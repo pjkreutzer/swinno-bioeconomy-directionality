@@ -1,0 +1,93 @@
+---
+title: "01 Filter Forest Bioeconomy"
+format: html
+---
+```{r}
+here::i_am("scripts/01 Filter Bioeconomy.qmd")
+
+library(tidyverse)
+library(here)
+library(DataEditR)
+
+data_path <- here("data")
+
+```
+
+
+
+```{r}
+#| warning: false
+
+df <- readxl::read_xlsx(here(data_path, "raw-data", "20201221 SWINNO 1970-2019.xlsx"), sheet="SWINNO 1970-2019")
+
+additional_info <- df %>% select(starts_with("Additional")) %>% colnames()
+use_sectors <- df %>% select(starts_with("Use")) %>% colnames()
+
+df <- df %>% 
+  unite(info, additional_info, sep =" ", remove=TRUE, na.rm=TRUE) %>%
+  unite(sectors, use_sectors, sep=",", remove= TRUE, na.rm=TRUE) 
+  
+df <- df %>%
+  select(c(`SINNO ID`, `Literal name of innovating firm ; SINNO's common name ; SINNO ID`  ,`Year of commercialization`, `Description in Swedish`, info, sectors))
+
+filtered_df  <- df %>%
+  filter(sectors == 2) %>%
+  rename(year = `Year of commercialization`, description = `Description in Swedish`)
+
+write_excel_csv(filtered_df, here(data_path, "modified-data", "classification-forest.csv"))
+
+```
+
+
+```{r}
+data\raw-data\
+
+df <- read_csv(here(data_path, "raw-data", "chaminade-bayou-bioeconomy.csv"))
+
+additional_info <- df %>% select(starts_with("Additional")) %>% colnames()
+
+df <- df %>% 
+  unite(info, additional_info, sep =" ", remove=TRUE, na.rm=TRUE)
+  
+df <- df %>%
+  select(c( SINNO.ID,
+        Name.Swe,
+        Descri.Swe,
+        Literal.name.of.innovating.firm...SINNO.s.common.name...SINNO.ID,
+       info))
+
+write_excel_csv(df, here(data_path, "modified-data", "classification-bioeconomy.csv"))
+
+```
+
+
+
+
+
+```{python}
+
+import pandas as pd
+
+df = pd.read_csv(
+    "../data/raw-data/chaminade-bayou-bioeconomy.csv",
+    usecols=[
+        "SINNO.ID",
+        "Name.Swe",
+        "Descri.Swe",
+        "Literal.name.of.innovating.firm...SINNO.s.common.name...SINNO.ID",
+        "Additional.information.if.Origin...1a.New.scientific.discovery",
+        "Additional.information.if.Origin...1b.New.technologies.or.materials",
+        "Additional.info.if.Origin...2a.Official.regulation..legislation.and.standards.",
+        "Additional.information.if.Origin...5b.Solution.for.a.problem",
+        "Additional.information.if.Origin...7.Performance",
+        "Additional.information.if.Origin...20.Other",
+    ],
+)
+
+add_info = list(df.iloc[:, 4:].columns)
+
+df["info"] = df[add_info].apply(lambda x: x.str.cat(sep=''), axis=1)
+
+df.to_csv("../data/modified-data/bioeonomy-classification.csv")
+
+```
