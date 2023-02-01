@@ -31,6 +31,7 @@ for csv in Path(ROOT, "data", "raw-data").glob("*.csv"):
     print(f'****************** \n {file_name}')
    
     df = clean_import('csv', csv)
+    df.dropna(subset="sinno_id", inplace=True)
     df["sinno_id"] = df["sinno_id"].astype(int)
    
     cleaned_innovation_types = clean_codes(df, code_digits=3, col='innovation_type')
@@ -40,13 +41,19 @@ for csv in Path(ROOT, "data", "raw-data").glob("*.csv"):
 
     split_innovation_types = split_cols(cleaned_tags, col_to_split='innovation_type', sep=',')
     melted_innovation_types = melt_table(split_innovation_types, id_vars='sinno_id', col_start='innovation', value_name='innovation_type')
-    melted_innovation_types.to_sql(name = 'eco_innovations', con = engine, if_exists='append', echo=False)
+    melted_innovation_types.to_sql(name = 'eco_innovations', con = engine, if_exists='append', index=False)
 
-    split_visions = split_cols(cleaned_tags, col_to_split='bioeconomy_visions', sep=',')
+    split_visions = split_cols(cleaned_tags, col_to_split='bioeconomy_vision', sep=',')
     melted_visions = melt_table(split_innovation_types, id_vars='sinno_id', col_start='bio', value_name='bioeconomy_vision')
-    melted_visions.to_sql(name = 'bioeconomy_visions', con = engine, if_exists='append', echo=False)
+    melted_visions.to_sql(name = 'bioeconomy_visions', con = engine, if_exists='append', index=False)
+
+    notes = df[["sinno_id", "notes"]]
+    notes.to_sql(name =  'classification_notes', con=engine, index=False, if_exists='append')
 
 
 
 
+# TODO: sanitze nans before entering in db
+# TODO: find error which enters company / innovation names instead of sinno ids
+# Maybe should instead combine all dfs together before running duplicate check
 
