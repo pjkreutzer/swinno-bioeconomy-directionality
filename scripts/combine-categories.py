@@ -1,59 +1,75 @@
 import pandas as pd
-from pathlib import Path
 from src.utils import get_project_root
+from src.categorization_helpers import *
 from src.swinno_helpers import *
 
 ROOT = get_project_root()
-
-def clean_codes(input_df, code_digits, col):
-    old = "(\d{code_digits})(?!\s+$)"
-    new = "$1,"
-    input_df[col] = input_df[col].replace(old, new, regex=True)
-    return input_df
-
-def check_duplicates(df, output_name, subset='sinno_id'):
-    duplicates = df.loc[df.duplicated(subset=subset, keep=False),:]
-    duplicates = duplicates.sort_values(by=subset)
-
-    if duplicates.empty:
-        print('No duplicates found.')
-    else:
-        print(f'{len(duplicates)} duplicates found.')
-        df.to_csv(Path(ROOT, "data", "modified-data", f'{output_name}-duplicates.csv'))
-        print(f'{output_name} written to csv.')
+ 
 
 engine = connect_swinno_db()
 
-for csv in Path(ROOT, "data", "raw-data").glob("*.csv"):
+list_innovation_type_df = []
+list_visions_df = []
+list_notes_df = []
+
+for csv in Path(ROOT, "data", "raw-data", "tags").glob("*.csv"):
 
     file_name = Path(csv).stem
 
-    print(f'****************** \n {file_name}')
-   
-    df = clean_import('csv', csv)
+    print(f"****************** \n {file_name}")
+
+    df = clean_import("csv", csv)
     df.dropna(subset="sinno_id", inplace=True)
     df["sinno_id"] = df["sinno_id"].astype(int)
-   
-    cleaned_innovation_types = clean_codes(df, code_digits=3, col='innovation_type')
-    cleaned_tags = clean_codes(df, code_digits=1, col='bioeconomy_vision')
+    replaced_letters = replace_letters_codes(df, "bioeconomy_vision")
 
-    check_duplicates(cleaned_tags, output_name=file_name)
+    cleaned_innovation_types = clean_codes(replaced_letters, code_digits=3, col="innovation_type")
+    list_innovation_type_df.append(
+        cleaned_innovation_types.loc[
+            :,
+            ["sinno_id", "innovation_type"],
+        ]
+    )
 
-    split_innovation_types = split_cols(cleaned_tags, col_to_split='innovation_type', sep=',')
-    melted_innovation_types = melt_table(split_innovation_types, id_vars='sinno_id', col_start='innovation', value_name='innovation_type')
-    melted_innovation_types.to_sql(name = 'eco_innovations', con = engine, if_exists='append', index=False)
+    cleaned_tags = clean_codes(df, code_digits=1, col="bioeconomy_vision")
 
-    split_visions = split_cols(cleaned_tags, col_to_split='bioeconomy_vision', sep=',')
-    melted_visions = melt_table(split_innovation_types, id_vars='sinno_id', col_start='bio', value_name='bioeconomy_vision')
-    melted_visions.to_sql(name = 'bioeconomy_visions', con = engine, if_exists='append', index=False)
+    list_visions_df.append(cleaned_tags.loc[:, ["sinno_id", "bioeconomy_vision"]])
 
     notes = df[["sinno_id", "notes"]]
-    notes.to_sql(name =  'classification_notes', con=engine, index=False, if_exists='append')
+    list_notes_df.append(notes)
+
+combined_innovation_types = pd.concat(list_innovation_type_df)
+combined_visions = pd.concat(list_visions_df)
+combined_notes = pd.concat(list_notes_df)
+
+combined_innovation_types.name = "combined_innovation_types"
+combined_visions.name = "combined_visions"
+combined_notes.name = "combined_notes"
+
+for combined_df in [combined_innovation_types, combined_notes, combined_visions]:
+    csv_path = Path(ROOT, "data", "modified-data", f"{combined_df.name}-duplicates.csv")
+    check_duplicates(combined_df, output_name=combined_df.name, output_path=csv_path)
+    print("-" * 5)
 
 
+split_visions = split_cols(combined_visions, col_to_split="bioeconomy_vision", sep=",")
+melted_visions = melt_table(
+    split_visions, id_vars="sinno_id", col_start="bio", value_name="bioeconomy_vision"
+)
+melted_visions = melted_visions.dropna()
+melted_visions.to_sql(name='bioeconomy_visions', con=engine, if_exists='replace', index=False)
 
+split_innovation_types = split_cols(
+    combined_innovation_types, col_to_split="innovation_type", sep=","
+)
+melted_innovation_types = melt_table(
+    split_innovation_types,
+    id_vars="sinno_id",
+    col_start="innovation",
+    value_name="innovation_type",
+)
+melted_innovation_types.dropna()
+melted_innovation_types.to_sql(name='eco_innovations', con=engine, if_exists='replace', index=False)
 
-# TODO: sanitze nans before entering in db
-# TODO: find error which enters company / innovation names instead of sinno ids
-# Maybe should instead combine all dfs together before running duplicate check
-
+combined_notes = combined_notes.dropna()
+combined_notes.to_sql(name='categorization_notes', con=engine, index=False, if_exists='replace')

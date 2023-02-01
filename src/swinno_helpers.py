@@ -77,10 +77,9 @@ def clean_import(file_type, file_path, **kwargs):
     df = clean_column_names(df)
     return df
 
-
 def connect_swinno_db():
 
     database_dir = get_project_root().parent.absolute()
     database_uri = f"sqlite:///{database_dir}/swinno.db"
-    engine = create_engine(database_uri, echo=True)
+    engine = create_engine(database_uri)
     return engine
