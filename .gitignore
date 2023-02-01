@@ -1,6 +1,7 @@
 *.egg-info
 .Rproj.user
 .pytest_cache
+/data/modified-data/
 
 .DS_Store
 .huskyrc.json
