@@ -5,7 +5,7 @@ from pathlib import Path
 def clean_codes(input_df, code_digits, col):
     old = r"(\d{{}})(?!\s+$)".format(code_digits)
     new = "$1,"
-    input_df[col] = input_df[col].replace(old, new, regex=True).str.strip()
+    input_df[col] = input_df[col].astype('string').replace(old, new, regex=True).str.strip()
     return input_df
 
 

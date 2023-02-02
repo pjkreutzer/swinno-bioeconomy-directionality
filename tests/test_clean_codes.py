@@ -17,7 +17,7 @@ def test_letter_to_code():
     assert_frame_equal(expected_df, output_df, check_names=False)
 
 
-def test_clean_codes():
+def test_clean_codes_1_digit():
 
     expected_df = pd.DataFrame(
         {"id": [1, 2, 3, 4, 5], "codes": ["1,0", "1,2,3", "1,1", "1,2,3", "1,2,0"]}
@@ -26,5 +26,36 @@ def test_clean_codes():
     replaced_letters = replace_letters_codes(input_df, "codes")
 
     output_df = clean_codes(replaced_letters, code_digits=1, col="codes")
+
+    assert expected_df["codes"].all() == output_df["codes"].all()
+
+
+def test_clean_codes_3_digit():
+
+    input_df = pd.DataFrame(
+        {"id": [1, 2, 3], "codes": ["112322,0", "1230", "123123"]}
+    )
+    expected_df = pd.DataFrame(
+        {"id": [1, 2, 3], "codes": ["112,322,0", "123,0", "123, 123"]}
+    )
+
+    replaced_letters = replace_letters_codes(input_df, "codes")
+
+    output_df = clean_codes(replaced_letters, code_digits=3, col="codes")
+
+    assert expected_df["codes"].all() == output_df["codes"].all()
+
+def test_clean_codes_int_handling():
+
+    input_df = pd.DataFrame(
+        {"id": [1, 2, 3], "codes": ["112322,0", "1230", 123123]}
+    )
+    expected_df = pd.DataFrame(
+        {"id": [1, 2, 3], "codes": ["112,322,0", "123,0", "123, 123"]}
+    )
+
+    replaced_letters = replace_letters_codes(input_df, "codes")
+
+    output_df = clean_codes(replaced_letters, code_digits=3, col="codes")
 
     assert expected_df["codes"].all() == output_df["codes"].all()
