@@ -1,12 +1,27 @@
 import pandas as pd
 from pathlib import Path
+import re
 
 
-def clean_codes(input_df, code_digits, col):
-    old = r"(\d{{}})(?!\s+$)".format(code_digits)
-    new = "$1,"
-    input_df[col] = input_df[col].astype('string').replace(old, new, regex=True).str.strip()
-    return input_df
+def clean_codes(df, column, code_digits, remove_whitespace=True, drop_na=True):
+    if drop_na:
+        df = df.dropna(subset=[column])
+
+    df[column] = df[column].apply(
+        lambda x: re.sub(r"\b(0)\b", r"0" * code_digits, x)
+    )
+    df[column] = df[column].apply(
+        lambda x: re.sub(r"\b(9)\b", r"9" * code_digits, x)
+    )
+
+    df[column] = df[column].apply(
+        lambda x: re.sub(rf"(\d{ {code_digits} })(?!$)", r"\1,", str(x))
+    )
+
+    if remove_whitespace:
+        df[column] = df[column].apply(lambda x: re.sub(r"\s", "", x))
+
+    return df
 
 
 def replace_letters_codes(input_df, col):

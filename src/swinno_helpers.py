@@ -50,13 +50,12 @@ def melt_table(df, id_vars: str, col_start: str, value_name: str, **kwargs):
     )
 
     temp_df.drop("variable", axis=1, inplace=True)
+    temp_df = temp_df[temp_df.iloc[:, 1] != ""]
     temp_df.dropna(inplace=True)
 
     temp_df = temp_df.sort_values(by=id_vars).reset_index(drop=True)
 
     return temp_df
-
-
 
 def clean_column_names(df):
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")

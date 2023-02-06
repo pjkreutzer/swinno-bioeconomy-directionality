@@ -4,7 +4,6 @@ from src.categorization_helpers import *
 from src.swinno_helpers import *
 
 ROOT = get_project_root()
- 
 
 engine = connect_swinno_db()
 
@@ -23,7 +22,9 @@ for csv in Path(ROOT, "data", "raw-data", "tags").glob("*.csv"):
     df["sinno_id"] = df["sinno_id"].astype(int)
     replaced_letters = replace_letters_codes(df, "bioeconomy_vision")
 
-    cleaned_innovation_types = clean_codes(replaced_letters, code_digits=3, col="innovation_type")
+    cleaned_innovation_types = clean_codes(
+        replaced_letters, code_digits=3, column="innovation_type"
+    )
     list_innovation_type_df.append(
         cleaned_innovation_types.loc[
             :,
@@ -31,7 +32,7 @@ for csv in Path(ROOT, "data", "raw-data", "tags").glob("*.csv"):
         ]
     )
 
-    cleaned_tags = clean_codes(df, code_digits=1, col="bioeconomy_vision")
+    cleaned_tags = clean_codes(df, code_digits=1, column="bioeconomy_vision")
 
     list_visions_df.append(cleaned_tags.loc[:, ["sinno_id", "bioeconomy_vision"]])
 
@@ -57,7 +58,9 @@ melted_visions = melt_table(
     split_visions, id_vars="sinno_id", col_start="bio", value_name="bioeconomy_vision"
 )
 melted_visions = melted_visions.dropna()
-melted_visions.to_sql(name='bioeconomy_visions', con=engine, if_exists='replace', index=False)
+melted_visions.to_sql(
+    name="bioeconomy_visions", con=engine, if_exists="replace", index=False
+)
 
 split_innovation_types = split_cols(
     combined_innovation_types, col_to_split="innovation_type", sep=","
@@ -69,7 +72,11 @@ melted_innovation_types = melt_table(
     value_name="innovation_type",
 )
 melted_innovation_types.dropna()
-melted_innovation_types.to_sql(name='eco_innovations', con=engine, if_exists='replace', index=False)
+melted_innovation_types.to_sql(
+    name="eco_innovations", con=engine, if_exists="replace", index=False
+)
 
 combined_notes = combined_notes.dropna()
-combined_notes.to_sql(name='categorization_notes', con=engine, index=False, if_exists='replace')
+combined_notes.to_sql(
+    name="categorization_notes", con=engine, index=False, if_exists="replace"
+)
