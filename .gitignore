@@ -2,6 +2,8 @@
 .Rproj.user
 .pytest_cache
 /data/modified-data/
+/data/raw-data/images
+**/scrap-notebook.ipynb**
 
 .DS_Store
 .huskyrc.json
@@ -117,3 +119,5 @@ po/*~
 rsconnect/
 
 .ipynb_checkpoints/
+
+**/**.db
