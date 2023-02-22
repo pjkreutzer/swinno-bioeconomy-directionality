@@ -47,16 +47,16 @@ def copy_files(id, sources, source_path, destination_path):
     for source in sources:
         files = list(source_path.glob(f"{source}*.*"))
         for f in files:
-            dest = Path(destination_path, "images", f"{id}", f"{f.name}")
+            dest = Path(destination_path, "images", f"{id}")
 
-            if not dest.parent.exists():
+            if not dest.exists():
                 dest.mkdir(parents=True)
             
             try:
-                copy(f, dest)
+                copy(f, Path(dest, f"{f.name}"))
             except PermissionError:
                 print(f"Error: Permission denied when copying {f} to {dest}")
 
-        print(f"Copied {len(files)} images.")
+        print(f"Copied {len(files)} images for id {id}.")
 
 copy_sources()

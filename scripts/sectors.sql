@@ -165,3 +165,8 @@ WHERE innovation.[SINNO ID] NOT IN (
     OR use_sectors.use_sectors LIKE '20%'
     OR use_sectors.use_sectors LIKE '38%'
     OR use_sectors.use_sectors LIKE '41%');
+
+-- Why did I choose these sectors, they make no sense!
+-- Right, because they make sense for the 2007 SNI codes.
+-- But even then why would I want to look at sector 18, Grafisk produktion och reproduktion av inspelningar?
+  
