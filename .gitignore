@@ -4,6 +4,7 @@
 /data/modified-data/
 /data/raw-data/images
 **/scrap-notebook.ipynb**
+/.quarto/
 
 .DS_Store
 .huskyrc.json
