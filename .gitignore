@@ -5,6 +5,7 @@
 /data/raw-data/images
 **/scrap-notebook.ipynb**
 /.quarto/
+*.html
 
 .DS_Store
 .huskyrc.json
