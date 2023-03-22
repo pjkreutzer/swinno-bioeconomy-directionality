@@ -113,6 +113,7 @@ vignettes/*.pdf
 
 # pkgdown site
 docs/
+docs/!*.qmd
 
 # translation temp files
 po/*~
@@ -123,3 +124,5 @@ rsconnect/
 .ipynb_checkpoints/
 
 **/**.db
+
+test_files/

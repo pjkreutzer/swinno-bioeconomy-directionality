@@ -1,0 +1,960 @@
+---
+title: Classification of Swedish Forest Sector Innovation
+
+author: Jonas Kreutzer
+date: last-modified
+abstract: |
+    
+bibliography: swinno-shades-green.bib
+csl: https://zotero.org/styles/apa?source=1
+link-citations: true
+link-bibliography: true
+# colorlinks: true
+execute: 
+  echo: false
+  warning: false
+format: 
+  pdf:
+    fig-width: 10
+    fig-height: 10
+---
+
+```{python}
+from pathlib import Path
+import pandas as pd
+import seaborn as sns
+
+import matplotlib.pyplot as plt
+from IPython.display import display, Markdown
+
+from src.utils import get_project_root
+from src.swinno_helpers import connect_swinno_db
+
+ROOT = get_project_root()
+conn = connect_swinno_db()
+
+sns.set_theme(style="whitegrid")
+
+
+def format_table(df):
+    # create a Styler object and set the wrapping style
+    styler = df.style.set_properties(**{"width": "50em", "text-wrap": "break-word"})
+
+    return styler
+
+
+def plot_counts(df1, df2, category_col, y, show_legend=True, legend_cols=None, y_label="Count"):
+    categories = df1[category_col].astype(str).unique()
+    categories.sort()
+
+    legend_ncols = len(categories) if legend_cols is None else legend_cols
+
+    colors = sns.color_palette("colorblind", len(categories))
+    palette = dict(zip(categories, colors))
+
+    fig, axes = plt.subplots(
+        ncols=1, nrows=2, sharex=False, sharey=True, layout="tight"
+    )
+
+    marker_size = 100
+    df1 = df1.sort_values(by=category_col)
+    df2 = df2.sort_values(by=category_col)
+
+    sns.scatterplot(
+        x=df1.index,
+        y=y,
+        hue=category_col,
+        data=df1,
+        ax=axes[0],
+        palette=palette,
+        s=marker_size,
+    )
+
+    sns.scatterplot(
+        x=df2.index,
+        y=y,
+        hue=category_col,
+        data=df2,
+        ax=axes[1],
+        palette=palette,
+        s=marker_size,
+    )
+    
+    for axs in axes:
+        axs.set_ylabel(y_label)
+        axs.set_xlabel("Year")
+        axs.legend().remove()
+
+    axes[0].set_title("Including Uncertains")
+    axes[0].title.set_position([0.5, 1.05])  # adjust the position of the title
+
+    axes[1].set_title("Excluding Uncertains")
+    axes[1].title.set_position([0.5, 1.05])  # adjust the position of the title
+
+    if not show_legend:
+        fig.legend().remove()
+    else:
+        handles, labels = axes[0].get_legend_handles_labels()
+        fig.legend(
+            handles,
+            labels,
+            loc="lower center",
+            ncol=legend_ncols,
+            frameon=False,
+            bbox_to_anchor=(0.5, -0.1),
+        )  # adjust the position of the legend
+
+    plt.subplots_adjust(bottom=0.2)
+
+    plt.show()
+
+
+def plot_heatmap(data, title):
+    fig, ax = plt.subplots(1, 1)
+    ax = sns.heatmap(
+        data, annot=True, cmap="Blues", fmt="g", cbar=False, annot_kws={"fontsize": 10}
+    )
+    ax.set(title=title, ylabel=None, xlabel=None)
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
+
+    plt.show()
+
+
+def prepare_heatmap_data(df, index_col, cols_col, values_col, ascending=False):
+    """
+    Prepare data for a heatmap visualization by pivoting and sorting a dataframe.
+
+    Args:
+    - df: input dataframe
+    - index_col: column name for the index of the pivoted dataframe
+    - cols_col: column name for the columns of the pivoted dataframe
+    - values_col: column name for the values of the pivoted dataframe
+    - ascending: boolean to specify whether to sort in ascending or descending order (default: False)
+
+    Returns:
+    - pivoted and sorted dataframe
+    """
+    # Pivot the data to create a matrix
+    matrix = df.pivot(index=index_col, columns=cols_col, values=values_col)
+
+    # Sort the matrix by descending order of values in the column with the highest value
+    highest_col = matrix.idxmax(axis=1).values[0]
+    matrix = matrix.sort_values(highest_col, ascending=ascending)
+
+    return matrix
+
+
+```
+
+
+# Classification Categories
+
+The classification categories for eco-innovation types were sourced from a single paper and augmented during the classification process.
+In addition to the 30 firm performance indicators identified by García-Granero's [-@garcia-granero2018EcoinnovationMeasurementReview] review of management literature, XX categories were added.
+Some are mere extensions of their categories (e.g., specifying if an innovation prolongs the life cylce of the product itself or downstream products), others are new types of existing categories (e.e.g., reduced other pollution such as noise), yet others are entirely new categories (human health and safety).
+Clearly not all new categories are eco-innovations.
+The newly created pesticide category, for example, can be an eco-innovation if it reduces chemical pollution, but it could also increase chemical pollution if pesticides are introduced in novel ways.
+These codes are therefore not a final categorization of eco-innovation, but rather steps towards a taxonomy, or at least usable dataset.
+
+The bioeconomy vision categories were combined from
+@bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy.
+In addition to the three visions discussed in these articles, the classified data includes two additional categories: one to keep track of doubt cases and one for innovations which do not belong to any bioeconomy vision.
+
+## Decision Process
+
+For the eco-innovations the decision process is straightforward.
+Based on the information contained in the text, the innovation is labeled with one or more categories.
+In case of uncertainty, the doubt label is added.
+Because the list of eco-innvation types was relatively exhaustive from the beginning, few adjustments had to be made.
+These include, as alluded to above, expanding the labeling for other sustaianbility criteria, such as human health and safety, and specific forest related aspects / tasks to gain a more detailed understanding of an innovations aim.
+For example, XX innnovations aim to protect harvested timber, either at harvest, during transport or storage.
+Since these could be tagged in different ways e.g., longer lifecycle of (downstream) product, optimized use of raw materials, or even reduced waste, it seemed more appropriate to create a specific category for these cases.
+Depending on subsequent analysis needs this could then be mapped to other categories.
+
+The bioeconomy vision classification remains more challenging.
+Identifying the larger aim, or correspondence to a vision, of an innovation can be unclear both from SWINNO descriptions and from sources.
+An innovation is tagged as belonging to a bioeconomy vision if it clearly fullfils at least one of the criteria unique to the vision discussed in Bugge et al.[-@bugge2016WhatBioeconomyReview, @tbl-bv-bugge] and Vivien et al. [-@vivien2019HijackingBioeconomy, @tbl-bv-vivien].
+This means that an innovation which references economic performance improvements is not tagged as belonging to both the bioresource and the biotechnology vision. An innovation would be tagged as belonging to the bioecology vision if it states that the innovation aims to protect biodiversity.
+If an innovation only aims to upgrade a bioresource, it is tagged as belonging to the bioresource vision, wheras if these products also feature a territorial idenity, it would be tagged as both bioresource and bioecology vision.
+Of course there are innovations belonging to the forestry sector which fit into no vision.
+<!-- TODO: Include Examples -->
+
+
+For both classficiations, uncertain cases were tagged to allow for later review, with intentions to use consensus between experts for final decision making.
+
+
+|  | Biotechnology | Bioresource | Bioecology |
+|---|---|---|---|
+| Aim &   Objectives | Economic growth & job   creation | Economic growth &   sustainability | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation |
+| Value   Creation | Application of biotechnology,   commercialisation of research & technology | Conversion and upgrading of   bio-resources (process oriented) | Development of integrated   production systems and high-quality products with territorial identity |
+| Drivers   & mediators of innovation | R & D, patents, TTOs,   Research councils and funders (Science push, linear model) | Interdisciplinary, optimisation   of land use, include degraded land in the production of biofuels, use and   availability of bio-resources, waste management, engineering, science &   market (Interactive & networked production mode) | Identification of favourable   organic agro-ecological practices, ethics, risk, transdisciplinary   sustainability, ecological interactions, re-use & recycling of waste,   land use, (Circular and self-sustained production mode) | 
+
+: Visions from @bugge2016WhatBioeconomyReview {#tbl-bv-bugge}
+
+
+| | Type II | Type III | Type I |
+|---|---|---|---|
+|  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere<br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decisionmaking centers |
+
+: Visions from @vivien2019HijackingBioeconomy {#tbl-bv-vivien}
+
+
+<!-- TODO: Read up on theoretical drawbacks of post-hoc tagging of visions -->
+
+# Data
+
+```{python}
+
+bv = pd.read_sql(
+    "SELECT sinno_id, bioeconomy_vision as bv FROM bioeconomy_visions", conn
+)
+bva = pd.read_sql(
+    "SELECT sinno_id, bioeconomy_vision as bv FROM bioeconomy_visions_articles", conn
+)
+
+
+ei = pd.read_sql("SELECT sinno_id, innovation_type as it FROM eco_innovations", conn)
+eia = pd.read_sql(
+    "SELECT sinno_id, innovation_type as it FROM eco_innovations_articles", conn
+)
+swinno = pd.read_sql(
+    "SELECT [SINNO ID] as sinno_id, [Year of commercialization] as year, [Innovation name in Swedish] as innovation_name, [Literal name of innovating firm ; SINNO's common name ; SINNO ID] as firm, Location as location FROM innovation",
+    conn,
+)
+
+display(
+    Markdown(
+        f"There are {len(bv['sinno_id'].unique())} unique innovations classified for bioeconomy visions using only swinno descriptions and  {len(bva['sinno_id'].unique())} innovations classified using the source articles. For the eco-innovation classification without and with articles the totals are {len(ei['sinno_id'].unique())} and {len(eia['sinno_id'].unique())}, respectively."
+    )
+)
+# Why are the unique ids for eco-innovation and visions different for the non-article chekes.
+```
+
+## Intra Rater Reliability of Labels
+
+Because the classifications using articles were done on innovations already tagged using only SWINNO descriptions, the reliability of the rating between these two approaches can be calculated.
+The reliability can also be calculated for some of the innovations classified only on SWINNO data, as during export some innovations were duplicated.
+In total 15 innovations were duplicated; they are not included in the reported figures on SWINNO only classifications.
+<!-- TODO: Check if duplicates are reported and remove if they are included -->
+<!-- TODO: make sure number is correct -->
+
+Different ways to assess the reliability of repeated ratings exist.
+Treating the intra-rater reliability of repeated codings like inter-rater reliabilities suggests use of different suggested reliability measures.
+However, most of them only consider the case of a single rating on different items between more than one observation.
+Considering that one rating can include multiple labels, an extension of the Kappa-coefficient as proposed by @kraemer1980ExtensionKappaCoefficient was tried.
+The statistic measures the proportion of agreement between ratings corrected for chance agreements and can be calculated by 
+
+$$ \kappa_0 = \frac{\bar{P} - P_e}{1-P_e} + \frac{(1-\bar{P})}{Nm_0(1-P_e)}, $$
+
+where $\bar{P}$ is the average proportion of agreement pairs, 
+$P_e = \sum p_i^2$ are the "overall proportions of observations in which the several response categories were selected" [@kraemer1980ExtensionKappaCoefficient 210], and $N$, $m_0$ the number of subjects and the number of of observations per subject, respectively.
+
+The difficulty of calculating this measure lies in deciding on the correct value for $P_e$, as any combination of the 19 given eco-innovation labels could be the possible.
+
+<!-- TODO fix this and calculate new -->
+
+
+## Classifications Using Only SWINNO
+
+
+```{python}
+
+bv_count = pd.read_sql(
+    """SELECT
+  codes.Category AS Vision,
+  COUNT(bioeconomy_vision) AS Count
+FROM
+  bioeconomy_visions
+  JOIN [classification-codes] AS codes ON codes.code = bioeconomy_visions.bioeconomy_vision
+GROUP BY
+  Vision
+ORDER BY
+  Count DESC """,
+    conn,
+)
+
+bv_count_zero = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  COUNT(bioeconomy_vision) AS Count
+FROM
+  bioeconomy_visions
+  JOIN [classification-codes] AS codes ON codes.code = bioeconomy_visions.bioeconomy_vision
+WHERE
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      bioeconomy_visions AS bv2
+    WHERE
+      bv2.sinno_id = bioeconomy_visions.sinno_id
+      AND bv2.bioeconomy_vision = 0
+  )
+GROUP BY
+  Vision
+ORDER BY
+  Count DESC;
+""",
+    conn,
+)
+
+ei_count = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Type,
+  COUNT(ei.innovation_type) AS Count
+FROM
+  eco_innovations as ei
+  JOIN [classification-codes] AS codes ON codes.code = ei.innovation_type
+GROUP BY
+  innovation_type
+ORDER BY
+  Count DESC;
+""",
+    conn,
+)
+
+ei_count_0 = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Type,
+  COUNT(ei.innovation_type) AS Count
+FROM
+  eco_innovations as ei
+  JOIN [classification-codes] AS codes ON codes.code = ei.innovation_type
+WHERE
+  NOT EXISTS(
+    SELECT * 
+    FROM
+      eco_innovations AS ei2
+    WHERE
+      ei2.sinno_id = ei.sinno_id
+      AND ei2.innovation_type = "000"
+  )
+GROUP BY
+  Type
+ORDER BY
+  Count DESC;
+""",
+    conn,
+)
+```
+
+
+It took approximately one minute to assign labels for bioeconomy visions and eco-innovations using only SWINNO data.
+However, this speed came at the cost of a high number of uncertain cases, which required follow up checking with articles, as can be seen from @tbl-bv-swinno-count and @tbl-ei-swinno-count.
+When examining these tables it is important to keep in mind that one innovation can have been labeled as belonging to more than one category.
+
+The large number of innovations not belonging to either a bioeconomy vision or an eco-innovation type is not very surprising, as it is the result of an overrepresentation of the mining sector in this data.
+During the selection of data from SWINNO, at first an error led to the inclusion of many mining areas.
+While this does inflate the number of non-applicable labels, it is perhaps a good sign that the labels are indeed useful and accurate when differentiating between eco-innovations / bioeconomy related innovations and those that do not belonge to these categories.
+
+No additional steps were taken at this point to remedy the error, instead this sector was simply excluded before moving on the classificaiton using source articles.
+
+This sections main take away is that the classification using predefined labels from literature has worked relatively well.
+After some initial tweaks and few new categories (mostly more specific under categories of eco-innovation types @tbl-full-codes) a complete taxonomy can be applied to work with the sources.
+
+```{python}
+
+def get_max_categories(dataframes):
+    max_categories = {}
+    for name, df in dataframes.items():
+        df = df.loc[df.iloc[:,0] != "Unsure", :]
+        max_category = df.iloc[0, 0]
+        max_categories[name] = max_category
+    return max_categories
+
+count_dfs = {"ei_count": ei_count, "ei_count_0": ei_count_0, "bv_count": bv_count, "bv_count_zero":bv_count_zero}
+
+max_counts = get_max_categories(count_dfs)
+
+# display(Markdown(f"Ignoring the Unsure category, the biggest group of innovations belonged to the vision {max_counts['bv_count']}, and {max_counts['bv_count_zero']}. For the eco-innovation types, the biggest categories are {max_counts['ei_count']} if uncertains are included and {max_counts['ei_count_0']} if they are excluded."))
+```
+
+
+
+```{python}
+
+#| label: tbl-bv-swinno-count
+#| tbl-cap: Count of Bioeconomy Visions Using Swinno Data
+
+bv_counts = pd.merge(bv_count, bv_count_zero, on="Vision", how="left")
+
+bv_counts.columns = ["Vision", "Count", "Count Excl. Unsure"]
+bv_counts.loc[:, "Count Excl. Unsure"] = (
+    bv_counts["Count Excl. Unsure"].fillna(0).astype(int)
+)
+
+bv_counts.style.set_properties(**{"text-align": "right"}).hide_index()
+
+```
+
+```{python}
+#| label: tbl-ei-swinno-count
+#| tbl-cap: Count of Eco-Innovations Using Swinno Data
+
+ei_counts = pd.merge(ei_count, ei_count_0, on="Type", how="left")
+
+ei_counts.columns = ["Type", "Count", "Count Excl. Unsure"]
+ei_counts.loc[:, "Count Excl. Unsure"] = (
+    ei_counts["Count Excl. Unsure"].fillna(0).astype(int)
+)
+
+ei_counts.style.set_properties(**{"text-align": "right"}).hide_index()
+
+```
+
+## Classificaitions Using Source Articles
+
+```{python}
+bv_count_articles = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  COUNT(bioeconomy_vision) AS Count
+FROM
+  bioeconomy_visions_articles
+  JOIN [classification-codes] AS codes ON codes.code = bioeconomy_visions_articles.bioeconomy_vision
+GROUP BY
+  Vision
+ORDER BY
+  Count DESC """,
+    conn,
+)
+
+bv_count_zero_articles = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  COUNT(bioeconomy_vision) AS Count
+FROM
+  bioeconomy_visions_articles
+  JOIN [classification-codes] AS codes ON codes.code = bioeconomy_visions_articles.bioeconomy_vision
+WHERE
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      bioeconomy_visions_articles AS bv2
+    WHERE
+      bv2.sinno_id = bioeconomy_visions_articles.sinno_id
+      AND bv2.bioeconomy_vision = 0
+  )
+GROUP BY
+  Vision
+ORDER BY
+  Count DESC;
+""",
+    conn,
+)
+
+```
+
+```{python}
+# |output: asis
+bv_counts_articles = pd.merge(
+    bv_count_articles, bv_count_zero_articles, on="Vision", how="left"
+)
+
+bv_counts_articles.columns = ["Vision", "Count", "Count Excl. Unsure"]
+bv_counts_articles.loc[:, "Count Excl. Unsure"] = (
+    bv_counts_articles["Count Excl. Unsure"].fillna(0).astype(int)
+)
+
+bv_counts_articles.style.set_properties(**{"text-align": "right"}).hide_index()
+
+
+```
+
+
+```{python}
+
+ei_count_articles = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Type,
+  COUNT(ei.innovation_type) AS Count
+FROM
+  eco_innovations_articles as ei
+  JOIN [classification-codes] AS codes ON codes.code = ei.innovation_type
+GROUP BY
+  innovation_type
+ORDER BY
+  Count DESC;
+""",
+    conn,
+)
+
+ei_count_articles_0 = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Type,
+  COUNT(ei.innovation_type) AS Count
+FROM
+  eco_innovations_articles as ei
+  JOIN [classification-codes] AS codes ON codes.code = ei.innovation_type
+WHERE
+  NOT EXISTS(
+    SELECT * 
+    FROM
+      eco_innovations_articles AS ei2
+    WHERE
+      ei2.sinno_id = ei.sinno_id
+      AND ei2.innovation_type = "000"
+  )
+GROUP BY
+  Type
+ORDER BY
+  Count DESC;
+""",
+    conn,
+)
+```
+
+```{python}
+# |output: asis
+ei_counts_articles = pd.merge(
+    ei_count_articles, ei_count_articles_0, on="Type", how="left"
+)
+
+ei_counts_articles.columns = ["Type", "Count", "Count Excl. Unsure"]
+ei_counts_articles.loc[:, "Count Excl. Unsure"] = (
+    ei_counts_articles["Count Excl. Unsure"].fillna(0).astype(int)
+)
+
+ei_counts_articles.style.set_properties(**{"text-align": "right"}).hide_index()
+```
+
+
+
+# Results
+
+## Trends
+
+### By Sector
+
+#### Bioeconomy Vision
+
+```{python}
+
+bv_sectors = pd.read_sql(
+    """
+SELECT
+  c.Category as vision,
+  sni_codes.label as sector,
+  count(bv.bioeconomy_vision) as count
+FROM
+  bioeconomy_visions as bv
+  join use_sectors ON bv.sinno_id = use_sectors.[SINNO ID]
+  join sni_codes ON SUBSTR(use_sectors.use_sectors, 1, 2) = sni_codes.code
+  join [classification-codes] as c ON bv.bioeconomy_vision = c.Code
+WHERE 
+  NOT EXISTS(
+   SELECT
+      *
+    FROM
+      bioeconomy_visions AS bv2
+    WHERE
+      bv2.sinno_id = bv.sinno_id
+      AND bv2.bioeconomy_vision = 0
+)
+GROUP BY
+  sector,
+  bioeconomy_vision;
+""",
+    conn,
+)
+
+bv_matrix = prepare_heatmap_data(
+    bv_sectors, index_col="sector", cols_col="vision", values_col="count"
+)
+
+plot_heatmap(bv_matrix, "Count Bioeconomy Vision by Sector Excluding Uncertains")
+```
+
+#### Eco-Innovations
+
+```{python}
+ei_sectors = pd.read_sql(
+    """
+SELECT
+  c.Category as innovation_type,
+  sni_codes.label as sector,
+  count(ei.innovation_type) as count
+FROM
+  eco_innovations as ei
+  join use_sectors ON ei.sinno_id = use_sectors.[SINNO ID]
+  join sni_codes ON SUBSTR(use_sectors.use_sectors, 1, 2) = sni_codes.code
+  join [classification-codes] as c ON ei.innovation_type = c.Code
+WHERE 
+  NOT EXISTS(
+   SELECT
+      *
+    FROM
+      eco_innovations AS ei2
+    WHERE
+      ei2.sinno_id = ei.sinno_id
+      AND ei2.innovation_type = "000"
+)
+GROUP BY
+  sector,
+  innovation_type;
+""",
+    conn,
+)
+
+ei_sectors_matrix = prepare_heatmap_data(
+    ei_sectors, index_col="sector", cols_col="innovation_type", values_col="count"
+)
+
+plot_heatmap(ei_sectors_matrix, title="Eco-Innovation Type by Sector")
+
+```
+### Over Time
+
+#### Bioeconomy Visions Using SWINNO
+
+```{python}
+
+bv_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  count(bv.bioeconomy_vision) AS vision_count,
+  innovation.[Year of commercialization] AS year
+FROM
+  bioeconomy_visions AS bv
+  JOIN innovation ON bv.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON bv.bioeconomy_vision = codes.Code
+WHERE
+  TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  year,
+  bv.bioeconomy_vision;
+""",
+    conn,
+)
+
+bvc_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  count(bv.bioeconomy_vision) AS vision_count,
+  innovation.[Year of commercialization] AS year
+FROM
+  bioeconomy_visions AS bv
+  JOIN innovation ON bv.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON bv.bioeconomy_vision = codes.Code
+WHERE
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      bioeconomy_visions AS bv2
+    WHERE
+      bv2.sinno_id = bv.sinno_id
+      AND bv2.bioeconomy_vision = 0
+  )
+  AND TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  year,
+  bv.bioeconomy_vision;
+""",
+    conn,
+)
+
+bv_years = bv_years.set_index("year")
+bvc_years = bvc_years.set_index("year")
+
+plot_counts(
+    bv_years,
+    bvc_years,
+    category_col="Vision",
+    y="vision_count",
+    y_label="Count of Vision",
+)
+```
+
+
+#### Bioeconomy Visions Using Articles
+
+```{python}
+
+bva_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  count(bv.bioeconomy_vision) AS vision_count,
+  innovation.[Year of commercialization] AS year
+FROM
+  bioeconomy_visions_articles AS bv
+  JOIN innovation ON bv.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON bv.bioeconomy_vision = codes.Code
+WHERE
+  TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  year,
+  bv.bioeconomy_vision;
+""",
+    conn,
+)
+
+bvac_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  count(bv.bioeconomy_vision) AS vision_count,
+  innovation.[Year of commercialization] AS year
+FROM
+  bioeconomy_visions_articles AS bv
+  JOIN innovation ON bv.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON bv.bioeconomy_vision = codes.Code
+WHERE
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      bioeconomy_visions_articles AS bv2
+    WHERE
+      bv2.sinno_id = bv.sinno_id
+      AND bv2.bioeconomy_vision = 0
+  )
+  AND TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  year,
+  bv.bioeconomy_vision;
+""",
+    conn,
+)
+
+bva_years = bva_years.set_index("year")
+bvac_years = bvac_years.set_index("year")
+
+plot_counts(
+    bva_years,
+    bvac_years,
+    category_col="Vision",
+    y="vision_count",
+    y_label="Count of Vision",
+)
+
+```
+
+At most we record 
+
+# Outlook
+
+## Open Questions and Doubts
+
+## Thoughts
+
+At times it can be difficult to decide wether an innovation should be counted as optimization of raw material, reduction of waste, or both.
+Generally it appears sensible that an optimization of waste can, but does not have to, lead to a reduction of waste.
+Keeping both labels seems sensible here.
+To avoid double counting eco-innovation in statistics, a prudent solution is to simple count the unique SWINNO IDs tagged with at least one eco-innovation type
+
+Considering the difference between innovations labeled as unsure between SWINNO data only and articles, there is no way around using articles exclusively.
+Utilizing articles drastically reduced the amount of uncertainty of a classification.
+However, even with articles some doubt cases remain.
+This is in so far expected as articles vary in length and detail as does my understanding of the likely impact of an innovation.
+Considering the number of doubt cases is rather low, it might be valuable to ask a second rater (ideally an expert on environmental evaluation) to rate a subset of articles deemed clear in addition to the doubt cases.
+An important question is who to approach for this task and with what instructions.
+As the level of expertise increases, perhaps the willingness to make decisive decisions on such limited information decreases.
+That, on the other hand, would in itself be valuable feedback regarding the overall approach.
+
+
+Code | Use Sector
+|:-|:---------|
+01 | Jordbruk, jakt och service i anslutning härtill
+02 | Skogsbruk och service till skogsbruk
+13 | Utvinning av metallmalmer
+16 | Tobaksvarutillverkning
+17 | Textilvarutillverkning
+18 | Tillverkning av kläder; pälsberedning
+20 | Tillverkning av trä och varor av trä, kork, rotting o.d. utom möbler
+41 | Vattenförsörjning
+: Included Sectors {#tbl-included-sectors tbl-colwidths="[10,90]"}
+
+
+<!-- Some of these are not clearly related to either the forest of bioeconomy. Mistake on my part. Category 16 needs to be removed.-->
+
+There are a number of  additional use sectors that need to be looked at
+
+Code | Use Sector
+|:---|:---|
+21 | Massa-, pappers- och pappersvarutillverkning
+24 | Tillverkning av kemikalier och kemiska produkter
+25 | Tillverkning av gummi- och plastvaror
+34 | Tillverkning av motorfordon, släpfordon och påhängsvagnar
+35 | Tillverkning av andra transportmedel
+36 | Tillverkning av möbler; annan tillverkning
+37 | Återvinning
+40 | El-, gas-, ång- och hetvattenförsörjning
+41 | Vattenförsörjning
+45 | Byggverksamhet
+50 | Handel med och service av motorfordon; detaljhandel med drivmedel
+90 | Avloppsrening, avfallshantering, renhållning o.d.
+: Missing Sectors {#tbl-missing-sectors tbl-colwidths="[10,90]"}
+
+<!-- This query yields 1678 innovation. Filtering with '%skog%', 'trä%', '%papper%' and '%cellulose' yields 1598 innovation. This likely has many overlaps with sni codes however.
+Filtering on the other sectors is a bit trickier than I thought.
+Might be that this only results in additional 119 innovation. -->
+
+<!-- 
+A cursory glance at sector code 70 (Fastighetsverksamhet) reveals many innovations aimed at reducing moisture in rooms.
+Could there be an argument to be made about development blocks for budilding with wood?
+TODO: Ask Ronnie about difficulties of building with wood from a building management perspective
+8596001
+
+It would perhaps also be a smart idea to go through all agricultural sectors, at least to the extent that they relate to the forest.
+Perhaps with a keyword search?
+Possible keywords: skog, trä, cellulose, papper
+What about the other machine sectors (29-30)? The same? -->
+
+
+## Appendix {.appendix}
+
+
+#### Bioeconomy Visions by Sector
+
+```{python}
+bvu_sectors = pd.read_sql(
+    """
+SELECT
+  c.Category AS vision,
+  sni_codes.label AS sector,
+  count(bv.bioeconomy_vision) AS count
+FROM
+  bioeconomy_visions AS bv
+  join use_sectors ON bv.sinno_id = use_sectors.[SINNO ID]
+  join sni_codes ON SUBSTR(use_sectors.use_sectors, 1, 2) = sni_codes.code
+  join [classification-codes] AS c ON bv.bioeconomy_vision = c.Code
+GROUP BY
+  sector,
+  bioeconomy_vision;
+""",
+    conn,
+)
+
+bvu_matrix = prepare_heatmap_data(
+    bvu_sectors, index_col="sector", cols_col="vision", values_col="count"
+)
+
+plot_heatmap(bvu_matrix, "Count Bioeconomy Vision by Sector Including Uncertains")
+```
+
+
+
+#### Eco-Innovations Over Time
+
+##### SWINNO
+
+
+
+
+##### Articles
+```{python}
+
+#| fig-caption: Count of Eco-Innovations by Year.
+
+eia_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Type,
+  count(ei.innovation_type) AS innovation_count,
+  innovation.[Year of commercialization] AS Year,
+  SUBSTR(ei.innovation_type, 1,1) as top_cat
+FROM
+  eco_innovations_articles AS ei
+  JOIN innovation ON ei.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON ei.innovation_type = codes.Code
+WHERE
+  TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  Year,
+  ei.innovation_type;
+""",
+    conn,
+)
+
+eiac_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Type,
+  count(ei.innovation_type) AS innovation_count,
+  innovation.[Year of commercialization] AS year,
+  SUBSTR(ei.innovation_type, 1,1)
+FROM
+  eco_innovations_articles AS ei
+  JOIN innovation ON ei.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON ei.innovation_type = codes.Code
+WHERE
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      eco_innovations_articles AS ei2
+    WHERE
+      ei2.sinno_id = ei.sinno_id
+      AND ei2.innovation_type = "000"
+  )
+  AND TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  year,
+  ei.innovation_type;
+""",
+    conn,
+)
+
+eia_years = eia_years.set_index("Year")
+eiac_years = eiac_years.set_index("year")
+
+plot_counts(
+    eia_years,
+    eiac_years,
+    category_col="Type",
+    y="innovation_count",
+    legend_cols = 8,
+    y_label="Count of Type",
+    show_legend=False
+)
+
+```
+
+```{python}
+for i, df in enumerate([eia_years, eiac_years]):
+  df = df.iloc[:, :2]
+  df = df.sort_values(by="innovation_count", ascending=False)
+  df.columns = ["Type", "Count"]
+  df.index.rename("Year")
+  if i == 0:
+    eia_years = df
+  else:
+    eiac_years = df
+
+```
+
+```{python}
+#| tbl-cap: Top 5 Most Frequent Categories by Year Including Uncertains
+format_table(eia_years.head())
+```
+
+```{python}
+#| tbl-cap: Top 5 Most Frequent Categories by Year Excluding Uncertains
+format_table(eiac_years.head())
+```
+
+```{python}
+#| label: tbl-full-codes
+# | tbl-cap: List of Labels
+
+codes_df = pd.read_sql("SELECT * FROM [classification-codes]", conn, index_col="Code")
+
+format_table(codes_df)
+```
+
+
+## References 
+
+
