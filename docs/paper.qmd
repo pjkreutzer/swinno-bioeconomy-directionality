@@ -151,7 +151,7 @@ def prepare_heatmap_data(df, index_col, cols_col, values_col, ascending=False):
 
 The classification categories for eco-innovation types were sourced from a single paper and augmented during the classification process.
 In addition to the 30 firm performance indicators identified by García-Granero's [-@garcia-granero2018EcoinnovationMeasurementReview] review of management literature, XX categories were added.
-Some are mere extensions of their categories (e.g., specifying if an innovation prolongs the life cylce of the product itself or downstream products), others are new types of existing categories (e.e.g., reduced other pollution such as noise), yet others are entirely new categories (human health and safety).
+Some are mere extensions of their categories (e.g., specifying if an innovation prolongs the life cycle of the product itself or downstream products), others are new types of existing categories (e.e.g., reduced other pollution such as noise), yet others are entirely new categories (human health and safety).
 Clearly not all new categories are eco-innovations.
 The newly created pesticide category, for example, can be an eco-innovation if it reduces chemical pollution, but it could also increase chemical pollution if pesticides are introduced in novel ways.
 These codes are therefore not a final categorization of eco-innovation, but rather steps towards a taxonomy, or at least usable dataset.
@@ -165,36 +165,36 @@ In addition to the three visions discussed in these articles, the classified dat
 For the eco-innovations the decision process is straightforward.
 Based on the information contained in the text, the innovation is labeled with one or more categories.
 In case of uncertainty, the doubt label is added.
-Because the list of eco-innvation types was relatively exhaustive from the beginning, few adjustments had to be made.
-These include, as alluded to above, expanding the labeling for other sustaianbility criteria, such as human health and safety, and specific forest related aspects / tasks to gain a more detailed understanding of an innovations aim.
-For example, XX innnovations aim to protect harvested timber, either at harvest, during transport or storage.
+Because the list of eco-innovation types was relatively exhaustive from the beginning, few adjustments had to be made.
+These include, as alluded to above, expanding the labeling for other sustainability criteria, such as human health and safety, and specific forest related aspects / tasks to gain a more detailed understanding of an innovations aim.
+For example, XX innovations aim to protect harvested timber, either at harvest, during transport or storage.
 Since these could be tagged in different ways e.g., longer lifecycle of (downstream) product, optimized use of raw materials, or even reduced waste, it seemed more appropriate to create a specific category for these cases.
 Depending on subsequent analysis needs this could then be mapped to other categories.
 
 The bioeconomy vision classification remains more challenging.
 Identifying the larger aim, or correspondence to a vision, of an innovation can be unclear both from SWINNO descriptions and from sources.
-An innovation is tagged as belonging to a bioeconomy vision if it clearly fullfils at least one of the criteria unique to the vision discussed in Bugge et al.[-@bugge2016WhatBioeconomyReview, @tbl-bv-bugge] and Vivien et al. [-@vivien2019HijackingBioeconomy, @tbl-bv-vivien].
+An innovation is tagged as belonging to a bioeconomy vision if it clearly fulfills at least one of the criteria unique to the vision discussed in Bugge et al.[-@bugge2016WhatBioeconomyReview, @tbl-bv-bugge] and Vivien et al. [-@vivien2019HijackingBioeconomy, @tbl-bv-vivien].
 This means that an innovation which references economic performance improvements is not tagged as belonging to both the bioresource and the biotechnology vision. An innovation would be tagged as belonging to the bioecology vision if it states that the innovation aims to protect biodiversity.
-If an innovation only aims to upgrade a bioresource, it is tagged as belonging to the bioresource vision, wheras if these products also feature a territorial idenity, it would be tagged as both bioresource and bioecology vision.
+If an innovation only aims to upgrade a bioresource, it is tagged as belonging to the bioresource vision, whereas if these products also feature a territorial identity, it would be tagged as both bioresource and bioecology vision.
 Of course there are innovations belonging to the forestry sector which fit into no vision.
 <!-- TODO: Include Examples -->
 
 
-For both classficiations, uncertain cases were tagged to allow for later review, with intentions to use consensus between experts for final decision making.
+For both classifications, uncertain cases were tagged to allow for later review, with intentions to use consensus between experts for final decision-making.
 
 
 |  | Biotechnology | Bioresource | Bioecology |
 |---|---|---|---|
-| Aim &   Objectives | Economic growth & job   creation | Economic growth &   sustainability | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation |
-| Value   Creation | Application of biotechnology,   commercialisation of research & technology | Conversion and upgrading of   bio-resources (process oriented) | Development of integrated   production systems and high-quality products with territorial identity |
-| Drivers   & mediators of innovation | R & D, patents, TTOs,   Research councils and funders (Science push, linear model) | Interdisciplinary, optimisation   of land use, include degraded land in the production of biofuels, use and   availability of bio-resources, waste management, engineering, science &   market (Interactive & networked production mode) | Identification of favourable   organic agro-ecological practices, ethics, risk, transdisciplinary   sustainability, ecological interactions, re-use & recycling of waste,   land use, (Circular and self-sustained production mode) | 
+| Aim & Objectives | Economic growth & job creation | Economic growth &   sustainability | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation |
+| Value   Creation | Application of biotechnology,   commercialization of research & technology | Conversion and upgrading of   bio-resources (process oriented) | Development of integrated   production systems and high-quality products with territorial identity |
+| Drivers   & mediators of innovation | R & D, patents, TTOs,   Research councils and funders (Science push, linear model) | Interdisciplinary, optimization   of land use, include degraded land in the production of biofuels, use and   availability of bio-resources, waste management, engineering, science &   market (Interactive & networked production mode) | Identification of favorable   organic agro-ecological practices, ethics, risk, transdisciplinary   sustainability, ecological interactions, re-use & recycling of waste,   land use, (Circular and self-sustained production mode) | 
 
 : Visions from @bugge2016WhatBioeconomyReview {#tbl-bv-bugge}
 
 
 | | Type II | Type III | Type I |
 |---|---|---|---|
-|  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere<br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decisionmaking centers |
+|  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere<br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decision-making centers |
 
 : Visions from @vivien2019HijackingBioeconomy {#tbl-bv-vivien}
 
@@ -229,14 +229,15 @@ display(
 )
 # Why are the unique ids for eco-innovation and visions different for the non-article chekes.
 ```
-
+<!-- 
 ## Intra Rater Reliability of Labels
 
 Because the classifications using articles were done on innovations already tagged using only SWINNO descriptions, the reliability of the rating between these two approaches can be calculated.
 The reliability can also be calculated for some of the innovations classified only on SWINNO data, as during export some innovations were duplicated.
 In total 15 innovations were duplicated; they are not included in the reported figures on SWINNO only classifications.
-<!-- TODO: Check if duplicates are reported and remove if they are included -->
-<!-- TODO: make sure number is correct -->
+
+TODO: Check if duplicates are reported and remove if they are included 
+TODO: make sure number is correct 
 
 Different ways to assess the reliability of repeated ratings exist.
 Treating the intra-rater reliability of repeated codings like inter-rater reliabilities suggests use of different suggested reliability measures.
@@ -251,7 +252,7 @@ $P_e = \sum p_i^2$ are the "overall proportions of observations in which the sev
 
 The difficulty of calculating this measure lies in deciding on the correct value for $P_e$, as any combination of the 19 given eco-innovation labels could be the possible.
 
-<!-- TODO fix this and calculate new -->
+TODO fix this and calculate new -->
 
 
 ## Classifications Using Only SWINNO
@@ -343,14 +344,14 @@ ORDER BY
 
 
 It took approximately one minute to assign labels for bioeconomy visions and eco-innovations using only SWINNO data.
-However, this speed came at the cost of a high number of uncertain cases, which required follow up checking with articles, as can be seen from @tbl-bv-swinno-count and @tbl-ei-swinno-count.
+However, this speed came at the cost of a high number of uncertain cases, which required follow-up checking with articles, as can be seen from @tbl-bv-swinno-count and @tbl-ei-swinno-count.
 When examining these tables it is important to keep in mind that one innovation can have been labeled as belonging to more than one category.
 
 The large number of innovations not belonging to either a bioeconomy vision or an eco-innovation type is not very surprising, as it is the result of an overrepresentation of the mining sector in this data.
 During the selection of data from SWINNO, at first an error led to the inclusion of many mining areas.
-While this does inflate the number of non-applicable labels, it is perhaps a good sign that the labels are indeed useful and accurate when differentiating between eco-innovations / bioeconomy related innovations and those that do not belonge to these categories.
+While this does inflate the number of non-applicable labels, it is perhaps a good sign that the labels are indeed useful and accurate when differentiating between eco-innovations / bioeconomy related innovations and those that do not belong to these categories.
 
-No additional steps were taken at this point to remedy the error, instead this sector was simply excluded before moving on the classificaiton using source articles.
+No additional steps were taken at this point to remedy the error, instead this sector was simply excluded before moving on the classification using source articles.
 
 This sections main take away is that the classification using predefined labels from literature has worked relatively well.
 After some initial tweaks and few new categories (mostly more specific under categories of eco-innovation types @tbl-full-codes) a complete taxonomy can be applied to work with the sources.
@@ -405,7 +406,8 @@ ei_counts.style.set_properties(**{"text-align": "right"}).hide_index()
 
 ```
 
-## Classificaitions Using Source Articles
+## Classifications Using Source Articles
+
 
 ```{python}
 bv_count_articles = pd.read_sql(
@@ -452,23 +454,6 @@ ORDER BY
 ```
 
 ```{python}
-# |output: asis
-bv_counts_articles = pd.merge(
-    bv_count_articles, bv_count_zero_articles, on="Vision", how="left"
-)
-
-bv_counts_articles.columns = ["Vision", "Count", "Count Excl. Unsure"]
-bv_counts_articles.loc[:, "Count Excl. Unsure"] = (
-    bv_counts_articles["Count Excl. Unsure"].fillna(0).astype(int)
-)
-
-bv_counts_articles.style.set_properties(**{"text-align": "right"}).hide_index()
-
-
-```
-
-
-```{python}
 
 ei_count_articles = pd.read_sql(
     """
@@ -510,10 +495,51 @@ ORDER BY
 """,
     conn,
 )
+
 ```
 
+Beginning with the innovations tagged as Unsure in the SWINNO only classification, the source articles were read and tags for bioeconomy visions and eco-innovations given on this basis.
+@tbl-bv-article-count and @tbl-ei-article-count show the results thus far.
+
 ```{python}
-# |output: asis
+
+def label_confidence(df):
+  count_unsure = df.loc[df.iloc[:, 0] == "Unsure", "Count"]
+  total_labels = df.iloc[:, 1].sum()
+  return float(1 - (count_unsure / total_labels).iloc[0]) #to return the value instead of series
+
+count_dfs_confidence = {"ei_count": ei_count, "ei_count_articles":ei_count_articles, "bv_count":bv_count, "bv_count_articles":bv_count_articles}
+
+label_confidences = {k: label_confidence(v) for  k, v in count_dfs_confidence.items()}
+
+
+display(Markdown(f"The confidence of labels for each approch, measured as the share of Unsure to total classifications is present in each data set shows that relying on source articles drastically reduces the uncertainty of labelling decisions(Eco-Innovation: {label_confidences['ei_count']:.2%} to {label_confidences['ei_count_articles']:.2%} and Bioeconomy: {label_confidences['bv_count']:.2%} to {label_confidences['bv_count_articles']:.2%}, for SWINNO and articles, respectively)."))
+```
+
+The only down side to the articles approach is a quintupling of labeling time (from 1 min on average to 5 min on average per innovation).
+
+```{python}
+#| label: tbl-bv-article-count
+#| tbl-cap: Count of Bioeconomy Visions Using Articles
+bv_counts_articles = pd.merge(
+    bv_count_articles, bv_count_zero_articles, on="Vision", how="left"
+)
+
+bv_counts_articles.columns = ["Vision", "Count", "Count Excl. Unsure"]
+bv_counts_articles.loc[:, "Count Excl. Unsure"] = (
+    bv_counts_articles["Count Excl. Unsure"].fillna(0).astype(int)
+)
+
+bv_counts_articles.style.set_properties(**{"text-align": "right"}).hide_index()
+
+
+```
+
+
+```{python}
+#| label: tbl-ei-article-count
+#| tbl-cap: Count of Eco-Innovations Using Swinno Data
+
 ei_counts_articles = pd.merge(
     ei_count_articles, ei_count_articles_0, on="Type", how="left"
 )
@@ -526,9 +552,11 @@ ei_counts_articles.loc[:, "Count Excl. Unsure"] = (
 ei_counts_articles.style.set_properties(**{"text-align": "right"}).hide_index()
 ```
 
-
-
 # Results
+
+While still early, a first analysis of the labeling results in regards to trends over time and across sectors follows.
+In this section only data based on source articles is presented.
+The figures and tables for SWINNO articles are included in the appendix.
 
 ## Trends
 
@@ -749,7 +777,7 @@ At most we record
 
 ## Thoughts
 
-At times it can be difficult to decide wether an innovation should be counted as optimization of raw material, reduction of waste, or both.
+At times, it can be difficult to decide whether an innovation should be counted as optimization of raw material, reduction of waste, or both.
 Generally it appears sensible that an optimization of waste can, but does not have to, lead to a reduction of waste.
 Keeping both labels seems sensible here.
 To avoid double counting eco-innovation in statistics, a prudent solution is to simple count the unique SWINNO IDs tagged with at least one eco-innovation type
