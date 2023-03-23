@@ -1,0 +1,34 @@
+---
+title: EHCS Session
+subtitle: Abstracts
+author: Jonas Kreutzer
+date: last-modified
+abstract: |
+    
+csl: https://zotero.org/styles/apa?source=1
+bibliography: swinno-shades-green.bib
+link-citations: true
+link-bibliography: true
+colorlinks: true
+
+---
+
+<!-- From Chat GPT -->
+
+Abstract 1:
+The Swedish forestry sector has undergone a significant transformation towards a bioeconomy in recent years. This paper presents an economic history analysis of the sector's innovation activity since the 1970s in regards to the three bioeconomy visions: biotechnology, bioresource and bioecology vision. By examining innovation trends and policy developments, we shed light on which vision the Swedish innovation system is pursuing in the forestry sector. Our findings reveal that while the biotechnology vision dominated innovation activity in the past, there has been a significant shift towards the bioresource and bioecology visions in recent years.
+
+Abstract 2:
+The bioeconomy has emerged as a new economic paradigm that prioritizes sustainable and renewable resources. The Swedish forestry sector, which accounts for a significant share of the country's economy, has been at the forefront of this transition. This paper presents an economic history analysis of the sector's innovation activity since the 1970s in regards to the three bioeconomy visions: biotechnology, bioresource and bioecology vision. 
+
+Abstract 3:
+The Swedish forestry sector has been undergoing a significant transformation towards a bioeconomy in recent years. This paper presents an economic history analysis of the sector's innovation activity since the 1970s in regards to the three bioeconomy visions: biotechnology, bioresource and bioecology vision. 
+
+---
+
+Abstract 4:
+Proponents of a bioeconomy argue it will combine prioritized sustainability with new avenues for economic development.
+The Swedish forestry sector is positioning itself at the forefront of this transition nationally and internationally.
+However, the aims of this transition are contested in public debate, with three possibilities competing: economic visions centered around biotechnology, bioresources, and bioecology. 
+By examining the innovation activities of the sector, the directionality of the sector can be assessed beyond the levels of discourse and funding decisions.
+This raises questions to the nuance embedded in sustainability transitions beyond material structure alone and highlights the potential of the Swedish forestry sector as a case study for understanding the challenges and opportunities of sustainability transitions.

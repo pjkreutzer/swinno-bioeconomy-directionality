@@ -558,34 +558,35 @@ While still early, a first analysis of the labeling results in regards to trends
 In this section only data based on source articles is presented.
 The figures and tables for SWINNO articles are included in the appendix.
 
-## Trends
+## Bioeconomy Vision
 
-### By Sector
-
-#### Bioeconomy Vision
+Examining the split of bioeconomy visions across sectors in @fig-bva-sectors, reveals a strong concentration of bioresource related innovations in the forestry sector.
 
 ```{python}
+#| label: fig-bva-sectors
+#| fig-cap: Heatmap of Bioeconomy Visions by Sector 
 
-bv_sectors = pd.read_sql(
+
+bva_sectors = pd.read_sql(
     """
 SELECT
   c.Category as vision,
   sni_codes.label as sector,
-  count(bv.bioeconomy_vision) as count
+  count(bva.bioeconomy_vision) as count
 FROM
-  bioeconomy_visions as bv
-  join use_sectors ON bv.sinno_id = use_sectors.[SINNO ID]
+  bioeconomy_visions_articles as bva
+  join use_sectors ON bva.sinno_id = use_sectors.[SINNO ID]
   join sni_codes ON SUBSTR(use_sectors.use_sectors, 1, 2) = sni_codes.code
-  join [classification-codes] as c ON bv.bioeconomy_vision = c.Code
+  join [classification-codes] as c ON bva.bioeconomy_vision = c.Code
 WHERE 
   NOT EXISTS(
    SELECT
       *
     FROM
-      bioeconomy_visions AS bv2
+      bioeconomy_visions_articles AS bva2
     WHERE
-      bv2.sinno_id = bv.sinno_id
-      AND bv2.bioeconomy_vision = 0
+      bva2.sinno_id = bva.sinno_id
+      AND bva2.bioeconomy_vision = 0
 )
 GROUP BY
   sector,
@@ -594,120 +595,20 @@ GROUP BY
     conn,
 )
 
-bv_matrix = prepare_heatmap_data(
-    bv_sectors, index_col="sector", cols_col="vision", values_col="count"
+bva_matrix = prepare_heatmap_data(
+    bva_sectors, index_col="sector", cols_col="vision", values_col="count"
 )
 
-plot_heatmap(bv_matrix, "Count Bioeconomy Vision by Sector Excluding Uncertains")
+plot_heatmap(bva_matrix, "Count Bioeconomy Vision by Sector Excluding Uncertains")
 ```
 
-#### Eco-Innovations
+@fig-bva-years suggests no clear pattern in the absolute count of visions assigned to innovations.
+Partially this might stem from a small number of innovations labeled so far, however, no clearer pattern emerges in the larger dataset using only SWINNO either (@fig-bv-years).
+The small number of biotechnology related visions is due to the chemistry sector not yet being included in the labelling.
 
 ```{python}
-ei_sectors = pd.read_sql(
-    """
-SELECT
-  c.Category as innovation_type,
-  sni_codes.label as sector,
-  count(ei.innovation_type) as count
-FROM
-  eco_innovations as ei
-  join use_sectors ON ei.sinno_id = use_sectors.[SINNO ID]
-  join sni_codes ON SUBSTR(use_sectors.use_sectors, 1, 2) = sni_codes.code
-  join [classification-codes] as c ON ei.innovation_type = c.Code
-WHERE 
-  NOT EXISTS(
-   SELECT
-      *
-    FROM
-      eco_innovations AS ei2
-    WHERE
-      ei2.sinno_id = ei.sinno_id
-      AND ei2.innovation_type = "000"
-)
-GROUP BY
-  sector,
-  innovation_type;
-""",
-    conn,
-)
-
-ei_sectors_matrix = prepare_heatmap_data(
-    ei_sectors, index_col="sector", cols_col="innovation_type", values_col="count"
-)
-
-plot_heatmap(ei_sectors_matrix, title="Eco-Innovation Type by Sector")
-
-```
-### Over Time
-
-#### Bioeconomy Visions Using SWINNO
-
-```{python}
-
-bv_years = pd.read_sql(
-    """
-SELECT
-  codes.Category AS Vision,
-  count(bv.bioeconomy_vision) AS vision_count,
-  innovation.[Year of commercialization] AS year
-FROM
-  bioeconomy_visions AS bv
-  JOIN innovation ON bv.sinno_id = innovation.[SINNO ID]
-  JOIN [classification-codes] AS codes ON bv.bioeconomy_vision = codes.Code
-WHERE
-  TRIM(innovation.[Year of commercialization]) IS NOT ""
-GROUP BY
-  year,
-  bv.bioeconomy_vision;
-""",
-    conn,
-)
-
-bvc_years = pd.read_sql(
-    """
-SELECT
-  codes.Category AS Vision,
-  count(bv.bioeconomy_vision) AS vision_count,
-  innovation.[Year of commercialization] AS year
-FROM
-  bioeconomy_visions AS bv
-  JOIN innovation ON bv.sinno_id = innovation.[SINNO ID]
-  JOIN [classification-codes] AS codes ON bv.bioeconomy_vision = codes.Code
-WHERE
-  NOT EXISTS (
-    SELECT
-      *
-    FROM
-      bioeconomy_visions AS bv2
-    WHERE
-      bv2.sinno_id = bv.sinno_id
-      AND bv2.bioeconomy_vision = 0
-  )
-  AND TRIM(innovation.[Year of commercialization]) IS NOT ""
-GROUP BY
-  year,
-  bv.bioeconomy_vision;
-""",
-    conn,
-)
-
-bv_years = bv_years.set_index("year")
-bvc_years = bvc_years.set_index("year")
-
-plot_counts(
-    bv_years,
-    bvc_years,
-    category_col="Vision",
-    y="vision_count",
-    y_label="Count of Vision",
-)
-```
-
-
-#### Bioeconomy Visions Using Articles
-
-```{python}
+#| label: fig-bva-years
+#| fig-cap: Count of Bioeconomy Visions by Year 
 
 bva_years = pd.read_sql(
     """
@@ -769,7 +670,131 @@ plot_counts(
 
 ```
 
-At most we record 
+## Eco-Innovations
+
+Looking at the eco-innovation types by sector reveals that the biggest category and most heavily used in the forest and timber sector are innovations aimed to prolong the lifecylce of products used therin (@fig-ei-sectors)
+```{python}
+#| label: fig-eia-sectors
+#| fig-cap: Heatmap of Eco-Innovations by Sector
+
+
+eia_sectors = pd.read_sql(
+    """
+SELECT
+  c.Category as innovation_type,
+  sni_codes.label as sector,
+  count(eia.innovation_type) as count
+FROM
+  eco_innovations_articles as eia
+  join use_sectors ON eia.sinno_id = use_sectors.[SINNO ID]
+  join sni_codes ON SUBSTR(use_sectors.use_sectors, 1, 2) = sni_codes.code
+  join [classification-codes] as c ON eia.innovation_type = c.Code
+WHERE 
+  NOT EXISTS(
+   SELECT
+      *
+    FROM
+      eco_innovations_articles AS eia2
+    WHERE
+      eia2.sinno_id = eia.sinno_id
+      AND eia2.innovation_type = "000"
+)
+GROUP BY
+  sector,
+  innovation_type;
+""",
+    conn,
+)
+
+eia_sectors_matrix = prepare_heatmap_data(
+    eia_sectors, index_col="sector", cols_col="innovation_type", values_col="count"
+)
+
+plot_heatmap(eia_sectors_matrix, title="Eco-Innovation Type by Sector")
+
+```
+
+For the count of eco-innovation types by year, the legend had to be surpressed, as the amount of categories made the plots unreadable.
+Just as for bioeconomy visions @fig-eia-year shows no clear pattern yet.
+@fig-ei-year-swinno does little to improve this.
+The biggest categories in that dataset are "Not Eco-Innovation" (dark blue), and "Automatization" (dark pink).
+Visualizing these data is challenging and suggestions warmly welcome.
+
+```{python}
+#| label: fig-eia-year
+#| fig-cap: Count of Eco-Innovations by Year
+
+eia_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Type,
+  count(eia.innovation_type) AS innovation_count,
+  innovation.[Year of commercialization] AS Year,
+  SUBSTR(eia.innovation_type, 1,1) as top_cat
+FROM
+  eco_innovations_articles AS eia
+  JOIN innovation ON eia.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON eia.innovation_type = codes.Code
+WHERE
+  TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  Year,
+  eia.innovation_type;
+""",
+    conn,
+)
+
+eiac_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Type,
+  count(eia.innovation_type) AS innovation_count,
+  innovation.[Year of commercialization] AS year,
+  SUBSTR(eia.innovation_type, 1,1)
+FROM
+  eco_innovations_articles AS eia
+  JOIN innovation ON eia.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON eia.innovation_type = codes.Code
+WHERE
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      eco_innovations_articles AS eia2
+    WHERE
+      eia2.sinno_id = eia.sinno_id
+      AND eia2.innovation_type = "000"
+  )
+  AND TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  year,
+  eia.innovation_type;
+""",
+    conn,
+)
+
+eia_years = eia_years.set_index("Year")
+eiac_years = eiac_years.set_index("year")
+
+plot_counts(
+    eia_years,
+    eiac_years,
+    category_col="Type",
+    y="innovation_count",
+    legend_cols = 8,
+    y_label="Count of Type",
+    show_legend=False
+)
+```
+
+## Trends
+
+So far, there is not much to make of these figures.
+The subset of innovations in SWINNO analyzed is too small to descern any real trends.
+However, there is probable cause to believe that the tendency of dominating bioresource vision related innovations will persist.
+It is unsurprising that in the core forestry sector (logging, timber) these type of innovations are more frequent than e.g., biotechnology related visions.
+Perhpas surprising is that, despite the small number of innovation labelled so far and the methodological disadvantage of LBIO towards bioecology innovations, three were possibly already identified.
+There occurance in the 1980s might suggest taht they were the outcome of a temporary increased awareness of environmental issues in the forestry sector at that time.
 
 # Outlook
 
@@ -843,10 +868,15 @@ What about the other machine sectors (29-30)? The same? -->
 
 ## Appendix {.appendix}
 
+### SWINNO
 
 #### Bioeconomy Visions by Sector
 
 ```{python}
+#| label: fig-bv-sectors
+#| fig-cap: Heatmap of Bioeconomy Visions by Sector (SWINNO)
+
+
 bvu_sectors = pd.read_sql(
     """
 SELECT
@@ -872,21 +902,121 @@ bvu_matrix = prepare_heatmap_data(
 plot_heatmap(bvu_matrix, "Count Bioeconomy Vision by Sector Including Uncertains")
 ```
 
+#### Bioeconomy Visions Over Time
 
+```{python}
+#| label: fig-bv-years
+#| fig-cap: Count of Bioeconomy Visions by Year (SWINNO)
+
+
+bv_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  count(bv.bioeconomy_vision) AS vision_count,
+  innovation.[Year of commercialization] AS year
+FROM
+  bioeconomy_visions AS bv
+  JOIN innovation ON bv.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON bv.bioeconomy_vision = codes.Code
+WHERE
+  TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  year,
+  bv.bioeconomy_vision;
+""",
+    conn,
+)
+
+bvc_years = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  count(bv.bioeconomy_vision) AS vision_count,
+  innovation.[Year of commercialization] AS year
+FROM
+  bioeconomy_visions AS bv
+  JOIN innovation ON bv.sinno_id = innovation.[SINNO ID]
+  JOIN [classification-codes] AS codes ON bv.bioeconomy_vision = codes.Code
+WHERE
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      bioeconomy_visions AS bv2
+    WHERE
+      bv2.sinno_id = bv.sinno_id
+      AND bv2.bioeconomy_vision = 0
+  )
+  AND TRIM(innovation.[Year of commercialization]) IS NOT ""
+GROUP BY
+  year,
+  bv.bioeconomy_vision;
+""",
+    conn,
+)
+
+bv_years = bv_years.set_index("year")
+bvc_years = bvc_years.set_index("year")
+
+plot_counts(
+    bv_years,
+    bvc_years,
+    category_col="Vision",
+    y="vision_count",
+    y_label="Count of Vision",
+)
+```
+
+
+#### Eco-Innovations by Sector
+
+```{python}
+#| label: fig-ei-sectors
+#| fig-cap: Heatmap of Eco-Innovations by Sector (SWINNO)
+
+ei_sectors = pd.read_sql(
+    """
+SELECT
+  c.Category as innovation_type,
+  sni_codes.label as sector,
+  count(ei.innovation_type) as count
+FROM
+  eco_innovations as ei
+  join use_sectors ON ei.sinno_id = use_sectors.[SINNO ID]
+  join sni_codes ON SUBSTR(use_sectors.use_sectors, 1, 2) = sni_codes.code
+  join [classification-codes] as c ON ei.innovation_type = c.Code
+WHERE 
+  NOT EXISTS(
+   SELECT
+      *
+    FROM
+      eco_innovations AS ei2
+    WHERE
+      ei2.sinno_id = ei.sinno_id
+      AND ei2.innovation_type = "000"
+)
+GROUP BY
+  sector,
+  innovation_type;
+""",
+    conn,
+)
+
+ei_sectors_matrix = prepare_heatmap_data(
+    ei_sectors, index_col="sector", cols_col="innovation_type", values_col="count"
+)
+
+plot_heatmap(ei_sectors_matrix, title="Eco-Innovation Type by Sector")
+
+```
 
 #### Eco-Innovations Over Time
-
-##### SWINNO
-
-
-
-
-##### Articles
 ```{python}
+#| label: fig-ei-year-swinno
+#| fig-cap: Count of Eco-Innovations by Year (SWINNO).
 
-#| fig-caption: Count of Eco-Innovations by Year.
-
-eia_years = pd.read_sql(
+ei_years = pd.read_sql(
     """
 SELECT
   codes.Category AS Type,
@@ -894,7 +1024,7 @@ SELECT
   innovation.[Year of commercialization] AS Year,
   SUBSTR(ei.innovation_type, 1,1) as top_cat
 FROM
-  eco_innovations_articles AS ei
+  eco_innovations AS ei
   JOIN innovation ON ei.sinno_id = innovation.[SINNO ID]
   JOIN [classification-codes] AS codes ON ei.innovation_type = codes.Code
 WHERE
@@ -906,7 +1036,7 @@ GROUP BY
     conn,
 )
 
-eiac_years = pd.read_sql(
+eic_years = pd.read_sql(
     """
 SELECT
   codes.Category AS Type,
@@ -914,7 +1044,7 @@ SELECT
   innovation.[Year of commercialization] AS year,
   SUBSTR(ei.innovation_type, 1,1)
 FROM
-  eco_innovations_articles AS ei
+  eco_innovations AS ei
   JOIN innovation ON ei.sinno_id = innovation.[SINNO ID]
   JOIN [classification-codes] AS codes ON ei.innovation_type = codes.Code
 WHERE
@@ -922,7 +1052,7 @@ WHERE
     SELECT
       *
     FROM
-      eco_innovations_articles AS ei2
+      eco_innovations AS ei2
     WHERE
       ei2.sinno_id = ei.sinno_id
       AND ei2.innovation_type = "000"
@@ -935,12 +1065,12 @@ GROUP BY
     conn,
 )
 
-eia_years = eia_years.set_index("Year")
-eiac_years = eiac_years.set_index("year")
+ei_years = ei_years.set_index("Year")
+eic_years = eic_years.set_index("year")
 
 plot_counts(
-    eia_years,
-    eiac_years,
+    ei_years,
+    eic_years,
     category_col="Type",
     y="innovation_count",
     legend_cols = 8,
