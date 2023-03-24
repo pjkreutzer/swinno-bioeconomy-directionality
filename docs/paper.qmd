@@ -20,6 +20,7 @@ format:
 ---
 
 ```{python}
+#| label: import-functions
 from pathlib import Path
 import pandas as pd
 import seaborn as sns
@@ -150,8 +151,8 @@ def prepare_heatmap_data(df, index_col, cols_col, values_col, ascending=False):
 # Classification Categories
 
 The classification categories for eco-innovation types were sourced from a single paper and augmented during the classification process.
-In addition to the 30 firm performance indicators identified by García-Granero's [-@garcia-granero2018EcoinnovationMeasurementReview] review of management literature, XX categories were added.
-Some are mere extensions of their categories (e.g., specifying if an innovation prolongs the life cycle of the product itself or downstream products), others are new types of existing categories (e.e.g., reduced other pollution such as noise), yet others are entirely new categories (human health and safety).
+In addition to the 30 firm performance indicators identified by García-Granero's [-@garcia-granero2018EcoinnovationMeasurementReview] review of management literature, 15 categories were added.
+Some are mere extensions of their categories (e.g., specifying if an innovation prolongs the life cycle of the product itself or downstream products), others are new types of existing categories (e.e.g., reduced other pollution such as noise), yet others are entirely new categories (human health and safety), the categories of automatization and precision by themselves are not eco-innovations, but can be used to gain a deeper understanding of what makes an innovation an eco-innovation.
 Clearly not all new categories are eco-innovations.
 The newly created pesticide category, for example, can be an eco-innovation if it reduces chemical pollution, but it could also increase chemical pollution if pesticides are introduced in novel ways.
 These codes are therefore not a final categorization of eco-innovation, but rather steps towards a taxonomy, or at least usable dataset.
@@ -167,7 +168,7 @@ Based on the information contained in the text, the innovation is labeled with o
 In case of uncertainty, the doubt label is added.
 Because the list of eco-innovation types was relatively exhaustive from the beginning, few adjustments had to be made.
 These include, as alluded to above, expanding the labeling for other sustainability criteria, such as human health and safety, and specific forest related aspects / tasks to gain a more detailed understanding of an innovations aim.
-For example, XX innovations aim to protect harvested timber, either at harvest, during transport or storage.
+For example, some innovations aim to protect harvested timber, either at harvest, during transport or storage.
 Since these could be tagged in different ways e.g., longer lifecycle of (downstream) product, optimized use of raw materials, or even reduced waste, it seemed more appropriate to create a specific category for these cases.
 Depending on subsequent analysis needs this could then be mapped to other categories.
 
@@ -373,8 +374,6 @@ max_counts = get_max_categories(count_dfs)
 # display(Markdown(f"Ignoring the Unsure category, the biggest group of innovations belonged to the vision {max_counts['bv_count']}, and {max_counts['bv_count_zero']}. For the eco-innovation types, the biggest categories are {max_counts['ei_count']} if uncertains are included and {max_counts['ei_count_0']} if they are excluded."))
 ```
 
-
-
 ```{python}
 
 #| label: tbl-bv-swinno-count
@@ -407,7 +406,6 @@ ei_counts.style.set_properties(**{"text-align": "right"}).hide_index()
 ```
 
 ## Classifications Using Source Articles
-
 
 ```{python}
 bv_count_articles = pd.read_sql(
@@ -516,7 +514,7 @@ label_confidences = {k: label_confidence(v) for  k, v in count_dfs_confidence.it
 display(Markdown(f"The confidence of labels for each approch, measured as the share of Unsure to total classifications is present in each data set shows that relying on source articles drastically reduces the uncertainty of labelling decisions(Eco-Innovation: {label_confidences['ei_count']:.2%} to {label_confidences['ei_count_articles']:.2%} and Bioeconomy: {label_confidences['bv_count']:.2%} to {label_confidences['bv_count_articles']:.2%}, for SWINNO and articles, respectively)."))
 ```
 
-The only down side to the articles approach is a quintupling of labeling time (from 1 min on average to 5 min on average per innovation).
+The only downside to the articles approach is a quintupling of labeling time (from 1 min on average to 5 min on average per innovation).
 
 ```{python}
 #| label: tbl-bv-article-count
@@ -554,7 +552,7 @@ ei_counts_articles.style.set_properties(**{"text-align": "right"}).hide_index()
 
 # Results
 
-While still early, a first analysis of the labeling results in regards to trends over time and across sectors follows.
+While still early, a first analysis of the labeling results regarding trends over time and across sectors follows.
 In this section only data based on source articles is presented.
 The figures and tables for SWINNO articles are included in the appendix.
 
@@ -603,7 +601,7 @@ plot_heatmap(bva_matrix, "Count Bioeconomy Vision by Sector Excluding Uncertains
 ```
 
 @fig-bva-years suggests no clear pattern in the absolute count of visions assigned to innovations.
-Partially this might stem from a small number of innovations labeled so far, however, no clearer pattern emerges in the larger dataset using only SWINNO either (@fig-bv-years).
+Partially this might stem from the small number of innovations labeled so far, however, no clearer pattern emerges in the larger dataset using only SWINNO either (@fig-bv-years).
 The small number of biotechnology related visions is due to the chemistry sector not yet being included in the labelling.
 
 ```{python}
@@ -672,7 +670,7 @@ plot_counts(
 
 ## Eco-Innovations
 
-Looking at the eco-innovation types by sector reveals that the biggest category and most heavily used in the forest and timber sector are innovations aimed to prolong the lifecylce of products used therin (@fig-ei-sectors)
+Looking at the eco-innovation types by sector reveals that the biggest category and most heavily used in the forest and timber sector are innovations aimed to prolong the lifecycle of products used therein (@fig-ei-sectors)
 ```{python}
 #| label: fig-eia-sectors
 #| fig-cap: Heatmap of Eco-Innovations by Sector
@@ -714,7 +712,7 @@ plot_heatmap(eia_sectors_matrix, title="Eco-Innovation Type by Sector")
 
 ```
 
-For the count of eco-innovation types by year, the legend had to be surpressed, as the amount of categories made the plots unreadable.
+For the count of eco-innovation types by year, the legend had to be suppressed, as the amount of categories made the plots unreadable.
 Just as for bioeconomy visions @fig-eia-year shows no clear pattern yet.
 @fig-ei-year-swinno does little to improve this.
 The biggest categories in that dataset are "Not Eco-Innovation" (dark blue), and "Automatization" (dark pink).
@@ -790,15 +788,69 @@ plot_counts(
 ## Trends
 
 So far, there is not much to make of these figures.
-The subset of innovations in SWINNO analyzed is too small to descern any real trends.
+The subset of innovations in SWINNO analyzed is too small to discern any real trends.
 However, there is probable cause to believe that the tendency of dominating bioresource vision related innovations will persist.
 It is unsurprising that in the core forestry sector (logging, timber) these type of innovations are more frequent than e.g., biotechnology related visions.
-Perhpas surprising is that, despite the small number of innovation labelled so far and the methodological disadvantage of LBIO towards bioecology innovations, three were possibly already identified.
-There occurance in the 1980s might suggest taht they were the outcome of a temporary increased awareness of environmental issues in the forestry sector at that time.
+Perhaps surprising is that, despite the small number of innovation labelled so far and the methodological disadvantage of LBIO towards bioecology innovations, three were possibly already identified.
+There occurrence in the 1980s might suggest that they were the outcome of a temporary increased awareness of environmental issues in the forestry sector at that time.
 
 # Outlook
 
 ## Open Questions and Doubts
+
+<!-- ```{python}
+#| label: tbl-bioeco-examples
+#| tbl-cap: Examples of Bioecology Vision
+
+bv3_examples = pd.read_sql(
+  """
+  SELECT
+  bv.sinno_id AS [SINNO ID],
+  innovation.[Description in Swedish]
+FROM
+  bioeconomy_visions_articles AS bv
+JOIN innovation ON bv.sinno_id = innovation.[SINNO ID]
+WHERE
+bv.bioeconomy_vision = 3 
+AND
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      bioeconomy_visions_articles AS bv2
+    WHERE
+      bv2.sinno_id = bv.sinno_id
+      AND bv2.bioeconomy_vision = 0
+  );
+  """
+  , conn
+)
+
+def wrap_text(s):
+    return 'white-space: pre-wrap'
+
+styled_df = bv3_examples.style.set_properties(subset=[bv3_examples.columns[-1]], **{'width': '70%', 'max-width': '80%', 'text-align': 'justify', 'word-wrap': 'break-word', 'white-space': 'pre-wrap'})
+
+# display the styled dataframe
+display(Markdown(styled_df.hide_index().render())) 
+
+```-->
+
+| SINNO ID | Description in Swedish |
+|:---|:---|
+| 7440001  | Trämelass. Trämelassen består av de mest lättlösliga substanserna i vedråvaran för skivframställning  vilka går i lösning i tillverkningsprocessen och inblandas i processvattnet. Sedan mitten av 1960-talet återvinnes substanserna koncentreras och torkas samt ges en viss efterbehandling som gör dem lämpliga som bl a kreatursfoder. Produkten är alltså dels rent kreatursfoder och dels en ingående ingredients i kreatursfoder. |
+| 7441001  | Maskinsystem för småskalig avverkning av energiskog (ESO).                                                          
+| 7446001  | Maskinsystem för storskalig avverkning av energiskog (ESO) i företrädesvis våtmark. I systemet ingår både skördare och buntare. |                                                      
+| 7508001  | Elsåg för motorsågsdrivna sågverk. Elsågen håller en jämnare hastighet jämfört med en dieseldriven såg det medför lägre bränslekostnader.
+| 7555001  | Patenterad lösning för stegdämpning i trähus. Innovationen består av en extremt kraftig gummilist som tar upp vibrationer. |
+: Examples of Bioecology Vision {#tbl-bioeco-examples tbl-colwidths="[15,85]"}                                     
+
+@tbl-bioeco-examples shows the five innovations tagged without uncertainty as belonging to the bioecology vision.
+While the first is perhaps the clearest example, the other three are not as obvious.
+After some deliberation, I decided that they ought to belong to the bioecology vision, as they all include strong territorial identity.
+But I have doubts if that is true enough.
+
+Further, doubts regarding the overall approach come from the fact that it feels very subjective at times, and I struggle with designing a more rigorous approach to classification of bioeconomy visions.
 
 ## Thoughts
 
