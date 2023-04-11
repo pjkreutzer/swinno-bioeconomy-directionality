@@ -2,7 +2,9 @@
 .Rproj.user
 .pytest_cache
 /data/modified-data/
-/data/raw-data/images
+/data/raw-data/
+!data/*/*.xslx
+!data/*/*.csv
 **/scrap-notebook.ipynb**
 /.quarto/
 *.html
@@ -113,7 +115,7 @@ vignettes/*.pdf
 
 # pkgdown site
 docs/
-docs/!*.qmd
+!docs/*.qmd
 
 # translation temp files
 po/*~

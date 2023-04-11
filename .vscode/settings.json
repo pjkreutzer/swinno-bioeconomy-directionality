@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "C:\\Users\\ph8148kr\\OneDrive - Lund University\\research\\swinno.db",
+            "name": "swinno"
+        }
+    ]
+}

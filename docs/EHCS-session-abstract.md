@@ -28,14 +28,15 @@ The Swedish forestry sector has been undergoing a significant transformation tow
 
 Abstract 4:
 The Swedish forestry sector is positioning itself at the forefront of the transition to a bioeconomy both nationally and internationally.
-A bioeconomy suggests replacements of fossil based inputs with inputs from biological sources.
-But the suggested transition goes deeper than input substitution, requiring novel configurations of economic structures and processes.
+The bioeconomy implies the replacements of fossil-based inputs with inputs from biological sources, but the suggested transition goes deeper than input substitution.
+It requires novel configurations of economic structures and processes.
+
 A contested debate between different visions of future bioeconomies has emerged in related policy, industry and scholarly arenas.
 Previous discourse analysis has shown that the debate is dominated by economic visions centered around bioresources and biotechnology.
 
-However, there is a lack of research on which direction the transition to a bioeconomy is actually taking. To address this gap, this paper uses newspaper reports about significant Swedish innovations found in the SWINNO database. The paper maps each innovation related to the forest sector between 1970 and 2020 to the bioeconomy visions it aims to realize. This mapping is based on previous definitions of each bioeconomy vision.
+However, there is a lack of research on which direction the transition to a bioeconomy is actually taking. To address this gap, this paper uses trade journal articles about significant Swedish innovations found in the SWINNO database. The paper maps each innovation related to the forest sector between 1970 and 2020 to the bioeconomy visions it aims to realize. This mapping is based on innovation biographies from the trade journals and previous definitions of each bioeconomy vision.
 
-Conceptualizing innovation as embedded ideas sheds light on the actual direction the transition to a bioeconomy is taking, moving beyond statements of intent. Qualitatively labeling innovation data with bioeconomy visions allows us to advance the bioeconomy debate by making lock-ins into single visions testable and examining trade-offs as well as potential synergies between innovation aimed at different visions
+Conceptualizing innovation as embedded ideas sheds light on the actual direction the search for bioeconomy transition pathways is taking, moving beyond statements of intent. Qualitatively labeling innovation data with bioeconomy visions allows us to advance the bioeconomy debate by making lock-ins into single visions testable and examining trade-offs as well as potential synergies between innovation aimed at different visions.
 
 The bioeconomy case study further highlights the importance and challenge of analyzing innovation in the context of sustainability transitions beyond efficiency gains or pollution reductions.
 
