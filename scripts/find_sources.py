@@ -1,8 +1,7 @@
 import argparse
-from shutil import copy
 from pathlib import Path
 from src.utils import get_project_root
-from collections import defaultdict
+from src.file_utils import create_directory, get_input_ids, get_source_names, copy_files
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -23,7 +22,7 @@ parser.add_argument(
     "--source",
     type=Path,
     default=Path(
-        "/mnt/c/Users/ph8148kr/Lund University/Mathias Johansson - non_missing_source_materials/images"
+        "/mnt/c/Users/ph8148kr/OneDrive - Lund University/research/swinno-db/data/source_images"
     ).absolute(),
     help="Path for source of files.",
 )
@@ -41,7 +40,7 @@ args = vars((parser.parse_args()))
 ROOT = get_project_root()
 
 
-def copy_sources():
+if __name__ == "__main__":
 
     if not Path(ROOT, args["input"]).exists():
         raise FileNotFoundError(f"Input file {args['input']} does not exist.")
@@ -52,51 +51,16 @@ def copy_sources():
         raise FileNotFoundError(f"Lookup file {args['lookup']} does not exist.")
     else:
         lookup_path = Path(ROOT, args["lookup"])
-    source_path = args["source"]
-
-    if not Path(ROOT, args["destination"]).is_dir():
-        Path(ROOT, args["destination"]).mkdir(parents=True)
+    if not Path(args["source"]).exists():
+        source_path = Path(args["source"])
+        raise NotADirectoryError(f"The directory '{source_path.name}' does not exist.")
+    else:
+        source_path = args["source"]
 
     destination_path = Path(ROOT, args["destination"])
+    create_directory(destination_path)
 
     input_ids = get_input_ids(input_path)
     source_names = get_source_names(lookup_path, input_ids)
 
-    for id, sources in source_names.items():
-        copy_files(id, sources, source_path, destination_path)
-
-
-def get_input_ids(input_path):
-    with open(input_path, "r") as f:
-        return [line.strip()[:-3] for line in f.readlines()]
-
-
-def get_source_names(lookup_path, input_ids):
-    with open(lookup_path, "r") as f:
-        lookup = defaultdict(list)
-        for line in f:
-            key, value = line.strip().split("|")
-            lookup[key].append(value)
-
-    return {k: lookup[k] for k in set(lookup).intersection(input_ids)}
-
-
-def copy_files(id, sources, source_path, destination_path):
-    for source in sources:
-        files = list(source_path.glob(f"{source}*.*"))
-        for f in files:
-            dest = Path(destination_path, "images", f"{id}")
-
-            if not dest.exists():
-                dest.mkdir(parents=True)
-
-            try:
-                copy(f, Path(dest, f"{f.name}"))
-            except PermissionError:
-                print(f"Error: Permission denied when copying {f} to {dest}")
-
-        print(f"Copied {len(files)} images for id {id}.")
-
-
-if __name__ == "__main__":
-    copy_sources()
+    copy_files(source_names, source_path, destination_path)
