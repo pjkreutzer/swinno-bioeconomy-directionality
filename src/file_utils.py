@@ -60,10 +60,6 @@ def get_source_names(lookup_path, input_ids):
 
     return {k: lookup[k] for k in set(lookup).intersection(input_ids)}
 
-
-from pathlib import Path
-from shutil import copy
-
 def copy_files(source_links: dict, source_dir: Path, destination_dir: Path):
     """
     Copies files from the source directory to the destination directory based on the provided source links.

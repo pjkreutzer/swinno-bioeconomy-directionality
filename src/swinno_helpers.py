@@ -24,7 +24,7 @@ def split_cols(df, col_to_split: str, sep: str):
     )
 
     for col in split_cols:
-        temp_df[f"{col_to_split}_{col}"] = split_cols.loc[:, col]
+        temp_df.loc[:, f"{col_to_split}_{col}"] = split_cols.loc[:, col]
 
     temp_df.drop(labels=col_to_split, axis=1, inplace=True)
 
@@ -57,13 +57,13 @@ def melt_table(df, id_vars: str, col_start: str, value_name: str, **kwargs):
 
     return temp_df
 
+
 def clean_column_names(df):
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
     return df
 
 
 def clean_import(file_type, file_path, **kwargs):
-
     if file_type == "csv":
         df = pd.read_csv(file_path, **kwargs)
 
@@ -76,8 +76,8 @@ def clean_import(file_type, file_path, **kwargs):
     df = clean_column_names(df)
     return df
 
-def connect_swinno_db():
 
+def connect_swinno_db():
     database_dir = get_project_root().parent.absolute()
     database_uri = f"sqlite:///{database_dir}/swinno-db/data/swinno.db"
     engine = create_engine(database_uri)

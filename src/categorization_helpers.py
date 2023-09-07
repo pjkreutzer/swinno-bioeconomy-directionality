@@ -5,9 +5,11 @@ import re
 
 def clean_codes(df, column, code_digits, remove_whitespace=True, drop_na=True):
     if drop_na:
-        df = df.dropna(subset=[column])
+        df = df.dropna(subset=[column]).copy()
 
     df.loc[:, column] = df[column].astype(str)
+
+    df.loc[:, column] = df[column].apply(lambda x: re.sub(r";", r",", x))
 
     df.loc[:, column] = df[column].apply(
         lambda x: re.sub(r"\b(0)\b", r"0" * code_digits, x)
@@ -19,6 +21,8 @@ def clean_codes(df, column, code_digits, remove_whitespace=True, drop_na=True):
     df.loc[:, column] = df[column].apply(
         lambda x: re.sub(rf"(\d{ {code_digits} })(?!$)", r"\1,", str(x))
     )
+
+    df.loc[:, column] = df[column].apply(lambda x: re.sub(r",,", r",", str(x)))
 
     if remove_whitespace:
         df.loc[:, column] = df[column].apply(lambda x: re.sub(r"\s", "", x))

@@ -1,0 +1,124 @@
+---
+title: The Direction of Search for a Forest Based Bioeconomy
+author: 
+    name: Jonas Kreutzer
+    affiliation: Department of Economic History, Lund University
+date: last-modified
+abstract: |
+    
+csl: https://zotero.org/styles/apa?source=1
+bibliography: [../../swinno-shades-green.bib]
+link-citations: true
+link-bibliography: true
+colorlinks: true
+format:
+    pdf
+execute: 
+    include: false
+---
+
+```{python}
+#| label: Imports
+
+from IPython.display import display, Markdown
+import pandas as pd
+```
+
+# Debate around Bioeconomies
+
+The development of a bioeconomy firmly features at the top of many national and international economic agendas.
+In Europe, 2012 saw the publication of a EU wide bioeconomy strategy, which outlined core tenenats sourrounding the aims and methods by which economic inputs with biological origin are to replace those based on fossile materials.
+
+The concept and idea of a bioeconomy is hence not novel.
+With progressing concern about environmental degradation the discussion around a bioeconomy has intensified in recent years.
+
+## Advanced Research Fronts
+
+Public, scientific and political debate of bioeconomies has brought forth a number of discourse analyses.
+Both @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy conclude that the concept of a bioeconomy conceals different, possibly conflicting visions of transfromation outcomes.
+
+
+# Context of Swedish Forest Based Bioeconomy
+
+## Size of Forestry Sector 
+
+##
+
+# Data and Methods
+
+To capture the actual innovation output associated with the Swedish forest based bioeconomy the SWINNO database was searched for innovation associated with core forest sectors and keywords describing forest products which may be used in sectors along the bioeconomy value chain.
+The list of keywords and sectors is presented in the appendix.
+Due to the query matching keywords whenever they appear as substrings in the description of the innovation, the inital search result is rather susceptible to false positives.
+In later manual review of each innovation for classification these false positives were removed from the search results.
+
+The SWINNO database is constructed according to  literature-based innovation output (LBIO) method.
+This method relies on the judgment of editiors and journalists at trade journals and hence captures what can be described as significant innovation.
+Measuring innovation with LBIO has substantial advantages.
+For one, it ensures that actual innovation, meaning commericialized products and processes, are captured.
+Second, because the source articles are preserved, it provides a rich source of data, giving frequently providing insights into the aims, motivations, advantages and challenges of the covered innovation.
+
+An important limitation of LBIO measures, especially for research into forest sector innovation, is a bias against non-commercialized innovation.
+New processes, or new organizational apporaches for example, will only be caputred if they are sold to another company.
+This is especially sensitive for bioeconomy research as, for example, new methods or plans for managing forest stands are less likely to be included.
+Relevant product innovation which faciliates these plans, for example products related to the planting of trees, on the other hand, are captured.
+
+A likely consequence of this limitation is that the number of innovation related to the bioecology vision are under counted, as this vision highlights "Counter-expertise rather than concrete technical solutions" [@vivien2019HijackingBioeconomy 194].
+Nonetheless, a small number of innovation associated with this vision were henceforth identified in the database.
+
+## Classification Methodology
+
+
+Innovations were classified as belonging to a bioeconomy vision if they fulfilled one, or more criteria outlined in @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy.
+@tbl-tbl-bioeconomy_vision_summary shows the summary of bioeconomy visions presented in the cited papers.
+
+Economic growth is cited as the aim & objective of biotechnology and bioresource visions by @bugge2016WhatBioeconomyReview.
+
+It can be argued that all innovation can contribute to economic growth, which is why these aspects were not given hightened importance in the classification decision.
+
+
+
+
+<!-- Use examples of clear cases here -->
+
+
+
+
+# Results
+
+
+```{python}
+#| label: Queries
+
+``` 
+
+
+
+```{python}
+#| label: Number of Results
+
+display
+```
+
+# References 
+
+:::{#refs}
+:::
+
+# Appendix {.appendix}
+
+| @bugge2016WhatBioeconomyReview [10] | Biotechnology | Bioresource | Bioecology |
+|---|---|---|---|
+| Aim &   Objectives | Economic growth & job   creation | Economic growth &   sustainability | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation |
+| Value   Creation | Application of biotechnology,   commercialisation of research & technology | Conversion and upgrading of   bio-resources (process oriented) | Development of integrated   production systems and high-quality products with territorial identity |
+| Drivers   & mediators of innovation | R & D, patents, TTOs,   Research councils and funders (Science push, linear model) | Interdisciplinary, optimisation   of land use, include degraded land in the production of biofuels, use and   availability of bio-resources, waste management, engineering, science &   market (Interactive & networked production mode) | Identification of favourable   organic agro-ecological practices, ethics, risk, transdisciplinary   sustainability, ecological interactions, re-use & recycling of waste,   land use, (Circular and self-sustained production mode) |
+
+| @vivien2019HijackingBioeconomy [194] | Type II | Type III | Type I |
+|---|---|---|---|
+|  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere<br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decisionmaking centers |
+| Classificaiton Code | 1 | 2 | 3 | 
+
+<!-- Definition An ecological economy, that is compatible with the biosphere A science-based economy driven by industrial biotechnology A biomass-based economy Nature/economy relations Struggle against entropy and coevolution with the biosphere. Economic development in line with biological evolution The cell is a factory Technology has the power to “correct God's mistakes” Biomass replaces fossil fuels and mining to produce energy and materials Science, technology and society Megatrends with “promethean technologies” Pending the advent of Prometheus III, the economics of prudence and sharing Prospect of a fifth Kondratiev wave based on the rise of biotechnology. The “economy of techno-scientific promises” Biorefining at the heart of ecological transition (multilevel perspective). The economy of learning Sustainability “Strong sustainability” approach and degrowth perspective Very “weak sustainability” approach “Weak sustainability” approach -->
+
+<!-- TODO merge tables -->
+
+: Bioeconomy Vision Summary {#tbl-bioeconomy_vision_summary}

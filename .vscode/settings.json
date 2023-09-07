@@ -6,5 +6,10 @@
             "database": "C:\\Users\\ph8148kr\\OneDrive - Lund University\\research\\swinno.db",
             "name": "swinno"
         }
-    ]
+    ],
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
