@@ -128,3 +128,4 @@ rsconnect/
 **/**.db
 
 test_files/
+/.luarc.json
