@@ -5,6 +5,7 @@ author:
     affiliation: Department of Economic History, Lund University
 date: last-modified
 abstract: |
+    The transition to a bioeconomy is high on the agenda for research, industry and policy. Beyond conceptual uncertainties of what is meant by a bioeconomy, three different visions have emerged, differing in their aims and objectives, drivers and mediators of innovation and relation to the biosphere. The use of detailed innovation data from the SWINNO data base allows to capture the actual innovation output of the Swedish forest based bioeconomy innovation system. Qualitative coding of the underlying source material associates innovation from 1970 to 2020 with vision of a bioresource, biotechnology and / or bioecology bioeconomy. Preliminary results suggest that the overall innovation output of the forest based bioeconomy has followed overall trends in the SWINNO database, failing to gain in prominence. Of the three visions, the bioresource vision has been the most dominant, especially in the 1970s and after 2005. At the same time, innovation which fit into multiple visions exist, suggesting that the opportunity space for future development is not yet locked in.
     
 csl: https://zotero.org/styles/apa?source=1
 bibliography: [../../swinno-shades-green.bib]
@@ -12,35 +13,83 @@ link-citations: true
 link-bibliography: true
 colorlinks: true
 format:
-    pdf
+    wordcount-pdf: default
 execute: 
-    include: false
+    echo: false
 ---
 
 ```{python}
-#| label: Imports
+# | label: Imports
+# | eval: true
 
-from IPython.display import display, Markdown
 import pandas as pd
-```
+from IPython.display import display, Markdown
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+from src.figures import *
+from src.utils import get_project_root, format_table
+from src.swinno_helpers import connect_swinno_db
+
+ROOT = get_project_root()
+conn = connect_swinno_db()
+
+
+# set all text on plots to be monospace with rcParams
+plt.rcParams["font.family"] = "monospace"
+
+
+sns.set_theme(style="whitegrid")
+
+
+```
 # Debate around Bioeconomies
 
-The development of a bioeconomy firmly features at the top of many national and international economic agendas.
-In Europe, 2012 saw the publication of a EU wide bioeconomy strategy, which outlined core tenenats sourrounding the aims and methods by which economic inputs with biological origin are to replace those based on fossile materials.
+An idea which is bound to increase the pressure and trade-offs between different ecosystem services is the bioeconomy. In recent years the concept has gained relevance among policymakers, practitioners and researchers. The term bioeconomy refers broadly to an economy which uses bio-based inputs instead of fossil based ones. Connected to this are hopes of increased resource efficiency and renewability. In a report commissioned by the Swedish Government, the @2012SwedishResearchInnovation defines a vision of a Swedish bioeconomy based on two central pillars. It is to be an economy based on,
 
-The concept and idea of a bioeconomy is hence not novel.
-With progressing concern about environmental degradation the discussion around a bioeconomy has intensified in recent years.
+> \[a\] sustainable production of biomass to enable increased use within a number of different sectors of society. The objective is to reduce climate effects and the use of fossil-based raw materials.
 
-## Advanced Research Fronts
+With,
+
+> \[a\]n increased added value for biomass materials, concomitant with a reduction in energy consumption and recovery of nutrients and energy as additional end products. The objective is to optimize the value and contribution of ecosystem services to the economy. (p. 9).
+
+These pillars reflect the two most influential visions the bioeconomy concept. Notions of a bio-technology and bio-resource oriented bioeconomy are widespread and dominate discourse at various levels [@dieken2021MultitudesBioeconomiesSystematic]. Despite -- or perhaps because of -- the bioeconomy lacking a strong definition, it is used to refer to different concepts, with different aims and objectives, foci, normative assumptions and hence implications for society and environment [@bugge2016WhatBioeconomyReview].
+
+The bio-technology vision focuses on economic growth and job provision through the application of bio-technology [@bugge2016WhatBioeconomyReview]. Science driven innovation features prominently in this vision, with collaborations between research institutions in academia and industry taking on an important role [@bugge2016WhatBioeconomyReview]. @vivien2019HijackingBioeconomy present a review of the concept showing that the focus on science as an absolute motor of change also shaped policy recommendations, driven especially by the OECD, towards increasing the speed and diffusion of innovation through partnerships between new start-ups and establish pharmaceutical companies. As a policy narrative this vision was particularly potent and widespread at the turn of the 21st century. According to them, the intellectual heritage of Schumpeter and Kontradieff play an important role in this vision. Technological breakthroughs are poised to solve economic and ecological challenges, for example through genetic engineering. Consequently, this vision has a weak sustainability notion, viewing sustainability challenges as temporary and nature as substitutable given sufficient research and knowledge creation [@vivien2019HijackingBioeconomy].
+
+In more recent years, visions of a bio-resource bioeconomy have taken over as the leading narrative. Unlike the bio-technology vision, this conceptualization does not only focus on economic growth and job creation, but attempts to include ecological sustainability challenges [@bugge2016WhatBioeconomyReview]. Biological resources, not technologies, form the basis of a new economy. In essence, there are two ways in which bio-resources are poised to replace fossil resources: as substitution, e.g., bio-fuels replacing fossil fuels, and as high value added products, e.g., Cross-laminated Timber used as a concrete alternative in construction [@vivien2019HijackingBioeconomy]. To substitute fossil resources requires significant efforts in innovation. In contrast to the bio-technology vision, however, innovation is not confined to scientific advances from a narrow biochemical and pharmaceutical field. Instead, new and old actors are required to collaborate between and beyond established sectors [@bugge2016WhatBioeconomyReview]. Although sustainability plays a more important role in this vision of the bioeconomy, this vision is considered an example of weak sustainability [@damato2017GreenCircularBio; @vivien2019HijackingBioeconomy]. The reason is the focus of substitution and high biomass demands. The consumption of raw materials may even increase, not only for bio-based, but also for fossil-based resources [@asada2020BioeconomicTransitionProjecting].
+
+The exact role played by forests in a bioeconomy transition depends on the desired vision [@kleinschmit2014ShadesGreenSocial]. There is no doubt that the Swedish vision places high demands on forests as primary providers of the required biomass. Both in the strategy formulated in @2012SwedishResearchInnovation and in public discourse, a small, well-connected group of actors center the bio-resource vision as legitimate and desirable [@holmgren2022WhoseTransformationThis]. The result is a forest sector which operates under a "more of everything" paradigm [@belandlindahl2015SwedishForestryModel].
+
+#### Innovation for a Bioeconomy
+
+Apart from the substitution of fossil resources through bio-based resources, a central narrative used in the Swedish transition is that, "\[t\]echnological innovation is key to a greener future" [@holmgren2022WhoseTransformationThis 42]. According to @jankovsky2021InnovationsForestBioeconomy four types of innovation are central for a forest based bioeconomy:
+
+1.  Substitute Products,
+2.  New (bio-based) Processes,
+3.  New (bio-based) Products,
+4.  New Behavior.
+
+Currently, most research into bioeconomy innovation relies on patent data or qualitative case studies [e.g., @bennich2021BiobasedEconomy2030; @jander2019MonitoringTransitionBioeconomy]. Unfortunately, these approaches are not without their flaws. Focusing on patents could overestimate the importance of the bio-technology vision, whose science oriented innovation approach is driven by patents [@bugge2016WhatBioeconomyReview]. Qualitative case studies, on the other hand, may miss broader trends and features of a bioeconomy transition.
+
+@hausknost2017TransitionWhichBioeconomy
+
 
 Public, scientific and political debate of bioeconomies has brought forth a number of discourse analyses.
 Both @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy conclude that the concept of a bioeconomy conceals different, possibly conflicting visions of transfromation outcomes.
 
+Recent scholarship has called for advancing research fronts instead of remaining entrenched in contested discourse positions @allain2022BioeconomicsVsBioeconomy.
 
-# Context of Swedish Forest Based Bioeconomy
+@jankovsky2021InnovationForestBioeconomy
 
-## Size of Forestry Sector 
+@bauer 
+refineries
+
+Research Question:
+
+While much research has been done on the research, less is known over the actual direction of technical change in the Swedish forest bioeconomy.
+How innovative, in terms of output, is the system?
+And what vision does the innovation system pursue?
 
 ##
 
@@ -51,43 +100,213 @@ The list of keywords and sectors is presented in the appendix.
 Due to the query matching keywords whenever they appear as substrings in the description of the innovation, the inital search result is rather susceptible to false positives.
 In later manual review of each innovation for classification these false positives were removed from the search results.
 
-The SWINNO database is constructed according to  literature-based innovation output (LBIO) method.
+The SWINNO database is constructed according to  literature-based innovation output (LBIO) method [@sjoo2014DatabaseSwedishInnovations].
 This method relies on the judgment of editiors and journalists at trade journals and hence captures what can be described as significant innovation.
-Measuring innovation with LBIO has substantial advantages.
-For one, it ensures that actual innovation, meaning commericialized products and processes, are captured.
-Second, because the source articles are preserved, it provides a rich source of data, giving frequently providing insights into the aims, motivations, advantages and challenges of the covered innovation.
-
 An important limitation of LBIO measures, especially for research into forest sector innovation, is a bias against non-commercialized innovation.
 New processes, or new organizational apporaches for example, will only be caputred if they are sold to another company.
 This is especially sensitive for bioeconomy research as, for example, new methods or plans for managing forest stands are less likely to be included.
 Relevant product innovation which faciliates these plans, for example products related to the planting of trees, on the other hand, are captured.
 
 A likely consequence of this limitation is that the number of innovation related to the bioecology vision are under counted, as this vision highlights "Counter-expertise rather than concrete technical solutions" [@vivien2019HijackingBioeconomy 194].
-Nonetheless, a small number of innovation associated with this vision were henceforth identified in the database.
+Nonetheless, a small number of innovation associated with this vision were already identified in the database.
+
+But, measuring innovation with LBIO has also substantial advantages.
+For one, it ensures that actual innovation, meaning commericialized products and processes, are captured.
+Second, because the source articles are preserved, it provides a rich source of data, giving frequently providing insights into the aims, motivations, advantages and challenges of the covered innovation.
 
 ## Classification Methodology
 
+These source articles were carefully read and their associated unique identifiers in the database tagged with two types of labels.
+The first label is the main interest of this study: the bioeconomy vision an innovation can be associated with.
+The second label provides a deeper understanding if and how the innovation reduces environmental impacts.
+As @broring2020InnovationTypesBioeconomy highlight, not all bioeconomy innovations need to be sustainability oriented innovation.
+
+### Bioeconomy Visions
 
 Innovations were classified as belonging to a bioeconomy vision if they fulfilled one, or more criteria outlined in @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy.
-@tbl-tbl-bioeconomy_vision_summary shows the summary of bioeconomy visions presented in the cited papers.
+@tbl-bioeconomy_vision_summary shows the summary of bioeconomy visions presented in the cited papers.
 
-Economic growth is cited as the aim & objective of biotechnology and bioresource visions by @bugge2016WhatBioeconomyReview.
-
+While following these criteria, a number of decisions were made concerning content of the summary presented in @tbl-bioeconomy_vision_summary and the nature of the corresponding vision.
+For one, economic growth is cited as the aim & objective of biotechnology and bioresource visions by @bugge2016WhatBioeconomyReview.
 It can be argued that all innovation can contribute to economic growth, which is why these aspects were not given hightened importance in the classification decision.
+A second topic of judgment has to be the inclusion of innovation which increases the recyclability of a product, or uses recycled waste, water and material in the process.
+Based on the definition of a bioecology vision presented in @bugge2016WhatBioeconomyReview, these innovations should be included as contributing to this vision.
+The extent to which such innovation contributes in reality to a "[c]ircular and self-sustained production mode" [@bugge2016WhatBioeconomyReview 10], however, can be debated.
+
+```{python}
+# | label: Count Recycling Innovation
+
+recycle_innovation = pd.read_sql(
+    """
+SELECT *
+FROM classification_codes
+LEFT JOIN eco_innovations ON classification_codes.Code = eco_innovations.innovation_type
+WHERE eco_innovations.innovation_type = 107 OR eco_innovations.innovation_type = 206 AND sinno_id NOT IN (SELECT sinno_id FROM categorization_notes WHERE notes LIKE '%not forest%')
+""",
+    conn,
+)
+
+recycle_innovation_count = recycle_innovation["sinno_id"].nunique()
+
+display(
+    Markdown(
+        f"Currently, {recycle_innovation_count} innovations were identified which involve either a product or process innovation related to recyling."
+    )
+)
+```
+
+<!-- TODO count all innovation with eco-innovation type 107 and 206 as bv 3 --> 
+
+@tbl-vision_examples shows five examples of classfied innovation.
+This selection also highlights that multible labels can be attached to one innovation.
+The last innovation, describing a waterproof paper, is classified as a bioresource vission innovaition because it describes a process by which biomass is converted and upgraded.
+It is also classified as a biotechnology innovation since the process mimics trees' microfiber formation, accroding to the innovation source article.
+
+```{python}
+# | label: tbl-vision_examples
+# | tbl-cap: "List of Eco-Innovation Labels"
+
+classification_examples = pd.read_sql(
+    """SELECT
+  n.sinno_id,
+  i.description_in_swedish,
+  GROUP_CONCAT(c.Category, ' & ') AS Categories,
+  n.notes
+FROM
+  categorization_notes n
+  JOIN innovation i ON i.sinno_id = n.sinno_id
+  JOIN bioeconomy_visions bv
+  ON n.sinno_id = bv.sinno_id
+  JOIN classification_codes c ON bv.bioeconomy_vision = c.Code
+WHERE
+  n.notes LIKE "%good example%"
+GROUP BY
+  n.sinno_id,
+  i.description_in_swedish,
+  n.notes""",
+    conn,
+)
+
+classification_examples_out = (
+    classification_examples.copy()
+    .loc[:, ["Categories", "description_in_swedish"]]
+    .iloc[2:]
+)
+
+rowIDs = range(1, len(classification_examples_out) + 1)
+display(
+    Markdown(
+        classification_examples_out.rename(
+            columns={"description_in_swedish": "Short Description"}
+        ).to_markdown(index=rowIDs)
+    )
+)
+
+```
 
 
+### Eco-Innovation Types
 
+Understanding the bioeconomy vision that an innovation is contributing to is the focus of this paper.
+In order to gain a deeper understanding of the nature of innovation within each bioeconomy vision, however, the innovation were also tagged with labels of eco-innovation types.
+This classification uses eco-innovation types identified in a recent literature review by @garcia-granero2018EcoinnovationMeasurementReview.
+They review 104 publications and produce a list 30 key Eco-Innovation Perfromance Indicators of product, process, organizational and marketing innovation.
+
+This initial list was tested on a subset of innovation in SWINNO and augmented with 15 categories.
+Some are mere extensions of their categories (for example, specifying if an innovation prolongs the life cycle of the product itself or downstream products), others are new types of existing categories (for example, reduced other pollution such as noise), yet others are entirely new categories (human health and safety), the categories of automatization and precision by themselves are not eco-innovations, but can be used to gain a deeper understanding of what makes an innovation an eco-innovation.
+Clearly not all new categories are eco-innovations.
+The newly created pesticide category, for example, can be an eco-innovation if it reduces chemical pollution, but it could also increase chemical pollution if pesticides are introduced in novel ways.
+
+For the eco-innovations the decision process is straightforward.
+Based on the information contained in the text, the innovation is labeled with one or more categories.
+In case of uncertainty, the doubt label is added.
+Because the list of eco-innovation types was relatively exhaustive from the beginning, few adjustments had to be made.
+These include, as alluded to above, expanding the labeling for other sustainability criteria, such as human health and safety, and specific forest related aspects / tasks to gain a more detailed understanding of an innovations aim.
+For example, some innovations aim to protect harvested timber, either at harvest, during transport or storage.
+Since these could be tagged in different ways, for example, longer lifecycle of (downstream) product, optimized use of raw materials, or even reduced waste, it seemed more appropriate to create a specific category for these cases.
+Depending on subsequent analysis needs this could then be mapped to other categories.
 
 <!-- Use examples of clear cases here -->
 
 
+# Results {#sec-results}
 
 
-# Results
 
 
 ```{python}
-#| label: Queries
+# | label: Queries
+
+bioeconomy = pd.read_sql(
+    """
+select
+  i.sinno_id,
+  i.innovation_name_in_swedish AS name,
+  i.description_in_swedish AS description,
+  i.additional_information_if_origin_new_scientific_discovery || i.additional_information_if_origin_new_technologies_or_materials || i.additional_info_if_origin_official_regulation_legislation_and_standards || i.additional_information_if_origin_solution_for_a_problem || i.additional_information_if_origin_performance || i.additional_information_if_origin_other AS info,
+  i.year_of_commercialization AS year,
+  us.use_sector
+from
+  innovation i
+  join use_sectors us on i.sinno_id = us.sinno_id
+where
+  (
+    us.use_sector like '02%'
+    or us.use_sector like '20%'
+    or us.use_sector like '21%'
+    or us.use_sector like '36%'
+    or product_code like '02%'
+    or product_code like '20%'
+    or product_code like '21%'
+    or product_code like '36%'
+  )
+  or (
+    description like '%virke%'
+    or description like '%cellulos%'
+    or description like '%lignin%'
+    or description like '%spån%'
+    or description like '%bark%'
+    or description like '%levulinsyra%'
+    or description like '%furfural%'
+    or description like '%svarttjära%'
+    or description like '%svartlut%'
+    or description like '%växtbas%'
+    or description like '%ved%'
+    or description like '%trä%'
+    or description like '%skog%'
+    or description like '%biobränsle%'
+    or description like '%biologisk%'
+    or description like '%nedbrytbar%'
+    or description like '%papper%'
+    or description like '%pappret%'
+    or description like '%karton%'
+    or description like '%tencel%'
+  );
+""",
+    conn,
+)
+
+sni_codes = pd.read_sql_query(
+    """
+select
+*
+from 
+sni_codes
+""",
+    conn,
+)
+
+sni_codes = sni_codes.rename(columns={"code": "use_sector"})
+
+swinno = pd.read_sql_query(
+    """
+select sinno_id, year_of_commercialization as year, innovation_name_in_swedish as name
+from innovation;
+""",
+    conn,
+)
+
+swinno["bioeconomy"] = swinno["sinno_id"].isin(bioeconomy["sinno_id"].unique())
 
 ``` 
 
@@ -106,6 +325,7 @@ display
 
 # Appendix {.appendix}
 
+:::{#tbl-bioeconomy_vision_summary layout-ncol=1}
 | @bugge2016WhatBioeconomyReview [10] | Biotechnology | Bioresource | Bioecology |
 |---|---|---|---|
 | Aim &   Objectives | Economic growth & job   creation | Economic growth &   sustainability | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation |
@@ -116,9 +336,105 @@ display
 |---|---|---|---|
 |  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere<br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decisionmaking centers |
 | Classificaiton Code | 1 | 2 | 3 | 
+: 
+
+Bioeconomy Vision Summary 
+:::
 
 <!-- Definition An ecological economy, that is compatible with the biosphere A science-based economy driven by industrial biotechnology A biomass-based economy Nature/economy relations Struggle against entropy and coevolution with the biosphere. Economic development in line with biological evolution The cell is a factory Technology has the power to “correct God's mistakes” Biomass replaces fossil fuels and mining to produce energy and materials Science, technology and society Megatrends with “promethean technologies” Pending the advent of Prometheus III, the economics of prudence and sharing Prospect of a fifth Kondratiev wave based on the rise of biotechnology. The “economy of techno-scientific promises” Biorefining at the heart of ecological transition (multilevel perspective). The economy of learning Sustainability “Strong sustainability” approach and degrowth perspective Very “weak sustainability” approach “Weak sustainability” approach -->
 
-<!-- TODO merge tables -->
 
-: Bioeconomy Vision Summary {#tbl-bioeconomy_vision_summary}
+
+```{python}
+# | label: tbl-full_codes
+# | tbl-cap: "List of Eco-Innovation Labels"
+
+codes_df = pd.read_sql(
+    "SELECT * FROM classification_codes", conn, index_col="Code"
+).iloc[:-5, :]
+
+format_table(codes_df)
+```
+
+
+```sql
+SELECT *
+FROM table
+WHERE
+    (
+        us.use_sectors LIKE '02%' -- Forestry and related services
+-- Furniture manufacturing; other manufacturing
+        OR us.use_sectors LIKE '20%' -- Wood and wood product manufacturing except furniture
+        OR us.use_sectors LIKE '21%' -- Pulp, paper and paper product manufacturing
+        OR us.use_sectors LIKE '36%' -- Furniture manufacturing; other manufacturing
+        us.use_sectors LIKE '02%' -- Forestry and related services
+-- Furniture manufacturing; other manufacturing
+        OR product_code LIKE '20%' -- Wood and wood product manufacturing except furniture
+        OR product_code LIKE '21%' -- Pulp, paper and paper product manufacturing
+        OR product_code LIKE '36%' -- Furniture manufacturing; other manufacturing
+    )
+    OR (
+        description LIKE '%virke%'
+        OR description LIKE '%cellulos%'
+        OR description LIKE '%lignin%'
+        OR description LIKE '%spån%'
+        OR description LIKE '%bark%'
+        OR description LIKE '%levulinsyra%'
+        OR description LIKE '%furfural%'
+        OR description LIKE '%svarttjära%'
+        OR description LIKE '%svartlut%'
+        OR description LIKE '%växtbas%'
+        OR description LIKE '%ved%'
+        OR description LIKE '%trä%'
+        OR description LIKE '%skog%'
+        OR description LIKE '%biobränsle%'
+        OR description LIKE '%biologisk%'
+        OR description LIKE '%nedbrytbar%'
+        OR description LIKE '%papper%'
+        OR description LIKE '%pappret%'
+        OR description LIKE '%karton%'
+        OR description LIKE '%tencel%'
+    );
+```
+
+::::{.columns}
+
+:::{.column width="50%"}
+**Using producer / user codes
+**
+
+|SNI Code | Description                            |
+|--------:|:---------------------------------------|
+|02       | Forestry and related services
+|20       | Wood and wood product manufacturing except furniture
+|21       | Pulp, paper and paper product manufacturing
+|36       | Furniture manufacturing; other manufacturing
+:::
+
+:::{.column width="50%"}
+**Adding keywords of value chain**
+
+    - "virke",
+    - "cellulos",
+    - "lignin",
+    - "spån", 
+    - "bark",
+    - "levulinsyra" (Levulinic acid),
+    - "furfural" (Furfural),
+    - "svarttjära",
+    - "svartlut",
+    - "växtbas",
+    - "ved",
+    - "trä",
+    - "skog",
+    - "papper",
+    - "biobränsle",
+    - "biologiskt",
+    - "nedbrytbar",
+    - "papper",
+    - "pappret",
+    - "karton",
+    - "tencel",
+:::
+
+::::
