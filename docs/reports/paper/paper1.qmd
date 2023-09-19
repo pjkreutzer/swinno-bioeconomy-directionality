@@ -36,13 +36,14 @@ conn = connect_swinno_db()
 
 
 # set all text on plots to be monospace with rcParams
-plt.rcParams["font.family"] = "monospace"
+# plt.rcParams["font.family"] = "Ubunto Mono"
 
 
-sns.set_theme(style="whitegrid")
-
+sns.set_theme(style="white")
 
 ```
+
+
 # Debate around Bioeconomies
 
 An idea which is bound to increase the pressure and trade-offs between different ecosystem services is the bioeconomy. In recent years the concept has gained relevance among policymakers, practitioners and researchers. The term bioeconomy refers broadly to an economy which uses bio-based inputs instead of fossil based ones. Connected to this are hopes of increased resource efficiency and renewability. In a report commissioned by the Swedish Government, the @2012SwedishResearchInnovation defines a vision of a Swedish bioeconomy based on two central pillars. It is to be an economy based on,
@@ -91,7 +92,6 @@ While much research has been done on the research, less is known over the actual
 How innovative, in terms of output, is the system?
 And what vision does the innovation system pursue?
 
-##
 
 # Data and Methods
 
@@ -235,7 +235,7 @@ Depending on subsequent analysis needs this could then be mapped to other catego
 
 
 ```{python}
-# | label: Queries
+# | label: Query bioeconomy
 
 bioeconomy = pd.read_sql(
     """
@@ -308,15 +308,183 @@ from innovation;
 
 swinno["bioeconomy"] = swinno["sinno_id"].isin(bioeconomy["sinno_id"].unique())
 
+
 ``` 
 
+```{python}
+#| label: Query eco-innovation
+
+
+eco_innovations = pd.read_sql(
+    """
+SELECT 
+    sinno_id
+    , innovation_type
+FROM
+  eco_innovations;
+""",
+    conn,
+)
+
+```
+
+```{python}
+# | label: Query bioeconomy visions
+
+bioeconomy_visions = pd.read_sql(
+    """
+SELECT bv.sinno_id
+, codes.Category AS bioeconomy_vision
+, i.year_of_commercialization AS "year"
+FROM bioeconomy_visions AS bv
+JOIN [classification_codes] AS codes ON codes.code = bv.bioeconomy_vision
+JOIN innovation AS i ON i.sinno_id = bv.sinno_id
+WHERE bv.sinno_id NOT IN (SELECT sinno_id FROM categorization_notes WHERE notes NOT LIKE "%not forest%")
+UNION
+SELECT DISTINCT(ei.sinno_id)
+, 'Bioecology Vision' AS bioeconomy_vision
+, i.year_of_commercialization AS "i.year"
+FROM eco_innovations AS ei
+JOIN innovation AS i ON i.sinno_id = ei.sinno_id
+WHERE ei.innovation_type IN (206, 107)
+AND ei.sinno_id NOT IN (
+  SELECT ei2.sinno_id
+  FROM eco_innovations as ei2
+  WHERE ei2.innovation_type IN (999, '000')
+  );
+-- adds recycling innovation to bioecology
+""",
+    conn,
+)
+
+bioeconomy_visions.loc[
+    bioeconomy_visions["bioeconomy_vision"] == "Not Bioeconomy",
+    ["bioeconomy_vision"],
+] = "No Bioeconomy Vision"
+
+uncertain_bioeconomy_visions = bioeconomy_visions.query("bioeconomy_vision == 'Unsure'")
+
+
+certain_bioeconomy_visions = bioeconomy_visions.loc[
+    ~bioeconomy_visions["sinno_id"].isin(uncertain_bioeconomy_visions["sinno_id"]), :
+]
+
+```
 
 
 ```{python}
-#| label: Number of Results
+# | label: Number of Results
+# | output: asis
 
-display
+display(
+    Markdown(
+        f"So far, {certain_bioeconomy_visions['sinno_id'].nunique()} innovation have been classified for the period between {certain_bioeconomy_visions['year'].min()} and {certain_bioeconomy_visions['year'].max()}."
+    ))
 ```
+
+
+```{python}
+# | label: fig-bioeconomy_trends
+# | fig-cap: Bioeconomy Vision Trends
+
+count_certain_bioeconomy_visions = (
+    certain_bioeconomy_visions.groupby(["year", "bioeconomy_vision"])
+    .size()
+    .reset_index(name="count")
+)
+
+def plot_bv_trends(df, title):
+    palette = sns.color_palette("colorblind")[:5]
+
+    # Create a custom palette with a default light gray color for "not bio" hue
+    custom_palette = {
+        hue: color if bioeconomy_vision != "No Bioeconomy Vision" else (0.8, 0.8, 0.8)
+        for hue, color, bioeconomy_vision in zip(
+            df["bioeconomy_vision"], palette, df["bioeconomy_vision"]
+        )
+    }
+
+    chart = sns.lineplot(
+        data=df,
+        x="year",
+        y="count",
+        hue="bioeconomy_vision",
+        palette=custom_palette,
+        linewidth=2.5,
+    )
+
+    chart.set_title(title, fontdict={"fontsize": 16, "fontweight": "normal"})
+    chart.set_xlabel("Year", fontdict={"fontsize": 12, "fontweight": "normal"})
+    chart.set_ylabel("Count", fontdict={"fontsize": 12, "fontweight": "normal"})
+    chart.tick_params(labelsize=10)
+
+    # Customize x-axis tick labels
+    years = df["year"].unique()
+    chart.set_xticks(years[::5])
+    chart.set_xticklabels(years[::5], rotation=45, ha="right")
+
+    # Create a custom legend with colored labels (no lines)
+    handles, labels = chart.get_legend_handles_labels()
+
+    # Set font color for legend labels based on the hue
+    legend = chart.legend(
+        bbox_to_anchor=(0.5, -0.35), loc="upper center", ncol=2, frameon=False
+    )
+    for text, label in zip(legend.texts, labels):
+        text.set_color(custom_palette[label])
+
+    plt.tight_layout()
+
+
+plot_bv_trends(count_certain_bioeconomy_visions, title="")
+
+plt.show()
+```
+
+```{python}
+# | label: fig-vision_heatmap
+# | fig-caption: Sectors Contribution to Bioeconomy Visions
+
+sectors = pd.read_sql(
+    """
+SELECT
+  bv.sinno_id as sinno_id,
+  c.Category AS vision,
+  sni_codes.label AS sector
+FROM
+  bioeconomy_visions AS bv
+  JOIN use_sectors ON bv.sinno_id = use_sectors.[sinno_id]
+  JOIN sni_codes ON SUBSTR(use_sectors.use_sector, 1, 2) = sni_codes.code
+  JOIN classification_codes AS c ON bv.bioeconomy_vision = c.Code;
+""",
+    conn,
+)
+
+sectors = sectors.loc[
+    sectors["sinno_id"].isin(set(certain_bioeconomy_visions["sinno_id"])), :
+]
+
+sectors.loc[sectors["vision"] == "Not Bioeconomy", "vision"] = "No Bioeconomy Vision"
+
+sector_counts = (
+    sectors.groupby(["sector", "vision"]).size().to_frame("count").reset_index()
+)
+# Question is, should I weight this following the way in the env-innovation paper?
+
+sector_counts = sector_counts.sort_values("count", ascending=False)
+
+heatmap_data = prepare_heatmap_data(sector_counts, "sector", "vision", "count")
+
+plot_heatmap(heatmap_data, "")
+
+# TODO: Better y axis labels
+
+```
+
+
+### How many eco-innovations are there?
+#### How many by bioeconomy vision?
+
 
 # References 
 
@@ -356,46 +524,6 @@ codes_df = pd.read_sql(
 format_table(codes_df)
 ```
 
-
-```sql
-SELECT *
-FROM table
-WHERE
-    (
-        us.use_sectors LIKE '02%' -- Forestry and related services
--- Furniture manufacturing; other manufacturing
-        OR us.use_sectors LIKE '20%' -- Wood and wood product manufacturing except furniture
-        OR us.use_sectors LIKE '21%' -- Pulp, paper and paper product manufacturing
-        OR us.use_sectors LIKE '36%' -- Furniture manufacturing; other manufacturing
-        us.use_sectors LIKE '02%' -- Forestry and related services
--- Furniture manufacturing; other manufacturing
-        OR product_code LIKE '20%' -- Wood and wood product manufacturing except furniture
-        OR product_code LIKE '21%' -- Pulp, paper and paper product manufacturing
-        OR product_code LIKE '36%' -- Furniture manufacturing; other manufacturing
-    )
-    OR (
-        description LIKE '%virke%'
-        OR description LIKE '%cellulos%'
-        OR description LIKE '%lignin%'
-        OR description LIKE '%spån%'
-        OR description LIKE '%bark%'
-        OR description LIKE '%levulinsyra%'
-        OR description LIKE '%furfural%'
-        OR description LIKE '%svarttjära%'
-        OR description LIKE '%svartlut%'
-        OR description LIKE '%växtbas%'
-        OR description LIKE '%ved%'
-        OR description LIKE '%trä%'
-        OR description LIKE '%skog%'
-        OR description LIKE '%biobränsle%'
-        OR description LIKE '%biologisk%'
-        OR description LIKE '%nedbrytbar%'
-        OR description LIKE '%papper%'
-        OR description LIKE '%pappret%'
-        OR description LIKE '%karton%'
-        OR description LIKE '%tencel%'
-    );
-```
 
 ::::{.columns}
 

@@ -4,73 +4,28 @@ import seaborn as sns
 import plotly.graph_objects as po
 import plotly.express as px
 
-
-def plot_counts(
-    df1, df2, category_col, y, show_legend=True, legend_cols=None, y_label="Count"
-):
-    categories = df1[category_col].astype(str).unique()
-    categories.sort()
-
-    legend_ncols = len(categories) if legend_cols is None else legend_cols
-
-    colors = sns.color_palette("colorblind", len(categories))
-    palette = dict(zip(categories, colors))
-
-    fig, axes = plt.subplots(
-        ncols=1, nrows=2, sharex=False, sharey=True, layout="tight"
+def plot_bv_trends(df, title):
+    chart = sns.lineplot(
+        data=df,
+        x="year",
+        y="count",
+        hue="bioeconomy_vision",
+        palette="colorblind",
+        linewidth=2.5,
     )
+    chart.set_title(title, fontdict={"fontsize": 16, "fontweight": "bold"})
+    chart.set_xlabel("Year", fontdict={"fontsize": 12, "fontweight": "bold"})
+    chart.set_ylabel("Count", fontdict={"fontsize": 12, "fontweight": "bold"})
+    chart.tick_params(labelsize=10)
+    plt.legend(title="Vision", fontsize=10, title_fontsize=12)
+    plt.tight_layout()
 
-    marker_size = 100
-    df1 = df1.sort_values(by=category_col)
-    df2 = df2.sort_values(by=category_col)
+    # Customize x-axis tick labels
+    years = df["year"].unique()
+    chart.set_xticks(years[::5])
+    chart.set_xticklabels(years[::5], rotation=45, ha="right")
 
-    sns.scatterplot(
-        x=df1.index,
-        y=y,
-        hue=category_col,
-        data=df1,
-        ax=axes[0],
-        palette=palette,
-        s=marker_size,
-    )
-
-    sns.scatterplot(
-        x=df2.index,
-        y=y,
-        hue=category_col,
-        data=df2,
-        ax=axes[1],
-        palette=palette,
-        s=marker_size,
-    )
-
-    for axs in axes:
-        axs.set_ylabel(y_label)
-        axs.set_xlabel("Year")
-        axs.legend().remove()
-
-    axes[0].set_title("Including Uncertains")
-    axes[0].title.set_position([0.5, 1.05])  # adjust the position of the title
-
-    axes[1].set_title("Excluding Uncertains")
-    axes[1].title.set_position([0.5, 1.05])  # adjust the position of the title
-
-    if not show_legend:
-        fig.legend().remove()
-    else:
-        handles, labels = axes[0].get_legend_handles_labels()
-        fig.legend(
-            handles,
-            labels,
-            loc="lower center",
-            ncol=legend_ncols,
-            frameon=False,
-            bbox_to_anchor=(0.5, -0.1),
-        )  # adjust the position of the legend
-
-    plt.subplots_adjust(bottom=0.2)
-
-    plt.show()
+    return chart
 
 
 def plot_heatmap(data, title):
