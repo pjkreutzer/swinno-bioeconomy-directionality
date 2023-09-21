@@ -14,7 +14,8 @@ link-bibliography: true
 colorlinks: true
 number-sections: true
 format:
-    wordcount-pdf: default
+    wordcount-pdf: 
+        papersize: A4
 execute:
     include: true
     echo: false
@@ -816,9 +817,11 @@ One innovation source cites possible concerns about the environemntal effects of
 <!-- TODO: find company -->
 <!-- , also included a hand drawn charicature of a hiker, who, taking a break on the last stump on a hill and watching the harvester at work, exclaims "Thankfully they left at least one standing". --> 
 
-## Discussion
+# Discussion
 
-# References 
+{{< pagebreak >}}
+
+# References {.unnumbered}
 
 :::{#refs}
 :::
