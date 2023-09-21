@@ -161,7 +161,7 @@ In more recent years, visions of a bio-resource bioeconomy have taken over as th
 
 The exact role played by forests in a bioeconomy transition depends on the desired vision [@kleinschmit2014ShadesGreenSocial]. There is no doubt that the Swedish vision places high demands on forests as primary providers of the required biomass. Both in the strategy formulated in @research2012StrategyBiobasedEconomy and in public discourse, a small, well-connected group of actors center the bio-resource vision as legitimate and desirable [@holmgren2022WhoseTransformationThis]. The result is a forest sector which operates under a "more of everything" paradigm [@belandlindahl2015SwedishForestryModel].
 
-#### Innovation for a Bioeconomy
+## Innovation for a Bioeconomy {#sec-innovation_bioeconomy}
 
 Apart from the substitution of fossil resources with bio-based resources, a central narrative used in the Swedish transition is that, "\[t\]echnological innovation is key to a greener future" [@holmgren2022WhoseTransformationThis 42]. According to @jankovsky2021InnovationsForestBioeconomy there are four types of innovation crucial for a forest-based bioeconomy:
 
@@ -180,7 +180,7 @@ Recent scholarship has called for advancing research fronts instead of remaining
 This paper takes up this call and asks what bioeconomy the Swedish innovation system pursues. A unique database of actual innovation output is first used to answer how innovative the system has been between 1970 and 2020. The database sources are then used to provide a qualitative insight into the extent to which specific bioeconomy visions appear in commercialized innovation and the extent to which they include eco-innovations which could lessen environmental impact.
 
 
-# Data and Methods
+# Data and Methods {#sec-data_methods}
 
 To capture the actual innovation output associated with the Swedish forest based bioeconomy the SWINNO database was searched for innovation associated with core forest sectors and keywords describing forest products which may be used in sectors along the bioeconomy value chain.
 The list of keywords and sectors is presented in the appendix.
@@ -212,54 +212,58 @@ But, measuring innovation with LBIO has also substantial advantages.
 For one, it ensures that actual innovation, meaning commercialized products and processes, are captured.
 Second, because the source articles are preserved, it provides a rich source of data, giving frequently providing insights into the aims, motivations, advantages and challenges of the covered innovation.
 
-## Classification Methodology
+## Classification Methodology {#sec-classification_method}
 
 These source articles were carefully read and their associated unique identifiers in the database tagged with two types of labels.
 The first label is the main interest of this study: the bioeconomy vision an innovation can be associated with.
 The second label provides a deeper understanding if and how the innovation reduces environmental impacts.
 As @broring2020InnovationTypesBioeconomy highlight, not all bioeconomy innovations need to be sustainability oriented innovation.
 
-### Bioeconomy Visions
+### Bioeconomy Visions {#sec-bioeconomy_classification_method}
 
 Innovations were classified as belonging to a bioeconomy vision if they fulfilled one, or more criteria outlined in @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy.
-@tbl-bioeconomy_vision_summary shows the summary of bioeconomy visions presented in the cited papers.
+@tbl-bugge and @tbl-vivien show the summary of bioeconomy visions presented in the cited papers.
+For the remainder of the paper the nomenclature of @bugge2016WhatBioeconomyReview is adopted.
+Vivien et al.'s [-@vivien2019HijackingBioeconomy] Type I bioeconomy is taken to correspond with the bioecology vision, Type II and Type III to correspond with the bioresource and biotechnology vision, respectively.
 The analysis of bioeconomy discourse which revealed different visions, highlights that the visions have emerged at different times and with different actors at their centers [@vivien2019HijackingBioeconomy, @bugge2016WhatBioeconomyReview].
-As discourse elements the bioresource vision developed in 
+@vivien2019HijackingBioeconomy trace the introduction of the term bioeconomics to the 1920s and a work on fishery by the Russian biologist Baranoff.
+The term bioeoconomics which they label as Type I bioeconomy, was introduced by Georgescu-Roegen,  in -@roegen1975BioeconomicAspectsEntropy.
+@vivien2019HijackingBioeconomy argue that the term biotechnology gradually emerged between 1990 and 2000, in the wake of enthusiasm about biotechnological adavances, such as the discovery of DNA, in preceeding years.
+It gained in popularity and international importance when the OECD began increasingly supporting and reshaping its meaning at the turn of the millenium [@vivien2019HijackingBioeconomy].
+According to them the last concept to enter the discourse was the bioresource oriented bioeconomy.
+While biomass has been used throughout history in various ways, the renewed interest with the intention to replace fossil inputs, for example in European Comission communication since 2010.
+However, @vivien2019HijackingBioeconomy point to the long history of biorefinery as a core aspect of this vision, which was discussed as early as the 1930s.
+Hence, while the organization of the discourse into the labels biotechnology, bioecology and bioresource vision is a very recent research outcome, the underlying concepts have a richer history.
+This alleviates concerns that using these labels retroactively confines the innovations to current policy terms.
 
-While following these criteria, a number of decisions were made concerning content of the summary presented in @tbl-bioeconomy_vision_summary and the nature of the corresponding vision.
-For one, economic growth is cited as the aim & objective of biotechnology and bioresource visions by @bugge2016WhatBioeconomyReview.
+While following the criteria of @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy, a number of decisions were made concerning content of the summary presented in @tbl-bugge and @tbl-vivien, and the nature of the corresponding vision.
+For one, economic growth is cited as the aim and objective of biotechnology and bioresource visions by @bugge2016WhatBioeconomyReview.
 It can be argued that all innovation can contribute to economic growth, which is why these aspects were not given heightened importance in the classification decision.
 A second topic of judgment has to be the inclusion of innovation which increases the recyclability of a product, or uses recycled waste, water and material in the process.
 Based on the definition of a bioecology vision presented in @bugge2016WhatBioeconomyReview, these innovations should be included as contributing to this vision.
 The extent to which such innovation contributes in reality to a "[c]ircular and self-sustained production mode" [@bugge2016WhatBioeconomyReview 10], however, can be debated.
 
-
-:::{#tbl-bioeconomy_vision_summary layout-ncol=1}
-+-------------------------------------+------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                     | Biotechnology                                                                      | Bioresource                                                                                                                                                                                                                              | Bioecology                                                                                                                                                                                                                          |
-+=====================================+====================================================================================+==========================================================================================================================================================================================================================================+=====================================================================================================================================================================================================================================+
-| Aim &   Objectives                  | Economic growth & job   creation                                                   | Economic growth &   sustainability                                                                                                                                                                                                       | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation                                                                                                                                               |
-+-------------------------------------+------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Value   Creation                    | Application of biotechnology,   commercialisation of research & technology         | Conversion and upgrading of   bio-resources (process oriented)                                                                                                                                                                           | Development of integrated   production systems and high-quality products with territorial identity                                                                                                                                  |
-+-------------------------------------+------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| | Biotechnology | Bioresource | Bioecology |
+|---|---|---|---|
+| Aim &   Objectives | Economic growth & job   creation | Economic growth &   sustainability | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation |
+| Value   Creation | Application of biotechnology,   commercialisation of research & technology | Conversion and upgrading of   bio-resources (process oriented) | Development of integrated   production systems and high-quality products with territorial identity |
 | Drivers   & mediators of innovation | R & D, patents, TTOs,   Research councils and funders (Science push, linear model) | Interdisciplinary, optimisation   of land use, include degraded land in the production of biofuels, use and   availability of bio-resources, waste management, engineering, science &   market (Interactive & networked production mode) | Identification of favourable   organic agro-ecological practices, ethics, risk, transdisciplinary   sustainability, ecological interactions, re-use & recycling of waste,   land use, (Circular and self-sustained production mode) |
-+-------------------------------------+------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-: Adapted from @bugge2016WhatBioeconomyReview [10] {tbl-colwidths="[25,25,25,25]"}
+: Table adapted from @bugge2016WhatBioeconomyReview [10] {#tbl-bugge}
 
 |  | Type II | Type III | Type I |
-|:---|:---|:---|:---|
+|---|---|---|---|
 |  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere<br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decisionmaking centers |
-: Adapted from @vivien2019HijackingBioeconomy [194] {tbl-colwidths="[25,25,25,25]"}
-
-Bioeconomy Vision Summary 
-:::
-
+: Table adapted from @vivien2019HijackingBioeconomy [194] {#tbl-vivien}
 
 
 @tbl-vision_examples shows five examples of classified innovation.
 This selection also highlights that multiple labels can be attached to one innovation.
 The last innovation, describing a waterproof paper, is classified as a bioresource vision innovation because it describes a process by which biomass is converted and upgraded.
 It is also classified as a biotechnology innovation since the process mimics trees' microfiber formation, according to the innovation source article.
+Lastly, there is also the possibility that an innovation cannot be placed into at least one of the visions.
+This is the case for innovation which brings general technological improvements, purely advances economic performance, or relates to a general purpose technology such as appliance of computers.
+These innovations are labeled as No Bioeconomy Vision, which does not imply that the innovation is not used, or originates in the forest based bioeconomy as defined above.
+An illustrative example of such an innovation are improved work boots, which promote safety of forest workers.
 
 ```{python}
 # | label: tbl-vision_examples
@@ -304,7 +308,7 @@ display(
 ```
 
 
-### Eco-Innovation Types
+### Eco-Innovation Types {#sec-eco_innovatoin_types}
 
 The focus of this paper is understanding what bioeconomy visions dominate the Swedish innovation system's output.
 In order to gain a deeper understanding of the nature of innovation within each bioeconomy vision, however, the innovation were also tagged with labels of eco-innovation types.
