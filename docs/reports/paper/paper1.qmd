@@ -17,6 +17,7 @@ number-sections: true
 format:
     wordcount-pdf: 
         papersize: A4
+        linestretch: 1.5
 execute:
     include: true
     echo: false
