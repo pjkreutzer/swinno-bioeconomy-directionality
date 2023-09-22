@@ -10,7 +10,7 @@ def plot_bv_trends(df):
 
     # Create a custom palette with a default light gray color for "not bio" hue
     custom_palette = {
-        hue: color if bioeconomy_vision != "No Bioeconomy Vision" else (0.8, 0.8, 0.8, 0.8)
+        hue: color if bioeconomy_vision != "No Bioeconomy Vision" else (0.7, 0.7, 0.7, 0.6)
         for hue, color, bioeconomy_vision in zip(
             df["bioeconomy_vision"], palette, df["bioeconomy_vision"]
         )
@@ -25,24 +25,27 @@ def plot_bv_trends(df):
         linewidth=2
     )
 
-    chart.set_xlabel("Year", fontdict={"fontsize": 12, "fontweight": "normal"})
-    chart.set_ylabel("Count", fontdict={"fontsize": 12, "fontweight": "normal"})
     chart.tick_params(labelsize=10)
 
     # Customize x-axis tick labels
     years = df["year"].unique()
     chart.set_xticks(years[::10])
     chart.set_xticklabels(years[::10])
+    chart.set_xlabel(None)
+    chart.set_ylabel(None)
 
     # Create a custom legend with colored labels (no lines)
     handles, labels = chart.get_legend_handles_labels()
 
     # Set font color for legend labels based on the hue
     legend = chart.legend(
-        bbox_to_anchor=(0.5, -0.35), loc="upper center", ncol=2, frameon=False
+        bbox_to_anchor=(0.5, -0.1), loc="upper center", ncol=2, frameon=False
     )
     for text, label in zip(legend.texts, labels):
-        text.set_color(custom_palette[label])
+        if label == "No Bioeconomy Vision":
+            text.set_color((0.4,0.4,0.4))
+        else:
+            text.set_color(custom_palette[label])
 
     sns.despine()
 

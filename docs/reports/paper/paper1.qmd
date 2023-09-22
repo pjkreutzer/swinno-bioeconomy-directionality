@@ -1,5 +1,6 @@
 ---
-title: The Direction of Search for a Forest Based Bioeconomy
+title: Shades of Green in the Swedish Forest-Based Bioeconomy Transition 
+subtitle: Draft
 author: 
     name: Jonas Kreutzer
     affiliation: Department of Economic History, Lund University
@@ -21,6 +22,7 @@ execute:
     echo: false
     warning: false
 ---
+
 
 ```{python}
 # | label: Imports
@@ -228,7 +230,7 @@ For the remainder of the paper the nomenclature of @bugge2016WhatBioeconomyRevie
 Vivien et al.'s [-@vivien2019HijackingBioeconomy] Type I bioeconomy is taken to correspond with the bioecology vision, Type II and Type III to correspond with the bioresource and biotechnology vision, respectively.
 The analysis of bioeconomy discourse which revealed different visions, highlights that the visions have emerged at different times and with different actors at their centers [@vivien2019HijackingBioeconomy, @bugge2016WhatBioeconomyReview].
 @vivien2019HijackingBioeconomy trace the introduction of the term bioeconomics to the 1920s and a work on fishery by the Russian biologist Baranoff.
-The term bioeoconomics which they label as Type I bioeconomy, was introduced by Georgescu-Roegen,  in -@roegen1975BioeconomicAspectsEntropy.
+The term bioeoconomics which they label as Type I bioeconomy, was introduced by Georgescu-Roegen,  in -@georgescu-roegen1975BioeconomicAspectsEntropy.
 @vivien2019HijackingBioeconomy argue that the term biotechnology gradually emerged between 1990 and 2000, in the wake of enthusiasm about biotechnological adavances, such as the discovery of DNA, in preceeding years.
 It gained in popularity and international importance when the OECD began increasingly supporting and reshaping its meaning at the turn of the millenium [@vivien2019HijackingBioeconomy].
 According to them the last concept to enter the discourse was the bioresource oriented bioeconomy.
@@ -630,7 +632,7 @@ display(
 
 ```{python}
 # | label: fig-bioeconomy_trends
-# | fig-cap: Bioeconomy Vision Trends
+# | fig-cap: "Count of Bioeconomy Visions by Year"
 
 plot_bv_trends(count_certain_bioeconomy_visions)
 
@@ -817,7 +819,6 @@ One innovation source cites possible concerns about the environemntal effects of
 <!-- TODO: find company -->
 <!-- , also included a hand drawn charicature of a hiker, who, taking a break on the last stump on a hill and watching the harvester at work, exclaims "Thankfully they left at least one standing". --> 
 
-# Discussion
 
 {{< pagebreak >}}
 
