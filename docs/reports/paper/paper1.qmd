@@ -428,56 +428,6 @@ display(
 # |   - "Bioeconomy Innovation Share in %"
 # | layout-ncol: 1
 
-
-def plot_count(data):
-    fig, ax = plt.subplots()
-    ax.plot(
-        data["year"],
-        data["bioeconomy_count"],
-        label="Yearly",
-    )
-
-        # Calculate rolling mean and plot on same axis
-    rolling_mean = data["bioeconomy_count"].rolling(window=5).mean()
-    ax.plot(
-        data["year"],
-        rolling_mean,
-        label="5-year moving average",
-        linestyle="dashed"
-    )
-
-    ax.set_xticks(data["year"][::10])
-    ax.tick_params(labelsize=10)
-
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.legend(frameon=False)
-
-    plt.show()
-
-
-def plot_share(data):
-    fig, ax = plt.subplots()
-    ax.plot(data["year"], data["bioeconomy_share"], label="Yearly")
-    ax.set_xticks(data["year"][::10])
-    ax.yaxis.set_major_formatter(mtick.PercentFormatter(xmax=1.0))
-    ax.tick_params(which="major", labelsize=10)
-
-    # Calculate rolling mean and plot on same axis
-    rolling_mean = data["bioeconomy_share"].rolling(window=5).mean()
-    ax.plot(
-        data["year"],
-        rolling_mean,
-        label="5-year moving average",
-        linestyle="dashed"
-    )
-    ax.set_ylim((0, .5))
-    ax.legend(frameon=False)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    plt.show()
-
-
 plot_count(bioeconomy_share)
 plot_share(bioeconomy_share)
 ```
