@@ -232,7 +232,21 @@ bioeconomy_share = calculate_bioeconomy_share(swinno)
 
 **** 
 
-## 817 Innovations in Forest Bioeconomy (Uncleaned)
+```{python}
+# | label: Sum bioeconomy visions
+# | output: asis
+
+sum_bioeconomy_innovations = swinno["bioeconomy"].sum()
+
+display(
+    Markdown(
+        f"# {sum_bioeconomy_innovations} Innovations in Forest Bioeconomy (Uncleaned){{.inverted}}"
+    )
+)
+
+
+```
+
 
 ## Count of Bioeconomy Innovation
 ### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
@@ -290,7 +304,6 @@ plot_bioeconomy_trends_interactive(bioeconomy_share, y="bioeconomy_share").updat
 | @vivien2019HijackingBioeconomy | Type II | Type III | Type I |
 |---|---|---|---|
 |  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere <br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decisionmaking centers |
-| Codes | 1 | 2 | 3 |
 
 ## Preliminary Results
 
