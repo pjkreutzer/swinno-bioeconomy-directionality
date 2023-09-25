@@ -386,40 +386,14 @@ unique forest bioeconomy innovations classified
 ## Examples
 
 ## Trends in Bioeconomy Visions{.smaller}
-### [No Bioeconomy]{.text-gray-600}, [Bioecology]{style="color:#cc78bc;"}, [Bioresource]{style="color:#de8f05;"} and [Biotechnoloy]{style="color:#029e73;"}{.smaller}
+### [No Vision]{.text-gray-600}, [Bioecology]{style="color:#cc78bc;"}, [Bioresource]{style="color:#de8f05;"} and [Biotechnoloy]{style="color:#029e73;"}{.smaller}
 
 ```{python}
 # | label: fig-bv_trends
 # | fig-cap: '[No Bioeconomy]{.text-gray-600}, [Bioecology]{style="color:#cc78bc;"}, [Bioresource]{style="color:#de8f05;"} and [Biotechnoloy]{style="color:#029e73"}'
 
-color_map = {
-    "No Bioeconomy Vision": "rgb(0.8, 0.8, 0.8)",  # Gray
-    "Bioecology Vision": "#cc78bc",  # Purple
-    "Bioresource Vision": "#de8f05",  # Orange
-    "Biotechnology Vision": "#029e73",  # Green
-}
 
-
-def plot_bv_trends_interactive(df):
-    traces = []
-
-    for bv, bioeconomy_vision in df.groupby("bioeconomy_vision"):
-        traces.append(
-            go.Scatter(
-                x=bioeconomy_vision["year"],
-                y=bioeconomy_vision["count"],
-                name=bv,
-                mode="lines",
-                line=dict(color=color_map[bv]),  # Set line color based on the color_map
-            )
-        )
-
-    fig = go.Figure(data=traces)
-    fig.update_layout(showlegend=False, hovermode="x unified", height=550)
-    fig.show()
-
-
-plot_bv_trends_interactive(count_certain_bioeconomy_visions)
+plot_bv_trends_interactive(count_certain_bioeconomy_visions).show()
 
 
 ```

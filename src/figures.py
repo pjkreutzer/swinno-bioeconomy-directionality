@@ -10,43 +10,36 @@ pio.templates.default = "presentation"
 
 royal_blue_800 = "#283aa4"
 gray_600 = "#878f97"
+def plot_bv_trends_interactive(df):
+  
+    color_map = {
+        "No Bioeconomy Vision": "rgb(0.8, 0.8, 0.8)",  # Gray
+        "Bioecology Vision": "#cc78bc",  # Purple
+        "Bioresource Vision": "#de8f05",  # Orange
+        "Biotechnology Vision": "#029e73",  # Green
+    }
 
-def plot_bioeconomy_trends_interactive(data, y):
-    fig = go.Figure()
+    traces = []
 
-    # Add yearly data to plot
-    fig.add_trace(
-        go.Scatter(
-            x=data["year"],
-            y=data[y],
-            mode="lines",
-            name="Yearly",
-            line=dict(dash="dash", color=gray_600),
+    for bv, bioeconomy_vision in df.groupby("bioeconomy_vision"):
+        traces.append(
+            go.Scatter(
+                x=bioeconomy_vision["year"],
+                y=bioeconomy_vision["count"],
+                name=bv,
+                mode="markers+lines",
+                line=dict(color=color_map[bv]),  # Set line color based on the color_map
+            )
         )
-    )
 
-    # Add rolling mean data to plot
-    rolling_mean = data[y].rolling(window=5).mean()
-    fig.add_trace(
-        go.Scatter(
-            x=data["year"],
-            y=rolling_mean,
-            mode="lines",
-            name="5-year moving average",
-            line=dict(color=royal_blue_800),
-        )
-    )
-
-    fig.update_xaxes(type="date")
+    fig = go.Figure(data=traces)
     fig.update_layout(
         showlegend=False,
-        xaxis_range=["1965", "2025"],
-        font=dict(family="Atkinson Hyperlegible"),
-        height=550,
         hovermode="x unified",
+        height=550,
+        yaxis_range=[0, 1],
+        xaxis_range=["1965", "2015"],
     )
-
-    # Show plot
     return fig
 
 
@@ -145,17 +138,6 @@ def plot_bv_trends(df):
     sns.despine()
 
     plt.show()
-
-def plot_bv_trends_interactive(df):
-    fig = px.line(df, x="year", y="count", color="bioeconomy_vision",
-                  color_discrete_sequence=px.colors.qualitative.Light24)
-    fig.update_layout(xaxis_tickangle=-45, xaxis_tickfont_size=10,
-                      xaxis_tickvals=df["year"].unique()[::10],
-                      xaxis_ticktext=df["year"].unique()[::10],
-                      legend_title=None, legend_font_size=10,
-                      legend_itemsizing="constant")
-    fig.show()
-
 
 def plot_heatmap(data):
     fig, ax = plt.subplots(1, 1)
