@@ -1,8 +1,103 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import plotly.graph_objects as po
+import plotly.graph_objects as go
 import plotly.express as px
+import plotly.io as pio
+
+# Set global options for all Plotly plots
+pio.templates.default = "presentation"
+
+royal_blue_800 = "#283aa4"
+gray_600 = "#878f97"
+
+def plot_bioeconomy_trends_interactive(data, y):
+    fig = go.Figure()
+
+    # Add yearly data to plot
+    fig.add_trace(
+        go.Scatter(
+            x=data["year"],
+            y=data[y],
+            mode="lines",
+            name="Yearly",
+            line=dict(dash="dash", color=gray_600),
+        )
+    )
+
+    # Add rolling mean data to plot
+    rolling_mean = data[y].rolling(window=5).mean()
+    fig.add_trace(
+        go.Scatter(
+            x=data["year"],
+            y=rolling_mean,
+            mode="lines",
+            name="5-year moving average",
+            line=dict(color=royal_blue_800),
+        )
+    )
+
+    fig.update_xaxes(type="date")
+    fig.update_layout(
+        showlegend=False,
+        xaxis_range=["1965", "2025"],
+        font=dict(family="Atkinson Hyperlegible"),
+        height=550,
+        hovermode="x unified",
+    )
+
+    # Show plot
+    return fig
+
+
+def plot_count(data):
+    fig, ax = plt.subplots()
+    ax.plot(
+        data["year"],
+        data["bioeconomy_count"],
+        label="Yearly",
+    )
+
+        # Calculate rolling mean and plot on same axis
+    rolling_mean = data["bioeconomy_count"].rolling(window=5).mean()
+    ax.plot(
+        data["year"],
+        rolling_mean,
+        label="5-year moving average",
+        linestyle="dashed"
+    )
+
+    ax.set_xticks(data["year"][::10])
+    ax.tick_params(labelsize=10)
+
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.legend(frameon=False)
+
+    plt.show()
+
+
+def plot_share(data):
+    fig, ax = plt.subplots()
+    ax.plot(data["year"], data["bioeconomy_share"], label="Yearly")
+    ax.set_xticks(data["year"][::10])
+    ax.yaxis.set_major_formatter(mtick.PercentFormatter(xmax=1.0))
+    ax.tick_params(which="major", labelsize=10)
+
+    # Calculate rolling mean and plot on same axis
+    rolling_mean = data["bioeconomy_share"].rolling(window=5).mean()
+    ax.plot(
+        data["year"],
+        rolling_mean,
+        label="5-year moving average",
+        linestyle="dashed"
+    )
+    ax.set_ylim((0, .5))
+    ax.legend(frameon=False)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    plt.show()
+
 
 def plot_bv_trends(df):
     
@@ -50,6 +145,16 @@ def plot_bv_trends(df):
     sns.despine()
 
     plt.show()
+
+def plot_bv_trends_interactive(df):
+    fig = px.line(df, x="year", y="count", color="bioeconomy_vision",
+                  color_discrete_sequence=px.colors.qualitative.Light24)
+    fig.update_layout(xaxis_tickangle=-45, xaxis_tickfont_size=10,
+                      xaxis_tickvals=df["year"].unique()[::10],
+                      xaxis_ticktext=df["year"].unique()[::10],
+                      legend_title=None, legend_font_size=10,
+                      legend_itemsizing="constant")
+    fig.show()
 
 
 def plot_heatmap(data):

@@ -235,7 +235,7 @@ bioeconomy_share = calculate_bioeconomy_share(swinno)
 ## 817 Innovations in Forest Bioeconomy (Uncleaned)
 
 ## Count of Bioeconomy Innovation
-### [Yearly]{.text-royal-blue-800} and [5 Year MA]{.text-gray-600}
+### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
 ```{python}
 # label: fig-bioeconomy_count
 #
@@ -248,7 +248,7 @@ plot_bioeconomy_trends_interactive(
 ```
 
 ## Share of Bioeconomy Innovation{.smaller}
-### [Yearly]{.text-royal-blue-800} and [5 Year MA]{.text-gray-600} 
+### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
 ```{python}
 
 plot_bioeconomy_trends_interactive(bioeconomy_share, y="bioeconomy_share").update_yaxes(
