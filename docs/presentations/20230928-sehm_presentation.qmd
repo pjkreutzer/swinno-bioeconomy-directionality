@@ -1,0 +1,480 @@
+---
+title: Shades of Green
+subtitle: Direction of the Swedish Forest Innovation System 1970-2020
+author: Jonas Kreutzer
+date: last-modified
+abstract: |
+    
+csl: https://zotero.org/styles/apa?source=1
+bibliography: [../../swinno-shades-green.bib]
+
+format:
+  revealjs:
+    theme: [../assets/revealme.scss]
+    transition: none
+    title-slide-attributes:
+      data-background-image: '../assets/ground-fog-valley-black-forest-sunset.jpg'
+      data-background-size: fit
+      data-background-opacity: '0.3'
+    embed-resources: true
+
+execute:
+    freeze: auto
+    echo: false
+jupyter: python3
+---
+
+
+
+```{python}
+# | label: Imports
+
+import pandas as pd
+import numpy as np
+from IPython.display import display, Markdown
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
+import seaborn as sns
+
+from src.figures import *
+from src.utils import get_project_root, format_table
+from src.swinno_helpers import connect_swinno_db
+
+ROOT = get_project_root()
+conn = connect_swinno_db()
+
+# set all text on plots to be monospace with rcParams
+plt.rcParams["font.family"] = "Space Grotesk"
+
+sns.set_theme(style="white")
+
+# full code labels for merging
+
+
+codes_df = pd.read_sql("SELECT * FROM classification_codes", conn)
+
+codes_df["Category"] = codes_df["Category"].str.strip()
+uncertain_eco = {"Code": "000", "Category": "Unsure"}
+codes_df = codes_df.append(uncertain_eco, ignore_index=True)
+
+codes_df = codes_df[~codes_df["Code"].duplicated(keep="last")]
+
+codes_df = codes_df.set_index("Code")
+```
+
+```{python}
+# | label: Query bioeconomy
+
+bioeconomy = pd.read_sql(
+    """
+select
+  i.sinno_id,
+  i.innovation_name_in_swedish AS name,
+  i.description_in_swedish AS description,
+  i.additional_information_if_origin_new_scientific_discovery || i.additional_information_if_origin_new_technologies_or_materials || i.additional_info_if_origin_official_regulation_legislation_and_standards || i.additional_information_if_origin_solution_for_a_problem || i.additional_information_if_origin_performance || i.additional_information_if_origin_other AS info,
+  i.year_of_commercialization AS year,
+  us.use_sector
+from
+  innovation i
+  join use_sectors us on i.sinno_id = us.sinno_id
+where
+  (
+    us.use_sector like '02%'
+    or us.use_sector like '20%'
+    or us.use_sector like '21%'
+    or us.use_sector like '36%'
+    or product_code like '02%'
+    or product_code like '20%'
+    or product_code like '21%'
+    or product_code like '36%'
+  )
+  or (
+    description like '%virke%'
+    or description like '%cellulos%'
+    or description like '%lignin%'
+    or description like '%spån%'
+    or description like '%bark%'
+    or description like '%levulinsyra%'
+    or description like '%furfural%'
+    or description like '%svarttjära%'
+    or description like '%svartlut%'
+    or description like '%växtbas%'
+    or description like '%ved%'
+    or description like '%trä%'
+    or description like '%skog%'
+    or description like '%biobränsle%'
+    or description like '%biologisk%'
+    or description like '%nedbrytbar%'
+    or description like '%papper%'
+    or description like '%pappret%'
+    or description like '%karton%'
+    or description like '%tencel%'
+  );
+""",
+    conn,
+)
+
+sni_codes = pd.read_sql_query(
+    """
+select
+*
+from 
+sni_codes
+""",
+    conn,
+)
+
+sni_codes = sni_codes.rename(columns={"code": "use_sector"})
+
+swinno = pd.read_sql_query(
+    """
+select sinno_id, year_of_commercialization as year, innovation_name_in_swedish as name
+from innovation;
+""",
+    conn,
+)
+
+swinno["bioeconomy"] = swinno["sinno_id"].isin(bioeconomy["sinno_id"].unique())
+
+
+``` 
+
+```{python}
+# | label: Query eco-innovation
+
+eco_innovations = pd.read_sql(
+    """
+SELECT
+  sinno_id,
+  innovation_type as innovation_type_code,
+  c.Category as innovation_type
+FROM
+  eco_innovations
+JOIN classification_codes AS c ON c.Code = eco_innovations.innovation_type
+WHERE 
+innovation_type NOT IN (701, 602, 601, 501, 111, 109, 108)
+;
+""",
+    conn,
+)
+
+eco_innovations["innovation_type"] = eco_innovations["innovation_type"].str.strip()
+
+
+```
+
+
+```{python}
+# | label: Calculate Bioeconomy Share
+
+
+def calculate_bioeconomy_share(swinno):
+    df = swinno.copy()
+    df = df[["sinno_id", "year", "bioeconomy"]]
+    df = (
+        df.groupby("year")
+        .agg(
+            total_count=("sinno_id", "nunique"), bioeconomy_count=("bioeconomy", "sum")
+        )
+        .reset_index()
+    )
+    df["bioeconomy_share"] = df["bioeconomy_count"] / df["total_count"]
+
+    return df
+
+
+bioeconomy_share = calculate_bioeconomy_share(swinno)
+```
+
+## Bioeconomy Demarkations {.smaller}
+
+::::{.columns}
+
+:::{.column width="50%"}
+**Using producer / user codes
+**
+
+|SNI Code | Description                            |
+|--------:|:---------------------------------------|
+|02       | Forestry and related services
+|20       | Wood and wood product manufacturing except furniture
+|21       | Pulp, paper and paper product manufacturing
+|36       | Furniture manufacturing; other manufacturing
+:::
+
+:::{.column width="50%"}
+**Adding keywords of value chain**
+
+    - "virke",
+    - "cellulos",
+    - "lignin",
+    - "spån", 
+    - "bark",
+    - "levulinsyra" (Levulinic acid),
+    - "furfural" (Furfural),
+    - "svarttjära",
+    - "svartlut",
+    - "växtbas",
+    - "ved",
+    - "trä",
+    - "skog",
+    - "papper",
+    - "biobränsle",
+    - "biologiskt",
+    - "nedbrytbar",
+    - "papper",
+    - "pappret",
+    - "karton",
+    - "tencel",
+:::
+
+::::
+
+**** 
+
+## 817 Innovations in Forest Bioeconomy (Uncleaned)
+
+## Count of Bioeconomy Innovation
+### [Yearly]{.text-royal-blue-800} and [5 Year MA]{.text-gray-600}
+```{python}
+# label: fig-bioeconomy_count
+#
+#
+
+plot_bioeconomy_trends_interactive(
+    bioeconomy_share, y="bioeconomy_count"
+).update_layout(yaxis_range=[0, 35]).show()
+
+```
+
+## Share of Bioeconomy Innovation{.smaller}
+### [Yearly]{.text-royal-blue-800} and [5 Year MA]{.text-gray-600} 
+```{python}
+
+plot_bioeconomy_trends_interactive(bioeconomy_share, y="bioeconomy_share").update_yaxes(
+    range=[0, 0.35], tickformat=".0%"
+).show()
+
+```
+
+
+
+# Three Visions for a Bioeconomy
+
+:::: columns
+::: {.column width="33%"}
+![Bio-Technology Vision](../assets/Biotech.jpg){.fragment}
+:::
+
+::: {.column width="33%"}
+![Bio-Resource Vision](../assets/Bioresource.jpg){.fragment}
+:::
+
+::: {.column width="33%"}
+![Bio-Ecology Vision](../assets/Bioecology.jpg){.fragment}
+:::
+::::
+
+
+[@bugge2016WhatBioeconomyReview]{.slide-cite style="font-size: x-small"}
+
+## Bioeconomy Vision Classification{.smaller .scrollable}
+
+
+| @bugge2016WhatBioeconomyReview | Biotechnology | Bioresource | Bioecology |
+|---|---|---|---|
+| Aim &   Objectives | Economic growth & job   creation | Economic growth &   sustainability | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation |
+| Value   Creation | Application of biotechnology,   commercialisation of research & technology | Conversion and upgrading of   bio-resources (process oriented) | Development of integrated   production systems and high-quality products with territorial identity |
+| Drivers   & mediators of innovation | R & D, patents, TTOs,   Research councils and funders (Science push, linear model) | Interdisciplinary, optimisation   of land use, include degraded land in the production of biofuels, use and   availability of bio-resources, waste management, engineering, science &   market (Interactive & networked production mode) | Identification of favourable   organic agro-ecological practices, ethics, risk, transdisciplinary   sustainability, ecological interactions, re-use & recycling of waste,   land use, (Circular and self-sustained production mode) |
+
+| @vivien2019HijackingBioeconomy | Type II | Type III | Type I |
+|---|---|---|---|
+|  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere <br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decisionmaking centers |
+| Codes | 1 | 2 | 3 |
+
+## Preliminary Results
+
+```{python}
+bv_df = pd.read_sql(
+    """SELECT bv.sinno_id, bv.bioeconomy_vision, i.year_of_commercialization AS "i.year"
+FROM bioeconomy_visions AS bv
+JOIN innovation AS i ON i.sinno_id = bv.sinno_id
+WHERE bv.sinno_id NOT IN (SELECT sinno_id FROM categorization_notes WHERE notes NOT LIKE "%not forest%")
+OR bv.sinno_id NOT IN (SELECT sinno_id FROM bioeconomy_visions WHERE bioeconomy_vision <> 0);
+""",
+    conn,
+)
+```
+
+
+
+::::{.columns}
+:::{.column width='80%'}
+```{python}
+
+display(
+    Markdown(
+        f"<span class='text-primary' style='font-size:15rem; font-weight:900'>{bv_df.loc[:, 'sinno_id'].nunique()}</span>"
+    )
+)
+
+```
+
+:::
+
+:::{.column width='20%'}
+unique forest bioeconomy innovations classified
+:::
+
+::::
+
+## Examples
+
+## Bioeconomy Vision by Year
+
+```{python}
+
+bv_year = pd.read_sql(
+    """
+SELECT
+  codes.Category AS Vision,
+  COUNT(bioeconomy_vision) AS Count,
+  i.year_of_commercialization AS Year
+FROM
+  bioeconomy_visions
+  JOIN classification_codes AS codes ON codes.code = bioeconomy_visions.bioeconomy_vision
+  JOIN innovation AS i on i.sinno_id = bioeconomy_visions.sinno_id
+WHERE
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      bioeconomy_visions AS bv2
+    WHERE
+      bv2.sinno_id = bioeconomy_visions.sinno_id
+      AND bv2.bioeconomy_vision = 0
+  )
+  AND bioeconomy_visions.sinno_id NOT IN (
+    SELECT
+      sinno_id
+    FROM
+      categorization_notes
+    WHERE
+      notes NOT LIKE "%not forest%"
+  )
+GROUP BY
+Year, Vision
+ORDER BY
+  Year ASC,
+  Count DESC;
+  """,
+    conn,
+)
+
+
+def plot_bv_trends(df, title):
+    sns.set_style("white")
+    chart = sns.lineplot(
+        data=df,
+        x="Year",
+        y="Count",
+        hue="Vision",
+        palette="colorblind",
+        linewidth=2.5,
+    )
+    chart.set_title(title, fontdict={"fontsize": 16, "fontweight": "bold"})
+    chart.set_xlabel("Year", fontdict={"fontsize": 12, "fontweight": "bold"})
+    chart.set_ylabel("Count", fontdict={"fontsize": 12, "fontweight": "bold"})
+    chart.tick_params(labelsize=10)
+    plt.legend(title="Vision", fontsize=10, title_fontsize=12)
+    plt.tight_layout()
+
+    # Customize x-axis tick labels
+    years = df["Year"].unique()
+    chart.set_xticks(years[::5])
+    chart.set_xticklabels(years[::5], rotation=45, ha="right")
+
+    plt.show(chart)
+
+
+plot_bv_trends(bv_year, title="")
+
+```
+
+## Bioeconomy Vision Count by Sector Excluding Uncertains {.smaller}
+```{python}
+bv_sectors = pd.read_sql(
+    """
+SELECT
+  c.Category AS vision,
+  sni_codes.label AS sector,
+  count(bv.bioeconomy_vision) AS count
+FROM
+  bioeconomy_visions AS bv
+  join use_sectors ON bv.sinno_id = use_sectors.[sinno_id]
+  join sni_codes ON SUBSTR(use_sectors.use_sector, 1, 2) = sni_codes.code
+  join [classification_codes] AS c ON bv.bioeconomy_vision = c.Code
+WHERE
+  NOT EXISTS(
+    SELECT
+      *
+    FROM
+      bioeconomy_visions AS bv2
+    WHERE
+      bv2.sinno_id = bv.sinno_id
+      AND bv2.bioeconomy_vision = 0
+  )
+  AND bv.sinno_id NOT IN (
+    SELECT
+      sinno_id
+    FROM
+      categorization_notes
+    WHERE
+      notes NOT LIKE "%not forest%"
+  )
+GROUP BY
+  sector,
+  bioeconomy_vision;
+""",
+    conn,
+)
+
+bv_matrix = prepare_heatmap_data(
+    bv_sectors, index_col="sector", cols_col="vision", values_col="count"
+)
+
+plot_heatmap(bv_matrix)
+```
+
+
+
+## Uncertain Cases 
+
+
+```{python}
+uncertains = pd.read_sql(
+    """
+SELECT
+DISTINCT
+  i.sinno_id,
+  i.innovation_name_in_swedish AS name,
+  i.description_in_swedish AS description,
+  i.additional_information_if_origin_new_scientific_discovery || i.additional_information_if_origin_new_technologies_or_materials || i.additional_info_if_origin_official_regulation_legislation_and_standards || i.additional_information_if_origin_solution_for_a_problem || i.additional_information_if_origin_performance || i.additional_information_if_origin_other AS info,
+  i.year_of_commercialization AS year
+FROM
+  innovation i
+  JOIN use_sectors us ON i.sinno_id = us.sinno_id
+  JOIN bioeconomy_visions bv on i.sinno_id = bv.sinno_id
+WHERE i.sinno_id in (select distinct sinno_id from bioeconomy_visions where bioeconomy_vision = "0");
+""",
+    conn,
+)
+
+display(
+    Markdown(
+        f"{uncertains['sinno_id'].nunique()} cases are marked as unsure bioeconomy visions."
+    )
+)
+```
+
+## References
