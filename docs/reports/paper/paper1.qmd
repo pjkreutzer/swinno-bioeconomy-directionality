@@ -6,7 +6,7 @@ author:
     affiliation: Department of Economic History, Lund University
 date: last-modified
 abstract: |
-    The transition to a bioeconomy is high on the agenda for research, industry and policy. Beyond conceptual uncertainties of what is meant by a bioeconomy, three different visions have emerged, differing in their aims and objectives, drivers and mediators of innovation and relation to the biosphere. The use of detailed innovation data from a Swedish innovation database, SWINNO, allows to capture the actual innovation output of the Swedish forest based bioeconomy innovation system. Qualitative coding of the underlying source material associates innovation from 1970 to 2020 with vision of a bioresource, biotechnology and / or bioecology bioeconomy. Preliminary results suggest that the innovation output of the forest based bioeconomy has failed to gain in prominence. Of the three visions, the bioresource vision has been the most dominant, especially in the 1970s and after 2005. At the same time, innovation which fit into multiple visions exist, suggesting that the opportunity space for future development is not yet locked in.
+    The transition to a bioeconomy is high on the agenda for research, industry and policy. Beyond conceptual uncertainties of what is meant by a bioeconomy, three different visions have emerged, differing in their aims and objectives, drivers and mediators of innovation and relation to the biosphere. The use of detailed innovation data from a Swedish innovation database, SWINNO, allows to capture the actual innovation output of the Swedish forest based bioeconomy innovation system. Qualitative coding of the underlying source material associates innovation from 1970 to 2010 with visions of a bioresource, biotechnology and / or bioecology bioeconomy. Preliminary results suggest that the innovation output of the forest based bioeconomy has decreased relative to the total output. Of the three visions, the bioresource vision has been the most dominant, especially in the 1970s and after 2005. At the same time, innovation which fit into multiple visions exist, suggesting that the opportunity space for future development is not yet locked in.
     
 csl: https://zotero.org/styles/apa?source=1
 bibliography: [../../swinno-shades-green.bib]
@@ -148,7 +148,7 @@ Balancing these expectations includes managing conflicting goals and hence diffi
 Transitioning to a bioeconomy, meaning an economy based on bio-based rather than fossil-based inputs is set to increase the pressure on Baltic forests in the coming years [@hogbom2021TrilemmaNordicBaltic].
 In recent years transitioning to a bioeconomy has gained relevance among policymakers, practitioners and researchers. 
 Connected to this are hopes of increased resource efficiency and renewability.
-In a report commissioned by the Swedish Government, the @research2012StrategyBiobasedEconomy defines a vision of a Swedish bioeconomy based on two central pillars.
+In a report commissioned by the Swedish Government, the @2012StrategyBiobasedEconomy defines a vision of a Swedish bioeconomy based on two central pillars.
 It is to be an economy based on,
 
 > \[a\] sustainable production of biomass to enable increased use within a number of different sectors of society. The objective is to reduce climate effects and the use of fossil-based raw materials.
@@ -157,11 +157,11 @@ With,
 
 > \[a\]n increased added value for biomass materials, concomitant with a reduction in energy consumption and recovery of nutrients and energy as additional end products. The objective is to optimize the value and contribution of ecosystem services to the economy. (p. 9).
 
-These pillars reflect the two most influential visions the bioeconomy concept. Notions of a biotechnology and bio-resource oriented bioeconomy are widespread and dominate discourse at various levels [@dieken2021MultitudesBioeconomiesSystematic]. Despite -- or perhaps because of -- the bioeconomy lacking a strong definition, it is used to refer to different concepts, with different aims and objectives, foci, normative assumptions and hence implications for society and environment [@bugge2016WhatBioeconomyReview].
+These pillars reflect the two most influential visions of the bioeconomy concept. Notions of a biotechnology and bio-resource oriented bioeconomy are widespread and dominate discourse at various levels [@dieken2021MultitudesBioeconomiesSystematic]. Despite -- or perhaps because of -- bioeconomy lacking a strong definition, the term is used to refer to different concepts, with different aims and objectives, foci, normative assumptions and hence implications for society and environment [@bugge2016WhatBioeconomyReview].
 
-The application of biotechnology to promote economic growth and provide jobs lends the biotechnology vision its name[@bugge2016WhatBioeconomyReview]. Science driven innovation features prominently in this vision, with collaborations between research institutions in academia and industry taking on an important role [@bugge2016WhatBioeconomyReview]. @vivien2019HijackingBioeconomy present a review of the concept showing that the focus on science as an absolute motor of change also shaped policy recommendations, driven especially by the OECD, towards increasing the speed and diffusion of innovation through partnerships between new start-ups and establish pharmaceutical companies. As a policy narrative this vision was particularly potent and widespread at the turn of the 21st century. According to @vivien2019HijackingBioeconomy, the intellectual heritage of Schumpeter and Kontradieff play an important role in this vision. Technological breakthroughs are poised to solve economic and ecological challenges, for example through genetic engineering. Consequently, this vision has a weak sustainability notion, viewing sustainability challenges as temporary and nature as substitutable given sufficient research and knowledge creation [@vivien2019HijackingBioeconomy].
+The application of biotechnology to promote economic growth and provide jobs lends the biotechnology vision its name [@bugge2016WhatBioeconomyReview]. Science driven innovation features prominently in this vision, with collaborations between research institutions in academia and industry taking on an important role [@bugge2016WhatBioeconomyReview]. @vivien2019HijackingBioeconomy present a review of the concept showing that the focus on science as an absolute motor of change also shaped policy recommendations, driven especially by the OECD, towards increasing the speed and diffusion of innovation through partnerships between new start-ups and establish pharmaceutical companies. As a policy narrative this vision was particularly potent and widespread at the turn of the 21st century. According to @vivien2019HijackingBioeconomy, the intellectual heritage of Schumpeter and Kontradieff play an important role in this vision. Technological breakthroughs are poised to solve economic and ecological challenges, for example through genetic engineering. Consequently, this vision has a weak sustainability notion, viewing sustainability challenges as temporary, and nature as substitutable given sufficient research and knowledge creation [@vivien2019HijackingBioeconomy].
 
-In more recent years, visions of a bio-resource bioeconomy have taken over as the leading narrative. Unlike the biotechnology vision, this conceptualization does not only focus on economic growth and job creation, but attempts to include ecological sustainability challenges [@bugge2016WhatBioeconomyReview]. Biological resources, not technologies, form the basis of a new economy. In essence, there are two ways in which bio-resources are poised to replace fossil resources: as substitution, e.g., biofuels replacing fossil fuels, and as high value added products, e.g., Cross-laminated timber used as an alternative to concrete in construction [@vivien2019HijackingBioeconomy]. To substitute fossil resources requires significant efforts in innovation. In contrast to the biotechnology vision, however, innovation is not confined to scientific advances from a narrow biochemical and pharmaceutical field. Instead, new and old actors are required to collaborate between and beyond established sectors [@bugge2016WhatBioeconomyReview]. Although sustainability plays a more important role in this vision of the bioeconomy, this vision is considered an example of weak sustainability [@damato2017GreenCircularBio; @vivien2019HijackingBioeconomy]. The reason is the focus of substitution and high biomass demands. The consumption of raw materials may even increase, not only for bio-based, but also for fossil-based resources [@asada2020BioeconomicTransitionProjecting].
+In more recent years, visions of a bio-resource bioeconomy have taken over as the leading narrative. Unlike the biotechnology vision, this conceptualization does not only focus on economic growth and job creation, but attempts to include ecological sustainability challenges [@bugge2016WhatBioeconomyReview]. Biological resources, not technologies, form the basis of a new economy. In essence, there are two ways in which bio-resources are poised to replace fossil resources: as substitution, e.g., biofuels replacing fossil fuels, and as high value added products, e.g., cross-laminated timber used as an alternative to concrete in construction [@vivien2019HijackingBioeconomy]. To substitute fossil resources requires significant efforts in innovation. In contrast to the biotechnology vision, however, innovation is not confined to scientific advances from a narrow biochemical and pharmaceutical field. Instead, new and old actors are required to collaborate between and beyond established sectors [@bugge2016WhatBioeconomyReview]. Although sustainability plays a more important role in this vision of the bioeconomy, this vision is considered an example of weak sustainability [@damato2017GreenCircularBio; @vivien2019HijackingBioeconomy]. The reason is the focus of substitution and high biomass demands. The consumption of raw materials may even increase, not only for bio-based, but also for fossil-based resources [@asada2020BioeconomicTransitionProjecting].
 
 The exact role played by forests in a bioeconomy transition depends on the desired vision [@kleinschmit2014ShadesGreenSocial]. There is no doubt that the Swedish vision places high demands on forests as primary providers of the required biomass. Both in the strategy formulated in @research2012StrategyBiobasedEconomy and in public discourse, a small, well-connected group of actors center the bio-resource vision as legitimate and desirable [@holmgren2022WhoseTransformationThis]. The result is a forest sector which operates under a "more of everything" paradigm [@belandlindahl2015SwedishForestryModel].
 
@@ -178,8 +178,7 @@ Currently, most research into bioeconomy innovation relies on patent data or qua
 
 Public, scientific and political debate of bioeconomies has brought forth a number of discourse analyses.
 Both @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy conclude that the concept of a bioeconomy conceals different, possibly conflicting visions of transformation outcomes.
-
-Recent scholarship has called for advancing research fronts instead of remaining entrenched in contested discourse positions @allain2022BioeconomicsVsBioeconomy.
+Recent scholarship has called for advancing research fronts instead of remaining entrenched in contested discourse positions [@allain2022BioeconomicsVsBioeconomy].
 
 This paper takes up this call and asks what bioeconomy the Swedish innovation system pursues. A unique database of actual innovation output is first used to answer how innovative the system has been between 1970 and 2020. The database sources are then used to provide a qualitative insight into the extent to which specific bioeconomy visions appear in commercialized innovation and the extent to which they include eco-innovations which could lessen environmental impact.
 
@@ -201,7 +200,7 @@ year_min = swinno["year"].min()
 year_max = swinno["year"].max()
 
 display(Markdown(
-    f"The SWINNO database used here contains {n_swinno} innovations commercialized between {year_min} and {year_max}. It is constructed according to  literature-based innovation output (LBIO) method [@sjoo2014DatabaseSwedishInnovations]. This method relies on the judgment of editiors and journalists at trade journals and hence captures what can be described as significant innovation."
+    f"The SWINNO database used here contains {n_swinno} innovations commercialized between {year_min} and {year_max}. It is constructed according to  literature-based innovation output (LBIO) method using Swedish source material [@sjoo2014DatabaseSwedishInnovations]. This method relies on the judgment of editiors and journalists at trade journals and hence captures what can be described as significant innovation."
 ))
 ```
 
@@ -231,11 +230,11 @@ For the remainder of the paper the nomenclature of @bugge2016WhatBioeconomyRevie
 Vivien et al.'s [-@vivien2019HijackingBioeconomy] Type I bioeconomy is taken to correspond with the bioecology vision, Type II and Type III to correspond with the bioresource and biotechnology vision, respectively.
 The analysis of bioeconomy discourse which revealed different visions, highlights that the visions have emerged at different times and with different actors at their centers [@vivien2019HijackingBioeconomy, @bugge2016WhatBioeconomyReview].
 @vivien2019HijackingBioeconomy trace the introduction of the term bioeconomics to the 1920s and a work on fishery by the Russian biologist Baranoff.
-The term bioeoconomics which they label as Type I bioeconomy, was introduced by Georgescu-Roegen,  in -@georgescu-roegen1975BioeconomicAspectsEntropy.
-@vivien2019HijackingBioeconomy argue that the term biotechnology gradually emerged between 1990 and 2000, in the wake of enthusiasm about biotechnological adavances, such as the discovery of DNA, in preceeding years.
-It gained in popularity and international importance when the OECD began increasingly supporting and reshaping its meaning at the turn of the millenium [@vivien2019HijackingBioeconomy].
-According to them the last concept to enter the discourse was the bioresource oriented bioeconomy.
-While biomass has been used throughout history in various ways, the renewed interest with the intention to replace fossil inputs, for example in European Comission communication since 2010.
+The term bioeoconomics which they label as Type I bioeconomy, was introduced by Georgescu-Roegen, in [-@georgescu-roegen1975BioeconomicAspectsEntropy].
+@vivien2019HijackingBioeconomy argue that the term biotechnology gradually emerged between 1990 and 2000, in the wake of enthusiasm about biotechnological advances, such as the discovery of DNA.
+It gained popularity and international importance when the OECD began increasingly supporting and reshaping its meaning at the turn of the millennium [@vivien2019HijackingBioeconomy].
+According to them, the last concept to enter the discourse was the bioresource oriented bioeconomy.
+While biomass has been used throughout history in various ways, the renewed interest with the intention to replace fossil inputs, for example in European Commission communication since 2010.
 However, @vivien2019HijackingBioeconomy point to the long history of biorefinery as a core aspect of this vision, which was discussed as early as the 1930s.
 Hence, while the organization of the discourse into the labels biotechnology, bioecology and bioresource vision is a very recent research outcome, the underlying concepts have a richer history.
 This alleviates concerns that using these labels retroactively confines the innovations to current policy terms.
@@ -263,11 +262,11 @@ The extent to which such innovation contributes in reality to a "[c]ircular and 
 @tbl-vision_examples shows five examples of classified innovation.
 This selection also highlights that multiple labels can be attached to one innovation.
 The last innovation, describing a waterproof paper, is classified as a bioresource vision innovation because it describes a process by which biomass is converted and upgraded.
-It is also classified as a biotechnology innovation since the process mimics trees' microfiber formation, according to the innovation source article.
+It is also classified as a biotechnology innovation since, according to the innovation source article, the process mimics trees' microfiber formation.
 Lastly, there is also the possibility that an innovation cannot be placed into at least one of the visions.
 This is the case for innovation which brings general technological improvements, purely advances economic performance, or relates to a general purpose technology such as appliance of computers.
 These innovations are labeled as No Bioeconomy Vision, which does not imply that the innovation is not used, or originates in the forest based bioeconomy as defined above.
-An illustrative example of such an innovation are improved work boots, which promote safety of forest workers.
+An illustrative example of such an innovation are improved work boots, which promote safety of forest workers but do not correspond with any of the criteria in @tbl-bugge or @tbl-vivien.
 
 ```{python}
 # | label: tbl-vision_examples
@@ -399,18 +398,22 @@ bioeconomy_share = calculate_bioeconomy_share(swinno)
 
 
 ```{python}
-#| label: Bioeconomy Trend Description
-#| output: asis
+# | label: Bioeconomy Trend Description
+# | output: asis
 
 
 share_max = bioeconomy_share["bioeconomy_share"].max()
-share_max_year = bioeconomy_share.loc[bioeconomy_share["bioeconomy_share"] == share_max, "year"].values[0]
+share_max_year = bioeconomy_share.loc[
+    bioeconomy_share["bioeconomy_share"] == share_max, "year"
+].values[0]
 share_last_year = bioeconomy_share["year"].max()
-share_latest = bioeconomy_share.loc[bioeconomy_share["year"] == share_last_year, "bioeconomy_share"].values[0]
+share_latest = bioeconomy_share.loc[
+    bioeconomy_share["year"] == share_last_year, "bioeconomy_share"
+].values[0]
 
 display(
     Markdown(
-        f"@fig-bioeconomy_share shows the count (1) and share relative to all innovation contained in SWINNO (2) of bioeconomy innovation by year and as five year moving averages. From visual inspection alone, two features of the forest based bioeconomy innovation system emerge. First, two periods of high output can be identified from 1970-1990 and from 2005 to approximately 2015. The period in between 1990 and 2005 is characterized by low average output with high volatility. Second, the forest based bioeconomy has failed to gain in importance relative to other innovation captures by SWINNO. From a high of {share_max:.2%} in {share_max_year} to {share_latest:.2%} in {share_last_year}."
+        f"@fig-bioeconomy_share shows the count (a) and share relative to all innovation contained in SWINNO (b) of bioeconomy innovation by year and as five year moving averages. From visual inspection alone, two features of the forest based bioeconomy innovation system emerge. First, two periods of high output can be identified from 1970-1990 and from 2005 to approximately 2015. The period in between 1990 and 2005 is characterized by low average output with high volatility. Second, the forest based bioeconomy has failed to gain in importance relative to other innovation captures by SWINNO. From a high of {share_max:.2%} in {share_max_year} to {share_latest:.2%} in {share_last_year}."
     )
 )
 
