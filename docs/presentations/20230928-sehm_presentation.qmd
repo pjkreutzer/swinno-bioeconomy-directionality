@@ -32,9 +32,6 @@ jupyter: python3
 import pandas as pd
 import numpy as np
 from IPython.display import display, Markdown
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mtick
-import seaborn as sns
 
 from src.figures import *
 from src.utils import get_project_root, format_table
@@ -163,6 +160,61 @@ eco_innovations["innovation_type"] = eco_innovations["innovation_type"].str.stri
 
 ```
 
+```{python}
+# | label: Query bioeconomy visions
+
+bioeconomy_visions = pd.read_sql(
+    """
+SELECT bv.sinno_id
+, codes.Category AS bioeconomy_vision
+, i.year_of_commercialization AS "year"
+FROM bioeconomy_visions AS bv
+JOIN [classification_codes] AS codes ON codes.code = bv.bioeconomy_vision
+JOIN innovation AS i ON i.sinno_id = bv.sinno_id
+WHERE bv.sinno_id NOT IN (SELECT sinno_id FROM categorization_notes WHERE notes NOT LIKE "%not forest%")
+UNION
+SELECT DISTINCT(ei.sinno_id)
+, 'Bioecology Vision' AS bioeconomy_vision
+, i.year_of_commercialization AS "i.year"
+FROM eco_innovations AS ei
+JOIN innovation AS i ON i.sinno_id = ei.sinno_id
+WHERE ei.innovation_type IN (206, 107)
+AND ei.sinno_id NOT IN (
+  SELECT ei2.sinno_id
+  FROM eco_innovations as ei2
+  WHERE ei2.innovation_type IN (999, '000')
+  );
+-- adds recycling innovation to bioecology
+""",
+    conn,
+)
+
+bioeconomy_visions.loc[
+    bioeconomy_visions["bioeconomy_vision"] == "Not Bioeconomy",
+    ["bioeconomy_vision"],
+] = "No Bioeconomy Vision"
+
+uncertain_bioeconomy_visions = bioeconomy_visions.query("bioeconomy_vision == 'Unsure'")
+
+
+certain_bioeconomy_visions = bioeconomy_visions.loc[
+    ~bioeconomy_visions["sinno_id"].isin(uncertain_bioeconomy_visions["sinno_id"]), :
+]
+
+count_certain_bioeconomy_visions = (
+    certain_bioeconomy_visions.groupby(["year", "bioeconomy_vision"])
+    .size()
+    .reset_index(name="count")
+)
+
+total_certain_bioeconomy_visions = (
+    count_certain_bioeconomy_visions.groupby("bioeconomy_vision")
+    .agg("sum", numeric_only=True)
+    .sort_values("count", ascending=False)
+    .reset_index()
+)
+
+```
 
 ```{python}
 # | label: Calculate Bioeconomy Share
@@ -307,27 +359,17 @@ plot_bioeconomy_trends_interactive(bioeconomy_share, y="bioeconomy_share").updat
 
 ## Preliminary Results
 
-```{python}
-bv_df = pd.read_sql(
-    """SELECT bv.sinno_id, bv.bioeconomy_vision, i.year_of_commercialization AS "i.year"
-FROM bioeconomy_visions AS bv
-JOIN innovation AS i ON i.sinno_id = bv.sinno_id
-WHERE bv.sinno_id NOT IN (SELECT sinno_id FROM categorization_notes WHERE notes NOT LIKE "%not forest%")
-OR bv.sinno_id NOT IN (SELECT sinno_id FROM bioeconomy_visions WHERE bioeconomy_vision <> 0);
-""",
-    conn,
-)
-```
-
 
 
 ::::{.columns}
 :::{.column width='80%'}
 ```{python}
 
+n_certain_bioeconomy_visions = certain_bioeconomy_visions["sinno_id"].nunique()
+
 display(
     Markdown(
-        f"<span class='text-primary' style='font-size:15rem; font-weight:900'>{bv_df.loc[:, 'sinno_id'].nunique()}</span>"
+        f"<span class='text-primary' style='font-size:15rem; font-weight:900'>{n_certain_bioeconomy_visions}</span>"
     )
 )
 
@@ -343,13 +385,45 @@ unique forest bioeconomy innovations classified
 
 ## Examples
 
-## Bioeconomy Vision by Year
+## Trends in Bioeconomy Visions{.smaller}
+### [No Bioeconomy]{.text-gray-600}, [Bioecology]{style="color:#cc78bc;"}, [Bioresource]{style="color:#de8f05;"} and [Biotechnoloy]{style="color:#029e73;"}{.smaller}
 
 ```{python}
+# | label: fig-bv_trends
+# | fig-cap: '[No Bioeconomy]{.text-gray-600}, [Bioecology]{style="color:#cc78bc;"}, [Bioresource]{style="color:#de8f05;"} and [Biotechnoloy]{style="color:#029e73"}'
 
-plot_bv_trends(bv_year, title="")
+color_map = {
+    "No Bioeconomy Vision": "rgb(0.8, 0.8, 0.8)",  # Gray
+    "Bioecology Vision": "#cc78bc",  # Purple
+    "Bioresource Vision": "#de8f05",  # Orange
+    "Biotechnology Vision": "#029e73",  # Green
+}
+
+
+def plot_bv_trends_interactive(df):
+    traces = []
+
+    for bv, bioeconomy_vision in df.groupby("bioeconomy_vision"):
+        traces.append(
+            go.Scatter(
+                x=bioeconomy_vision["year"],
+                y=bioeconomy_vision["count"],
+                name=bv,
+                mode="lines",
+                line=dict(color=color_map[bv]),  # Set line color based on the color_map
+            )
+        )
+
+    fig = go.Figure(data=traces)
+    fig.update_layout(showlegend=False, hovermode="x unified", height=550)
+    fig.show()
+
+
+plot_bv_trends_interactive(count_certain_bioeconomy_visions)
+
 
 ```
+
 
 ## Bioeconomy Vision Count by Sector Excluding Uncertains {.smaller}
 ```{python}
