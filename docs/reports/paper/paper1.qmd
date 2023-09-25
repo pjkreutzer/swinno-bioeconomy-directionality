@@ -50,18 +50,15 @@ sns.set_theme(style="white")
 # full code labels for merging
 
 
-codes_df = pd.read_sql(
-    "SELECT * FROM classification_codes", conn
-)
+codes_df = pd.read_sql("SELECT * FROM classification_codes", conn)
 
 codes_df["Category"] = codes_df["Category"].str.strip()
-uncertain_eco = {"Code":"000", "Category":"Unsure"}
+uncertain_eco = {"Code": "000", "Category": "Unsure"}
 codes_df = codes_df.append(uncertain_eco, ignore_index=True)
 
-codes_df = codes_df[~codes_df["Code"].duplicated(keep='last')
-]
+codes_df = codes_df[~codes_df["Code"].duplicated(keep="last")]
 
-codes_df =codes_df.set_index("Code")
+codes_df = codes_df.set_index("Code")
 ```
 
 ```{python}
@@ -192,16 +189,18 @@ In later manual review of each innovation for classification these false positiv
 
 
 ```{python}
-#| label: Total SWINNO Innovation
-#| output: asis
+# | label: Total SWINNO Innovation
+# | output: asis
 
 n_swinno = swinno["sinno_id"].nunique()
 year_min = swinno["year"].min()
 year_max = swinno["year"].max()
 
-display(Markdown(
-    f"The SWINNO database used here contains {n_swinno} innovations commercialized between {year_min} and {year_max}. It is constructed according to  literature-based innovation output (LBIO) method using Swedish source material [@sjoo2014DatabaseSwedishInnovations]. This method relies on the judgment of editiors and journalists at trade journals and hence captures what can be described as significant innovation."
-))
+display(
+    Markdown(
+        f"The SWINNO database used here contains {n_swinno} innovations commercialized between {year_min} and {year_max}. It is constructed according to  literature-based innovation output (LBIO) method using Swedish source material [@sjoo2014DatabaseSwedishInnovations]. This method relies on the judgment of editiors and journalists at trade journals and hence captures what can be described as significant innovation."
+    )
+)
 ```
 
 An important limitation of LBIO measures, especially for research into forest sector innovation, is a bias against non-commercialized innovation.
@@ -336,21 +335,21 @@ Where the source text only mentions that the innovation is less harmful to the e
 
 
 ```{python}
-#| label: Number Bioeconomy Innovation
-#| output: asis
+# | label: Number Bioeconomy Innovation
+# | output: asis
 
-sum_bioeconomy_visions = swinno["bioeconomy"].sum()
+sum_bioeconomy_innovations = swinno["bioeconomy"].sum()
 
 display(
     Markdown(
-        f"Querying the SWINNO database for forest based bioeconomy innovations initally yields {sum_bioeconomy_visions} innovations. This number includes false positives from substrings matching keywords included in the search. While there is no indication that these false positives are non-randomly distributed across time and sectors, the following analysis for bioeconomy innovation trends at large needs to be viewed in the light of this being unlceaned data. Where the analysis turns to specific bioeconomy visions, only clean and certain cases are discussed."
+        f"Querying the SWINNO database for forest based bioeconomy innovations initally yields {sum_bioeconomy_innovations} innovations. This number includes false positives from substrings matching keywords included in the search. While there is no indication that these false positives are non-randomly distributed across time and sectors, the following analysis for bioeconomy innovation trends at large needs to be viewed in the light of this being unlceaned data. Where the analysis turns to specific bioeconomy visions, only clean and certain cases are discussed."
     )
 )
 ```
 
 
 ```{python}
-#| label: Query eco-innovation
+# | label: Query eco-innovation
 
 eco_innovations = pd.read_sql(
     """
@@ -375,7 +374,8 @@ eco_innovations["innovation_type"] = eco_innovations["innovation_type"].str.stri
 
 
 ```{python}
-#| label: Calculate Bioeconomy Share
+# | label: Calculate Bioeconomy Share
+
 
 def calculate_bioeconomy_share(swinno):
     df = swinno.copy()
@@ -390,6 +390,7 @@ def calculate_bioeconomy_share(swinno):
     df["bioeconomy_share"] = df["bioeconomy_count"] / df["total_count"]
 
     return df
+
 
 bioeconomy_share = calculate_bioeconomy_share(swinno)
 
@@ -482,17 +483,16 @@ certain_bioeconomy_visions = bioeconomy_visions.loc[
 ]
 
 count_certain_bioeconomy_visions = (
-    certain_bioeconomy_visions
-    .groupby(["year", "bioeconomy_vision"])
+    certain_bioeconomy_visions.groupby(["year", "bioeconomy_vision"])
     .size()
     .reset_index(name="count")
 )
 
-total_certain_bioeconomy_visions = (count_certain_bioeconomy_visions
-        .groupby("bioeconomy_vision")
-        .agg("sum", numeric_only=True)
-        .sort_values("count", ascending=False)
-        .reset_index()
+total_certain_bioeconomy_visions = (
+    count_certain_bioeconomy_visions.groupby("bioeconomy_vision")
+    .agg("sum", numeric_only=True)
+    .sort_values("count", ascending=False)
+    .reset_index()
 )
 
 ```
@@ -500,12 +500,12 @@ total_certain_bioeconomy_visions = (count_certain_bioeconomy_visions
 
 
 ```{python}
-#| label: Number of Uncertains
-#| output: asis
+# | label: Number of Uncertains
+# | output: asis
 
 n_uncertain_bioeconomy_visions = uncertain_bioeconomy_visions["sinno_id"].nunique()
 
-    
+
 display(
     Markdown(
         f"For the following part, innovations which do not relate to the forest are excluded. Excluded are also the {n_uncertain_bioeconomy_visions} innovations whose source text did not allow labeling without significant uncertaintiy. These innovations are planned to undergo a revision by subject matter experts at a later point."
@@ -517,18 +517,19 @@ display(
 # | label: Number of Results
 # | output: asis
 
-n_certain_bioeconomy_visions = certain_bioeconomy_visions['sinno_id'].nunique()
+n_certain_bioeconomy_visions = certain_bioeconomy_visions["sinno_id"].nunique()
 
-certain_bioeconomy_visions_min_year = certain_bioeconomy_visions['year'].min()
+certain_bioeconomy_visions_min_year = certain_bioeconomy_visions["year"].min()
 
-certain_bioeconomy_visions_max_year = certain_bioeconomy_visions['year'].max()
+certain_bioeconomy_visions_max_year = certain_bioeconomy_visions["year"].max()
 
 n_most_bioeconomy_vision = total_certain_bioeconomy_visions.iloc[0, 1]
 
 display(
     Markdown(
         f"This leaves {n_certain_bioeconomy_visions} innovations have been classified for the period between {certain_bioeconomy_visions_min_year} and {certain_bioeconomy_visions_max_year}. With {n_most_bioeconomy_vision} innovations, the {total_certain_bioeconomy_visions.iloc[0, 0]} has the most associated innovations. Next the {total_certain_bioeconomy_visions.iloc[1, 0]} was associated with {total_certain_bioeconomy_visions.iloc[1,1]}, while {total_certain_bioeconomy_visions.iloc[2,1]} and  {total_certain_bioeconomy_visions.iloc[3,1]} innovation were classified as {total_certain_bioeconomy_visions.iloc[2,0]} and {total_certain_bioeconomy_visions.iloc[3,0]}, respectively. Note that the sum by category will not yield the total number of classified innovations, as one innovation can be associated with more than one bioeconomy vision."
-    ))
+    )
+)
 
 ```
 
@@ -555,7 +556,10 @@ WHERE eco_innovations.innovation_type = 107 OR eco_innovations.innovation_type =
 
 recycle_innovation_count = recycle_innovation["sinno_id"].nunique()
 
-n_bioecology_vision = count_certain_bioeconomy_visions.loc[count_certain_bioeconomy_visions["bioeconomy_vision"] == "Bioecology Vision", "count"].sum()
+n_bioecology_vision = count_certain_bioeconomy_visions.loc[
+    count_certain_bioeconomy_visions["bioeconomy_vision"] == "Bioecology Vision",
+    "count",
+].sum()
 
 display(
     Markdown(
@@ -738,9 +742,11 @@ eco_innovation_by_bioeconomy_visions["innovation_type_group"] = np.where(
 ```
 
 ```{python}
-#| label: fig-eco_innovation_by_bioeconomy_vision
-#| fig-cap: Count of Eco-Innovation Types by Bioeconomy Vision
-p = plot_eco_innovation_by_bioeconomy_vision(eco_innovation_by_bioeconomy_visions, codes_df)
+# | label: fig-eco_innovation_by_bioeconomy_vision
+# | fig-cap: Count of Eco-Innovation Types by Bioeconomy Vision
+p = plot_eco_innovation_by_bioeconomy_vision(
+    eco_innovation_by_bioeconomy_visions, codes_df
+)
 
 sns.move_legend(p, "lower center", ncol=5)
 # TODO: perhaps a per cent display by group size would be interesting too?
