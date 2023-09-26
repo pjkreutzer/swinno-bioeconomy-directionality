@@ -262,6 +262,25 @@ def calculate_bioeconomy_share(swinno):
 bioeconomy_share = calculate_bioeconomy_share(swinno)
 ```
 
+# Data{.inverted}
+```{python}
+# | label: Data
+n_swinno = swinno["sinno_id"].nunique()
+
+display(
+    Markdown(
+        f"""
+  ## SWINNO -- A Swedish Innovation Output Database with {n_swinno} Innovations{{.smaller}}
+
+  ### [5 Year MA]{{.text-royal-blue-800}} and [Yearly]{{.text-gray-600}}
+  """
+    )
+)
+
+plot_bioeconomy_trends_interactive(bioeconomy_share, "total_count")
+
+```
+
 ## Bioeconomy Innovation Definition {.smaller}
 
 ::::{.columns}
@@ -323,6 +342,7 @@ display(
 
 ```
 
+# Results{.inverted}
 
 ## Count of Bioeconomy Innovation
 ### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
@@ -527,14 +547,6 @@ plot_heatmap(bv_matrix)
 :::
 
 # Appendix
-
-## Count of all SWINNO
-### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
-
-```{python}
-
-plot_bioeconomy_trends_interactive(bioeconomy_share, "total_count")
-```
 
 ## Count of Bioeconomy Visions
 
