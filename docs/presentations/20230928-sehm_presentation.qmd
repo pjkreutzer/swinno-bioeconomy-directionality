@@ -25,7 +25,7 @@ jupyter: python3
 ---
 
 
-# Three Visions for a Bioeconomy
+## Three Visions for a Bioeconomy
 
 :::: columns
 ::: {.column width="33%"}
@@ -45,12 +45,13 @@ jupyter: python3
 [@bugge2016WhatBioeconomyReview]{.slide-cite style="font-size: x-small"}
 
 
-## Research Questions {.fragment}
+## Research Questions 
 
+:::{.incremental}
 1. How innovative is the Swedish forest bioeconomy?
 2. What visions of a bioeconomy are represented?
 3. What eco-innovations are developed?
-
+:::
 
 ```{python}
 # | label: Imports
@@ -70,7 +71,6 @@ conn = connect_swinno_db()
 pio.templates.default = "presentation"
 
 # full code labels for merging
-
 
 codes_df = pd.read_sql("SELECT * FROM classification_codes", conn)
 
@@ -262,20 +262,26 @@ def calculate_bioeconomy_share(swinno):
 bioeconomy_share = calculate_bioeconomy_share(swinno)
 ```
 
-# Data{.inverted}
+# Data {.inverted}
+
 ```{python}
 # | label: Data
+# | output: asis
+
 n_swinno = swinno["sinno_id"].nunique()
 
 display(
     Markdown(
-        f"""
-  ## SWINNO -- A Swedish Innovation Output Database with {n_swinno} Innovations{{.smaller}}
-
-  ### [5 Year MA]{{.text-royal-blue-800}} and [Yearly]{{.text-gray-600}}
-  """
+        f"## SWINNO -- A Swedish Innovation Output Database with {n_swinno} Innovations"
+        + "{.smaller}"
     )
 )
+
+```
+
+### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
+
+```{python}
 
 plot_bioeconomy_trends_interactive(bioeconomy_share, "total_count")
 
@@ -327,25 +333,9 @@ plot_bioeconomy_trends_interactive(bioeconomy_share, "total_count")
 
 [based on @wolfslehner2016ForestBioeconomyNew]{.slide-cite}
 
-```{python}
-# | label: Sum bioeconomy visions
-# | output: asis
-
-sum_bioeconomy_innovations = swinno["bioeconomy"].sum()
-
-display(
-    Markdown(
-        f"# {sum_bioeconomy_innovations} Innovations in Forest Bioeconomy (Uncleaned){{.inverted}}"
-    )
-)
-
-
-```
-
-# Results{.inverted}
-
 ## Count of Bioeconomy Innovation
-### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
+###  Uncleaned [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
+
 ```{python}
 # label: fig-bioeconomy_count
 
@@ -356,8 +346,24 @@ plot_bioeconomy_trends_interactive(
 
 ```
 
+
+```{python}
+# | label: Sum bioeconomy visions
+# | output: asis
+
+sum_bioeconomy_innovations = swinno["bioeconomy"].sum()
+
+display(
+    Markdown(
+        f"{sum_bioeconomy_innovations}{{.text-royal-blue-400}} Total Innovations in Forest Bioeconomy (Uncleaned)"
+    )
+)
+
+
+```
+
 ## Share of Bioeconomy Innovation{.smaller}
-### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
+###  Uncleaned  [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
 ```{python}
 
 plot_bioeconomy_trends_interactive(bioeconomy_share, y="bioeconomy_share").update_yaxes(
@@ -367,29 +373,26 @@ plot_bioeconomy_trends_interactive(bioeconomy_share, y="bioeconomy_share").updat
 ```
 
 
-## Bioeconomy Vision Classification{.smaller .scrollable}
+## Bioeconomy Vision Classification {.smaller}
 @bugge2016WhatBioeconomyReview
 
-|  | Biotechnology | Bioresource | Bioecology |
+|  | [Biotechnology]{.text-colorblind-green} | [Bioresource]{.text-colorblind-orange} | [Bioecology]{.text-colorblind-purple} |
 |---|---|---|---|
 | Aim &   Objectives | Economic growth & job   creation | Economic growth &   sustainability | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation |
 | Value   Creation | Application of biotechnology,   commercialisation of research & technology | Conversion and upgrading of   bio-resources (process oriented) | Development of integrated   production systems and high-quality products with territorial identity |
 | Drivers   & mediators of innovation | R & D, patents, TTOs,   Research councils and funders (Science push, linear model) | Interdisciplinary, optimisation   of land use, include degraded land in the production of biofuels, use and   availability of bio-resources, waste management, engineering, science &   market (Interactive & networked production mode) | Identification of favourable   organic agro-ecological practices, ethics, risk, transdisciplinary   sustainability, ecological interactions, re-use & recycling of waste,   land use, (Circular and self-sustained production mode) |
-
-<style>
-  tbl {
-    fontsize=9;
-  }
-</style>
+: {.tiny}
 
 ## Bioeconomy Vision Classification {.smaller}
 @vivien2019HijackingBioeconomy
 
-|  | Type II | Type III | Type I |
+|  | [Type II]{.text-colorblind-green} | [Type III]{.text-colorblind-orange} | [Type I]{.text-colorblind-purple} |
 |---|---|---|---|
-|  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere <br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decisionmaking centers |
+|  | A science-based economy driven  by industrial biotechnology| Biomass replaces fossil fuels   and mining to produce energy and materials| An ecological economy, that is compatible with the biosphere |
+| | The cell is a factory | Biorefining at the heart of ecological transition (multilevel perspective). | Counter-expertise rather than concrete technical solutions <br> Criticism from  social groups who remain at the margins of decisionmaking centers |
+:  {.small}
 
-## Preliminary Results
+# Preliminary Results {.inverted}
 
 ```{python}
 
@@ -397,7 +400,7 @@ n_certain_bioeconomy_visions = certain_bioeconomy_visions["sinno_id"].nunique()
 
 display(
     Markdown(
-        f"<span class='r-fit-text text-royal-blue-600'>{n_certain_bioeconomy_visions}</span> "
+        f"## <span class='r-fit-text text-royal-blue-600'>{n_certain_bioeconomy_visions}</span> unique forest bioeconomy innovations classified"
     )
 )
 
@@ -417,6 +420,7 @@ plot_bv_trends_interactive(count_certain_bioeconomy_visions).show()
 
 ```{python}
 # | output: asis
+# | include: false
 
 recycle_innovation = pd.read_sql(
     """
@@ -447,6 +451,9 @@ display(
 
 ```
 
+::: notes
+39 innovations involving either a product or process innovation related to recyling. Hence, 22 innovation are associated with the bioecology vision, without using or facilitating recycling.
+:::
 
 ## Eco Innovations
 
