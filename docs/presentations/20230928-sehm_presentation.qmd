@@ -15,7 +15,7 @@ format:
     title-slide-attributes:
       data-background-image: '../assets/ground-fog-valley-black-forest-sunset.jpg'
       data-background-size: fit
-      data-background-opacity: '0.3'
+      data-background-opacity: '0.45'
     embed-resources: true
 
 execute:
@@ -264,6 +264,8 @@ bioeconomy_share = calculate_bioeconomy_share(swinno)
 
 # Data {.inverted}
 
+****
+
 ```{python}
 # | label: Data
 # | output: asis
@@ -272,8 +274,7 @@ n_swinno = swinno["sinno_id"].nunique()
 
 display(
     Markdown(
-        f"## SWINNO -- A Swedish Innovation Output Database with {n_swinno} Innovations"
-        + "{.smaller}"
+        f"### SWINNO -- A Swedish Innovation Output Database with {n_swinno} Innovations"
     )
 )
 
@@ -286,6 +287,12 @@ display(
 plot_bioeconomy_trends_interactive(bioeconomy_share, "total_count")
 
 ```
+
+[@sjoo2014DatabaseSwedishInnovations]{.slide-cite}
+
+<style>
+  h2 {font-size=3rem;}
+</style>
 
 ## Bioeconomy Innovation Definition {.smaller}
 
@@ -395,18 +402,17 @@ plot_bioeconomy_trends_interactive(bioeconomy_share, y="bioeconomy_share").updat
 # Preliminary Results {.inverted}
 
 ```{python}
+# | output: asis
 
 n_certain_bioeconomy_visions = certain_bioeconomy_visions["sinno_id"].nunique()
 
-display(
-    Markdown(
-        f"## <span class='r-fit-text text-royal-blue-600'>{n_certain_bioeconomy_visions}</span> unique forest bioeconomy innovations classified"
-    )
-)
+text = f"""<span class="r-fit-text">after<b> {n_certain_bioeconomy_visions}</b> unique forest innovations classified</span>"""
+
+display(Markdown(text))
 
 ```
 
-unique forest bioeconomy innovations classified
+
 
 ## Trends in Bioeconomy Visions{.smaller}
 <!-- ### [No Vision]{.text-gray-600}, [Bioecology]{style="color:#cc78bc;"}, [Bioresource]{style="color:#de8f05;"} and [Biotechnoloy]{style="color:#029e73;"}{.smaller} -->
