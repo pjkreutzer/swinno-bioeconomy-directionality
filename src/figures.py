@@ -289,7 +289,7 @@ def plot_eco_innovation_by_bioeconomy_vision(data, label_lookup):
     return fig
 
 
-def plot_eco_innovation_by_bioeconomy_vision_interactive(data):
+def plot_eco_innovation_by_bioeconomy_vision_interactive(data, codes_df):
     label_map = create_label_mapping(codes_df)
 
     data["innovation_type_label"] = data["innovation_type_code"].map(label_map)

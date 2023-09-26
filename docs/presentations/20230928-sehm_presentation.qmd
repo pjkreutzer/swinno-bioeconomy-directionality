@@ -45,11 +45,11 @@ jupyter: python3
 [@bugge2016WhatBioeconomyReview]{.slide-cite style="font-size: x-small"}
 
 
-## Research Questions
+## Research Questions {.fragment}
 
-1.
-2.
-3.
+1. How innovative is the Swedish forest bioeconomy?
+2. What visions of a bioeconomy are represented?
+3. What eco-innovations are developed?
 
 
 ```{python}
@@ -486,7 +486,7 @@ eco_innovation_by_bioeconomy_visions["innovation_type_group"] = np.where(
 
 ```{python}
 plot_eco_innovation_by_bioeconomy_vision_interactive(
-    eco_innovation_by_bioeconomy_visions
+    eco_innovation_by_bioeconomy_visions, codes_df
 ).show()
 
 ```
