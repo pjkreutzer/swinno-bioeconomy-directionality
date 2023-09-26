@@ -287,3 +287,38 @@ def plot_eco_innovation_by_bioeconomy_vision(data, label_lookup):
     # plt.show()
 
     return fig
+
+
+def plot_eco_innovation_by_bioeconomy_vision_interactive(data):
+    label_map = create_label_mapping(codes_df)
+
+    data["innovation_type_label"] = data["innovation_type_code"].map(label_map)
+
+    fig = px.bar(
+        x=data["count"],
+        y=data["innovation_type_label"],
+        color=data["innovation_type_group"],
+        facet_col=data["bioeconomy_vision"],
+        facet_col_wrap=4,
+    )
+
+    fig.for_each_annotation(
+        lambda a: a.update(text=a.text.split("=")[-1].strip(" Vision"))
+    )
+    fig.update_layout(
+        showlegend=False,
+        font=dict(family="Atkinson Hyperlegible"),
+        margin=dict(l=150),
+        yaxis=dict(autorange="reversed"),
+    )
+    fig.update_traces(hovertemplate="<b>%{x}</b> %{y} Innovations")
+
+    # hide subplot y-axis titles and x-axis titles
+    for axis in fig.layout:
+        if type(fig.layout[axis]) == go.layout.YAxis:
+            fig.layout[axis].title.text = ""
+            fig.layout[axis].tickfont = dict(size=10)
+        if type(fig.layout[axis]) == go.layout.XAxis:
+            fig.layout[axis].title.text = ""
+            fig.layout[axis].tickfont = dict(size=12)
+    return fig

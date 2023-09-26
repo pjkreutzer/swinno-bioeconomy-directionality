@@ -25,6 +25,32 @@ jupyter: python3
 ---
 
 
+# Three Visions for a Bioeconomy
+
+:::: columns
+::: {.column width="33%"}
+![Bio-Technology Vision](../assets/Biotech.jpg){.fragment}
+:::
+
+::: {.column width="33%"}
+![Bio-Resource Vision](../assets/Bioresource.jpg){.fragment}
+:::
+
+::: {.column width="33%"}
+![Bio-Ecology Vision](../assets/Bioecology.jpg){.fragment}
+:::
+::::
+
+
+[@bugge2016WhatBioeconomyReview]{.slide-cite style="font-size: x-small"}
+
+
+## Research Questions
+
+1.
+2.
+3.
+
 
 ```{python}
 # | label: Imports
@@ -40,10 +66,8 @@ from src.swinno_helpers import connect_swinno_db
 ROOT = get_project_root()
 conn = connect_swinno_db()
 
-# set all text on plots to be monospace with rcParams
-plt.rcParams["font.family"] = "Space Grotesk"
 
-sns.set_theme(style="white")
+pio.templates.default = "presentation"
 
 # full code labels for merging
 
@@ -238,7 +262,7 @@ def calculate_bioeconomy_share(swinno):
 bioeconomy_share = calculate_bioeconomy_share(swinno)
 ```
 
-## Bioeconomy Demarkations {.smaller}
+## Bioeconomy Innovation Definition {.smaller}
 
 ::::{.columns}
 
@@ -282,7 +306,7 @@ bioeconomy_share = calculate_bioeconomy_share(swinno)
 
 ::::
 
-**** 
+[based on @wolfslehner2016ForestBioeconomyNew]{.slide-cite}
 
 ```{python}
 # | label: Sum bioeconomy visions
@@ -304,8 +328,7 @@ display(
 ### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
 ```{python}
 # label: fig-bioeconomy_count
-#
-#
+
 
 plot_bioeconomy_trends_interactive(
     bioeconomy_share, y="bioeconomy_count"
@@ -324,77 +347,127 @@ plot_bioeconomy_trends_interactive(bioeconomy_share, y="bioeconomy_share").updat
 ```
 
 
-
-# Three Visions for a Bioeconomy
-
-:::: columns
-::: {.column width="33%"}
-![Bio-Technology Vision](../assets/Biotech.jpg){.fragment}
-:::
-
-::: {.column width="33%"}
-![Bio-Resource Vision](../assets/Bioresource.jpg){.fragment}
-:::
-
-::: {.column width="33%"}
-![Bio-Ecology Vision](../assets/Bioecology.jpg){.fragment}
-:::
-::::
-
-
-[@bugge2016WhatBioeconomyReview]{.slide-cite style="font-size: x-small"}
-
 ## Bioeconomy Vision Classification{.smaller .scrollable}
+@bugge2016WhatBioeconomyReview
 
-
-| @bugge2016WhatBioeconomyReview | Biotechnology | Bioresource | Bioecology |
+|  | Biotechnology | Bioresource | Bioecology |
 |---|---|---|---|
 | Aim &   Objectives | Economic growth & job   creation | Economic growth &   sustainability | Sustainability, biodiversity,   conservation of ecosystems, avoiding soil degradation |
 | Value   Creation | Application of biotechnology,   commercialisation of research & technology | Conversion and upgrading of   bio-resources (process oriented) | Development of integrated   production systems and high-quality products with territorial identity |
 | Drivers   & mediators of innovation | R & D, patents, TTOs,   Research councils and funders (Science push, linear model) | Interdisciplinary, optimisation   of land use, include degraded land in the production of biofuels, use and   availability of bio-resources, waste management, engineering, science &   market (Interactive & networked production mode) | Identification of favourable   organic agro-ecological practices, ethics, risk, transdisciplinary   sustainability, ecological interactions, re-use & recycling of waste,   land use, (Circular and self-sustained production mode) |
 
-| @vivien2019HijackingBioeconomy | Type II | Type III | Type I |
+<style>
+  tbl {
+    fontsize=9;
+  }
+</style>
+
+## Bioeconomy Vision Classification {.smaller}
+@vivien2019HijackingBioeconomy
+
+|  | Type II | Type III | Type I |
 |---|---|---|---|
 |  | A science-based economy driven   by industrial biotechnology<br>     <br>     The cell is a factory | Biomass replaces fossil fuels   and mining to produce energy and materials<br>     <br>     Biorefining at the heart of ecological transition (multilevel perspective). | An ecological economy, that is   compatible with the biosphere <br>     <br>     Counter-expertise rather than concrete technical solutions Criticism from   social groups who remain at the margins of decisionmaking centers |
 
 ## Preliminary Results
 
-
-
-::::{.columns}
-:::{.column width='80%'}
 ```{python}
 
 n_certain_bioeconomy_visions = certain_bioeconomy_visions["sinno_id"].nunique()
 
 display(
     Markdown(
-        f"<span class='text-primary' style='font-size:15rem; font-weight:900'>{n_certain_bioeconomy_visions}</span>"
+        f"<span class='r-fit-text text-royal-blue-600'>{n_certain_bioeconomy_visions}</span> "
     )
 )
 
 ```
 
-:::
-
-:::{.column width='20%'}
 unique forest bioeconomy innovations classified
-:::
-
-::::
-
-## Examples
 
 ## Trends in Bioeconomy Visions{.smaller}
-### [No Vision]{.text-gray-600}, [Bioecology]{style="color:#cc78bc;"}, [Bioresource]{style="color:#de8f05;"} and [Biotechnoloy]{style="color:#029e73;"}{.smaller}
+<!-- ### [No Vision]{.text-gray-600}, [Bioecology]{style="color:#cc78bc;"}, [Bioresource]{style="color:#de8f05;"} and [Biotechnoloy]{style="color:#029e73;"}{.smaller} -->
 
 ```{python}
-# | label: fig-bv_trends
-# | fig-cap: '[No Bioeconomy]{.text-gray-600}, [Bioecology]{style="color:#cc78bc;"}, [Bioresource]{style="color:#de8f05;"} and [Biotechnoloy]{style="color:#029e73"}'
-
+# | label: Trends in Bioeconomy Visions Figure
 
 plot_bv_trends_interactive(count_certain_bioeconomy_visions).show()
 
+```
+
+```{python}
+# | output: asis
+
+recycle_innovation = pd.read_sql(
+    """
+SELECT *
+FROM classification_codes
+LEFT JOIN eco_innovations ON classification_codes.Code = eco_innovations.innovation_type
+WHERE eco_innovations.innovation_type = 107 OR eco_innovations.innovation_type = 206 AND sinno_id NOT IN (SELECT sinno_id FROM categorization_notes WHERE notes LIKE '%not forest%')
+""",
+    conn,
+)
+
+recycle_innovation_count = recycle_innovation["sinno_id"].nunique()
+
+n_bioecology_vision = count_certain_bioeconomy_visions.loc[
+    count_certain_bioeconomy_visions["bioeconomy_vision"] == "Bioecology Vision",
+    "count",
+].sum()
+
+display(
+    Markdown(
+        f"""
+        :::{{.notes}} 
+          {recycle_innovation_count} innovations involving either a product or process innovation related to recyling. Hence, {n_bioecology_vision - recycle_innovation_count} innovation are associated with the bioecology vision, without using or facilitating recycling. 
+        :::
+        """
+    )
+)
+
+```
+
+
+## Eco Innovations
+
+```{python}
+
+eco_innovation_merged_bv = certain_bioeconomy_visions.merge(
+    eco_innovations, on="sinno_id", validate="many_to_many"
+)
+
+eco_innovation_by_bioeconomy_visions = (
+    eco_innovation_merged_bv.groupby(["bioeconomy_vision", "innovation_type_code"])
+    .size()
+    .to_frame("count")
+    .reset_index()
+)
+
+eco_innovation_by_bioeconomy_visions["innovation_type_group"] = np.where(
+    eco_innovation_by_bioeconomy_visions["innovation_type_code"].str[0] == "1",
+    "Product",
+    np.where(
+        eco_innovation_by_bioeconomy_visions["innovation_type_code"].str[0] == "2",
+        "Process",
+        np.where(
+            eco_innovation_by_bioeconomy_visions["innovation_type_code"].str[0] == "3",
+            "Organizational",
+            np.where(
+                eco_innovation_by_bioeconomy_visions["innovation_type_code"].str[0]
+                == "4",
+                "Marketing",
+                "No Eco-Innovation",
+            ),
+        ),
+    ),
+)
+```
+
+
+```{python}
+plot_eco_innovation_by_bioeconomy_vision_interactive(
+    eco_innovation_by_bioeconomy_visions
+).show()
 
 ```
 
@@ -449,3 +522,35 @@ plot_heatmap(bv_matrix)
 ## Uncertain Cases 
 
 ## References
+
+:::{#refs}
+:::
+
+# Appendix
+
+## Count of all SWINNO
+### [5 Year MA]{.text-royal-blue-800} and [Yearly]{.text-gray-600}
+
+```{python}
+
+plot_bioeconomy_trends_interactive(bioeconomy_share, "total_count")
+```
+
+## Count of Bioeconomy Visions
+
+
+```{python}
+
+
+display(
+    Markdown(
+        count_certain_bioeconomy_visions.groupby("bioeconomy_vision")
+        .agg("sum", numeric_only=True)
+        .sort_values("count", ascending=False)
+        .reset_index()
+        .rename(columns={"bioeconomy_vision": "Vision", "count": "Count"})
+        .to_markdown(index=False)
+    )
+)
+
+```
