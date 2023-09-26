@@ -36,11 +36,12 @@ def plot_bioeconomy_trends_interactive(data, y):
     fig.update_xaxes(type="date")
     fig.update_layout(
         showlegend=False,
-        xaxis_range=["1965", "2025"]
+        xaxis_range=["1965", "2025"],
         font=dict(family="Atkinson Hyperlegible"),
         height=550,
         hovermode="x unified"
     )
+
     return fig
 
 def plot_count(data):
@@ -139,9 +140,7 @@ def plot_bv_trends(df):
 
     plt.show()
 
-
 def plot_bv_trends_interactive(df):
-  
     color_map = {
         "No Bioeconomy Vision": "rgb(0.8, 0.8, 0.8)",  # Gray
         "Bioecology Vision": "#cc78bc",  # Purple
@@ -159,19 +158,25 @@ def plot_bv_trends_interactive(df):
                 name=bv,
                 mode="markers+lines",
                 line=dict(color=color_map[bv]),  # Set line color based on the color_map
+                visible="legendonly",
             )
         )
 
     fig = go.Figure(data=traces)
     fig.update_layout(
-        showlegend=False,
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="left",
+            font=dict(size=30, family="Atkinson Hyperlegible"),
+        ),
         hovermode="x unified",
         height=550,
-        yaxis_range=[0, 1],
         xaxis_range=["1965", "2015"],
+        font=dict(family="Atkinson Hyperlegible"),
     )
     return fig
-
 
 def plot_heatmap(data):
     fig, ax = plt.subplots(1, 1)
