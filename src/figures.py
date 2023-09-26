@@ -6,42 +6,42 @@ import plotly.express as px
 import plotly.io as pio
 
 # Set global options for all Plotly plots
-pio.templates.default = "presentation"
 
 royal_blue_800 = "#283aa4"
 gray_600 = "#878f97"
-def plot_bv_trends_interactive(df):
-  
-    color_map = {
-        "No Bioeconomy Vision": "rgb(0.8, 0.8, 0.8)",  # Gray
-        "Bioecology Vision": "#cc78bc",  # Purple
-        "Bioresource Vision": "#de8f05",  # Orange
-        "Biotechnology Vision": "#029e73",  # Green
-    }
+def plot_bioeconomy_trends_interactive(data, y):
+    fig = go.Figure()
 
-    traces = []
-
-    for bv, bioeconomy_vision in df.groupby("bioeconomy_vision"):
-        traces.append(
-            go.Scatter(
-                x=bioeconomy_vision["year"],
-                y=bioeconomy_vision["count"],
-                name=bv,
-                mode="markers+lines",
-                line=dict(color=color_map[bv]),  # Set line color based on the color_map
-            )
+    fig.add_trace(
+        go.Scatter(
+            x=data["year"],
+            y=data[y],
+            mode="lines",
+            name="Yearly",
+            line=dict(dash="dash", color=gray_600),
         )
+    )
 
-    fig = go.Figure(data=traces)
+    # Rolling mean
+    rolling_mean = data[y].rolling(window=5).mean()
+    fig.add_trace(
+        go.Scatter(
+            x=data["year"],
+            y=rolling_mean,
+            mode="lines",
+            name="5-Year Moving Average",
+            line=dict(color=royal_blue_800)
+        )
+    )
+    fig.update_xaxes(type="date")
     fig.update_layout(
         showlegend=False,
-        hovermode="x unified",
+        xaxis_range=["1965", "2025"]
+        font=dict(family="Atkinson Hyperlegible"),
         height=550,
-        yaxis_range=[0, 1],
-        xaxis_range=["1965", "2015"],
+        hovermode="x unified"
     )
     return fig
-
 
 def plot_count(data):
     fig, ax = plt.subplots()
@@ -138,6 +138,40 @@ def plot_bv_trends(df):
     sns.despine()
 
     plt.show()
+
+
+def plot_bv_trends_interactive(df):
+  
+    color_map = {
+        "No Bioeconomy Vision": "rgb(0.8, 0.8, 0.8)",  # Gray
+        "Bioecology Vision": "#cc78bc",  # Purple
+        "Bioresource Vision": "#de8f05",  # Orange
+        "Biotechnology Vision": "#029e73",  # Green
+    }
+
+    traces = []
+
+    for bv, bioeconomy_vision in df.groupby("bioeconomy_vision"):
+        traces.append(
+            go.Scatter(
+                x=bioeconomy_vision["year"],
+                y=bioeconomy_vision["count"],
+                name=bv,
+                mode="markers+lines",
+                line=dict(color=color_map[bv]),  # Set line color based on the color_map
+            )
+        )
+
+    fig = go.Figure(data=traces)
+    fig.update_layout(
+        showlegend=False,
+        hovermode="x unified",
+        height=550,
+        yaxis_range=[0, 1],
+        xaxis_range=["1965", "2015"],
+    )
+    return fig
+
 
 def plot_heatmap(data):
     fig, ax = plt.subplots(1, 1)
