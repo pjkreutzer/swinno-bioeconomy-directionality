@@ -29,8 +29,8 @@ WHERE
   OR product_code LIKE '36%'
   AND NOT EXISTS (
     SELECT 1
-    FROM bioeconomy_visions_articles bva
-    WHERE i.sinno_id = bva.sinno_id
+    FROM bioeconomy_visions bv
+    WHERE i.sinno_id = bv.sinno_id
   )
   
 UNION
@@ -68,14 +68,14 @@ WHERE
   OR description LIKE '%tencel%'
 AND NOT EXISTS (
     SELECT 1
-    FROM bioeconomy_visions_articles bva
-    WHERE i.sinno_id = bva.sinno_id
+    FROM bioeconomy_visions bv
+    WHERE i.sinno_id = bv.sinno_id
   );
   """, con = conn)
 
 read = pd.read_sql("""
 SELECT sinno_id 
-FROM bioeconomy_visions_articles;
+FROM bioeconomy_visions;
 """, conn)
 
 last_run = datetime.today().strftime('%Y%m%d')
