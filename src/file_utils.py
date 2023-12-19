@@ -1,12 +1,11 @@
-from pathlib import Path
 from collections import defaultdict
+from pathlib import Path
 from shutil import copy
 
 
 def create_directory(directory_path):
     if not directory_path.is_dir():
         directory_path.mkdir(parents=True)
-        
 
 
 def get_input_ids(input_path):
@@ -54,11 +53,14 @@ def get_source_names(lookup_path, input_ids):
         for line in f:
             try:
                 key, value = line.strip().split("|")
+                if key[-3:] == "001":
+                    key = key[:-3]
                 lookup[key].append(value)
             except ValueError:
                 print(f"Warning: invalid line in lookup file: {line.strip()}")
 
     return {k: lookup[k] for k in set(lookup).intersection(input_ids)}
+
 
 def copy_files(source_links: dict, source_dir: Path, destination_dir: Path):
     """
@@ -77,20 +79,21 @@ def copy_files(source_links: dict, source_dir: Path, destination_dir: Path):
     """
     if not source_dir.is_dir():
         raise ValueError("Source directory does not exist.")
-    
+
     for sinno_id in source_links.keys():
         destination_path = destination_dir / sinno_id
         create_directory(destination_path)
-        
+
         for image_prefix in source_links[sinno_id]:
             files = list(Path(source_dir).glob(f"{image_prefix}*"))
-            
+
             for f in files:
                 if f.is_file():
                     try:
                         copy(f, destination_path / f.name)
                     except PermissionError:
-                        print(f"Error: Permission denied when copying {f} to {destination_path}")
-        
-        print(f"Copied {len(files)} images for sinno_id {sinno_id}.")
+                        print(
+                            f"Error: Permission denied when copying {f} to {destination_path}"
+                        )
 
+        print(f"Copied {len(files)} images for sinno_id {sinno_id}.")
