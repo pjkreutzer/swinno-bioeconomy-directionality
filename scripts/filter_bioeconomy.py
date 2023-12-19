@@ -6,8 +6,9 @@ from src.swinno_helpers import connect_swinno_db, get_project_root
 
 conn = connect_swinno_db()
 
-new_bioec = pd.read_sql_query(
-    """
+
+def query_bioeconomy(conn):
+    query = """
 SELECT
   i.sinno_id,
   i.innovation_name_in_swedish AS name,
@@ -21,11 +22,6 @@ FROM
 WHERE
   (us.use_sector LIKE '02%' OR us.use_sector LIKE '20%' OR us.use_sector LIKE '21%' OR us.use_sector LIKE '36%')
   OR (product_code LIKE '02%' OR product_code LIKE '20%' OR product_code LIKE '21%' OR product_code LIKE '36%')
-  AND NOT EXISTS (
-    SELECT 1
-    FROM bioeconomy_visions bv
-    WHERE i.sinno_id = bv.sinno_id
-  )
 
 UNION
 
@@ -44,42 +40,49 @@ WHERE
    OR description LIKE '%levulinsyra%' OR description LIKE '%furfural%' OR description LIKE '%svarttjära%' OR description LIKE '%svartlut%' OR description LIKE '%växtbas%'
    OR description LIKE '%ved%' OR description LIKE '%trä%' OR description LIKE '%skog%' OR description LIKE '%biobränsle%' OR description LIKE '%biologisk%'
    OR description LIKE '%nedbrytbar%' OR description LIKE '%papper%' OR description LIKE '%pappret%' OR description LIKE '%karton%' OR description LIKE '%tencel%')
-  AND NOT EXISTS (
-    SELECT 1
-    FROM bioeconomy_visions bv
-    WHERE i.sinno_id = bv.sinno_id
-  );
-  """,
-    con=conn,
-)
+  ;
+  """
 
-read = pd.read_sql(
-    """
-SELECT sinno_id 
-FROM bioeconomy_visions;
-""",
-    conn,
-)
+    return pd.read_sql_query(query, con=conn)
 
-last_run = datetime.today().strftime("%Y%m%d")
-out_path = Path(get_project_root(), "results/bioeconomy_definitions/")
-file_name = f"{last_run}_bioeconomy-articles-to-check.txt"
 
-sinno_id_to_classify = new_bioec.loc[
-    ~new_bioec["sinno_id"].isin(read["sinno_id"]), "sinno_id"
-].unique()
+def query_read(conn):
+    query = """
+  SELECT DISTINCT(CAST(sinno_id AS TEXT)) AS sinno_id FROM bioeconomy_visions;
+  """
+    return pd.read_sql(query, conn)
 
-np.savetxt(Path(out_path, file_name), sinno_id_to_classify, fmt="%s")
 
-tagging_columns = ["bioeconomy_vision", "innovation_type", "article_checked", "notes"]
+if __name__ == "__main__":
+    last_run = datetime.today().strftime("%Y%m%d")
+    out_path = Path(get_project_root(), "results/bioeconomy_definitions/")
+    file_name = f"{last_run}_bioeconomy-articles-to-check.txt"
 
-df_to_classify = new_bioec.loc[~new_bioec["sinno_id"].isin(read["sinno_id"]), :]
-df_to_classify = df_to_classify.drop_duplicates(subset="sinno_id")
+    read = query_read(conn)
 
-for col in tagging_columns:
-    df_to_classify[col] = None
+    new_bioec = query_bioeconomy(conn)
+    sinno_id_to_classify = new_bioec.loc[
+        ~new_bioec["sinno_id"].isin(read["sinno_id"]), "sinno_id"
+    ].unique()
 
-df_to_classify.to_excel(
-    Path(get_project_root(), "data/raw-data", f"{last_run}_innovations-to-check.xlsx"),
-    index=False,
-)
+    np.savetxt(Path(out_path, file_name), sinno_id_to_classify, fmt="%s")
+
+    tagging_columns = [
+        "bioeconomy_vision",
+        "innovation_type",
+        "article_checked",
+        "notes",
+    ]
+
+    df_to_classify = new_bioec.loc[~new_bioec["sinno_id"].isin(read["sinno_id"]), :]
+    df_to_classify = df_to_classify.drop_duplicates(subset="sinno_id")
+
+    for col in tagging_columns:
+        df_to_classify[col] = None
+
+    df_to_classify.to_excel(
+        Path(
+            get_project_root(), "data/raw-data", f"{last_run}_innovations-to-check.xlsx"
+        ),
+        index=False,
+    )
