@@ -65,50 +65,61 @@ codes_df = codes_df.set_index("Code")
 # | label: Query bioeconomy
 
 bioeconomy = pd.read_sql(
-    """
-select
-  i.sinno_id,
-  i.innovation_name_in_swedish AS name,
-  i.description_in_swedish AS description,
-  i.additional_information_if_origin_new_scientific_discovery || i.additional_information_if_origin_new_technologies_or_materials || i.additional_info_if_origin_official_regulation_legislation_and_standards || i.additional_information_if_origin_solution_for_a_problem || i.additional_information_if_origin_performance || i.additional_information_if_origin_other AS info,
-  i.year_of_commercialization AS year,
-  us.use_sector
-from
-  innovation i
-  join use_sectors us on i.sinno_id = us.sinno_id
-where
-  (
-    us.use_sector like '02%'
-    or us.use_sector like '20%'
-    or us.use_sector like '21%'
-    or us.use_sector like '36%'
-    or product_code like '02%'
-    or product_code like '20%'
-    or product_code like '21%'
-    or product_code like '36%'
-  )
-  or (
-    description like '%virke%'
-    or description like '%cellulos%'
-    or description like '%lignin%'
-    or description like '%spån%'
-    or description like '%bark%'
-    or description like '%levulinsyra%'
-    or description like '%furfural%'
-    or description like '%svarttjära%'
-    or description like '%svartlut%'
-    or description like '%växtbas%'
-    or description like '%ved%'
-    or description like '%trä%'
-    or description like '%skog%'
-    or description like '%biobränsle%'
-    or description like '%biologisk%'
-    or description like '%nedbrytbar%'
-    or description like '%papper%'
-    or description like '%pappret%'
-    or description like '%karton%'
-    or description like '%tencel%'
-  );
+    """ 
+    SELECT distinct sinno_id from (SELECT
+    i.sinno_id,
+    i.innovation_name_in_swedish AS name,
+    i.literal_name_of_innovating_firm_sinnos_common_name_sinno_id AS firm,
+    i.literal_name_of_collaborator_sinnos_common_name_sinno_id AS collaborator_0,
+    i.literal_name_of_collaborator_sinnos_common_name_sinno_id1 AS collaborator_1,
+    i.literal_name_of_collaborator_sinnos_common_name_sinno_id2 AS collaborator_2,
+    i.literal_name_of_collaborator_sinnos_common_name_sinno_id3 AS collaborator_3,
+    i.literal_name_of_collaborator_sinnos_common_name_sinno_id4 AS collaborator_4,
+    i.literal_name_of_collaborator_sinnos_common_name_sinno_id5 AS collaborator_5,
+    i.literal_name_of_collaborator_sinnos_common_name_sinno_id6 AS collaborator_6,
+    i.literal_name_of_collaborator_sinnos_common_name_sinno_id7 AS collaborator_7,
+    i.literal_name_of_collaborator_sinnos_common_name_sinno_id8 AS collaborator_8,
+    i.description_in_swedish AS description,
+    i.year_of_commercialization AS year,
+    us.use_sector
+    FROM
+    innovation i
+    JOIN use_sectors us ON i.sinno_id = us.sinno_id
+    WHERE
+    (
+        us.use_sector LIKE '02%'
+        OR us.use_sector LIKE '20%'
+        OR us.use_sector LIKE '21%'
+        OR us.use_sector LIKE '36%'
+        OR product_code LIKE '02%'
+        OR product_code LIKE '20%'
+        OR product_code LIKE '21%'
+        OR product_code LIKE '36%'
+    )
+    OR (
+        description LIKE '%virke%'
+        OR description LIKE '%cellulos%'
+        OR description LIKE '%lignin%'
+        OR description LIKE '%spån%'
+        OR description LIKE '%bark%'
+        OR description LIKE '%levulinsyra%'
+        OR description LIKE '%furfural%'
+        OR description LIKE '%svarttjära%'
+        OR description LIKE '%svartlut%'
+        OR description LIKE '%växtbas%'
+        OR description LIKE '%ved%'
+        OR description LIKE '%trä%'
+        OR description LIKE '%skog%'
+        OR description LIKE '%biobränsle%'
+        OR description LIKE '%biologisk%'
+        OR description LIKE '%nedbrytbar%'
+        OR description LIKE '%papper%'
+        OR description LIKE '%pappret%'
+        OR description LIKE '%karton%'
+        OR description LIKE '%tencel%'
+    )
+    AND i.sinno_id not in (select sinno_id from categorization_notes
+    where notes not like "%not forest%"));
 """,
     conn,
 )
