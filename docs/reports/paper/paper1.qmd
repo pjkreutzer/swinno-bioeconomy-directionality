@@ -15,9 +15,8 @@ link-bibliography: true
 colorlinks: true
 number-sections: true
 format:
-    wordcount-pdf: 
-        papersize: A4
-        linestretch: 1.5
+  hikmah-manuscript-pdf: 
+    papersize: A4
 execute:
     include: true
     echo: false
@@ -206,13 +205,9 @@ In later manual review of each innovation for classification these false positiv
 n_swinno = swinno["sinno_id"].nunique()
 year_min = swinno["year"].min()
 year_max = swinno["year"].max()
-
-display(
-    Markdown(
-        f"The SWINNO database used here contains {n_swinno} innovations commercialized between {year_min} and {year_max}. It is constructed according to  literature-based innovation output (LBIO) method using Swedish source material [@sjoo2014DatabaseSwedishInnovations]. This method relies on the judgment of editiors and journalists at trade journals and hence captures what can be described as significant innovation."
-    )
-)
 ```
+
+The SWINNO database used here contains `{python} n_swinno` innovations commercialized between `{python} year_min` and `{python} year_max`. It is constructed according to  literature-based innovation output (LBIO) method using Swedish source material [@sjoo2014DatabaseSwedishInnovations]. This method relies on the judgment of editiors and journalists at trade journals and hence captures what can be described as significant innovation.
 
 An important limitation of LBIO measures, especially for research into forest sector innovation, is a bias against non-commercialized innovation.
 New processes, or new organizational approaches for example, will only be captured if they are sold to another company.
@@ -282,41 +277,41 @@ An illustrative example of such an innovation are improved work boots, which pro
 # | label: tbl-vision_examples
 # | tbl-cap: "List of Eco-Innovation Labels"
 
-classification_examples = pd.read_sql(
-    """SELECT
-  n.sinno_id,
-  i.description_in_swedish,
-  GROUP_CONCAT(c.Category, ' & ') AS Categories,
-  n.notes
-FROM
-  categorization_notes n
-  JOIN innovation i ON i.sinno_id = n.sinno_id
-  JOIN bioeconomy_visions bv
-  ON n.sinno_id = bv.sinno_id
-  JOIN classification_codes c ON bv.bioeconomy_vision = c.Code
-WHERE
-  n.notes LIKE "%good example%"
-GROUP BY
-  n.sinno_id,
-  i.description_in_swedish,
-  n.notes""",
-    conn,
-)
+# classification_examples = pd.read_sql(
+#     """SELECT
+#   n.sinno_id,
+#   i.description_in_swedish,
+#   GROUP_CONCAT(c.Category, ' & ') AS Categories,
+#   n.notes
+# FROM
+#   categorization_notes n
+#   JOIN innovation i ON i.sinno_id = n.sinno_id
+#   JOIN bioeconomy_visions bv
+#   ON n.sinno_id = bv.sinno_id
+#   JOIN classification_codes c ON bv.bioeconomy_vision = c.Code
+# WHERE
+#   n.notes LIKE "%good example%"
+# GROUP BY
+#   n.sinno_id,
+#   i.description_in_swedish,
+#   n.notes""",
+#     conn,
+# )
 
-classification_examples_out = (
-    classification_examples.copy()
-    .loc[:, ["Categories", "description_in_swedish"]]
-    .iloc[2:]
-)
+# classification_examples_out = (
+#     classification_examples.copy()
+#     .loc[:, ["Categories", "description_in_swedish"]]
+#     .iloc[2:]
+# )
 
-rowIDs = range(1, len(classification_examples_out) + 1)
-display(
-    Markdown(
-        classification_examples_out.rename(
-            columns={"description_in_swedish": "Short Description"}
-        ).to_markdown(index=rowIDs)
-    )
-)
+# rowIDs = range(1, len(classification_examples_out) + 1)
+# display(
+#     Markdown(
+#         classification_examples_out.rename(
+#             columns={"description_in_swedish": "Short Description"}
+#         ).to_markdown(index=rowIDs)
+#     )
+# )
 
 ```
 
@@ -351,13 +346,9 @@ Where the source text only mentions that the innovation is less harmful to the e
 
 sum_bioeconomy_innovations = swinno["bioeconomy"].sum()
 
-display(
-    Markdown(
-        f"Querying the SWINNO database for forest based bioeconomy innovations initally yields {sum_bioeconomy_innovations} innovations. This number includes false positives from substrings matching keywords included in the search. While there is no indication that these false positives are non-randomly distributed across time and sectors, the following analysis for bioeconomy innovation trends at large needs to be viewed in the light of this being unlceaned data. Where the analysis turns to specific bioeconomy visions, only clean and certain cases are discussed."
-    )
-)
 ```
 
+Querying the SWINNO database for forest based bioeconomy innovations initally yields `{python} sum_bioeconomy_innovations` innovations. This number includes false positives from substrings matching keywords included in the search. While there is no indication that these false positives are non-randomly distributed across time and sectors, the following analysis for bioeconomy innovation trends at large needs to be viewed in the light of this being unlceaned data. Where the analysis turns to specific bioeconomy visions, only clean and certain cases are discussed.
 
 ```{python}
 # | label: Query eco-innovation
@@ -402,7 +393,6 @@ def calculate_bioeconomy_share(swinno):
 
     return df
 
-
 bioeconomy_share = calculate_bioeconomy_share(swinno)
 
 ```
@@ -422,12 +412,6 @@ share_last_year = bioeconomy_share["year"].max()
 share_latest = bioeconomy_share.loc[
     bioeconomy_share["year"] == share_last_year, "bioeconomy_share"
 ].values[0]
-
-display(
-    Markdown(
-        f"@fig-bioeconomy_share shows the count (a) and share relative to all innovation contained in SWINNO (b) of bioeconomy innovation by year and as five year moving averages. From visual inspection alone, two features of the forest based bioeconomy innovation system emerge. First, two periods of high output can be identified from 1970-1990 and from 2005 to approximately 2015. The period in between 1990 and 2005 is characterized by low average output with high volatility. Second, the forest based bioeconomy has failed to gain in importance relative to other innovation captures by SWINNO. From a high of {share_max:.2%} in {share_max_year} to {share_latest:.2%} in {share_last_year}."
-    )
-)
 
 ```
 
@@ -618,86 +602,86 @@ Further, the persistent dominance of the bioresource vision over the full study 
 # | fig-caption: "Sector's Contribution to Bioeconomy Visions"
 # | include: false
 
-sectors = pd.read_sql(
-    """
-SELECT
-  bv.sinno_id as sinno_id,
-  c.Category AS vision,
-  sni_codes.label AS sector
-FROM
-  bioeconomy_visions AS bv
-  JOIN use_sectors ON bv.sinno_id = use_sectors.[sinno_id]
-  JOIN sni_codes ON SUBSTR(use_sectors.use_sector, 1, 2) = sni_codes.code
-  JOIN classification_codes AS c ON bv.bioeconomy_vision = c.Code;
-""",
-    conn,
-)
+# sectors = pd.read_sql(
+#     """
+# SELECT
+#   bv.sinno_id as sinno_id,
+#   c.Category AS vision,
+#   sni_codes.label AS sector
+# FROM
+#   bioeconomy_visions AS bv
+#   JOIN use_sectors ON bv.sinno_id = use_sectors.[sinno_id]
+#   JOIN sni_codes ON SUBSTR(use_sectors.use_sector, 1, 2) = sni_codes.code
+#   JOIN classification_codes AS c ON bv.bioeconomy_vision = c.Code;
+# """,
+#     conn,
+# )
 
-sectors = sectors.loc[
-    sectors["sinno_id"].isin(set(certain_bioeconomy_visions["sinno_id"])), :
-]
+# sectors = sectors.loc[
+#     sectors["sinno_id"].isin(set(certain_bioeconomy_visions["sinno_id"])), :
+# ]
 
-sectors.loc[sectors["vision"] == "Not Bioeconomy", "vision"] = "No Bioeconomy Vision"
+# sectors.loc[sectors["vision"] == "Not Bioeconomy", "vision"] = "No Bioeconomy Vision"
 
-sector_counts = (
-    sectors.groupby(["sector", "vision"]).size().to_frame("count").reset_index()
-)
+# sector_counts = (
+#     sectors.groupby(["sector", "vision"]).size().to_frame("count").reset_index()
+# )
 
-short_sector_labels = {
-    "Manufacture of other transport equipment": "Transport Equipment",
-    "Manufacture of motor vehicles, trailers and semi-trailers": "Motor Vehicle Manufacturing",
-    "Manufacture of furniture; manufacturing n.e.c.": "Furniture Manufacturing",
-    "Manufacture of fabricated metal products, except machinery and equipment": "Metal Products Manufacturing",
-    "Manufacture of machinery and equipment n.e.c.": "Machinery and Equipment",
-    "Construction": "Construction",
-    "Manufacture of electrical machinery and apparatus n.e.c.": "Electrical Machinery Manufacturing",
-    "Manufacture of radio, television and communication equipment and apparatus": "Communication Equipment",
-    "Manufacture of rubber and plastic products": "Rubber and Plastic Products",
-    "Forestry, logging and related service activities": "Forestry and Logging",
-    "Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials": "Wood and Cork Products",
-    "Agriculture, hunting and related service activities": "Agriculture and Hunting",
-    "Land transport; transport via pipelines": "Land Transport",
-    "Supporting and auxiliary transport activities; activities of travel agencies": "Transport Services",
-    "Water transport": "Water Transport",
-    "Air transport": "Air Transport",
-    "Manufacture of medical, precision and optical instruments, watches and clocks": "Precision Instruments",
-    "Recycling": "Recycling",
-    "Manufacture of basic metals": "Basic Metals Manufacturing",
-    "Public administration and defence; compulsory social security": "Public Administration",
-    "Electricity, gas, steam and hot water supply": "Utilities",
-    "Sewage and refuse disposal, sanitation and similar activities": "Waste Management",
-    "Manufacture of chemicals and chemical products": "Chemical Products",
-    "Manufacture of pulp, paper and paper products": "Paper Products",
-    "Manufacture of coke, refined petroleum products and nuclear fuel": "Petroleum Products",
-    "Collection, purification and distribution of water": "Water Services",
-    "Publishing, printing and reproduction of recorded media": "Publishing and Media",
-    "Other mining and quarrying": "Mining and Quarrying",
-    "Mining of metal ores": "Metal Ore Mining",
-    "Tanning and dressing of leather; manufacture of luggage, handbags, saddlery, harness and footwear": "Leather and Footwear",
-    "Manufacture of food products and beverages": "Food and Beverages",
-    "Manufacture of other non-metallic mineral products": "Non-metallic Products",
-    "Wholesale trade and commission trade, except of motor vehicles and motorcycles": "Wholesale Trade",
-    "Other business activities": "Business Services",
-    "Research and development": "R&D",
-    "Manufacture of textiles": "Textile Manufacturing",
-    "Financial intermediation, except insurance and pension funding": "Financial Services",
-    "Education": "Education",
-    "Health and social work": "Healthcare",
-    "Fishing, operation of fish hatcheries and fish farms; service activities incidental to fishing": "Fishing and Aquaculture",
-    "Recreational, cultural and sporting activities": "Recreation and Culture",
-    "Extraction of crude petroleum and natural gas; service activities incidental to oil and gas extraction excluding surveying": "Oil and Gas Extraction",
-    "Post and telecommunications": "Post and Telecom",
-    "Sale, maintenance and repair of motor vehicles and motorcycles; retail sale of automotive fuel": "Automotive Services",
-    "Manufacture of wearing apparel; dressing and dyeing of fur": "Apparel Manufacturing",
-}
+# short_sector_labels = {
+#     "Manufacture of other transport equipment": "Transport Equipment",
+#     "Manufacture of motor vehicles, trailers and semi-trailers": "Motor Vehicle Manufacturing",
+#     "Manufacture of furniture; manufacturing n.e.c.": "Furniture Manufacturing",
+#     "Manufacture of fabricated metal products, except machinery and equipment": "Metal Products Manufacturing",
+#     "Manufacture of machinery and equipment n.e.c.": "Machinery and Equipment",
+#     "Construction": "Construction",
+#     "Manufacture of electrical machinery and apparatus n.e.c.": "Electrical Machinery Manufacturing",
+#     "Manufacture of radio, television and communication equipment and apparatus": "Communication Equipment",
+#     "Manufacture of rubber and plastic products": "Rubber and Plastic Products",
+#     "Forestry, logging and related service activities": "Forestry and Logging",
+#     "Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials": "Wood and Cork Products",
+#     "Agriculture, hunting and related service activities": "Agriculture and Hunting",
+#     "Land transport; transport via pipelines": "Land Transport",
+#     "Supporting and auxiliary transport activities; activities of travel agencies": "Transport Services",
+#     "Water transport": "Water Transport",
+#     "Air transport": "Air Transport",
+#     "Manufacture of medical, precision and optical instruments, watches and clocks": "Precision Instruments",
+#     "Recycling": "Recycling",
+#     "Manufacture of basic metals": "Basic Metals Manufacturing",
+#     "Public administration and defence; compulsory social security": "Public Administration",
+#     "Electricity, gas, steam and hot water supply": "Utilities",
+#     "Sewage and refuse disposal, sanitation and similar activities": "Waste Management",
+#     "Manufacture of chemicals and chemical products": "Chemical Products",
+#     "Manufacture of pulp, paper and paper products": "Paper Products",
+#     "Manufacture of coke, refined petroleum products and nuclear fuel": "Petroleum Products",
+#     "Collection, purification and distribution of water": "Water Services",
+#     "Publishing, printing and reproduction of recorded media": "Publishing and Media",
+#     "Other mining and quarrying": "Mining and Quarrying",
+#     "Mining of metal ores": "Metal Ore Mining",
+#     "Tanning and dressing of leather; manufacture of luggage, handbags, saddlery, harness and footwear": "Leather and Footwear",
+#     "Manufacture of food products and beverages": "Food and Beverages",
+#     "Manufacture of other non-metallic mineral products": "Non-metallic Products",
+#     "Wholesale trade and commission trade, except of motor vehicles and motorcycles": "Wholesale Trade",
+#     "Other business activities": "Business Services",
+#     "Research and development": "R&D",
+#     "Manufacture of textiles": "Textile Manufacturing",
+#     "Financial intermediation, except insurance and pension funding": "Financial Services",
+#     "Education": "Education",
+#     "Health and social work": "Healthcare",
+#     "Fishing, operation of fish hatcheries and fish farms; service activities incidental to fishing": "Fishing and Aquaculture",
+#     "Recreational, cultural and sporting activities": "Recreation and Culture",
+#     "Extraction of crude petroleum and natural gas; service activities incidental to oil and gas extraction excluding surveying": "Oil and Gas Extraction",
+#     "Post and telecommunications": "Post and Telecom",
+#     "Sale, maintenance and repair of motor vehicles and motorcycles; retail sale of automotive fuel": "Automotive Services",
+#     "Manufacture of wearing apparel; dressing and dyeing of fur": "Apparel Manufacturing",
+# }
 
-sector_counts = sector_counts.sort_values("count", ascending=False)
+# sector_counts = sector_counts.sort_values("count", ascending=False)
 
-sector_counts["sector"] = sector_counts["sector"].map(short_sector_labels)
+# sector_counts["sector"] = sector_counts["sector"].map(short_sector_labels)
 
-heatmap_data = prepare_heatmap_data(sector_counts, "sector", "vision", "count")
+# heatmap_data = prepare_heatmap_data(sector_counts, "sector", "vision", "count")
 
-plot_heatmap(heatmap_data)
+# plot_heatmap(heatmap_data)
 
 ```
 

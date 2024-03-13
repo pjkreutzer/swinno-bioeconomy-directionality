@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 import seaborn as sns
 import plotly.graph_objects as go
 import plotly.express as px
@@ -9,6 +10,8 @@ import plotly.io as pio
 
 royal_blue_800 = "#283aa4"
 gray_600 = "#878f97"
+
+
 def plot_bioeconomy_trends_interactive(data, y):
     fig = go.Figure()
 
@@ -30,7 +33,7 @@ def plot_bioeconomy_trends_interactive(data, y):
             y=rolling_mean,
             mode="lines",
             name="5-Year Moving Average",
-            line=dict(color=royal_blue_800)
+            line=dict(color=royal_blue_800),
         )
     )
     fig.update_xaxes(type="date")
@@ -39,10 +42,11 @@ def plot_bioeconomy_trends_interactive(data, y):
         xaxis_range=["1965", "2025"],
         font=dict(family="Atkinson Hyperlegible"),
         height=550,
-        hovermode="x unified"
+        hovermode="x unified",
     )
 
     return fig
+
 
 def plot_count(data):
     fig, ax = plt.subplots()
@@ -52,13 +56,10 @@ def plot_count(data):
         label="Yearly",
     )
 
-        # Calculate rolling mean and plot on same axis
+    # Calculate rolling mean and plot on same axis
     rolling_mean = data["bioeconomy_count"].rolling(window=5).mean()
     ax.plot(
-        data["year"],
-        rolling_mean,
-        label="5-year moving average",
-        linestyle="dashed"
+        data["year"], rolling_mean, label="5-year moving average", linestyle="dashed"
     )
 
     ax.set_xticks(data["year"][::10])
@@ -81,12 +82,9 @@ def plot_share(data):
     # Calculate rolling mean and plot on same axis
     rolling_mean = data["bioeconomy_share"].rolling(window=5).mean()
     ax.plot(
-        data["year"],
-        rolling_mean,
-        label="5-year moving average",
-        linestyle="dashed"
+        data["year"], rolling_mean, label="5-year moving average", linestyle="dashed"
     )
-    ax.set_ylim((0, .5))
+    ax.set_ylim((0, 0.5))
     ax.legend(frameon=False)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
@@ -94,12 +92,13 @@ def plot_share(data):
 
 
 def plot_bv_trends(df):
-    
     palette = sns.color_palette("colorblind")[:5]
 
     # Create a custom palette with a default light gray color for "not bio" hue
     custom_palette = {
-        hue: color if bioeconomy_vision != "No Bioeconomy Vision" else (0.7, 0.7, 0.7, 0.6)
+        hue: color
+        if bioeconomy_vision != "No Bioeconomy Vision"
+        else (0.7, 0.7, 0.7, 0.6)
         for hue, color, bioeconomy_vision in zip(
             df["bioeconomy_vision"], palette, df["bioeconomy_vision"]
         )
@@ -111,7 +110,7 @@ def plot_bv_trends(df):
         y="count",
         hue="bioeconomy_vision",
         palette=custom_palette,
-        linewidth=2
+        linewidth=2,
     )
 
     chart.tick_params(labelsize=10)
@@ -132,13 +131,14 @@ def plot_bv_trends(df):
     )
     for text, label in zip(legend.texts, labels):
         if label == "No Bioeconomy Vision":
-            text.set_color((0.4,0.4,0.4))
+            text.set_color((0.4, 0.4, 0.4))
         else:
             text.set_color(custom_palette[label])
 
     sns.despine()
 
     plt.show()
+
 
 def plot_bv_trends_interactive(df):
     color_map = {
@@ -178,11 +178,17 @@ def plot_bv_trends_interactive(df):
     )
     return fig
 
+
 def plot_heatmap(data):
     fig, ax = plt.subplots(1, 1)
     ax = sns.heatmap(
-        data, annot=True, cmap="Blues", fmt="g", cbar=False, annot_kws={"fontsize": 9},
-        square=True
+        data,
+        annot=True,
+        cmap="Blues",
+        fmt="g",
+        cbar=False,
+        annot_kws={"fontsize": 9},
+        square=True,
     )
     ax.set(ylabel=None, xlabel=None)
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
@@ -217,39 +223,41 @@ def prepare_heatmap_data(df, index_col, cols_col, values_col, ascending=False):
 
 def create_label_mapping(label_lookup):
     short_labels = {
-        'Acquisition of machinery and software': 'Machinery & Software Acquisition',
-        'Component number reduction': 'Component Number Reduction',
-        'Cooperation with stakeholders': 'Stakeholder Cooperation',
-        'Elimination of dirty components': 'Eliminate Dirty Components',
-        'Environmental audit': 'Environmental Audit',
-        'Environmental-friendly technologies': 'Eco-Friendly Technologies',
-        'Green design packaging': 'Green Packaging Design',
-        'Keep waste to a minimum': 'Waste Minimization',
-        'Longer life cycle of downstream product': 'Extended Downstream Product Life',
-        'Longer life cycle of product itself': 'Extended Product Life',
-        'Longer life cycle products': 'Extended Product Lifespan',
-        'New systems (remanufacturing systems and transport systems)': 'New Systems',
-        'Not Eco-Innovation': 'Not Eco-Innovation',
-        'Protection of timber harvest': 'Timber Harvest Protection',
-        'Recyclability of product': 'Product Recyclability',
-        'Recycle waste, water or materials': 'Waste Recycling',
-        'Reduce Chemical Waste': 'Chemical Waste Reduction',
-        'Reduce Use of Energy': 'Energy Use Reduction',
-        'Reduce Use of Water': 'Water Use Reduction',
-        'Reduced Air Pollution': 'Air Pollution Reduction',
-        'Reduced Other Pollution': 'Other Pollution Reduction',
-        'Reduced Water Pollution': 'Water Pollution Reduction',
-        'Reduction / optimization of raw material use': 'Raw Material Optimization',
-        'Replace fossil engery source with electrical energy': 'Use Electric Energy',
-        'Replace fossil input with bio input': 'Use Bio Input',
-        'Replace plastic with bio source': 'Use Bio Plastic',
-        'Returnable/reusable packaging': 'Returnable/Reusable Packaging',
-        'Unsure': 'Uncertain',
-        'Use new cleaner material or new input with lower environmental impact': 'Cleaner Material Adoption',
-        'Use of recycled materials': 'Recycled Material Usage'
+        "Acquisition of machinery and software": "Machinery & Software Acquisition",
+        "Component number reduction": "Component Number Reduction",
+        "Cooperation with stakeholders": "Stakeholder Cooperation",
+        "Elimination of dirty components": "Eliminate Dirty Components",
+        "Environmental audit": "Environmental Audit",
+        "Environmental-friendly technologies": "Eco-Friendly Technologies",
+        "Green design packaging": "Green Packaging Design",
+        "Keep waste to a minimum": "Waste Minimization",
+        "Longer life cycle of downstream product": "Extended Downstream Product Life",
+        "Longer life cycle of product itself": "Extended Product Life",
+        "Longer life cycle products": "Extended Product Lifespan",
+        "New systems (remanufacturing systems and transport systems)": "New Systems",
+        "Not Eco-Innovation": "Not Eco-Innovation",
+        "Protection of timber harvest": "Timber Harvest Protection",
+        "Recyclability of product": "Product Recyclability",
+        "Recycle waste, water or materials": "Waste Recycling",
+        "Reduce Chemical Waste": "Chemical Waste Reduction",
+        "Reduce Use of Energy": "Energy Use Reduction",
+        "Reduce Use of Water": "Water Use Reduction",
+        "Reduced Air Pollution": "Air Pollution Reduction",
+        "Reduced Other Pollution": "Other Pollution Reduction",
+        "Reduced Water Pollution": "Water Pollution Reduction",
+        "Reduction / optimization of raw material use": "Raw Material Optimization",
+        "Replace fossil engery source with electrical energy": "Use Electric Energy",
+        "Replace fossil input with bio input": "Use Bio Input",
+        "Replace plastic with bio source": "Use Bio Plastic",
+        "Returnable/reusable packaging": "Returnable/Reusable Packaging",
+        "Unsure": "Uncertain",
+        "Use new cleaner material or new input with lower environmental impact": "Cleaner Material Adoption",
+        "Use of recycled materials": "Recycled Material Usage",
     }
     label_mapping = label_lookup["Category"].to_dict()
-    plot_labels = {str(k): short_labels[v] for k, v in label_mapping.items() if v in short_labels}
+    plot_labels = {
+        str(k): short_labels[v] for k, v in label_mapping.items() if v in short_labels
+    }
     return plot_labels
 
 
@@ -276,9 +284,7 @@ def plot_eco_innovation_by_bioeconomy_vision(data, label_lookup):
         for c in ax.containers:
             ax.bar_label(c, label_type="edge", padding=2, fontsize=8)
         ax.margins(x=0.1)
-        ax.tick_params(axis='y', labelsize=10)
-
-
+        ax.tick_params(axis="y", labelsize=10)
 
     fig.set_titles("{col_name}")
     fig.set_axis_labels("", "")
