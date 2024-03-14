@@ -49,13 +49,11 @@ plt.rcParams["font.family"] = "Space Grotesk"
 sns.set_theme(style="white")
 
 # full code labels for merging
-
-
 codes_df = pd.read_sql("SELECT * FROM classification_codes", conn)
 
 codes_df["Category"] = codes_df["Category"].str.strip()
-uncertain_eco = {"Code": "000", "Category": "Unsure"}
-codes_df = codes_df.append(uncertain_eco, ignore_index=True)
+uncertain_eco = {"Code": ["000"], "Category": ["Unsure"]}
+codes_df = pd.concat([codes_df, pd.DataFrame(uncertain_eco)], ignore_index=True)
 
 codes_df = codes_df[~codes_df["Code"].duplicated(keep="last")]
 
@@ -157,6 +155,7 @@ Discussions about transitions to a bioeconomy are a hot topic of research and po
 Different visions of the endgoal exists, stressing needs for ecological, resource or technological aims.
 Actors in the transition stress the need for innovation to transition to a bioeconomy.
 Yet, the actual efforts undertaken to realize these visions remain underexplored.
+
 
 <!-- • Paragraphs 3-4: Challenges. These paragraphs explain why your research question has not already been answered, i.e., what are the central challenges a researcher must tackle to answer this question. -->
 Rigorously operationalizing directionality is challening due to a plurality of possible development paths [@stirling2011PluralisingProgressIntegrative].

@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
+from pathlib import Path
 from src.utils import get_project_root
 
 
@@ -78,7 +79,7 @@ def clean_import(file_type, file_path, **kwargs):
 
 
 def connect_swinno_db():
-    database_dir = get_project_root().parent.absolute()
-    database_uri = f"sqlite:///{database_dir}/swinno-db/data/swinno.db"
+    database_dir = "/Users/research/Library/CloudStorage/OneDrive-LundUniversity/research/swinno-db"
+    database_uri = f"sqlite:///{database_dir}/data/swinno.db"
     engine = create_engine(database_uri)
     return engine
