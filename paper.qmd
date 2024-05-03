@@ -6,7 +6,7 @@ author:
   affiliation: 'Department of Economic History, Lund University'
 date: last-modified
 abstract: |
-  The transition to a bioeconomy is high on the agenda for research, industry and policy. Like other sustainability transition, the bioeconomy transition is characterized by contestation over desired outcomes and transition pathways. While shared visions are seen as pivotal in guiding transitions, the bioeconomy discourse is marked by the contention of three competing visions. The Swedish forest-based bioeconomy is well established as a case study in this arena. Yet, knowledge about innovation produced across the entire system is scarce. The use of detailed innovation data from a Swedish literature-based innovation output database, SWINNO, allows to capture the actual innovation output of the Swedish forest-based bioeconomy innovation system. Qualitative coding of the source material links innovation from 1970 to 2021 with visions of a bioresource, biotechnology and / or bioecology bioeconomy. Findings reveal a decrease in the innovation output of the forest-based bioeconomy relative to Sweden's overall commercialized innovation. Notably, innovations associated with a bioresource vision surged during the energy crises of the 1970s, pre-dating their formalization in strategy documents, suggesting a significant role for path dependency in shaping shared visions. Concurrently, the presence of innovations aligning with multiple visions indicates an open opportunity space for future development across various directions. This research underscores the dynamic interplay between historical contexts, shared visions, and innovation trajectories within the bioeconomy transition, and questions the extent to which visions can provide novel directionality to transitions.
+  The transition to a bioeconomy is high on the agenda for research, industry and policy. Like other sustainability transition, the bioeconomy transition is characterized by contestation over desired outcomes and transition pathways. While shared visions are seen as pivotal in guiding transitions, the bioeconomy discourse is marked by the contention of three competing visions. The Swedish forest-based bioeconomy is well established as a case study in this arena. Yet, knowledge about innovation produced across the entire system is scarce. The use of detailed innovation data from a Swedish literature-based innovation output database, SWINNO, allows to capture the actual innovation output of the Swedish forest-based bioeconomy innovation system. Qualitative coding of the source material links innovation from 1970 to 2021 with visions of a bioresource, biotechnology and / or bioecology bioeconomy. Findings reveal a decrease in the innovation output of the forest-based bioeconomy relative to Sweden's overall commercialized innovation. Notably, innovations associated with a bioresource vision surged during the energy crises of the 1970s, pre-dating their formalization in strategy documents, suggesting a significant role for path-dependency in shaping shared visions. Concurrently, the presence of innovations aligning with multiple visions indicates an open opportunity space for future development across various directions. This research underscores the dynamic interplay between historical contexts, shared visions, and innovation trajectories within the bioeconomy transition, and questions the extent to which visions can provide novel directionality to transitions.
 
 csl: 'https://zotero.org/styles/apa?source=1'
 bibliography:
@@ -60,6 +60,7 @@ sns.set_theme(style="white")
 ```{python}
 #| label: Load Data
 raw_data = here("data/raw")
+uncleaned_bioeconomy_query = pd.read_csv(raw_data / "uncleaned_bioeconomy_query.csv")
 bioeconomy = pd.read_csv(raw_data / "id_year_bioeconomy.csv")
 bioeconomy = bioeconomy.loc[bioeconomy["bioeconomy"] == 1]
 
@@ -108,11 +109,13 @@ bioeconomy_visions = pd.read_csv(raw_data / "bioeconomy_visions.csv")
 
 
 ```{python}
-# | label: Total SWINNO Innovation
-
+# | label: Innovation Counts
 n_swinno = swinno["sinno_id"].nunique()
 year_min = swinno["year"].min()
 year_max = swinno["year"].max()
+
+n_uncleaned_bioeconomy_innovations = uncleaned_bioeconomy_query["sinno_id"].nunique()
+sum_bioeconomy_innovations = swinno["bioeconomy"].sum()
 ```
 
 # Introduction {#sec-introduction}
@@ -152,14 +155,14 @@ tion in paragraphs 1-2. -->
 Results show that Swedish bioeconomy innovation output has declined over the last 50 years.
 Of the three different visions the bioresource vision is the most pronounced, in line with expectations from discourse analysis and the Swedish bioeconomy strategy.
 However, the strategy should not be seen as visionary, as the innovation system had been producing bioeconomy innovation and even bioresource aligned innovation from the 1970s onwards.
-This points to a strong interconnection between path dependence and the creation of directionality in the policy space.
+This points to a strong interconnection between path-dependence and the creation of directionality in the policy space.
 
 <!-- • Paragraphs 14-15: Literature. Lay out the two main ways your paper contributes to the literature. Each paragraph should center around one contribution and should explain precisely how your paper differs from the most closely related recent work. -->
 
 <!-- By analyzing the innovations produced by the forest-bioeconomy system in Sweden, this paper adds to existing literature on directionality in sustainability transitions and bioeconomy literature in two main ways.
 On one hand, using literature covering innovation output can be used to assess the directionality a sociotechnical system  -->
 
-<!-- From an empirical perspective, this is essentially about furthering the current understanding of how sociotechnical systems grow as a result of historical path dependencies, system-internal dynamics and external influence, towards a more elaborate understanding of how these mechanisms influence how system configurations change over time. From a conceptual perspective, it is rather about enabling such investigations, by developing analytical frameworks that capture not only the pace, but also the directionality of innovation processes. For example, there may be a need to advancethe commonly used technological innovation systems framework, since the typology of functional processes is geared towards investigating system growth in a way that hides the potential for vastly different technical, social and spatial development trajectories (Andersson, 2020).
+<!-- From an empirical perspective, this is essentially about furthering the current understanding of how sociotechnical systems grow as a result of historical path-dependencies, system-internal dynamics and external influence, towards a more elaborate understanding of how these mechanisms influence how system configurations change over time. From a conceptual perspective, it is rather about enabling such investigations, by developing analytical frameworks that capture not only the pace, but also the directionality of innovation processes. For example, there may be a need to advancethe commonly used technological innovation systems framework, since the typology of functional processes is geared towards investigating system growth in a way that hides the potential for vastly different technical, social and spatial development trajectories (Andersson, 2020).
 @andersson2021OutcomesDirectionalityMorphology [127-128] -->
 
 
@@ -171,81 +174,44 @@ This section introduces key concepts from this literature.
 
 ## Directionality {#sec-directionality}
 
+Path-dependency arises from events at one point in time affect later events, and may even lead to suboptimal outcomes [@david1985ClioEconomicsQWERTY].
+It arises due to positive feedback effects, such as increasing returns [@arthur1989CompetingTechnologiesIncreasing], or through extension of possibilities adjecent to exiting technology [@kauffman2000Investigations].
+Hence, technological change is contingent and influences technological change at previous or later points in time.
+Instead of more or less progress, each innovation implies a new direction for socio-technical systems [@stirling2011PluralisingProgressIntegrative].
+Andersson et al., [-@andersson2021OutcomesDirectionalityMorphology] term this quality of innovation possessing direction _positive_ directionality.
+
 As innovation policy took a normative turn under which innovation is needed to solve grand societal challenges [@schot2018ThreeFramesInnovation], the question of how to steer innovation into desired directions became a central issue in innovation research [@kohler2019AgendaSustainabilityTransitions].
-Innovation turned from a scalar concept, where the central questions where how to promote the right amount of innovation, into a question of influencing the vector in which society develops through innovation [@stirling2011PluralisingProgressIntegrative].
-But, as innovation systems are embedded in a spatial and temporal context they tend to develop along trajectories characterized by path dependency [@kemp2022DiversifyingDeepTransitions, @bergek2015TechnologicalInnovationSystems].
+Innovation policy now ought to promote the desired vector of societal development, instead of focusing on providing the right amount of progress [@schot2018ThreeFramesInnovation], lending innovation _normative_ directionality [@andersson2021OutcomesDirectionalityMorphology].
+As innovation systems are embedded in a spatial and temporal context, not all potentially desired pathways are available or feasible. Instead, socio-technical systems are constrained by path-dependency [@kemp2022DiversifyingDeepTransitions;@bergek2015TechnologicalInnovationSystems; @stirling2011PluralisingProgressIntegrative], sometimes to the point of being locked-in to specific system states [@unruh2000UnderstandingCarbonLockin].
 
-@hekkert2007FunctionsInnovationSystems provide a framework of intervention in innovation on a systemic level, which highlights the importance of guidance of search as one of seven functions innovation system must provide.
-They explain guidance of search as, "those activities within the innovation system that can positively affect the visibility and clarity of specific wants among technology users" (423).
-It is changing preferences in society, which through market and government influence and, ".. an interactive and cumulative process of exchanging ideas between technology producers, technology users, and many other actors" (423) decides which direction of technological development is most promising. 
-@bauer2017TechnologicalInnovationSystems adapts the innovation system functions to the specific case of biorefineries in Sweden and define the influence on the direction of search as "the incentives and/or pressures for organizations to enter the technological field. These may come in the form of visions, expectations of growth potential, regulation, policy targets, standards, articulation of demand from leading customers, crises in current business, etc." (4).
-
-<!-- 
-The most accepted view in sustainability transitions studies is that system change is driven by a combination of exogenous and endogenous driving forces. Moreover, the external shocks ‘do not mechanically impact niches and regimes, but need to be perceived and translated by actors to exert influence’ (Geels & Schot, 2007, p. 404). This implies that the actual directions of change are shaped by strategic action (Grillitsch et al., 2018; Markard & Truffer, 2008; Pacheco et al., 2010; Smith et al., 2010; Yap & Truffer, 2019). Although there are many studies on the role of agency in shaping sustainability transitions, there is still limited understanding about how this agency shapes the directionality of the change process.
-@yang2022ShapingDirectionalitySustainability [752]
--->
-
-<!-- 
-The directionality battle is not about whether the new (niche actors) will win over the old (regime actors). In our research we do not want to tie regime actors upfront to a strategy of maintaining institutions (defending the regime) while niche actors do the creating (building niches) and disrupting work (destabilizing regimes). Rather, battles about the actual course of action may happen equally among regime actors within a prevailing regime as among actors supporting (potentially manifold) niches. Such a view accounts for a situation in which regime actors may operate in the niche and have an interest in promoting niches, while niche actors may not want to destroy the regime and prefer to operate at the niche level only. In the end, the unfolding directionality will be the result of interaction among actors with different degrees of incumbency (Jørgensen, 2012; Yap & Truffer, 2019). The fact that regime actors are not just defending the status quo has also been recognized in neo-institutional literature. The seminal work of Leblebici et al. (1991) emphasized that internal institutional contradictions may emerge as a starting point for dominant actors to engage with institutional change. In transition studies, Fünfschilling and Truffer (2014) elaborated how different institutional logics in a regime may create tensions within and among actors who are incumbents in the prevailing regime. We have therefore to account for a multiplicity of institutional work strategies of a multitude of actors, which are more or less tied to the prevailing regime structures.
-
-@yang2022ShapingDirectionalitySustainability [754] -->
-
-<!-- Our analysis supports that in the context of transformative industrial change, companies’ innovation activities change directionality. Companies’ central roles in the RIS still lie in exploiting, combining, and recombining knowledge and turning it into innovations (Autio, 1998; Isaksen & Trippl, 2016). The influence of the direction of search and legitimacy of change provided by pioneering organizations (Grillitsch & Sotarauta, 2020), such as Paper Province, additionally supports their identification with the environmental debate. 
-
-@martin2023ReconsideringActorRoles 1643 -->
-
-@yang2022ShapingDirectionalitySustainability too highlight the importance of visions in directionality over transformations, stressing the importance of shared visions between niche and regime actors.
-They argue that a stretch-and-transform pattern is more likely if niche actors are given a leading role and core regime actors obtain new roles and identites.
-"The objective in the stretching and transforming form of niche empowerment is to convince the wider world that the rules of the game need to be changed.", @smith2012WhatProtectiveSpace [17].
-
-Visions as shared imaginaries, mental models and aspirations,
-narratives as their embodiment in discourse [@bauer2018NarrativesBiorefineryInnovation, @holmgren2022WhoseTransformationThis], technology as their material realization.
-
-@konnola2021TransformativeGovernanceInnovation highlight the importance of shared visions to provide a normative direction and purpose to a system.
-
-@grillitsch2019InnovationPolicySystemwidea illustrate that visions alone are not sufficent to provide clear directionality.
-They must be specific enough and with significant buyin from actors, which may be difficult to obtain with vision statements created elsewhere than within the system.
-
-<!-- Especially, this study indicates that the build-up of shared visions across niche and regime actors is key, and when these shared visions allow for a leading role of niche actors combined with openings for new roles and identities of core regime actors, the emergence of a stretch-and-transform pattern is more likely.
-
-@yang2022ShapingDirectionalitySustainability [766] -->
-
-@weber2012LegitimizingResearchTechnology synthesis policy insights from innovation systems and multilevel perspective research into a failures framework.
+Dealing with the question of how to provide and exercise normative transition directionality @weber2012LegitimizingResearchTechnology synthesis policy insights from innovation systems and multilevel perspective research into a failures framework.
 Therein, directionality failure is understood as the failure to provide direction to the process of search and unclear or missing setting of collective priorities.
 They caution that it should not be confused with shortsighted or flawed anticipation of market developments, as this myopia lacks a view on the direction of change.
 To overcome this failure, that is, to provide directionality, they argue, guiding orientation needs to be translated and intermediated on two levels.
 External requirements placed on the innovation system need to be absorbed after which they need to be interpreted in a process of negotiation between the different actors.
 Reaching this collective understanding of direction, @weber2012LegitimizingResearchTechnology [p. 1042] write, is in practice, "achieved by establishing shared future visions".
 
-Instead of linear view, all levels interact to provide directionality, i.e. influencing the direction of search.
-Other influences on the direction of search exists as well, such as landscape pressures, positive and negative pressures, windows of opportunties etc.
-Top down visions and bottom up pragmatism interact to shape transition dynamics [@bolton2019GrandVisionsPragmatic].
-Operationalizing directionality hence difficult.
-Few notable attempts such as
-@cappellano2022WhereInnovationMeets operationalize directionality as a measure of R&I expenditure earmarked for specific transition objectives.
-Other attempts to measure the directionality and progress towards a bioeconomy @jander2019MonitoringTransitionBioeconomy and @jander2020MonitoringBioeconomyTransitions, but lack the plurality of innovation.
 
-<!-- As Stirling (2011) emphasizes, transition pathways are contingent. They involve contestations between different worldviews and interests. Instead of focusing entirely on the cascades of innovation that converge into clear-cut and singular regime shifts, transition analysis should remain attentive to the multiplicity of directions that a transition process may take. To be sure, the DT frameworkworks with an evolutionary logic that is far from deterministic. It addresses directionality explicitly. Schot & Kanger (2018, p. 8) consider how the diversity of current socio-technical niches make for undercurrents that contain the seeds for alternative, sustainable and just directions of development. Kanger & Schot (2018, pp. 15-16) describe a ‘portfolio of directionality’ that, throughout subsequent surges and notwithstanding the alignments across sectors, becomes broader over time. Along the formation of ‘regimes’ and ‘meta-regimes’, niche alternatives are not considered to just perish or become absorbed. Instead, these alternative directions may manifest after periods of hibernation, or they break through locally.
-@kemp2022DiversifyingDeepTransitions [112] -->
+In the two central research streams of sustainability transitions, the innovation systems and the multi-level perspective literature, the importance of visions is highlighted.
+@hekkert2007FunctionsInnovationSystems provide a framework of intervention in innovation on a systemic level, which highlights the importance of guidance of search as one of seven functions innovation system must provide.
+They explain guidance of search as, "those activities within the innovation system that can positively affect the visibility and clarity of specific wants among technology users" [@hekkert2007FunctionsInnovationSystems, 423].
+It is changing preferences in society, which through market and government influence and, ".. an interactive and cumulative process of exchanging ideas between technology producers, technology users, and many other actors" [@hekkert2007FunctionsInnovationSystems, 423] decides which direction of technological development is most promising. 
+@bauer2017TechnologicalInnovationSystems adapts the innovation system functions to the specific case of biorefineries in Sweden and define the influence on the direction of search as "the incentives and/or pressures for organizations to enter the technological field. These may come in the form of visions, expectations of growth potential, regulation, policy targets, standards, articulation of demand from leading customers, crises in current business, etc." (p. 4).
+Using the multi-level perspective, @yang2022ShapingDirectionalitySustainability too highlight the importance of visions in directionality over transformations, stressing the importance of shared visions between niche and regime actors.
+Similarly, @bolton2019GrandVisionsPragmatic illustrate how visions and pragmatic change combined in the development and evolution of a highly integrated European electricity system.
 
-<!-- However, the DT framework displays a rather reductionist understanding of directionality. It reduces the matter to analytical openness, minding the evolutionary multiplicity of a transformation trajectory (e.g. towards, or away from, mass production). The normative reflection remains tied to a particular direction that a transition process should be taking (K ̈ ohler et al., 2019). Yet what is needed is a more fundamentalattending to the multiplicityof possible socio-technical configurations that may emerge,to the different process dynamics that may unfold, and to the different (competing) normative appraisals – by stakeholders and by analysts - of outcomes (Pel et al., 2020). Stirling (2009, 2011) underlined the need to unfold evolutionary diversity in a way that clarifies the normative implications of this diversity.To articulate directionality is to increaseevaluative diversity (Stirling, 2008: 268), opening up the wickedness and the ambiguities of transition issues. 
-@kemp2022DiversifyingDeepTransitions [113] -->
+@rotmans2001MoreEvolutionRevolution even go so far to argue that transition management is based on appealing and imaginative long-term visions and @loorbach2010TransitionManagementSustainable argues that shared visions need to be developed and disseminated between transition stakeholders.
+But, as @bolton2019GrandVisionsPragmatic show, visions alone are insufficient to provide directionality.
+In addition to being appealing, visions must also be specific and actors need to buy into them [@grillitsch2019InnovationPolicySystemwide].
+In summary, visions can be seen as shared imaginaries, mental models and aspirations of desired transitions which are expressed through narratives in discourse between actors [@bauer2018NarrativesBiorefineryInnovation; @holmgren2022WhoseTransformationThis].
 
-<!-- Do I need patents to actually show the entire funnel? -->
-
-Recent scholarship has called for advancing research fronts instead of remaining entrenched in contested discourse positions [@allain2022BioeconomicsVsBioeconomy].
-Here is how I propose to measure how the visions have provided directionality to the Swedish Transition to a bioeconomy.
-Directionality as influencing the direction of search.
-I then measure the effectivness of the directionality provided by different visions in actually producing innovation in the direction of search.
-The emergence of visions is at least partially grounded in development paths taken by system actors.
-These then serve as important vehicles to create legitimacy of the chosen paths and further provide directionality for the search.
-
+However, one transition can be characterized by multiple, competing visions, as is illustrated by the transition to a bioeconomy.
+The next section sharpens the conceptual understanding of what is meant with a bioeconomy and introduces the three visions.
 
 ## Clarification of Bioeconomy Concept
 
 Although the bioecononmy has gained importance as a research, policy and industry focus, it remains unclear what exactly it entails.
-Broadly speaking, the bioeconomy refers to an economy in which raw materials for energy and production processes are provided from biological instead of fossil sources.
-<!-- TODO: citation -->
+At a high level, the bioeconomy refers to an economy in which raw materials for energy and production processes are provided from biological instead of fossil sources [@bugge2016WhatBioeconomyReview].
 Hopes of increased resource efficiency and renewability as well as promised economic growth especially in regions rich in biological resources abound [@el-chichakli2016PolicyFiveCornerstones].
 However, a such a profound change to economic systems will not be possible without balancing significant tradeoffs between the needs and desires of different human and non-human stakeholders [@dieken2021MultitudesBioeconomiesSystematic]. @hogbom2021TrilemmaNordicBaltic summarize these tradeoffs as a trilemma between forests ability to provide sufficent wood to replace fossil based materials, carbon sequestration and storage, and the delivery of other eco-system services such as forest biodiversity.
 Resolving these tradeoffs is challenging, as goal conflicts between different development pathways make simulatneous progress on social, ecological and economic goals difficult [@bennich2021BiobasedEconomy2030].
@@ -292,6 +258,10 @@ Hence, while the organization of the discourse into the labels biotechnology, bi
 # Data and Methods {#sec-data_methods}
 
 To quantify transition directionality, data about innovation activity is needed.
+Operationalizing directionality hence difficult.
+Few notable attempts such as
+@cappellano2022WhereInnovationMeets operationalize directionality as a measure of R&I expenditure earmarked for specific transition objectives.
+Other attempts to measure the directionality and progress towards a bioeconomy @jander2019MonitoringTransitionBioeconomy and @jander2020MonitoringBioeconomyTransitions, but lack the plurality of innovation.
 Previous research has frequently relied on input and throughput indicators of innovation activities, such as R&D expenditure, or  publications and patents [@wydra2020MeasuringInnovationBioeconomy].
 Such data, however, suffers from limitations when attempting to assess the directionality of socio-technical systems.
 While R&D expenditure is a key lever to exercise normative directionality for policy makers, the uncertainty of innovation requires portfolio diversification to prevent misallocation of public and private resources.
@@ -307,9 +277,6 @@ Second, because the source articles are preserved, it provides a rich source of 
 
 To capture the forest-based bioeconomy the database was searched for innovation associated with core forest sectors and keywords describing forest products which may be used in sectors along the bioeconomy value chain based on @wolfslehner2016ForestBioeconomyNew.
 The list of keywords and sectors is presented in the appendix.
-`{python} n_total_query` innovation were identified from the query. 
-Due to the query matching keywords whenever they appear as substrings in the description of the innovation, the initial search result is rather susceptible to false positives.
-In later manual review of each innovation for classification these false positives were removed from the search results, yielding `{python} n_bioeconomy_innovation` innovations.
 
 ## Classification Methodology {#sec-classification_method}
 
@@ -321,8 +288,8 @@ As @broring2020InnovationTypesBioeconomy highlight, not all bioeconomy innovatio
 ### Bioeconomy Visions {#sec-bioeconomy_classification_method}
 
 Based on the analyses of competing bioeconomy visions in @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy, I develop and apply a matrix of characterstics for each vision.
- Visions based on @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy, biotechnology definition based on @yeung2019CurrentResearchBiotechnology. 
-<!-- TODO: Matrix That matrix is presented in @tbl- -->
+While the criteria for the bioresource and bioecology vision are entirely based on the two previous publications, the biotechnology critieria are additionally based on a literature review of @yeung2019CurrentResearchBiotechnology, concerning biotechnology publications.
+
 Reading the source texts of innovations identified from SWINNO, I classify an innovation as being *aligned* with a vision if it fulfills at least one criteria in the matrix.
 This means that one innovation can be aligned with more than one vision at a time, for example, if it uses biological processes such as bacteria (biotechnology) to refine a wood based material to replace a fossil input elsewhere in the economy (bioresource vision).
 Not all innovations fulfill at least one criteria, yet still originate or are used within the analytical boundaries of the forest based bioeconomy.
@@ -331,7 +298,6 @@ Examples include innovations aimed at the health and saftey of employees
 <!-- TODO enter source -->
 , or general improvements to the longevity of materials and tools used somewhere in the value chain of the forest bioeconomy.
 The majority of innovations in this category are of the latter nature.
-
 
 | Corresponding Vision | Source article explicitly mentions that innovation:                                                   |
 |----------------------|-------------------------------------------------------------------------------------------------------|
@@ -358,14 +324,12 @@ The majority of innovations in this category are of the latter nature.
 
 : Decision matrix used to classify innovation. {#tbl-decision-matrix tbl-colwidths="[20,80]"}
 
-This selection also highlights that multiple labels can be attached to one innovation.
-The last innovation, describing a waterproof paper, is classified as a bioresource vision innovation because it describes a process by which biomass is converted and upgraded.
-It is also classified as a biotechnology innovation since, according to the innovation source article, the process mimics trees' microfiber formation.
+An innovation can align with multiple visions, for example, where biomass is converted and upgraded (bioresource vision) by application of biotechnology (biotechnology vision).
+Or the value chain decommodifying introduction of new production lines by a family-business which use wood from their own forests to produce furniture with high territorial identiy supporting explicit ecological conservation goals, that aligns with the bioresource and bioecology vision.
 Lastly, there is also the possibility that an innovation cannot be placed into at least one of the visions.
 This is the case for innovation which brings general technological improvements, purely advances economic performance, or relates to a general purpose technology such as appliance of computers.
 These innovations are labeled as Vision Neutral, which does not imply that the innovation is not used, or originates in the forest based bioeconomy as defined above.
 An illustrative example of such an innovation are improved work boots, which promote safety of forest workers but do not correspond with any of the criteria in @tbl-decision-matrix.
-
 
 ### Eco-Innovation Types {#sec-eco_innovation_types}
 
@@ -390,14 +354,8 @@ Where the source text only mentions that the innovation is less harmful to the e
 
 # Results {#sec-results}
 
-```{python}
-#| label: Number Bioeconomy Innovation
-#| output: asis
+Querying the SWINNO database for forest based bioeconomy innovations initially yields `{python} n_uncleaned_bioeconomy_innovations` innovations. This number includes false positives from substrings matching keywords included in the search. During classification, these false positives were removed from the dataset, yielding `{python} sum_bioeconomy_innovations` innovations which originate from, are used in or make use of products derived from the forest.
 
-sum_bioeconomy_innovations = swinno["bioeconomy"].sum()
-```
-
-Querying the SWINNO database for forest based bioeconomy innovations initially yields `{python} sum_bioeconomy_innovations` innovations. This number includes false positives from substrings matching keywords included in the search. While there is no indication that these false positives are non-randomly distributed across time and sectors, the following analysis for bioeconomy innovation trends at large needs to be viewed in the light of this being uncleaned data. Where the analysis turns to specific bioeconomy visions, only clean and certain cases are discussed.
 
 ```{python}
 #| label: Calculate Bioeconomy Share
@@ -749,11 +707,14 @@ Nonetheless, a few innovations associated with this vision were already identifi
 
 # Conclusion {#sec-conclusion}
 
+In conclusion, the technological artefacts produced in the transition to a forest-based bioeconomy in Sweden show a clear directionality aligned with the bioresource vision, which is most favored by central actors and policy makers.
+At the same time, there is evidence that the innovation system has produced knowledge aligned with alternative transition pathways towards an ecological bioeconomy, such as decommodification of value chains and efforts to increase the circularity of the system and reduce environmental pollution.
+The temporal distribution of innovation output aligns strongly with the Swedish tendency to produce consens oriented policy by aligning policy objectives with existing directionality.
+While this approach is pragmatic and has produced good outcomes in the past, it is at least doubtful how radical a shift can be expected for the bioeconomy transition, considering that innovation output since the 1970s has not meaningfully explored alternatives to the intensification of biomass resource extraction.
+
 
 
 {{< pagebreak >}}
-
-
 # References {.unnumbered}
 
 :::{#refs}
