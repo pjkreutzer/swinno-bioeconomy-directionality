@@ -5,6 +5,7 @@ import seaborn as sns
 import plotly.graph_objects as go
 import plotly.express as px
 import plotly.io as pio
+from cmcrameri import cm
 
 # Set global options for all Plotly plots
 
@@ -266,7 +267,10 @@ def plot_eco_innovation_by_bioeconomy_vision(data, label_lookup):
 
     data["innovation_type_label"] = data["innovation_type_code"].map(label_mapping)
 
-    palette = sns.color_palette("colorblind")
+    palette = cm.batlowS.colors
+
+    # Set font to IBM Plex Sans
+    plt.rcParams["font.family"] = "IBM Plex Sans"
 
     fig = sns.catplot(
         data=data,
@@ -285,6 +289,15 @@ def plot_eco_innovation_by_bioeconomy_vision(data, label_lookup):
             ax.bar_label(c, label_type="edge", padding=2, fontsize=8)
         ax.margins(x=0.1)
         ax.tick_params(axis="y", labelsize=10)
+
+        # Remove spines
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.spines["bottom"].set_visible(False)
+        ax.spines["left"].set_visible(False)
+
+        # Add x-grid lines for every tick
+        ax.xaxis.grid(True, linestyle="-")
 
     fig.set_titles("{col_name}")
     fig.set_axis_labels("", "")
