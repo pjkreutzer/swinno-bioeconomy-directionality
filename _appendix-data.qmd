@@ -1,0 +1,35 @@
+**Using producer / user codes
+**
+
+|SNI Code | Description                            |
+|--------:|:---------------------------------------|
+|02       | Forestry and related services
+|20       | Wood and wood product manufacturing except furniture
+|21       | Pulp, paper and paper product manufacturing
+|36       | Furniture manufacturing; other manufacturing
+:Key Sectors Used in Query {#tbl-query}
+
+| Swedish           | English                    |
+|-------------------|----------------------------|
+| virke             | timber                     |
+| cellulos          | cellulose                  |
+| lignin            | lignin                     |
+| spån              | chip                       |
+| bark              | bark                       |
+| levulinsyra       | levulinic acid             |
+| furfural          | furfural                   |
+| svarttjära        | black tar                  |
+| svartlut          | black liquor               |
+| växtbas           | plant-based                |
+| ved               | wood                       |
+| trä               | timber                     |
+| skog              | forest                     |
+| biobränsle        | biofuel                    |
+| biologiskt        | biological                 |
+| nedbrytbar        | biodegradable              |
+| papper            | paper                      |
+| pappret           | cardboard                  |
+| karton            | carton                     |
+| lyocell            | lyocell |
+| tencel            | Tencel (brand of lyocell) |
+: Swedish Keywords used in Query: `WHERE description LIKE %keyword% OR ...` {#tbl-keywords}
