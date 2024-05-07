@@ -12,6 +12,14 @@ pull_data:
 	@echo "Pulling data from SWINNO DB"
 	@python3 scripts/analysis/00-pull_data.py
 
-paper: 
+create_data:
+	@echo "Creating data"
+	@python3 scripts/analysis/01-create_bioeconomy_share.py
+	
+figures: create_data
+	@echo "Creating figures"
+	@quarto render experiments/14-plots.qmd && (cd experiments && rm -rf 14-plots_files && find .  -type f -name "14-plots.*" ! -name "*.qmd" -exec rm -f {} \;) && cd ..
+
+paper: figures
 	@echo "Creating paper..."
 	@quarto render paper.qmd -o "$$(date '+%F')_pjk_draft_directionality.pdf"
