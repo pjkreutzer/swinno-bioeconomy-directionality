@@ -25,7 +25,10 @@ To reproduce the paper follow these steps:
     * stringr
 
 3. If you are on a unix based OS, you can now simply run `make paper`.
-    On Windows you need to render the paper.qmd file by either navigating to it and rendering it from your favorite IDE, or by running 
+    On Windows you need to:
+    1. Run `scripts/analysis/01-create_bioeconomy_share.py`
+    2. Run `quarto render experiments/14-plots.qmd`
+    3. Render the paper.qmd file by either navigating to it and rendering it from your favorite IDE, or by running 
     `quarto render paper.qmd -o "pjk_draft_directionality.pdf" from the command line.
 
 
