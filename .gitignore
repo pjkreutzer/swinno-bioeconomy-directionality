@@ -1,13 +1,11 @@
 *.egg-info
 .Rproj.user
 .pytest_cache
-/data/modified-data/
-/data/raw-data/
-!data/*/*.xslx
-!data/*/*.csv
+/data/modified/
 **/scrap-notebook.ipynb**
 /.quarto/
 *.html
+*.pdf
 
 .DS_Store
 .huskyrc.json
@@ -129,3 +127,5 @@ rsconnect/
 
 test_files/
 /.luarc.json
+
+# Output
