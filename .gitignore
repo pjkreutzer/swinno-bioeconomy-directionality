@@ -2,6 +2,7 @@
 .Rproj.user
 .pytest_cache
 /data/modified/
+results/
 **/scrap-notebook.ipynb**
 /.quarto/
 *.html
