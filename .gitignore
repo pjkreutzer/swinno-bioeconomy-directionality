@@ -126,3 +126,5 @@ test_files/
 /.luarc.json
 
 # Output
+data/uncertain/
+paper_files/
