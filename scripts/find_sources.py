@@ -30,7 +30,7 @@ parser.add_argument(
     "--source",
     type=Path,
     default=Path(
-        "/mnt/c/Users/ph8148kr/OneDrive - Lund University/research/swinno-db/data/source_images"
+        "/Users/research/OneDrive - Lund University/cloud-research/swinno-db/data/source_images"
     ).absolute(),
     help="Path for source of files.",
 )
@@ -62,9 +62,9 @@ if __name__ == "__main__":
                 "notes/02-innovation_id_to_source_id.txt",
             ]
         else:
-            args[
-                "lookup"
-            ] = f"notes/{args['lookup_type']}-innovation_id_to_source_id.txt"
+            args["lookup"] = (
+                f"notes/{args['lookup_type']}-innovation_id_to_source_id.txt"
+            )
 
     if not Path(args["source"]).exists():
         source_path = Path(args["source"])
