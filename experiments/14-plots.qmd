@@ -69,6 +69,7 @@ innovation_trends_plot <- (innovation_plot + bioeconomy_plot) / share_plot + plo
 
 innovation_trends_plot
 ggsave(here("results/figures/innovation_trends.pdf"), width = 7, height = 5)
+ggsave(here("results/figures/innovation_trends.svg"), width = 7, height = 5)
 ```
 
 
@@ -89,6 +90,7 @@ visions <- merge(visions, vision_summary, by = "bioeconomy_vision")
 
 ```{r}
 batlow_discrete <- paletteer::paletteer_c("scico::batlowW", n = 5)
+batlow_discrete
 ```
 
 ```{r}
@@ -109,4 +111,5 @@ vision_count_plot <- ggplot(visions, aes(x = year, y = count, color = bioeconomy
     )
 
 ggsave(here("results/figures/vision_count.pdf"), vision_count_plot)
+ggsave(here("results/figures/vision_count.svg"), vision_count_plot)
 ```
