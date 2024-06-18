@@ -8,7 +8,7 @@ from sqlalchemy.engine.base import Engine
 def connect_swinno_db() -> Engine:
     path_to_db = (
         Path(
-            "/Users/research/Library/CloudStorage/OneDrive-LundUniversity/research/swinno-db/data/swinno.db"
+            "/Users/research/OneDrive - Lund University/cloud-research/swinno-db/data/swinno.db"
         )
         .absolute()
         .as_posix()
