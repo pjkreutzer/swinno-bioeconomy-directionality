@@ -81,8 +81,6 @@ if __name__ == "__main__":
         df_to_classify[col] = None
 
     df_to_classify.to_excel(
-        Path(
-            get_project_root(), "data/raw-data", f"{last_run}_innovations-to-check.xlsx"
-        ),
+        Path(get_project_root(), "data/raw", f"{last_run}_innovations-to-check.xlsx"),
         index=False,
     )
