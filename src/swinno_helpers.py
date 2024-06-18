@@ -79,7 +79,7 @@ def clean_import(file_type, file_path, **kwargs):
 
 
 def connect_swinno_db():
-    database_dir = "/Users/research/Library/CloudStorage/OneDrive-LundUniversity/research/swinno-db"
+    database_dir = "/Users/research/OneDrive - Lund University/cloud-research/swinno-db"
     database_uri = f"sqlite:///{database_dir}/data/swinno.db"
     engine = create_engine(database_uri)
     return engine
