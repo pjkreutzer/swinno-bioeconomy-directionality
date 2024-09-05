@@ -1,0 +1,193 @@
+---
+title: Quantifying Directionality and Innovation Output in Sweden's Transition to a Forest-Based Bioeconomy
+author: Philipp Jonas Kreutzer
+date: last-modified
+bibliography: swinno-shades-green.bib
+csl: 'https://zotero.org/styles/apa?source=1'
+format: 
+    pjk_theme-revealjs
+---
+
+## [Forest-Based Bioeconomy]{.text-white} {background-image="/assets/images/forwarder.jpeg" .center}
+
+## RQ {.center}
+
+[1.]{.text-gray-600} [How many innovations are commercialized in this new economy]{.text-royal-blue-600}, especially considering the central role of innovation in bioeconomy discourse?
+
+[2.]{.text-gray-600} What does commercialized innovation suggest for the [positive directionality of the bioeconomy transition]{.text-royal-blue-600}?
+
+
+# Data From SWINNO Database {.inverted}
+
+## Significant Swedish Innovations
+
+::: {.columns}
+::: {.column}
+~ 5000 unique innovations
+
+Literature-Based Innovation Output method 
+
+from 15 independent trade journals [@sjoo2014DatabaseSwedishInnovations]
+
+
+:::
+::: {.column}
+![Example Page From a Source Article](/assets/images/swinno-example-1.jpg)
+:::
+::: 
+
+
+
+## Defining the Bioeconomy {.smaller}
+
+
+::: {.columns}
+::: {.column}
+|SNI Code | Description                            |
+|--------:|:---------------------------------------|
+|02       | Forestry and related services
+|20       | Wood and wood product manufacturing except furniture
+|21       | Pulp, paper and paper product manufacturing
+|36       | Furniture manufacturing; other manufacturing
+:Key Sectors Used in Query {#tbl-query}
+
+:::
+::: {.column}
+| Swedish           | English                    |
+|-------------------|----------------------------|
+| virke             | timber                     |
+| cellulos          | cellulose                  |
+| lignin            | lignin                     |
+| spån              | chip                       |
+| bark              | bark                       |
+| levulinsyra       | levulinic acid             |
+| furfural          | furfural                   |
+| svarttjära        | black tar                  |
+| svartlut          | black liquor               |
+| växtbas           | plant-based                |
+| ved               | wood                       |
+| trä               | timber                     |
+| skog              | forest                     |
+| biobränsle        | biofuel                    |
+| biologiskt        | biological                 |
+| nedbrytbar        | biodegradable              |
+| papper            | paper                      |
+| karton            | carton                     |
+| lyocell            | lyocell |
+: Swedish Keywords used in Query: `WHERE description LIKE %keyword% OR ...` {#tbl-keywords}
+:::
+::: 
+
+# Results {.inverted}
+
+## Bioeconomy Innovation Has Declined After 1970s
+
+![a. A total number of innovation registered in SWINNO database. b. Forest-based bioeconomy innovations registered in SWINNO database. c. Percentage of forest based bioeconomy innovations to total innovation registered in SWINNO database. Shown are the 5 year moving averages for each time series.](results/figures/innovation_trends.svg){#fig-innovation-trends}
+
+## Three Visions for Normative Directionality 
+
+
+::: {.columns}
+::: {.column width="33%"}
+
+### [Bioresource]{.text-batlow-darkgreen}
+
+![](/assets/images/bioresource.svg)
+:::
+::: {.column width="33%"}
+
+### [Biotechnology]{.text-batlow-forestgreen}
+
+![](/assets/images/biotechnology.svg)
+
+
+:::
+::: {.column width="33%"}
+
+### [Bioecology]{.text-batlow-darkblue}
+
+![](/assets/images/bioecology.svg)
+
+:::
+::: 
+
+Classification based on @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy
+
+
+## Bioresource Was Biggest Vision Category
+
+But most innovations did not align with any vision
+
+![Counts of innovation classification by Bioeconomy Vision Category](/results/figures/vision_count.svg){#fig-bioeconomy-trends}
+
+## [Bioresource Vision]{.text-batlow-darkgreen} {background-video="/assets/images/harvester.mp4" background-video-loop=true background-video-muted=true background-opacity=0.4}
+
+
+1970-1990:
+
+Intensification of Harvesting
+
+Energy & Chemical Pollution Reduction in Pulp and Paper
+
+. . . 
+
+2000-2021:
+
+New Materials 
+
+## {.center}
+
+::: {.columns}
+::: {.column width="33%"}
+
+### [Bioresource]{.text-batlow-darkgreen}
+
+[1970-1990:]{.text-gray-600}
+
+Intensification of Harvesting
+
+Energy Usage & Chemical Pollution Reduction in Pulp and Paper
+
+[2000-2021:]{.text-gray-600}
+
+New Materials 
+
+:::
+::: {.column width="33%"}
+
+### [Biotechnology]{.text-batlow-forestgreen}
+
+Mostly applications to clean water in pulp and paper
+
+New materials from cellulose
+
+:::
+::: {.column width="33%"}
+
+### [Bioecology]{.text-batlow-darkblue}
+
+74% Recycling related
+
+Decommodification of value chains through regional identity products
+
+:::
+::: 
+
+# Outlook & Aims {.inverted}
+
+## Sharpen Analytical Focus on Directionality
+
+To what extent is there a tension between the normative (desired) and positive (observed) directionality in the transition to a bioeconomy?
+
+How does positive directionality shape normative directionality?
+
+# Take Aways
+
+1. [The bioeconomy is declining]{.text-royal-blue-600} relative to total innovation
+
+2. [Positive directionality towards bioresource vision]{.text-royal-blue-600}, but overlap between visions and open development paths
+
+# References
+
+::: {#refs}
+:::

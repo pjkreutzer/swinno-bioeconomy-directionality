@@ -1,0 +1,106 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+$font-family-sans-serif: "Atkinson Hyperlegible", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-headers: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace: "Space Mono", monospace !default;
+
+$font-weight-bold: 800;
+$font-weight-normal: 400;
+
+// Colors
+$theme-colors: (
+    "white": hsl(0, 0%, 100%),
+    "royal-blue-50": hsl(219, 88%, 97%),
+    "royal-blue-100": hsl(221, 78%, 93%),
+    "royal-blue-200": hsl(218, 82%, 87%),
+    "royal-blue-300": hsl(218, 82%, 78%),
+    "royal-blue-400": hsl(219, 80%, 68%),
+    "royal-blue-500": hsl(223, 78%, 60%),
+    "royal-blue-600": hsl(227, 71%, 55%),
+    "royal-blue-700": hsl(231, 65%, 48%),
+    "royal-blue-800": hsl(231, 61%, 40%),
+    "royal-blue-900": hsl(230, 55%, 33%),
+    "royal-blue-950": hsl(232, 50%, 21%),
+    "success": hsl(152, 37%, 46%),
+    "warning": hsl(36, 54%, 51%),
+    "danger": hsl(4, 90%, 58%),
+    "gray-100": hsl(210, 17%, 98%),
+    "gray-200": hsl(210, 16%, 93%),
+    "gray-300": hsl(0, 0%, 87%),
+    "gray-400": hsl(210, 14%, 83%),
+    "gray-500": hsl(210, 11%, 71%),
+    "gray-600": hsl(210, 7%, 56%),
+    "gray-700": hsl(210, 9%, 31%),
+    "gray-800": hsl(210, 10%, 23%),
+    "gray-900": hsl(210, 11%, 15%),
+    "colorblind-blue":#0173b2,
+    "colorblind-orange":#de8f05,
+    "colorblind-green":#029e73,
+    "colorblind-red":#d55e00,
+    "colorblind-purple":#cc78bc,
+    "colorblind-light-orange":#ca9161,
+    "colorblind-pink":#fbafe4,
+    "colorblind-gray":#949494,
+    "colorblind-yellow":#ece133,
+    "colorblind-light-blue":#56b4e9,
+    "batlow-darkblue": #001959FF,
+    "batlow-darkgreen":  #1F5E61FF,
+    "batlow-forestgreen": #7C8637FF,
+    "batlow-salmon": #E7AB84FF,
+);
+
+$color-names: map-keys($theme-colors);
+
+$white: map-get($theme-colors, "white");
+$light: map-get($theme-colors, "royal-blue-100");
+$dark: map-get($theme-colors, "royal-blue-950");
+$primary: map-get($theme-colors, "royal-blue-400");
+$secondary: map-get($theme-colors, "royal-blue-600");
+$info: map-get($theme-colors, "info");
+$success: map-get($theme-colors, "success");
+$warning: map-get($theme-colors, "warning");
+$danger: map-get($theme-colors, "danger");
+$light-accent : map-get($theme-colors, "royal-blue-200");
+$medium-accent: map-get($theme-colors, "royal-blue-500");
+$dark-accent : map-get($theme-colors, "royal-blue-800");
+$default: map-get($theme-colors, "gray-500");
+
+$dark-background: $dark-accent;
+$light-background: $light;
+$white-background: $white;
+
+$link-color : $primary !default;
+$code-color : black !default;
+$selection-color: $secondary !default;
+// Default values for callout colors
+$callout-color-note: $primary !default;
+$callout-color-tip: $success !default;
+$callout-color-important: $danger !default;
+$callout-color-warning: $warning !default;
+
+
+// colors
+
+@each $color-name in $color-names {
+    .text-#{$color-name} {
+        color: map-get($theme-colors, $color-name);
+    }
+
+    .bg-#{$color-name} {
+        background-color: map-get($theme-colors, $color-name);
+    }
+}
+
+/*-- scss:rules --*/
+
+
+a {
+    position: relative;
+    color: inherit;
+}
+
+a:hover {
+    color: $primary;
+    text-decoration: underline;
+}

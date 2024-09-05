@@ -1,0 +1,121 @@
+/*-- scss:defaults --*/
+
+/*-- scss:rules --*/
+
+// quarto 
+
+.quarto-title-meta-heading {
+    color: $default;
+}
+
+
+// acceptable rem values with 1 rem = 16 px
+// 0.25, 0.5, 0.75, 1, 1.5, 2, 4, 6, 8, 12, 16, 24, 32, 40, 48
+
+body {
+    font-family: $font-family-sans-serif;
+    color: $dark;
+}
+
+p {
+    font-family: inherit;
+    line-height: calc(150% + (0.0025vw * (100 - 30)));
+    /* calculate line height */
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-family-sans-serif;
+    font-weight: 400;
+    color: inherit, $dark;
+    border-bottom: none;
+}
+
+div.quarto-about-trestles .about-entity .about-link:hover {
+    color: $primary;
+}
+
+.date {
+    color: $default;
+}
+
+.font-normal {
+    font-weight: $font-weight-normal;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+// navbar
+
+.navbar {
+    background-color: $white;
+}
+
+// sidebars
+
+.sidebar-item-text .menu-text,
+.margin-sidebar {
+    color: $gray-800; 
+}
+
+.sidebar-item-text .margin-sidebar:hover, .menu-text:hover {
+    color: $primary;
+}
+
+// buttons
+
+.btn {
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: $primary;
+    color: $white;
+    border-color: $primary;
+    &:hover {
+        background-color: $dark-accent;
+        border-color: $dark-accent;
+        color: $white;
+    }
+}
+.downloadthis:hover {
+    transition: 0.2s;
+    filter: none !important;
+  }
+
+
+// responsive iframe
+.container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 5%;
+}
+
+.responsive-iframe {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 500px;
+}
+
+// extras
+
+.empty {
+    color: inherit;
+    -webkit-text-stroke: 2px;
+    text-stroke: 2px;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+}
