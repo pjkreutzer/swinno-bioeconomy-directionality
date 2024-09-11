@@ -5,8 +5,7 @@ date: last-modified
 bibliography: swinno-shades-green.bib
 csl: 'https://zotero.org/styles/apa?source=1'
 format: 
-    pjk_theme-revealjs:
-        embedd-resources: true
+    pjk_theme-revealjs
 ---
 
 ## [Forest-Based Bioeconomy]{.text-white} {background-image="/assets/images/forwarder.jpeg" .center}
@@ -184,9 +183,21 @@ How does positive directionality shape normative directionality?
 
 # Take Aways
 
+::: {.columns}
+::: {.column width=66%}
+
 1. [The bioeconomy is declining]{.text-royal-blue-600} relative to total innovation
 
 2. [Positive directionality towards bioresource vision]{.text-royal-blue-600}, but overlap between visions and open development paths
+:::
+::: {.column width=33%}
+
+**Get the Paper**
+
+{{< qrcode https://pjkreutzer.github.io/files/2024-05-05_pjk_draft_directionality.pdf width=100 height=100 colorDark='#0011bb' >}}
+:::
+::: 
+
 
 # References
 
