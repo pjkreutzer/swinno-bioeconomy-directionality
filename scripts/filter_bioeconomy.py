@@ -2,7 +2,10 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 from pathlib import Path
-from src.swinno_helpers import connect_swinno_db, get_project_root
+from swinno_bioeconomy_directionality.swinno_helpers import (
+    connect_swinno_db,
+    get_project_root,
+)
 
 conn = connect_swinno_db()
 

@@ -130,3 +130,6 @@ test_files/
 data/uncertain/
 paper_files/
 20240906-pjk-NEST_files
+# pixi environments
+.pixi
+*.egg-info

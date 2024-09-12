@@ -1,13 +1,13 @@
 import pandas as pd
 from pandas.testing import assert_frame_equal
-from  src.categorization_helpers import *
+from swinno_bioeconomy_directionality.categorization_helpers import *
 
 input_df = pd.DataFrame(
     {"id": [1, 2, 3, 4, 5], "codes": ["A 0", "   1,23", "A,1", "ABC", " 1, 2, 0"]}
 )
 
-def test_letter_to_code():
 
+def test_letter_to_code():
     expected_df = pd.DataFrame(
         {"id": [1, 2, 3, 4, 5], "codes": ["1 0", "   1,23", "1,1", "123", " 1, 2, 0"]}
     )
@@ -18,7 +18,6 @@ def test_letter_to_code():
 
 
 def test_clean_codes_1_digit():
-
     expected_df = pd.DataFrame(
         {"id": [1, 2, 3, 4, 5], "codes": ["1,0", "1,2,3", "1,1", "1,2,3", "1,2,0"]}
     )
@@ -30,9 +29,7 @@ def test_clean_codes_1_digit():
     assert expected_df["codes"].equals(output_df["codes"])
 
 
-
 def test_clean_codes_3_digit():
-
     input_df = pd.DataFrame(
         {"id": [1, 2, 3, 4], "codes": ["112322,0", "1230", "123123", "101201207"]}
     )
@@ -46,11 +43,9 @@ def test_clean_codes_3_digit():
 
     assert expected_df["codes"].equals(output_df["codes"])
 
-def test_clean_codes_int_handling():
 
-    input_df = pd.DataFrame(
-        {"id": [1, 2, 3], "codes": ["112322,0", "1230", 123123]}
-    )
+def test_clean_codes_int_handling():
+    input_df = pd.DataFrame({"id": [1, 2, 3], "codes": ["112322,0", "1230", 123123]})
     expected_df = pd.DataFrame(
         {"id": [1, 2, 3], "codes": ["112,322,0", "123,0", "123, 123"]}
     )
@@ -61,10 +56,11 @@ def test_clean_codes_int_handling():
 
     assert expected_df["codes"].equals(output_df["codes"])
 
+
 def test_white_space():
-    input_df = pd.DataFrame({"id":["6990001"], "codes":["101 201 207"]})
-    
-    expected_df = pd.DataFrame({"id":["6990001"], "codes":["101,201,207"]})
+    input_df = pd.DataFrame({"id": ["6990001"], "codes": ["101 201 207"]})
+
+    expected_df = pd.DataFrame({"id": ["6990001"], "codes": ["101,201,207"]})
 
     output_df = clean_codes(input_df, "code", code_digits=3)
 

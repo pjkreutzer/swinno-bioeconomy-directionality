@@ -1,0 +1,37 @@
+[project]
+name = "swinno-bioeconomy-directionality"
+version = "0.2.0"
+description = "Quantifying Directionality and Innovation Output in Sweden’s Transition to a Forest-Based Bioeconomy"
+authors = [{name = "Philipp Jonas Kreutzer", email = "philipp_jonas.kreutzer@ekh.lu.se"}]
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    
+]
+requires-python = ">=3.12.6,<4"
+dependencies = []
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+ 
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+swinno-bioeconomy-directionality = { path = ".", editable = true }
+
+[tool.pixi.dependencies]
+ruff = ">=0.6.4,<0.7"
+seaborn = ">=0.13.2,<0.14"
+jupyter = ">=1.1.1,<2"
+matplotlib = ">=3.9.2,<4"
+pandas = ">=2.2.2,<3"
+polars = ">=1.7.0,<2"
+pyarrow = ">=17.0.0,<18"
+pathlib = ">=1.0.1,<2"
+sqlalchemy = ">=2.0.34,<3"
+

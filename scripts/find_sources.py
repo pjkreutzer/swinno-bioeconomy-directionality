@@ -1,8 +1,13 @@
 import argparse
 from pathlib import Path
 
-from src.file_utils import copy_files, create_directory, get_input_ids, get_source_names
-from src.utils import get_project_root
+from swinno_bioeconomy_directionality.file_utils import (
+    copy_files,
+    create_directory,
+    get_input_ids,
+    get_source_names,
+)
+from swinno_bioeconomy_directionality.utils import get_project_root
 
 parser = argparse.ArgumentParser()
 parser.add_argument(

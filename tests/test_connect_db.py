@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 from sqlalchemy import create_engine
 
-from src.swinno_helpers import connect_swinno_db
+from swinno_bioeconomy_directionality.swinno_helpers import connect_swinno_db
 
 
 def test_connect_swinno_db():

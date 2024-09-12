@@ -1,6 +1,7 @@
 import pytest
 from pathlib import Path
-from src.file_utils import get_input_ids
+from swinno_bioeconomy_directionality.file_utils import get_input_ids
+
 
 @pytest.fixture
 def input_file(tmp_path):
@@ -20,6 +21,7 @@ def input_file(tmp_path):
     with open(input_file, "w") as f:
         f.write("\n".join(str(id) for id in input_data))
     return input_file
+
 
 def test_get_input_ids(input_file):
     # Test that function returns expected IDs

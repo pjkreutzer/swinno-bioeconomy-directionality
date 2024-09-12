@@ -1,0 +1,563 @@
+﻿sinno_id,name,description,info,year,use_sector,bioeconomy_vision,innovation_type,article_checked,notes
+5874001,"BOOK-O""-MATIC",Tryckpress för framställning av färdig bok direkt från pappersrulle. Maskinen består av välkända komponenter som har sammanfogats till ett nytt system.  Istället för att använda ett visst antal ark för att åstadkomma ett visst antal sidor använder maskinen alltid 10 ark i varje bok och varierar istället antalet sidor i arken.,,1972,22222,,,,
+5886001,Solna C96,Rulloffsetpress med hög tryckkvalitet på bestruket papper. ,,1977,22222,,,,
+6038001,,Hörselskydd med inbyggd radio. ,,1976,-100,,,,
+6194001,Dendro 4000,"Datoriserad kantautomat för sågverk, som har hög kapacitet. En elevator och en tävtransportör med en inbyggd vändare åstadkommer att den inkommande brädan trots maskines höga kapacitet passerar med måttlig hastighet på tvären under mätrampen. Detta ger ett jämnt flöde och noggrann mätning och optimering.",,1985,20101,,,,
+6431001,Asea Master / ABB Master,"Integrerat styrsystem. Ett generellt mikrodatorbyggsystem med en stor mängd byggbitar i såväl maskin som programvara. Byggbitarna är uppdelade i ett antal delsystem som grovt kan sammanföras till två grupper, maskinvarudelsystem respektive programvarudelsystem. Maskinvarumässigt sett är systemet baserat på flera olika mikrodatorer och mirkoprocessorer, såväl 16/32 bit som 8-bit. Med Asea Master kan styrfunktionerna funktionellt distribueras för varje objekt och de kan även geografiskt distribueras och placeras nära objektet som skall styras och övervakas. ",,1983,02,2,601;207;203;212;211;501,1,"2 because of process optimization in massabruk ""stora miljöförbättringar har också uppnåts"" 11485-01-00; 211,212 and 501 on 11485-02"
+7393001,RK 66 Snorre,"Liten skotare. Snorre väger 6 ton och lastar lika mycket. Den låga vikten och marktrycket minimerar skaderiskerna på underlaget. Marbrott, rot- och humusskador har varit huvudproblem som konstruktionen vill lösa. ",,1974,02,2;3,207;213,1,"2;3: ""vi vill att man se nya skotare … som ett positivit steg i utveckling av skogsvården…"", ""Markbrott, rot-, och humusskador har varit huvudproblem som konstruktionen vill lösa"""
+7394001,,"Konsåddpistol. Överst på ett ca 80 cm långt rör sitter ett plasthandtag och en liten behållare frö. När man trycker ned handtaget faller 5-6 frön mot marken. På röret sitter 100 koner och vid varje ""skott"" faller en kon till marken. Det betyder i klartext att fröna får egna drivhus. Konen skyddar fröna från skadedjur. Konerna har ett litet hål i toppen och genom detta kan plantan växa upp. Efter ca två år kommer konen att spricka av den växande plantan. ",,1975,02,2,109,1,"""Det betyder i klartext att fröna får egna drivhus"""
+7464001,,"Mätnings- och sorteringssystem för sågtimmer. Noggrann mätning och ett nytt sätt att behandla mätdata ligger till grund för det nya systemet, som gör det möjligt att optimera sågningen bättre och effektivare än hittills. Hänsyn tas inte bara till stockens diameter utan också till dess ovalitet, krokighet, konicitett och kvalitet. Sorteringen baseras på den information som en ny vision-mätram av treriktningstyp ger om stocken. Med den nya utrustningen är det möjligt att klassificera stockarna i lämpliga klasser för sågningen på ett annat sätt än vad som tidigare varit möjligt. Den nya utrustningen ger också utökade rapporteringsmöjligheter. ",,1984,20,,,,
+7549001,Caliwood,Infärgat trä. Metoden för att färga träet är patenterad i hela världen. Träet pressas i en quintus-press. ,,2004,45,,,,
+7853001,Inka-reaktorn,Kompostreaktor som gör jordförbättringsmedel av slam och bark. ,,1977,90022,,,,
+7991001,,Metod för att avhartsa sulfitmassa. Metoden för lagring av flis onödig; istället försvinner hartset när sulfitmassan bearbetas mekaniskt tillsammans med kemikalier. ,,1980,211,2,103;110,1,"""Massaindustrien har länge försökt lösa problemet på ett enklare sätt"", biorefinery; 110: replaces oil of 10m3 / 24h"
+8425001,,"Instrument för tillståndskontroll av maskiner eller delar av maskiner. Haverier är i regel mycket kostsamma, med det här instrumentet kan företag kapa sina reparations- och stoppkostnader. Instrumentet fungerar som ett öra och lyssnar efter felljud. Från varje avlyssning, som kan ske kontinuerligt eller med vissa förutbestämda tidsintervall, samlar man upp data och bygger upp en karaktäristisk ljudbild.  Skillnaderna mellan dessa återkommande ljudbilder framträder tydligt och avikande ljud belyses. ",,1989,-100,,,,
+9111001,Apid 55,Obemannad helikopter. ,,2006,02,9,999,1,unmanned helicopter without any clear relevance to bioeconomy visions
+9529001,,Specialmärkt kartong som avser att förhindra förfalskningar. Metoden går ut på att man vid själva tillverkningen i basskartongen förses denna med en tydlig prägling. Vid efterföljande bestrykning får dessa intryckningar en vattenmärkning som endast syns i ultraviolett ljus.,,2001,211,,,2,corrupted file
+9576001,Väv-Kalle,"Kasettvävstol som består av en grundstomme med trampanordning. På stommen läggs en kassett som innehåler varpbom, träckbom, lättmetallskaft med stålsolv, skedlag, bröstbom och tygbom. Om man har tre kasetter innebär det att man kan göra undervisning i tre pass om dagen på samma yta som man tidigare körde ett. ",,1979,172,,,,
+10828001,,Spåntork med rökgaskondensor som återvinner energin annars förlorad i uppvärmning av fukt. ,,2003,20,2;3,203;211,1,2 and 3 as recycling of waste energy
+10855001,,Trimsats för hyvlar som gör det möjligt för en hyvel att hyvla olika profiler. ,,2008,20,2,999,1,"""För ett hyvleri med normalt sortiment betyder det att hyveln kan bestyckas så att den kan köras med vanliga profiler under flera dager utan ompostning, något som ger en kräftigt ökad kapacitet."""
+10857001,,NIR (närainfraröd spektroskopi) vid tillverkning av bl.a pellets sänker energikraven up till 80%.,,2008,20101,2,203;207;103;601;602;162,1,Miljövänliga och energisnälla produktionsprocess för pelletsmaterial
+10867001,,"rundkutter med en helt ny typ av hydraulisk fastspänning (NTT, 2009, nr. 14-15, p. 10).",,2009,20,2,203,1,"""… kuttern är skonsam mot hårda kvistar…"""
+10872001,Mountin,"Nya ""osynliga""(NTT, 2010, nr. 3, p. 7) fästen för beslag i trappor. ",,2010,36,9,999,1,"good example bv 3: ""Monteringsmetoden utan synliga hattpluggar gör att arkitekterna kann rita mer estetiskt tilltalande trappor.."""
+10874001,,"Uppgradering av ett gammalt system som förhindrade att lim och härdare kom i kontakt innan lamellen. Det nya systemet är enklare att montera, underhålla, ökar kvalitet, produktivitet och minskar limförbrukning.",,2010,20,2;3,103;602;601,1,"2 because of process optimization, 3 because of ethic considerations behind company strategy ""Att bidra till minska limförbrukningen kan tyckas vara som att såga av den gren man sitter på. Men det ligger helt i linje med Akzo Nobels miljösatsning och ambitionen att stärka kundernas konkurrenskraft."""
+10878001,Refloor,"Upplyft golv utan reglar, med plats för rör, kablar och/eller ventilationsutrymme. Golvet är både miljömärkt och skall gå snabbt att lägga.",,2010,45,2,207,1,"""Vi vill göra byggnadet så effektivt och resurssnålt som mjöligt."""
+10881001,CombiCut,Ny reducerskiva som kombinerar steg- och spiralhuggning. Skivan går lättare och ökar därmed andelen acceptflis samt sänkt elförbrukningen.,,2008,20,2,203;103,1,"""Den utvecklade
+konstruktionen ger bättre ytor
+med bibehållen klingtjocklek.
+Combi Cut med fyra stål ger bästa
+fliskvalitet i matningshastigheter
+upp till 100 meter per minut.
+I femstålsutförande klarar skivan
+matningshastigheter upp till
+150 meter per minut."" 11995-08-00"
+10882001,Sioo,"Vattenburet träskydd med kisel, kalium och naturliga växtämnen.",,2007,-101,2;3;0,207,1,"""Kisel är inte giftig utan verkansprincip är mekanisk"", ""Överblivit medel kann hällas i komposten"", ""Underhållet är enkelt och träet håller sig fräscht utan regelbunden oljning"""
+10897001,Morumpressen,"Småskalig pellets-press med 24 kolvar, vilket fördelar trycket mer och då håller längre. ""Drar inte mer än 4 kilowatt."" (NTT, 2008, nr. 7, p. 17)",,2008,20,2,161,1,"""Träindustriens intresse för att paletera sina biprodukter har ökat lavinartat de senaste åren"""
+10909001,Proficura 2D,"En 2D sensor som ""ger väsentligt mer mätdata om virkesstyckets dimensioner och profil"" (NTT, 2010, nr. 12, p. 22).",,2011,20,2,601;602,1,"""Mätaren skapar nya mjöligheter till kostnadsoptimering för trävaruindistrin"" 11894-01-00, ""Mätaren skapar nya mjöligheter till kostnadsoptimering för trävaruindistrin"", ""Vi hoppas mycket på Boardprofiler
+L i framtiden. Dels inom
+sågverksindustrin, dels och nästan
+mer för förädlingsindustrin."" 12012-00-00, "
+10922001,ETP Cubit,"[E]tt nytt komplett koncept för justerbara system. Profilering av not och spont i golvindustrin kan nu göras effektivt med extrem precision och repeternoggrannhet.  (NTT, 2011, nr. 10-11, p.18)",,2011,20,2,602;,1,"""ETP Cubit-Mini sparar
+tid och pengar genom att det
+inte behövs några svårhanterliga
+shims."" 11995-02-00,"
+10924001,Alentpumpen,Styrningsmodul for en trätorkmetod som låter fläktarna stå still ger bättre (rakare med mindre spänning) virke på samma tid av mindre energi. ,,2009,02,2,203;103,1,"""Det blev mindre spänningar i virke och det gick att göra ganska stora besparingar på elförbrukningen …"" 11910-00-00,"
+10925001,High Impact Soot System (HISS),"Sotteknik för pappersbruk som ska spara stora mängder energi på sotningen av sodapannan, som sparar på ångan som behövs till annat på bruket. ",,2011,21,2,203;206,1,"""Traditionellt rengörs sodapannor under drift med en teknologi som är mycket energikrävande. Den nya tekniken innebär att energiförbrukningen i form av ånga halveras. Soot Techs HISS-teknik gör att sotblåsarna kan löras oftare, vilekt i sin tur ölar sotningseffekten."" 14395-00-00"
+10927001,Undergolvet Tempo,Spårad undergolvsskiva för värmesystem,,2010,-101,2,999,1,
+10928001,,"Containergolv av komposit (trä, återvinnings plast och en kemisk reagens) som skall ersätta tropiskt hårdträ.",,2010,28210,2;9;0,102;207,1,"possibly bv2 or bv9, edge case as uses fossil input to substitue bioinput"
+10937001,Paint Cutter,"En ny kutter ""som ger en yta som efter perfekt finsågning"" (NTT, 2010, nr. 17, p. 11).",,2010,20,2,999,1,"""En panel som kan ha blivit randig
+av dåliga sågblad och behöver
+snyggas till, eller kanske fi nns det
+behov av att återställa hyvlat virke
+till sågat för en klara en snabb
+leverans."" 12628-00-00"
+10950001,Hoppolek,"Träningsmaskin för svårt handikappade som ""stärker skelettet genom stötande belastning underifrån"".",,2010,73,9,501,1,not forest
+10961001,Icetech,"Metod för att med hjälp av kolsyreblästring rengöra maskiner, särskilt värmebatterier i virkestorkar.",,2011,45,2,162;203,1,"""De vill inte prata om reda pengar
+då kostnaden kommer upp men
+säger att det rör sig om en återbetalningstid
+på några månader i
+minskad energiförbrukning och
+då är fördelar som minskat slitage,
+ökad kapacitet och höjd kvalitet
+inte medräknat."" 11947-01-00"
+10974001,DuraPulp,"Biokomposit av mixat träfiber och PLA-plast, ""nedbryt- och återvinningsbart"". Kompositen kan formas med hjälp av konventionell varmformning.",,2015,20,1;2,114;207;107,1,"""Vi blandar ned en polymer, som vi
+får från stärkelsen i majs, i pappersmassan.
+[…] Då får vi ett material som
+ser ut och som kan användas som
+plast."" 12936-00-00"
+10979001,,"Nytt timmerbord med enklare konstruktion som skjuter timret med stegmatare istället för kedjor. Nyckelkomponenten är en skruvad hake, istället för en svetsad, som är enklare att montera, byta ut samt uppges vara starkare.",,2011,20,2,999,1,"""Skillnaden på Logcons bord och
+de som normalt används är att timret
+skjuts fram med stegmatare
+istället för med kedjor. Enligt Lars
+ger detta en mängd fördelar.
+Även om stockarna inte blir perfekt
+placerade gör stegmatningen
+att de parallelläggs ganska snart."" 11975-00-00"
+11007001,Tetra Gemina Aseptic,"Förpackningssystem ""med aseptiska kartongförpackningar som möjliggör transporter och lagring utan kyla""  (Livsmedel i fokus, 2012, nr. 5, p. 19)",,2012,15,,,,
+11008001,CAR,Ett nytt matarverk som centrerar stockar mycket effektivare och mindre våldsamt. Metoden gör även kurvsågning enklare.,,2011,20101,2,103;602,1,"""...att CAR förstärker
+bandsågens fördelar när
+det gäller utbyte och noggrannhet."" 15304-01-00, ""… med med CAR klarar bandsågen
+även att följa dubbelkrok"" 15304-00-00"
+11012001,,"En biomaterial-scanner som använder två olika röntgenfrekvenser. Metoden tillåter snabb och exakt mätning av fukthalter (även med frusen massa), till skillnad från den befintliga metoden.",,2010,02,2,103;203;201,1,"""Genom att hela tiden veta fukthalten
+på flisen kan man optimera
+andra parametrar i processen utifrån
+det, vilket i sin tur ger bättre
+råvaruutnyttjande, mindre energiåtgång
+och lägre förbrukning av
+andra tillsatskemikalier, förklarar
+Erik Odén."" 12014-00-00"
+11014001,,"Ugn med förgasning av trädbränsle, som sedan bränner gasen. Metoden reducerar halten obränt material i askan till nära noll. Förgasaren är flexibel och kan även använda andra biobränslen.",,2011,40,2,211;113,1,"""Gasen som bildas då biobränslet
+värms upp bränns här under
+speciella förhållanden."", ""Poängen med denna omväg
+till flamman är att gasen ger bättre
+förbränning och därmed mindre
+utsläpp."" 12017-00-00, "
+11016001,Evojet,Ny MDF-skive teknik som använder 20-25% mindre lim.,,2011,20,2;0,103,1,"""Finessen med den nya limtekniken
+är att limmet fördelas jämnare,
+och därmed också mer ekonomiskt,
+på fibern än vad man tidigare
+har kunnat åstadkomma."" 12018-00-00"
+11026001,Träullit,"Element gjorda av en blandning av träull (80 viktprocent) och cement. Materialet är väldigt starkt, isolerande och brinner inte.",,2011,45,2,0,1,"""Träullit är ett mycket enkelt mate rial
+och består bara av träull och cement.
+En träullitskiva består till 80 viktprocent
+av trä."" 12027-00-00"
+11028001,,"Hus färdiga för montering som levereras i platta paket, inspirerat av ikea.",,2008,-101,2,999,1,"""Det borde väl gå att leverera hus på samma sätt som bokhyllan Billy? I platta paket, med numererade delar och en monteringsanvisning?"" 12031-00-00: use and   availability of bio-resources"
+11037001,AddiFlex,"Ett additiv som ""förändrar de långa molekylkedjorna hos plaster... ...så att mikroorganismer kan angripa dem"" (Kemivärlden Biotech med Kemisk Tidskrift, 2010, nr. 3, p. 8). Detta gör plasterna nedbrytbara.",,2010,25,1,105;201;207,1,"""...de viktigaste
+skillnaderna gentemot konkurrenterna
+är att additivet inte innehåller tungmetaller..."", ""Själva nedbrytningsprocessen
+är mycket enkel, det handlar
+om en oxidationsprocess när plasten utsätts
+för omgivande syre och där UV-strålning och
+gynnsamma temperaturförhållanden hjälper
+till. Plasten bryts ner till så små partiklar att
+mikroorganismerna i jorden kan ta över och
+fortsätta nedbrytningen till naturlig biomassa.
+Så totalt övergår polyolefinen till vatten, koldioxid
+och ren mull."" 12165-00-00"
+11082001,Opcon Powerbox,Powerbox utvinner energi ur spillvärme med hjälp av värmeväxlar och förångare. Det räcker med en lägsta temperatur på 55 grader på spillvattnet för för att få fram gasen. Tekniken bygger på Opcons unika skrivkompressor.,,2007,211,9,203,1,"""Med PowerBox kan delar av den värme som tidigare kyldes bort omvandlas till ny elproduktion"" 12543-00-00; good example bv9"
+11098001,,Transport lådor för bl.a läkemedel som är isolerade med olika salter för att klara längre transporter.,,2010,15,9,162;501,1,not forest
+11106001,Stabilizor T1,"Instrument och metod som hindrar att biologiska prover bryts ner innan de analyserats. Nedbrytningen avstannar genom ""en kombination av hög temperatur, tryck och vakuum"" (Kemivärlden Biotech med Kemisk Tidskrift, 2011, nr. 1-2, p. 12). Ger mycket högre säkerhet och reproducerbarhet än andra tekniker som ofta baseras på olika kombinationer av kemiska inhibitorer.",,2008,24,1,162,1,"""Metoden baseras på en kombination
+av hög temperatur, tryck
+och vakuum som avstannar nedbrytningsaktiviteten
+i proverna.
+Företaget får nu in tolv miljoner"" 12104-00-00; not forest"
+11107001,Aco-spektor / Acopulp / Acochem,Sensor som kan mäta bl.a temperatur av flödande vätskor utan beröring genom aktiv akustisk spektroskopi. Teknologin är baserad på äldre patent men är möjlig först nu p.g.a processorkapacitet.,,2010,20,2,103;602;207,1,"""Med hjälp av exakta och kontinuerliga mätvärden
+av torrhalten kan förbränningen av
+svartluten i sodapannan optimeras.
+– Genom att optimera förbränningen i samtliga
+sodapannor i Sverige har vi räknat ut att
+det går att öka energiproduktionen från svartluten
+med upp till två terawattimmar (TWh)..."" 12106-01-00"
+11142001,Hype,Tub av biologiskt nedbrytbart material som enbart lämnar biomassa och koldioxid som restprodukt samtidigt som materialet har egenskaper som är snarlika PE och PP.,,2013,15,1;2,402;101;161;114,1,"""Tectubes i Åstorp lanserar nu världens första kommersiella helt biobaserade
+tubförpackning på bred front. Biomaterialet kommer från FKuRs Terralene-serie
+som är baserat på sockerrörsblast."" 13846-00-00; not forest"
+11307001,EXA skate,En ny typ av långfärdsskridsko tillverkad i ett enda stycke rostfritt stål som hjälper åkaren att spara energi. Den har dessutom en inbyggd anti-vibrationsfunktion vilket gör den i princip helt tyst på naturis.,,2009,-101,9,213,1,not forest
+11335001,,"en profilerande kompaktlinje med rundkörning utan kantverk som är mycket rationell. (NTT, 2012, nr. 1-2, p. 6)",,2012,20,2,999,1,"""Uppställningen består av reducerare,
+profilerare och en stocksåg där vi
+fräser bräderna direkt ur stocken innan
+de sågas loss i stocksågen. Blocket
+går i retur och genom maskingruppen
+igen så det behövs ingen separat kantning,
+förklarar Stefan Arnqvist."" 12367-00-00"
+11339001,,"Produkter, däribland en laptopväska samt en skärbräda, tillverkade av trä som värmebehandlats på ett helt nytt sätt.",,2012,-101,2;3,999,1,"""Grundidén i Wood of Sweden är
+övertygelse att det finns outforskade
+möjligheter med trä. Genom att
+utveckla designprodukter med hög
+kvalitet och funktionalitet hoppas
+företaget kunna ta svenska naturmaterial
+till en ny nivå. Formgivning
+och produktion sker i samarbete
+med lokala företag i Skellefteå."" 12371-00-00"
+11340001,Kugge,Ett hexagonalt kubbgolv av klentimmer som är både stryktåligt och har ljudabsorberande egenskaper. ,,2012,-101,2;3,213;,1,"""Produktionen har
+startats upp i Jämtland med närhet
+till den egna skogsfastig heten. Där
+finns gott om både den senvuxna
+gran, som är det träslag företaget
+började arbeta med, och även viktig
+träbearbetnings kunskap bland
+småsågar och hyvlerier.
+– För denna skenbart enkla produkt
+krävs mycket kunskap och
+omsorg i varje förädlingled: Val av
+råvara, sågning och torkning av
+kärnvirke har varit speciellt utmanande
+moment att lösa."" ""Det är något som numera
+ofta går förlorat när industrin satsar
+på volym och kvantitet. Vi tror
+att många har ett behov av den här
+typen av omsorg och äkthet i sin
+närmiljö och att det finns en framtida
+marknad för hantverksmässigt
+producerade byggprodukter,
+säger Oscar Carlsson."" 12372-00-00; good example bv3"
+11341001,Dynamisk facksättning,En ytterligare funktion till företagets mjukvara GPS Timber som anvisar virkesfordon till tomma fack om det ursprungliga facket är fullt och inte kan tömmas.,,2012,20,2,999,1,"""Hur som helst så är produktionschefen
+Olov Martinson helnöjd
+och säger att den nya funktionen
+sparat in en timmertruck,
+med allt vad det innebär, och samtidigt
+ökat kapaciteten på sorteringen
+avsevärt."" 12375-00-00"
+11346001,,"En säkerhetsspärr, som monteras direkt på axeln av en virkestilt, som förhindrar att virkespaket rasar om kedjan går av.",,2013,20,,,,
+11347001,Bark On-line,"ett system för att mäta hur mycket bark som är kvar på timret efter barkningen. (NTT, 2013, nr. 17-18, p. 16)",,2013,20,2,204;103,1,"""Bark är
+den vanligaste föroreningen, och det
+nya systemet från SP är ämnat att lösa
+det mesta av detta problem genom
+att barkresterna på timret mäts efter
+barkningen. För mycket bark ger
+prisavdrag, eller straffavgift på flisen.
+Att barka för hårt innebär att värdefull
+timmerved svarvas bort av barkningsknivarna."" 12390-00-00"
+11351001,BK80,"En ny hydraulikbefriad bandsåg som flyttar sågenheterna och ett fast anhåll, vis-à-vis normen, med bättre precision. Detta gör klyvningen ""mer ekonomisk och flexibel"" (NTT, 2012, nr. 22, p. 12) och att mer av råvirket kan utnyttjas samt att den kräver mindre underhåll.",,2012,20,2,602;105;103;104,1,"""I kombination
+med en exakt mätning ger detta
+helt nya möjligheter till en mer
+effektiv och ekonomisk produktion
+som i en del fall även påverkar sågningen
+av råvaran."", ""Detta förenklar den följande
+hyvlingen, men innebär också att
+utnyttjandet av råvirket blir högre
+vilket ger billigare inköp eller bättre
+utbyte i sågverket, hur man nu ser
+det. Ett annat scenario är om virket
+in är för tunt för att få tre bitar ut
+med angivet minimimått, då ställer
+sågen sig för att i alla fall ge två
+bitar med exakt tjocklek medan den
+tredje blir vrak. När virket in har lite
+mer övermått fördelas detta övermått
+på alla tre bitar så att alla ska
+vara hyvlingsbara i nästa steg. I en
+konventionell såg skulle det bli två
+hyvlingsbara och en för grov om
+övermåttet är för stort."", 12410-00-00"
+11352001,Boardscanner,"Brädscanner som mäter dimensioner, styrka, kvistar, röta, mm. Systemet är relativt litet och går snabbt. Det är modulbaserat och kan byggas på efter hand om inte alla delar används.",,2013,20,2,602;601;501,1,"""Det första är integrerat
+i körprogrammen där man kan välja
+”Utvärderingsprodukter”. Dessa beräknas
+simultant med det riktiga resultatet
+under optimering och det går
+sedan att jämföra hur bra utvärderingsprodukterna
+har presterat jämfört
+med de verkliga produkterna.
+Det andra sättet är att spela in bräddata
+under produktion och sedan välja
+att ”köra” inspelade data med olika
+körprogram. Dessa jämförs sedan med
+det faktiska resultatet och det syns tydligt
+hur mycket volym och/eller pengar
+de olika körprogrammen skulle ge."" 12411-00-00"
+11367001,Vision tilt,En on-line kamerabaserad teknik som håller koll på hur sågbandet ligger på såghjulet och korrigerar automatiskt. Genom att göra bladläget operatörsoberoende uppges driften bli jämnare i längden.,,2014,20,2,602;601;103;,1,"""En stor
+fördel är att Vision tilt gör bladläget
+operatörsoberoende, vilket gör att
+driften blir jämnare över tid. En fördel
+är också att den här tekniken kan
+byggas in även i äldre bandsågar."" 12434-00-00"
+11368001,Moistpal,"En ny fuktkvotsmätare med ett tredje mätstift för temperatur, lägre ljudnivå samt skickar mätdatan trådlöst till en app.",,2015,20,2;3,213;501;601,1,"""Ska trä beträktas som en premiumval av möbel- och bygindustri måste kvalitetssäkeringen bli bättre. Inte minst när alltmer av träprodukter ska vara kundspecifika."" 113160-00-00"
+11369001,Timbertime,"En mjukvara som lättare möjliggör informationsspridning till och från timber lastbils chaufförer, så att leveranstidpunkter kan förberedas för och proppar minimeras, samt bilarna kan prioritera andra uppdrag.",,2014,02,,,,
+11382001,MultiScat,Analysmjukvara för ämnen som bl.a gör det möjligt att öka flödet med 50% tack vare vissa beräkningar.,,2009,20,9,602;601;,1,"only scans material, not involved in refinery process directly"
+11386001,Valmatics,"Ett system för adaptiv styrning av virkestorkar ""som kan spara energi och ge bättre virkeskvalitet"" (NTT, 2013, nr. 9-10, p. 16). Systemet justerar fläktarnas hastighet samt fuktigheten i realtid baserat på historisk mätdata.",,2011,20,2,601;203,1," ""som kan spara energi och ge bättre virkeskvalitet"" (NTT, 2013, nr. 9-10, p. 16)"
+11394001,,"Ett säte för fordon som går up och ner med  stora dunsar, som till exempel snabba båtar. Sätets ""fjädringen består av en stötdapare och dubbla bladfjädrar "" med s-form.",,2008,35120,,,,
+11399001,WoodRoll,"En trestegsprocess ""för torkning, pyrolys och förgasning av biomassa"" med ""väldigt högt energiutbyte"". Den resulterande gasen är väldigt ren och och ger en väldigt hög verkningsgrad.",,2010,21,1;0;2,202;206;110;,1,unsure if bv 1; good example of bv 2
+11449001,,Metod och utrustning för massflödesmätning i industriella processer baserad på två sensorer som detekterar partikelordning och elektrostatisk laddning. Metoden gör att man bättre kan optimera olika typer av flödesprocesser vilket leder till effektivisering av t.ex. förbränningsprocsser och därmed kan koldioxidutsläpp etc. reduceras.,,2010,21,2,601;602;103;211,1,"""Om man känner till massaflöden inom sin industriella process kan man bättre optimera anläggningen"" 12552-00-00"
+11468001,,Träningsredskap för negativ träning d.v.s. som ger större belastning då musklerna sträcker ut sig än när de drar ihop sig för effektivare träning. Detta åstadkoms genom att viktmagasinet tippas 45 grader när man byter riktning.,,2013,-101,9,501,1,not forest
+11475001,,Reluktansmotor (elmotor) vars rotor har enkel konstruktion utan lindningar vilket eliminerar rotorförlusterna och ger en lägre driftstemperatur än en konventionell induktionsmotor vilket kan reducera energiförlusterna med ca 40 procent.,,2011,20,9,213;601;,1,"""Det fina
+med den här motorserien är att den
+har avsevärt högre verkningsgrad än
+tidigare och kan reducera energiförlusterna
+med upp till 40 procent"", ""Vi tror att den främst kommer att
+användas för att driva pumpar, fläktar
+och kompressorer där man har
+kontinuerlig drift, till exempel
+i gruv-, metall-, pappers- och massaindustrin.
+Där finns oftast de mest
+energikrävande drifterna."" 14754-00-00; good example bv3"
+11527001,,"Specialcellulosa där ""tillverkningsprocessen är klorfri, vilket ger så pass ren cellulosa att den även användas i exempelvis läkemedelstabletter och korvskinn"" (Kemivärlden Biotech med Kemisk Tidskrift, 2012, nr. 1-2, p. 18)",,2012,15130,1;2,101;201;105,1,"""Råvaran består av gran och tall som huvudsakligen
+förädlas till specialcellulosa, lignin
+och bioetanol.
+I en biologisk reningsanläggning bryter bakterier
+ned det återstående organiska materialet
+till bland annat biogas. Den tas tillvara och används
+som energikälla vid torkning av lignin
+och generering av el och ånga, vilket bidrar till
+att göra bioraffinaderiet näst intill oberoende
+av fossila energikällor."" 12651-00-00
+
+Long innovation biography"
+11543001,,"Kamera som ""mäter rörelser ner till en felmarginal på 0,1 mm och kan leverera upp till tusen bilder per sekund."" Kameratekniken möjliggör detaljerade mätningar av 3D-objekt.",,2008,36500,9,602;,1,not forest
+11546001,,"Process för återvinning av cellulosa ur textilier, som fungerar genom att ""högkristallin cellulosa omvandlas till oordnad cellulosa.""  (Kemivärlden Biotech med Kemisk Tidskrift, 2012, nr. 11, p. 34)  Produkten består av textilfibrer.",,2014,174,2;3,206;107,1,"""Men kemikarlierna är billiga och återvinningsbara."" 12673-00-00, 
+""●I dag saknas tekniker för att
+återvinna textilier. Det är ett
+problem eftersom tillverkningen
+slukar stora mängder vatten,
+energi, kemikalier och åkermark."" 14626-00-00"
+11559001,,"Hot leaching process for gold with cyanide. ""What is new is the that the flotation concentrate with cyanide is heated up to 608offlC, which increases the rate of leaching "" (Kemivärlden Biotech med Kemisk Tidskrift, 2012, nr. 3, p. 25-26)",,2012,36220,9,103;204,1,not forest
+11568001,,"Ett ""nytt plastmaterial (epoxy med inbyggd limfunktion)"" (Kemivärlden Biotech med Kemisk Tidskrift, 2013, nr. 4, p. 8)",,2011,36,9,999,1,not forest
+11581001,High Temperature Graphene Process,"En teknik som tillåter tillverkning av grafen på kiselkarbid, som växer över större skalor och är av högre kvalitet.",,2013,21,9,999,1,not forest
+11595001,El-Forest,"Elhybridskotare som sparar 30 till 40 procent av diesel. ""El-Forest är marknadens enda skotare som lastar mer än den själv väger""",,2009,0201,2;3,213;113;203,1,"reduces pressure on forest soil; ""Där fanns 240 hektar prima skog, som jag ville hålla i så fint skick som möjligt"" 14839-00-00"
+11617001,,Hockeyklubba i kompositmaterial tillverkad av Oxeons vävda kolfibrer vilket gör klubban betydligt lättare och mer välbalanserad än konventionella klubbor.,,2008,-101,9,999,1,not forest
+11632001,CVA,Metod för värdering av finansiella variabler.,,1999,20,9,999,1,controlling method for market classifcation
+11634001,,"Papper med grå backgrund och vita linjer i stället av svarta. Vita linjer ""är vilsamt för ögat. De vita linjerna konkurrerar inte med det skrivnas färg, och den gråa bakgrunden skapar inga reflexer.""  (Ny Teknik, 2008, nr. 40, p. 23)",,2008,-101,2,999,1,improvement of paper for writing by hand
+11646001,Compact Cooking,En kontinuerlig kokmetod för sulfatkokning.,,1999,21,2;3,212;211;602;103,1,"""Hans insats ha lett till minskade kapitalkostnader, högre kontrollbarhet och minskad miljöpåverkan runt hela världen"", "
+11655001,Railgrip,Fästsystem med en unik vridlåsningsmekanism som gör den enkel och snabb att flytta på vid behov.,,2009,36,9,999,1,not forest
+11676001,,Ftalat- och metallfri PVC-kompound med högandel förnyelsebara råvaror (modifierad vegetabilisk olja) som prismässigt är på samma nivå som kompound med ftalater.,,2009,20,1;2,114;101,1,"""Genom att använda modifierrad vegetabilisk olha skapas ett högvärdigt och låmigrerande PC-kompound till ett konkurrenskraftigt pris"" 12850-00-00; not forest"
+11699001,Kee-Bio,Spritspåse av flerskiktsfilm som utgörs av miljövänlig bioplast vilket är världens första som är såväl komposterbar och bionedbrytbar. ,,2009,15,1,114,1,not forest
+11722001,,"Metod som renar lakvatten från nedlagda gruvor, genom ""specialbyggd container"" fylld med filtermassa ""vars ingredienser är sågspån och kalk."" (Bergsmannen, 2013 , nr. 1, p. 12)",,2013,13,1;2,212;206,1,"""… en filtermassa vars ingredienser är sågspån och kalk. … vattnet renars effektivt från tungmetaller"" 12921-00-00"
+11730001,"Domex 900/960, 1100","Ett stål med högre hållfasthet, god formbarhet och bättre svets- och skär egenskaper. Möjliggör lättare konstruktioner utan förlust av styrka eller livslängd.",,2013,36,9,999,1,not forest
+11745001,,Kabellock av träfiberkomposit som är till för att skydda kabel som läggs ned vid järnväg. Det kan ersätta betong som vanligen används med fördelen att det nya locket är lättare att montera och installera. ,,2007,45,2,206;114;161,1,"""... valde OFK
+Plast att extrudera profilen av återvunnen
+polyeten och återvunna träfibrer.
+Fördelen med det nya materialvalet var
+att det skulle bli lättare att montera och
+installera. Dessutom var vikten lägre och
+livslängden längre, hävdade tillverkaren."" 12952-00-00"
+11748001,,"En världsunik ""tvåstegs natriumbaserad kokprocess, som separerar hemicellulosan"" (Svensk Papperstidning, 2008, nr. 4, p. 48) och därmed kan ta vara på nya delar av veden.",,2008,21111,2,211;103,1,"""Råvaruoptimering, biologisk rening och bioenergi i form av en biogastork, uppskattas av kunderna och ger ett bättre ekonomiskt utfall i slutänden."" 12956-00-00"
+11749001,FibreForm,Ett töjbart pappersmaterial som kan användas istället för plast vid förpackning av bl.a matvaror. Är helt baserad på fiber.,,2010,-100,2,114;402,1,"""FibreForm kan ersätta plast i en mängd olika förpackningar och utmanar nu plastförpackningar på allvar, vilket miljön vinner på"" 13105-00-00"
+11750001,Pure Board,En kartong av nyfiber med PE-beläggningar för produkter som kommer i kontakt med färdigrätter.,,2009,15,2,999,1,
+11813001,Corodrill 860,Borr med helt ny geometri och specialutvecklad spånkanalform.,,2012,D,,,,
+11907001,,"ny teknik för att framställa cellulosabaserad etanol för biobränsle. (Kemivärlden Biotech med Kemisk Tidskrift, 2014, nr. 5, p. 32)",,2014,-101,1;2,110,1,"""Under de
+fyra åren som industridoktorand utvecklade
+han en ny teknik för att framställa
+cellulosabaserad etanol för biobränsle"", ""Kemikalierna reagerar med nedbrytningsprodukterna
+och gör dem mindre
+toxiska, vilket gör att jäsningen kan fortsätta
+ostört."" 13276-00-00"
+11937001,,Elektroluminiscent färg för tryck av förpackning och reklam.,,2012,2121,9,999,1,not forest
+11952001,,"Kryllsensor ""som kan installeras i massa- och pappersbruk"". Den ger tätare och snabbare mätningar än konventionell bildanalys.",,2012,21,2,203,1,"""Målet är att möjliggöra produktion av bättre papper, men med en lägre energiförbrukning"" 13340-01-00"
+11969001,Midiflex,"En skonsam markberedare som gör mindre åverkan på kalhyggena, tack vare ett ""midjemonterat aggregat där markberedaren sitter mellan dragfordonet och boggien"" (Ny Teknik, 2014, nr. 34, p. 7)",,2014,02,,,,
+11997001,,"DNA-strängar som gör det möjligt att ""reglera hastigheten på tillverkningen av protein i levande celler."" Kan användas i forskning om och tillverkning av läkemedel.",,2010,24420,1,501,1,"good example of bv1;not forest; ""Det gäller även när
+fabriken består av levande celler.
+Xbrane har dna-strängarna
+som fixar uppgiften."" 13395-00-00"
+12016001,,Ny framställningsmetod av biometanol från förgasat svartlut.,,2012,24140,2,110;101,1,"""Metanolen är framställd av syntesgas,
+en blandning av kolmonoxid
+och vätgas, som i sin tur är resultatet
+av förgasning av svartlut, en restprodukt
+från tillverkning av pappersmassa."" 13419-00-00"
+12020001,,Råtalldiesel som tillverkas genom att tallolja från massabruken blandas med metanol. Raffineras sedan till drivmedel som består av 25 procent förnybar råvara.,,2010,21112,2,101;110;206;211,1,"""Han ville
+tillverka mer än dubbelt så många
+liter biodiesel av tallolja, en restprodukt
+vid massatillverkning."" 55260-00-00"
+12026001,,"Nanocellulosa som bland annat kan ersätta plast i förpackningar och fungera som ""miljövänlig ersättare till kevlar i olika kompositmaterial.""",,2011,21,2,114;101;203,1,"""Tunna genomskinliga filmer som kan
+ersätta oljebaserad plast i matförpackningar.
+Miljövänlig ersättare till
+kevlar i olika kompositmaterial. Ett
+hälsosammare alternativ till olika
+konsistensgivare i exempelvis lättprodukter."" 13434-00-00; ""en ny process,
+som sänker energiförbrukningen
+med 98 procent."" 13435-00-00"
+12048001,,"Papperskorgar som tömmer sig själva med hjälp av vakumteknik, när en nivåmätare signalerar att det är dags.",,2010,75125,9,213,1,"good example bv9; ""När nivåmätaren signalerar
+att det är dags för
+tömning skapas ett undertryck
+i det underjordiska
+rörsystem som papperskorgen
+är kopplad till. Sedan öppnas en
+ventil i papperskorgens botten. Via ventilen
+sugs skräpet in i rör, som leder till
+en container. Undertrycket och suget skapas
+med hjälp av fläktar. Det handlar med
+andra ord om en sopsug med en ny typ
+av inkast."" 13464-00-00"
+12070001,,Tekniktjänst som ska ersätta papperskvitton med digitala kvitton,,2010,-101,9,204,1,not forest
+12079001,,"fjädrande sängbotten i stål med ""geometri som ska ge både stabilitet och lagom svikt"". Efter som sängbotten består av serieproducerade smådelar ska produkten kunna monteras snabbt både i butik och hemma.",,2010,-101,9,999,1,not forest
+12134001,,"Spelmotor som kan hantera ett ""stort antal individuella ljuskällor"" och ge en realistisk återgivning""",,2011,36500,9,999,1,not forest
+12151001,Trainitest,"Ny maskin som kan simulera alla sorters träning, från tennis till simninng. Maskinen har en ""servomotor som drivs av ett programmerbart styrsystem (PLC)""",,2011,92621,9,999,1,not forest
+12221001,Domex,"Höghållfaststål, i detta fall 3 nya sorter. Det nya stålet blev möjligt tack vare en ny kylsträcka",,2013,29220,9,103;206,1,"not forest; ""Nu kan vi göra det höghållfasta
+stålet så tunt och lätt att vi kan
+matcha designlösningar där man
+använder aluminium, säger Johan
+Broback.""13655-00-00"
+12228001,,Ett nytt intelligent skrivbord som anpassar sig efter användaren samtidigt som det är miljövänligt,,2013,-100,9,501;601;203,1,not forest
+12235001,,"En ny maskin som tillverkar mjukpapper, energisnålare än andra maskiner och med möjligheten att byta tillverkling av papper utan behovet att bygga om maskinen",,2013,21,2,203;103,1,"""Det är en ny generation mjukpappersmaskiner
+där vi kan tillverka
+papper av hög kvalitet i en energisnål
+produktion, säger Karl-Johan Tolfsson.
+Åtgången av fibrer vid samma papperstjocklek
+blir 30 procent lägre än
+tidigare, vilket är positivt ur miljöhänsyn."" 13672-00-00"
+12254001,,En metod som gör att ytvikten kan ställas om snabbt vid  byte av kvalitet i pappersmaskiner. Automatiseringen är egenutvecklad och har ökar produktiviteten ordentligt.,,2013,211,2,601,1,"""Tack vare dess föreslag kan massaflödet regleras automatiskt"" 13696-00-00"
+12322001,Cellufoam,Ett nytt miljövänligt material gjort av pappersmassa som förhoppningvis ska kunna ersätta EPS (frigolit).,,2015,25240,2,114;101;107,1,"""När
+det torkat blir det ett poröst och lätt
+material som påminner om EPS, expanderad
+polystyren, eller frigolit
+som de flesta säger. … Många vill komma bort
+från plastbaserade material, som frigolit."" 13777-00-00; good example bv2; good innovation journey; bought by stora enso in 2018"
+12335001,Peepoo,En självsanerande engångstoalett som består av en påse i ett bionedbrytbart material. Toaletterna kan på grund av att innehållet desinficeras användas till gödsel.,,2012,85325,2,107;501;114,1,"not forest; ""Materialet är en biologiskt
+nedbrytbar plast, gjord av en
+blandning av alifatiska/aromatiska
+sampolyestrar och polymjölksyra (PLA),
+med små tillsatser av vax och kalk."" 14075-00-00"
+12363001,,"En ""unik teknik för att behandla flis för massaproduktion"" (Svensk Papperstidning, 2014, nr. 1, p. 34) som kräver mindre energi genom att förbehandla flisen vid huggningen.",,2014,21111,2,203,1,"""Företaget erbjuder ett unik teknik för att behandla flis för massaproduktion och att optimer tekniken för att spara energi."" 13817-00-00; ""Bolagets mål är att hjälpa skogsindustrien att effektivisera sina flisbaserade processystem."" 13819-00-00; good example bv2"
+12367001,,Miljövänlig elektronik som kan tryckas på papper med vanliga tryckpressar.,,2011,212,9,107;501,1,not forest
+12393001,,"En plattform för kombinationen av haptik, fysik och 3D-grafik. Plattformen implementeras i träning- och simulationsinstrument för medicinska ändamål.",,2013,33101,9,501,1,not forest
+12416001,Meganews,"en internetuppkopplad tidningsautomat som med print-on-demand-teknik skapar en kopia direkt (Svensk Papperstidning, 2012, nr. 10, p. 6)",,2013,-101,9,207;211;103;204,1,not forest
+12419001,,Aukustiska displayer av pappersmassa som har ljuddämpande och temperaturreglerande egenskaper.,,2013,-100,2,213,1,"""… en ljuddämpande produkt av fibermassa"" 13950-00-00"
+12424001,Sustainable Packaging,En serie förpackningar gorda av micro-wellkartong.,,2013,15,2;3,402;107,1,"""Skillnaden är att pappret i de nya produkterna har förstärkts med sulfatmassa för att kunna blir förpackningspapper."", ""Vedfibern är ju en del av naturens kretslopp som vi lånar och sedan lämnar tillbaka igen"" 13959-00-00"
+12425001,HDI800,Ett inspektionssystem för kartongbanor med 100 kameror. Systemet kan kontrollera varje kvadratmilimeter vid en hastighet på 800 meter i minuten.,,2013,2121,2,602;601;501;204;203,1,"""Tidigare var Skogshall tvungen att kassera mellan 700-1500 ton färdig kartong i månaden på grund av skjuvningsdefekter och felsökning kunde ta upp till 45 minuter"" 13960-00-00"
+12430001,InvoTip,Produkt för ytbehandling och bestrykning av papper. Den sparar såväl på råmaterial som energi.,,2009,21,2,103;203,1,
+12454001,IMX,Fjärrövervakningssystem som består av hårdvaran (IMX) i kombination med mjukvara (Aptitude Observer) känner automatiskt av ogynsamma vibrationer i maskinutrustning genom fasta mätpunkter och skickar automatiskt ut larm om så sker.,,2014,21,9,162,1,good example bv9
+12463001,Skräddarsydda materialegenskaper,En metod för presshärdning av stål som genom uttänkt bromsning av kylningen uppnår olika sträckgränser (hållfasthet) i plåten.,,2013,3410,9,999,1,not forest
+12466001,BoxLoc,"Återförslutare av kartonger i form av en plastdetalj (PA66 eller PP) som också fungerar som ""flagga"" och visar på håll att kartong öppnats.",,2009,-100,9,999,1,not forest
+12476001,Cailar,Vattenbaserat beläggningsmaterial som kan ersätta plastfilm i förpackningar. Materialet baseras på förnyelsebara råvaror och är därmed miljövänligare än oljebaserade plastfilmer.,,2014,2121,1;2,114;101,1,"""Det vattenbaserade systemet är
+utvecklat för beläggning av pappersmaterial
+och är ett miljövänligt alternativ
+till de oljebaserade plastfilmer
+som i stor utsträckning används
+i förpackningar idag."" 14075-00-00"
+12518001,TactonWorks,IT-system som hjälper säljaren sammanställa exakt den produkt eller en konfiguration av produkter som kunden vill ha.,,2008,20302,9,601,1,
+12565001,,En bältesförsträckare med elmotor som komplement till krutladdning. Elmotorn aktiveras vid kraftiga inbromsningar för att dra åt bilbältena.,,2008,34100,9,501,1,not forest
+12569001,,"världen första elhybridbåt som drivs med vanliga träpellets. (Ny Teknik, 2009, nr. 6, p. 18). Båten är den första kommersiella implementeringen av företagets elhybriddrift som använder pellets för att generera el.",,2009,35110,,,,
+12576001,,Ställningstrall i kompositmaterial som är uppemot 50% lättare och 3ggr längre livslängd jämfört med en ställningstrall i trä som ökar i vikt vid nederbörd. Ställningstrallen kan vid kassering malas ned och återanvändas.,,2014,45,9,101;161;107;206,,"not forest; ""Trallen tillverkas
+av 100 procent återvinningsbart material
+och den dag produkten kasseras utgår
+pant när den returneras till Octaflex,
+som i sin tur maler ner materialet för recirkulering."" 14248-00-00"
+12586001,,"System där en datorröst som läser upp plocklistan för lagerarbetare. ""I stället för att skriva ut plocklistor på papper får lagerarbeterna dem upplästa, rad för rad, i ett trådlöst headset."" (Ny Teknik - Automation, 2008, nr. 9 (49), p. 10).",,2008,341,,,,
+12639001,Bio-Energy with Carbon Capture and Storage (BECCS),Tekniken för att fånga in koldioxid från processindustrier med biomassa som råvara och ta den ur kretsloppet.,,2012,21,1;2;0,206;211,1,"""Tekniken heter bio-energy with carbon
+capture and storage och förkortas
+BECCS. Den går ut på att
+fånga in koldioxiden från processindustrier
+med biomassa som råvara,
+till exempel etanolfabriker där
+koldioxid frigörs i jäsningsprocesser
+eller biogasanläggningar och
+pappersindustrier."" 14372-00-00"
+12691001,,"Världens första instrument som kontinuerligt kan mäta pappersytans kvalitet online och sedan styra tillverkningsprocessen mot bättre kvalitet utifrån mätdata (Elektroniktidningen, 2014, nr. 5, p. 4-5)",,2014,212,2,602;601,1,"""För oss tar det cirka en sekund att upptäcka en kvalitätsförändring, sen tar det förstås en stund att åtgärda processen"" 14471-00-00 "
+12769001,Network Platform QCS800xA,Kvalitetsstyrsystem för pappers- och massaindustrin som kontrollerar och hanterar en mängd faktorer under produktionsprocessen såsom tjocklek och fukthalt.,,2009,21,2,999,1,"""Då blir det viktigaste för oss att vår utrustning stödjer kvalitätstänket och grantera samma resultat varje gång"" 14657-00-00"
+12776001,Pulpeye,Modulärt analys- och mätsystem för pappers- och massaindustrin. Systemet är onlinebaserat och baseras på hårdvara samt mjukvaran Extracteye.,,2012,21,2,203;602;601,1,"""Det blir inte bara mer energieffektivt, utan en maskin som kan styras och regleras optimalt ger en jämmnare kvalitet av slutprodukten"" 14670-00-00"
+12777001,,Sensor som mäter vattenmängden i pappersmaskinens viraparti i viktiga positioner. Mätresultaten möjliggör kontroll och optimering av mäldkemin vilket ger ökad körbarhet och bättre papperskvalitet.,,2012,21,2,602;601,1,"""Mätresultaten gör det möjligt att kontrollera och optimera mäldkemin, vilket ökar körbarheten och förbättrar papperskvaliteten"" 14676-00-00"
+12784001,,Skräddarsydd TPE-lösning (en Dryflex SEBS-förening) som material till halkskydd till specialgångstaven Flexyfoot som har hög slittålighet och friktion vilket ger ett bra fäste även på hala och våta ytor.,,2011,36400,9,501;161,1,not forest
+12801001,Pulzit,Träningsglasögon med inbyggd skärm som visar personens puls i ögonvrån.,,2012,-101,9,999,1,not forest
+12813001,Forwarder 1450F,Ny konstruktion av skotare för timmertransporter som ger en minskning av chassivikten på femton procent vilket innebär lägre bränsleförbrukning.,,2012,02,9,203;211,1,good example bv9
+12927001,Easy Ad,System för utomhusreklam i en wellpappskvalitet som passar för såväl inom- som utomhusbruk och som dessutom är till 100 procent återvinningsbar.,,2009,52,2,107,1,"""SCA har utvecklat en wellpappskvaliteten som, förutom vara återvinningsbar till 100 percent, lämpar sig för såväl inomhus- som utomhustillämpningar"" 15000-00-00"
+12933001,G-Print,"Ett unikt matt, bestruket papper.",,1975,22110,2,162,1,"""Det unika är att papperet är bestruket och lätt kalandrerat"" 15034-00-00"
+12966001,Intellinova,Onlineverktyg för vibrationsanalys baserat på SPM HD metoden i form av en vibrationsgivare.,,2013,21111,2,602;601,1,"""… och analysera mätningar på ett effektivt sätt"", ""Kraftliner är ett baspapper tillverkat av nyfiber som används för tillverkning av högklassig wellpapp"" 14034-00-00"
+13032001,,Helt kund anpassade byggsats hus helt i limträ som håller värmen medan fukten kan röra sig fritt.,,2015,-101,2;3,203;309,1,"""Inget finns färdigt på lager, utan allt
+tillverkas på beställning och i samarbete
+med kunden."" ""LIMTRÄBALKEN ÄR I massiv gran med
+maximalt fem millimeter mellan årsringarna
+och är limmad med ett tvåkomponents
+melaminhartslim."" 15468-00-00"
+13041001,X-Tech /X-Bim /X-Shell,"Kompositteknologi (högvärdiga termoplastkompositer med kontinuerlig kolfiber) som möjliggör lösningar (för kunden) som signifikant minskar vikt, stärker egenskaper samt sänker kostnaderna.",,2014,36400,9,999,1,not forest
+13069001,,"Utrustning för att utvinna energi ur vibrationer från industriella processer med hjälp av elektromagnetism. Den kan göra iot-prylar självförsörjande på el. Den patenterade metoden kallas för ”energy harvesting"".",,2019,211,9,206;203;104,1,"""Tänkbara
+applikationer är anläggningsmaskiner,
+kompressorer, flygplan
+och andra ”skakiga” miljöer där
+tekniken kan göra sensorer, mätinstrument
+och annan iot-utrustning
+självförsörjande på ström. På
+detta sätt slipper man kablar och
+batterier, vilket ska eliminera så -
+väl höga initialkostnader som
+underhåll och byten av dyra batterier""16311-00-00; "
+13089001,SKF Xtra Power Lawn and Garden,"[N]ya kilremmar för kraftöverföring [...]  med extremt hög hållbarhet, är anpassade för trädgårds-maskiner som jordfräsar, åkgräsklippare och kompostkvarnar. Konstruktionen i Aramid garanterar betydligt längre hållbarhet än standardtrådar i polyester. Höljet i speciell torr bomull är avsett att ge remmarna en jämnare kraft-överföring. De ska också orsaka mindre slirning vid koppling jämfört med lågeffektremmar standardutförande.",,2015,29320,9,161,1,good example bv9
+13091001,,"Diskkoppling som klarar tyngre laster och temperaturer[...] Designen skapar ett brett användningsområde anpassat till applikationer inom till exempel marin industri, petrokemi, pappersindustri och tryckerier.",,2015,211,9,999,1,good example bv9
+13121001,Absorption Express,Nyutvecklad högutbytesmassa för mjukpapper.,,2015,21220,2;3,203;201,1,"""Det unika med produkten
+är att den ersätter dyrare massakvaliteter
+samtidigt som den har bättre
+absorptionsegenskaper och bulk än
+de kvaliteter den ersätter."", ""Vi använder enbart färsk gran för
+våra slipmassor och vi hämtar veden
+inom en radie av 10 mil. Färskheten
+ger förutsättningar för bättre
+produktegenskaper såsom ovanligt
+hög ljushet, faktiskt 60 procent eller mer redan på oblekt massa. Veden är
+också mer lättbarkad och ger en lägre
+kemikalie- och energiförbrukning."", 15617-00-00; good example bv3 for paper industry"
+13122001,Bulk Booster,[E]n ny massakvalitet [...] speciellt avsedd att höja bulk och styvhet ytterligare hos kartongprodukter.,,2015,21211,2;3,203;201,1,"""Det unika med produkten
+är att den ersätter dyrare massakvaliteter
+samtidigt som den har bättre
+absorptionsegenskaper och bulk än
+de kvaliteter den ersätter."", ""Vi använder enbart färsk gran för
+våra slipmassor och vi hämtar veden
+inom en radie av 10 mil. Färskheten
+ger förutsättningar för bättre
+produktegenskaper såsom ovanligt
+hög ljushet, faktiskt 60 procent eller mer redan på oblekt massa. Veden är
+också mer lättbarkad och ger en lägre
+kemikalie- och energiförbrukning."", 15617-00-00; good example bv3 for paper industry"
+13202001,Gameon,En webbaserad simuleringsmodel för industriell miljö- och processteknik som kan köras i realtid tack vare att uträkningarna sker i molnet.,,2016,80301,9,999,1,
+13223001,Strenx 1100 MC,"Den ultrahöghållfasta tunnplåten StrenxTM 1100 MC uppfyller alla kraven som ställs av avancerade lyftutrustningsproducenter. ... Strenx 1100 MC noggrant kontrollerade egenskaper, förbättrade töjningsvärden, slagseghet och verkstadsegenskaper garanterar en säker överföring från de vanliga sträckgränsnivå- erna på 900 MPa till en sträckgräns på 1 100 MPa. (Bergsmannen 1, 2016, nr. 2, p. 10)",,2016,2812,9,999,1,not forest
+13291001,,"Skärning av kartong med rörliga hjul, något som innebär stor flexibilitet",,1998,21211,2,999,1,
+13303001,Circulose,"Ett material som består av 100 % återvunnen cellulosa. Baserat på en ""... världsunik teknologi för återvinning av bomull och andra cellulosabaserade fibrer."" (SPCI Svensk Papperstidning, 2016, nr. 1, p. 30-33). Man bryter ner ogenomträngliga fibriller som cellulosa består av.",,2020,5241,2;3,107;206;204;201;202;203;101,1,113188-00-00
+13311001,,"M-vägg av korslimmat trä som klarar brand- och mekaniska krav, är smalare, lättare och miljövänligare än de tidigare alternativen.",,2016,45212,2,101,1,"""M-väggar i KL-trä är billigare,
+mindre utrymmeskrävande,
+lättare och bättre
+för miljön, säger Daniel
+Wilded, försäljningsingenjör
+på Martinsons."" 15867-00-00"
+13313001,WoodGuard-6,En helautomatisk emballagemaskin som täcker alla sex sidor samt limmar ihop emballaget med smältlim och fäster etiketter på fyra sidor.,,2016,20102,9,601;112,1,
+13347001,Arcwise,En wellpappförpackning med runda former som är extra stabil och möjliggör 30% lättare förpackningar.,,2016,21211,2,999,1,"""Enligt företaget kommer tekniken bland annat innebär att förpackningar kan göras upp till 30 percent lättare"" 15917-00-00 "
+13355001,Soundots,"Sladdlösa, små och stapelbara högtalare. Detta för att skapa större högtalare, där egenutvecklad ai-teknik anpassas ljudet efter hur många enheter som är inkopplade.",,2015,-101,9,999,1,not forest
+13357001,,"En automatiserad träningsmaskin som med hjälp av en elmotor anpassar belastningen efter användaren. Maskinen låter den använda sim maximala förmåga genom hela rörelsen, vilket leder till effektivare träning och lägre skaderisk.",,2015,-101,9,999,1,not forest
+13367001,,Smycken ned nfs-chip som kan användas vid t.ex betalning eller som passerkort.,,2012,-101,9,999,1,not forest
+13373001,,En cellulosafiberanläggning som använder returpapper samt är automatiserad till väldigt hög grad.,,2016,21129,2;3,206;203;202;201,1,"""Icell använder ocirkularade tidningar till produktion av isoleringsmaterial. Genom att återvinna ett ton tidningspapper sparas 19 trä, 4000kWh energi, 29 000 liter rent vatten, 3 kubikmeter sopor och sammanlagt 30 kg giftigt avfall"" 15971-02-00"
+13398001,Bioink,3d-skrivare som kan skriva ut celler blandat med nanocellulosa vilket kan växa till sig och forma riktig vävnad.,,2016,80301,1,501,1,"good example bv1; ""Resultatet blev en 3d-bioskrivare
+där celler trycks genom skrivhuvudet,
+ungefär som med en spruta,
+samt ett bläck med nanocellulosa
+som får cellerna att trivas.
+Med tekniken överlever runt 95
+procent av cellerna en utskrift."" 16002-00-00"
+13410001,Tiki,Billig och bekväm andningsmask. Tillverkas genom vakuumformar i petplast som justerar trycket beroende på bärarens andning.,,2016,45110,9,501;203;204,1,not forest
+13415001,,En lastbil som erbjuder både pappersstrimlare och elektronikförstörare för känsligt material.,,2016,-100,9,999,1,not forest
+13518001,,"Nystartade Voysys har tagit fram en programvara som gör det möjligt att livesända vr-video genom att sy ihop rörlig bild från flera olika 360-kameror. Det som särskiljer deras lösning är att den även klarar av att lägga till ”virtuella skärmar” ovanpå vr-videon. (Ny Teknik, 2017, nr. 5, p. 14-15) Tekniken är användbar i livesändningar av vr",,2017,02019,9,999,1,
+13528001,,"Företaget har tagit fram ett nydanande system för medicinsk bildanalys inom cancerbehandling. Genom att ersätta konventionell datortomografi (CT) med bilder från en magnetkameraundersökning (MR) och låta självlärande algoritmer analysera bilderna, kan systemet öka precisionen för strålbehandlingen för att skydda friska kringliggande organ, och göra det möjligt med mer individanpassad och träffsäker behandling. (Ny Teknik, 2017, nr. 9, p. 15)",,2017,85,9,501,1,not forest
+13539001,,"Grundtekniken utvecklades för att snabbt kunna skanna av objekt som fanns framför missilen. Men Cind har gett den ett nytt användningsområde. Genom att placera flera kameror i en portal som en timmerlastbil kör igenom kan man mäta lassets volym. Det gör att skogsbolagen kan ha en operatör som fjärrövervakar mätningarna, i stället för att ha flera personer som utför det arbetet på plats. (Ny Teknik - 33-listan, 2017, nr. 14, p. 10)",,2016,20,,,,
+13545001,,"Med restprodukten glycerol som bas har Sustainalube lyckats ta fram en ny typ av giftfritt, nedbrytbart smörjmedel. (Ny Teknik - 33-listan, 2017, nr. 14, p. 13)",,2017,020,1,201;207;101,1,"""Genom att dra nytta av restprodukten
+glycerol och sedan lägga
+till additiv, det vill säga tillsatsämnen,
+från växtriket, så har företaget
+kunnat skapa ett medel som är
+giftfritt, biologiskt nedbrytbart –
+och lika effektivt som konventionella
+smörjmedel."" 16236-00-00"
+13557001,,Silverkloridbehandling av polyester för att motverka dålig lukt i kläder.,,2011,36400,9,102;701,1,not forest
+13633001,,"Ett nytt isoleringsmaterial som består av speciellt designad kabelplast, tvärbunden polyeten. Det har väldigt högt spänningsnivå och gör möjligt att överföra kraft långa sträckor med mindre energiförluster.",,2017,31300,9,203;161,1,not forest
+13661001,,"Mätsystem som i realtid övervakar flödesegenskaper vid tillverkning i industri. Egenutvecklad teknik med ultraljud som mäter flöden och egenskaper. Tidigare har man fått göra detta manuellt. Den nya produkten är mer miljövänlig, säker, kostnadseffektiv och håller jämn kvalité.",,2017,21,,,,
+13705001,Threespine,"En flexibel låstunga vilken gör det möjligt att genom ett enkelt klick, montera företagets möbelinredningar, utan verktyg. (Plastforum, 2017, nr. 8, p. 17) Låstekniken fungerar också för konkava, konvex och runda möbeldelar.",,2017,361,9,999,1,not forest
+13706001,Surf Leash Revolwe,"Surf leash, tillverkad av material från återvunna PET-flaskor, miljöcertifierad NR och återvunnen TPU, vilket innebär ett radikalt minskat koldioxidutsläpp jämfört med motsvarande produkter av oljebaserade material. (Plastforum, 2017, nr. 8, p. 17)",,2017,-101,9,102;213,1,not forest
+13731001,TT 245 (Top Tension),Ett nytt bandspänningsaggregat som bygger på ett fyrkolvssystem. Systemet kan installeras tillsammans med existerande system och gör det möjligt att hålla en konstant spänning samt reducera avbrottsrisken.,,2018,201,2,103,1,"""Stabilare
+drift minskar risken för stopp, samtidigt
+som man via tunnare sågblad kan
+öka utbytet"" 45205-00-00"
+13746001,,"En egenutvecklad unik maskin som använder en ny teknik vid tillverkning av servetter och bordsdukar. Med maskinen ""får produkten en känsla av linneduk."" (SPCI Svensk Papperstidning, 2018, nr. 3, p. 36)",,2018,-101,2,999,1,
+13748001,,"En ny produktionsanläggning för att omvandla sågspån till pyrolysolja. Pyrolysolja är en förnybar råvara till biodrivmedel. ""Detta är Europas första produktionsanläggning av pyrolysolja som kopplas till ett raffineri."" (SPCI Svensk Papperstidning, 2018, nr. 5, p. 8)",,2021,-101,2,206;110,1,
+13780001,DuraSense,"Biokompositmaterial som innehåller TMP-massa och plast (vanlig, bio- eller returplast).",,2018,252,2,102;114;110;107;206,1,
+13783001,,"Ny skruv som bara kräver 10 newton för att gå in i trävirket, jämfört med genomsnittliga skruvar som kräver 30 netwon. Huvudet har försetts med inverterade skär i tårtbitsmönster. Med denna design får man ett bättre avslut och samtidigt bättre klämkraft eftersom träet kompakteras under skruvskallen.",,2018,45,9,501,1,"good example bv 9; ""Det är viktigt i en bransch där många faktiskt är slut
+i axlar och rygg vid femtioårsåldern,
+säger Christofer Lindberg."" 55270-00-00 - 5527-01-00"
+13791001,,"En unik metod för att sanera gruvavfall. Metoden innebär att täcka gruvavfall med grönlutslam. ""Det understa lagret består av en blandning av grönlutslam och stenmjöl med HDPE emellan och möran i översta lagret."" (SPCI Svensk Papperstidning, 2018, nr. 5, p. 20)",,2017,10100,2,212;207;206;102,1,
+13795001,Karma,En app (en maträddartjänst) som möjliggör att kunder kan köpa mat till rabatterat pris.,,2018,-101,9,204,1,not forest
+13834001,CoroTap 400,En ny gängtapp som möjliggör en spånfri och säkrare och stabilare gängning jämfört med konkurrenterna. Ytterligare förkortas bearbetningstider.,,2018,45230,9,999,1,not forest
+13836001,BLT / DLT,Två sensorer utvecklades genom en ny mätteknik. DLT mäter filtratets kappatal medan BLT mäter det totala kappatalet. Den nya mättekniken just mäter lignin. Tekniken möjliggör att minska mängden kemikalier och att få jämnare massakvalitet.,,2018,211,2,202;201,1,"""Genom att applicera resultatet från laboratorietförsök i en massalinje bekräftades att mätningar online av utlöst ligning gör det möjligt att minska blekningskostnader och vattenförbrukning samt bidra till jämnare massakvalitet"" 73242-00-00"
+13844001,No Man Entry,En ny metod för rengöring av sodapannor. Att använda roboter för att rengöra sodapannor möjliggör en säkrare arbetsmiljö och en dubbelt så snabbt rengöring.,,2018,2111,9,501,1,good example bv9
+13853001,Aiida,Maskinlärningstjänst som kan hantera de flödena som traditionellt är manuella i dagens företag. De har lyckats skapa en algoritm som kan ta sig an ostrukturerad data och göra den så effektiv som möjligt med begränsad information. Dvs träningsdata är inte lika nödvändig i samma utsträckning.,,2018,-100,9,601,1,not forest
+13859001,TC-kanaltork,"En ny generation av virkestork. Genom ""att styra temperatur och luftfastighet individuellt i olika zoner"" ""kan sågverket med stor frihetsgrad välja dimensioner på virket som ska torkas, något som tidigare inte varit möjligt i en kanaltork"" (NTT, 2018, nr. 7, p. 6)",,2018,20,2,203,1,"""Det kan förändra sättet att arbeta på ett helt sågverk. Det skapar möjligheter att vara betydligt mer flexibel och ger stora fördelar när det handlar om planering i sågen."" 77427-00-00"
+13869001,,"En ny lösning som används för att samla alla information från hela anläggningen så att data kan ""visualiseras och tydliggöras på det sätt man själv önskar""(Automation, 2018, nr. 9, p. 13). Genom lösningen, minskas ställtider, oplanerade stopp samt energiförbrukning med cirka 10 procent.",,2018,20,,,,
+13885001,,"Modeller som förutser processer som är av två slag: fysikaliska (sambandet mellan tryck och vattenflöde) och statistiska: först genom mätning och kalibrering i labbmiljö och sen simuleras den fysikaliska modellen, varav resultatet blir en process som justerar sig själv. Simuleringsmodellerna kompletteras med soft-sensorer som har NIR (near-infrared spectroscopy). Med simuleringsmodellerna och mätdatan man matar in, kan de prediktera att det blir en viss temperatur eller en viss koncentration i ett flöde.",,2019,21,9,601;601,1,
+13890001,Renol,"En förnybar bioplast som är gjord av restprodukter från skogsindustrin. Processen ""bygger upp ligninet till en hydrofob plastliknande polymer i en enkel process utan giftiga utsläpp eller restprodukter."" (SPCI Svensk Papperstidning, 2019, nr. 6, p. 24)",,2020,2416,2,114;101;107,1,
+13925001,,En ny teknik för snabb och jämn uppvärmning av kompositfibern.,,2019,36400,9,999,1,not forest
+13942001,,"Kombinationen av Biolaminas teknologi om cellodling -laminintekniken- och Spibers spindeltrådsprotein -silkesprotein- möjliggör ett biorelevant sätt att odla celler i 3D. ""Genom att koppla Biolaminas laminer till detta silkesprotein har 3D-ytan fått en biologisk funktion."" (Kemivärlden, 2019, nr. 4, p. 32)",,2019,731,1,501,1,not forest
+13969001,Biodolomer,"Ett nytt nedbrytbart fossilfritt biomaterial. Materialet byggs på kalciumkarbonat och en bionedbrytbar polymer, PBAT.",,2019,25,,,,
+13981001,,En elektrisk wakeboard som kan uppnå 60 kilometer per timme med ett egenutvecklat framdrivningssystem.,,2019,-101,9,999,1,not forest
+13997001,,"Mjukvara ""som effektiviserar processen att framställa stora mängder träningsdata som har hög kvalitet och som är konsekvent. Det handlar bland annat om algoritmer som kan följa objekt på bilderna, vilket innebär att inte varje bildruta i en sekvens måste annoteras manuellt."" (Ny Teknik - 33-listan, 2019, nr. 21, p. 15)",,2019,341,9,601,1,not forest
+14003001,,"Batteri med råvaror från skogen. "".....det aktiva materialet i den positiva elektroden består av kol och vedämnet lignin medan den negativa elektroden består av kol och en organisk polymer. Elektrolyten är vattenbaserad."" (Ny Teknik, 2019, nr. 45, p. 30)",,2021,32100,2;1,207;107;102;211;110,1,""".....det aktiva materialet i den positiva elektroden består av kol och vedämnet lignin medan den negativa elektroden består av kol och en organisk polymer. Elektrolyten är vattenbaserad."" 93187-00-00"
+14576001,Wooduro,"En teknologi ""som ger ett extra tåligt toppskikt.""",,2019,45,9,999,1,
+14577001,Raptor,"En kutter som är annorlunda än traditionella kuttrar. Den har inte ""skruvningen på periferin utan på sidan där skären monteras."" (NTT, 2019, nr. 1, p. 12)",,2019,201,9,213,1,good example bv9
+14589001,,"Ett ny sätt för att mäta tryckkrafter ""med hjälp av optiska fibersensorer som egentligen används för att räta ut ljussignaler inom telekomsektorn. En fibertråd läggs runt lagret ytterring. Fibern förses med oregelbundenheter med jämna mellanrum. Dessa fungerar som mätpunkter runt lagret."" (Ny Teknik, 2019, nr. 15, p. 12,13)",,2019,211,9,601;602;162,1,good example bv9
+14612001,,Konstgräsplan. Den är baserad på sockerrörsgranulat som är nedbrytbart.,,2019,751,9,114,1,not forest
+14617001,,"En videotjänst för att ""spela in, analysera och dela en träning eller match."" (Ny Teknik - 33-listan, 2016, nr. 15, p. 10)",,2016,926,9,999,1,not forest
+14636001,FiberSafe,Papperremmar (paper straps) som är helt nedbrytbara.,,2019,211,2,501;101;105;204,1,"""We are introducing FIberSafe straps, for example - a replacement for wire straps around our bales that can be thrown into the pulper, fully degradable and eliminating potential accidents which can arise from dewiring"" 106497-02-00"
+14677001,,"Patenterat styrsystem för styrning av mesaugnar. Av medelvärdet av den brända kalken och rökgasernas temperaturer och differenstemperaturer kan det nu uppnås stabil drift, rätt kalkkvalitet och lägsta energiförbrukning.",,2012,21123,2,601;203,1,"""Styr man mesaugnen till rätt temperatur elimineras dammproblemt, den brända kalken får rätt kvalitet och energikostnaden sjunker."" 111046-03-00"
+14751001,,"En teknik för att fritera potatis med hjälp av vattenånga istället för gasol. ""Vattnet värms till ånga med hjälp av träpellets i en extern byggnad. Via ett avancerat rörsystem leds ångan sedan vidare till de totalt åtta fritöserna...."" (Livsmedel i fokus, 2020, nr. 2, p. 34, 35)",,2020,15310,2,101;110;162,1,"""Tydigare använde vi gasolen för att värma upp fritösen men sedan trygt ett år tillbaka använda vi vattenånga istället … Vattnet värms till ång med hjälp av träpellets i en extern byggnad"" 111593-00-00 "
+16067001,Timber Exchange,"En plattform som är utvecklad för att göra det möjligt för säljare att kontrollera och ha en överblick över produkten hela vägen till kunden. Plattformen kan göra processen kostnadseffektiv, och samtidigt generera inkomster med effektivare skeppning. Fler mindre och nischade jobb kan nu också vara möjligt i större utsträckning.",,2020,20,2;0,309;601,1,
+16068001,,"En ny typ av träfiberisolering. Råvaran är restprodukter från pappersindustrin. Isoleringskivan är patenterad och råvaran har en viss mögelresistans och har hög bullerdämpning, energieffektivitet och brandklassning. Verksamheten i den nya anläggningen kommer också vara 100 % cirkulär.",,2020,45,,,,
+16069001,Nexum,En mjukvaruplattform för indexering och integration av spårbar data. Syftet är att få en kostnadseffektiv och användarvänlig som är anpassad till sågverkens systemmiljö. Plattformen indexerar data från kritiska system på sågverket.,,2020,201,2;3,601;309;203;,1,"""När sågverkens fokus flyttas
+från produktionshastighet till
+produktvärde blir det nödvändigt
+att skaffa sig en mer
+målstyrd hanteringen av data.
+Spårbarhet och sortering efter
+kundens behov blir två avgörande
+steg mot framtida lönsamhet
+när kampen om råvaran blir allt
+hårdare."" 147629-00-00"
+16155001,,"En produkt som är baserad på network slicing, där en operatör kan skära upp nätverket i skivor. Ericssons lösning innebär att man medger nätverksskivning på radioaccessnätverk.",,2021,36500,9,999,1,not forest
+16197001,Aida,En AI-modell som kan identifiera virkesstavar i bilder. Den kommer till användning som stöd för virkesmätare vid travmätning. Detta innebär att mätningen blir mer effektiv.,,2021,20,2,601;602,1,
+16230001,,En förgasningsteknik där finfördelat biobränsle förgasas i en cyklonreaktor. Förgasaren ska producera förnybar syntesgas från träpellets. Målet är att ersätta fossil gasol som används i pappersbruk.,,2021,2112,2,110;101;211;206,1,"""Den ska producera
+förnybar syntesgas från
+träpellets, för att ersätta den fossila
+gasol som används i pappersbruket
+i dag."" 126484-00-00"
+16239001,,"En skärvätskeutrustning för som består av två kompaktbandfilter, ett hydrostatfilter, och kompressorkylare. Det nya systemet gör föravskiljningen bättre, minskad pappersförbrukning och reducerad mängd spillvätska.",,2020,316,2;3,212;206;103,1,"""Det ger såväl ekonomiska som miljömässiga vinster. Andra positiva
+effekter är en mycket högre reningsgrad, vilket innebär optimerad slipning,
+högre produktionstakt och kortare tid för underhåll."" 146850-00-00"
+16243001,,"Med federerad maskininlärning är det möjligt för företaget att träna ai-system på olika datakällor samtidigt, utan att kompromettera eller röja känslig och/eller reglerad information.",,2021,244,9,999,1,not forest
+16266001,IRB 1300,"En ny, snabbare och kompaktare robot som passar bra i trånga utrymmen. En ökad lyftkapacitet på upp till 11 kg skapar 27 procent snabbare cykeltid och nära 60 procent lättare samt 83 procent mindre än tidigare robot IRB 1600. Den består även av 20 stycken input- och output-portar. Roboten finns tillgänglig i tre olika versioner - 11kg/0,9m, 10 kg/1,15m och 7kg/1,4m. Vidare är den utrustad med inträngningsskydd som även står emot fasta partiklar såväl som vattenintrång.",,2021,-100,9,999,1,not forest
+16276001,Pevalen Pro,En mjukgörare för PVC som är 40% biobaserat av bland annat skogsprodukter. Det krävs mindre material och har god UV-beständighet.,,2019,-100,2,114;103,1,
+16280001,,En ny typ av grundläggning som består av korslimmat trä som i kombination med isolerande fuktbrytande skikt skapar en rationell och klimatsmart grundläggningsmetod.,,2021,-101,2,211;101,1,"""Grundläggningelementens bärande delar är uppbyggda av korslimmat trä som i kombination med isolerande och fuktbrytande skikt skapar en rationell och klimatsmart grundläggningsmetod"" 127328-00-00 "
+16287001,Golden Bullet 2.0,En lösning för att transportera temperaturkontrollerade varor från väg till järnväg med klimatpositiva konsekvenser. Man ansluter vagnar till loket med en tågvärmekabel.,,2021,02029,2,162;161;104,1,"""… eftersom den rymmer mer virke per meter"" 127345-00-00"
+16332001,r:go,En teknik för fjärrstyrning av lastbilar. Tekniken effektiviserar arbetet med bl.a. timmerlastning och frigör upp till 50 procent av arbetstiden samt att den är kostnadseffektiv.,,2018,0202,,,,
+16373001,Raptor,En produktionscell med robothantering. Man har även utvecklad en egen spånhanteringslösning som kan hantera alla spånstorlekar. Med produktionscellen kan man nu ta bättre betalt för spånen och producera flugfiskerullar obemannat i större utsträckning.,,2021,36400,1,103;206;204,1,"""Tack vare en smartare spånhantering
+så får vi nu bättre betalt
+för spånet, vi tar tillbaka all
+kylvätska till maskinen, och vi
+kan producera upp till 150 timmar
+obemannat."" 146802-00-00"

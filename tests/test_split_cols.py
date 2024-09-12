@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from pandas.testing import assert_frame_equal
-from src.swinno_helpers import split_cols
+from swinno_bioeconomy_directionality.swinno_helpers import split_cols
 
 test_input_df = pd.DataFrame({"A": ["1 2", np.nan, "0", "1 2"]})
 

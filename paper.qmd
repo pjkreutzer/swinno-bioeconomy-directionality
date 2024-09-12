@@ -44,9 +44,9 @@ import matplotlib.ticker as mtick
 import seaborn as sns
 from tabulate import tabulate
 
-from src.figures import *
-from src.utils import get_project_root, format_table
-from src.data_handling import database
+from swinno_bioeconomy_directionality.figures import *
+from swinno_bioeconomy_directionality.utils import get_project_root, format_table
+from swinno_bioeconomy_directionality.data_handling import database
 
 ROOT = get_project_root()
 raw_data = here("data/raw")

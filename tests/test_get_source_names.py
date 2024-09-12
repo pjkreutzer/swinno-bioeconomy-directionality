@@ -2,7 +2,8 @@ import os
 import tempfile
 from collections import defaultdict
 import pytest
-from src.file_utils import get_source_names
+from swinno_bioeconomy_directionality.file_utils import get_source_names
+
 
 def test_get_source_names():
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -17,6 +18,7 @@ def test_get_source_names():
         output = get_source_names(lookup_path, input_ids)
         assert output == expected_output
 
+
 def test_get_source_names_empty_input():
     with tempfile.TemporaryDirectory() as temp_dir:
         lookup_path = os.path.join(temp_dir, "lookup.txt")
@@ -29,6 +31,7 @@ def test_get_source_names_empty_input():
         expected_output = {}
         output = get_source_names(lookup_path, input_ids)
         assert output == expected_output
+
 
 def test_get_source_names_invalid_file():
     input_ids = ["1", "2", "3"]

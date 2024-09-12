@@ -1,4 +1,4 @@
-from src.data_handling import database
+from swinno_bioeconomy_directionality.data_handling import database
 from pyhere import here
 import pandas as pd
 

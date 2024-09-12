@@ -1,7 +1,7 @@
 import pandas as pd
-from src.utils import get_project_root
-from src.categorization_helpers import *
-from src.swinno_helpers import *
+from swinno_bioeconomy_directionality.utils import get_project_root
+from swinno_bioeconomy_directionality.categorization_helpers import *
+from swinno_bioeconomy_directionality.swinno_helpers import *
 
 ROOT = get_project_root()
 
@@ -12,7 +12,6 @@ list_visions_df = []
 list_notes_df = []
 
 for csv in Path(ROOT, "data", "raw-data", "tags").glob("*.csv"):
-
     file_name = Path(csv).stem
 
     print(f"****************** \n {file_name}")
