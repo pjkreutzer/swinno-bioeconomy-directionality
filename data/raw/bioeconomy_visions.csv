@@ -15,11 +15,10 @@ sinno_id,bioeconomy_vision,year
 5972001,Not Bioeconomy,1992
 5987001,Bioecology Vision,1991
 5994001,Not Bioeconomy,2004
-5999001,Bioresource Vision,2006
-5999001,Unsure,2006
+5999001,Not Bioeconomy,2006
 6001001,Bioresource Vision,2007
 6002001,Not Bioeconomy,1973
-6031001,Unsure,1975
+6031001,Bioresource Vision,1975
 6033001,Not Bioeconomy,1975
 6041001,Not Bioeconomy,1976
 6044001,Not Bioeconomy,1978
@@ -27,7 +26,7 @@ sinno_id,bioeconomy_vision,year
 6060001,Bioresource Vision,1977
 6081001,Not Bioeconomy,1978
 6099001,Not Bioeconomy,1979
-6110001,Unsure,1980
+6110001,Bioresource Vision,1980
 6116001,Not Bioeconomy,1980
 6125001,Not Bioeconomy,1981
 6130001,Not Bioeconomy,1982
@@ -87,8 +86,8 @@ sinno_id,bioeconomy_vision,year
 6940001,Bioecology Vision,1978
 6940001,Biotechnology Vision,1978
 6943001,Bioresource Vision,1980
+6945001,Bioecology Vision,1980
 6945001,Bioresource Vision,1980
-6945001,Unsure,1980
 6947001,Bioresource Vision,1980
 6949001,Bioecology Vision,1981
 6949001,Bioresource Vision,1981
@@ -111,7 +110,7 @@ sinno_id,bioeconomy_vision,year
 7134001,Not Bioeconomy,2008
 7139001,Not Bioeconomy,2004
 7174001,Not Bioeconomy,1970
-7218001,Unsure,1979
+7218001,Biotechnology Vision,1979
 7242001,Bioresource Vision,1981
 7277001,Not Bioeconomy,1985
 7318001,Not Bioeconomy,1994
@@ -126,37 +125,27 @@ sinno_id,bioeconomy_vision,year
 7369001,Bioresource Vision,1973
 7370001,Bioresource Vision,1973
 7372001,Not Bioeconomy,1973
-7373001,Not Bioeconomy,1973
-7373001,Unsure,1973
+7373001,Bioresource Vision,1973
+7374001,Bioresource Vision,1974
 7375001,Not Bioeconomy,1974
-7375001,Unsure,1974
-7376001,Bioresource Vision,1974
-7376001,Unsure,1974
+7376001,Not Bioeconomy,1974
 7377001,Not Bioeconomy,1974
-7377001,Unsure,1974
 7378001,Not Bioeconomy,1974
 7380001,Bioresource Vision,1974
 7383001,Bioresource Vision,1974
 7384001,Bioresource Vision,1975
-7384001,Unsure,1975
 7385001,Not Bioeconomy,1975
 7386001,Not Bioeconomy,1975
+7388001,Not Bioeconomy,1975
 7390001,Bioresource Vision,1975
 7392001,Not Bioeconomy,1973
-7392001,Unsure,1973
 7395001,Bioresource Vision,1975
 7396001,Not Bioeconomy,1975
 7397001,Bioresource Vision,1975
-7401001,Bioecology Vision,1976
-7401001,Bioresource Vision,1976
-7401001,Unsure,1976
+7401001,Not Bioeconomy,1976
 7402001,Bioresource Vision,1976
-7402001,Not Bioeconomy,1976
-7402001,Unsure,1976
 7405001,Not Bioeconomy,1976
 7406001,Bioresource Vision,1976
-7406001,Not Bioeconomy,1976
-7406001,Unsure,1976
 7407001,Bioresource Vision,1975
 7408001,Bioresource Vision,1976
 7410001,Not Bioeconomy,1977
@@ -167,57 +156,48 @@ sinno_id,bioeconomy_vision,year
 7418001,Not Bioeconomy,1977
 7423001,Bioresource Vision,1978
 7424001,Bioresource Vision,1978
-7425001,Bioecology Vision,1978
-7425001,Bioresource Vision,1978
-7425001,Unsure,1978
+7425001,Not Bioeconomy,1978
 7426001,Not Bioeconomy,1978
 7427001,Not Bioeconomy,1978
+7428001,Bioresource Vision,1979
+7429001,Bioresource Vision,1979
 7432001,Bioresource Vision,1979
 7433001,Not Bioeconomy,1979
 7435001,Bioresource Vision,1977
 7436001,Bioresource Vision,1979
 7438001,Not Bioeconomy,1979
 7440001,Bioecology Vision,1979
-7442001,Bioecology Vision,1980
 7442001,Bioresource Vision,1980
-7442001,Unsure,1980
 7443001,Bioresource Vision,1980
+7453001,Bioecology Vision,1982
+7453001,Bioresource Vision,1982
 7456001,Bioresource Vision,1982
 7457001,Not Bioeconomy,1982
 7458001,Bioresource Vision,1982
 7459001,Bioresource Vision,1982
 7460001,Not Bioeconomy,1983
-7461001,Bioresource Vision,1983
 7461001,Not Bioeconomy,1983
-7461001,Unsure,1983
 7463001,Bioresource Vision,1983
 7465001,Bioresource Vision,1984
 7466001,Bioresource Vision,1984
 7467001,Not Bioeconomy,1983
-7467001,Unsure,1983
-7468001,Bioecology Vision,1984
-7468001,Bioresource Vision,1984
-7468001,Unsure,1984
+7468001,Not Bioeconomy,1984
 7470001,Bioresource Vision,1984
-7470001,Unsure,1984
-7471001,Unsure,1984
+7471001,Not Bioeconomy,1984
 7473001,Bioresource Vision,1985
 7475001,Bioresource Vision,1986
 7477001,Bioecology Vision,1986
 7477001,Bioresource Vision,1986
-7477001,Unsure,1986
-7478001,Bioecology Vision,1986
 7478001,Bioresource Vision,1986
-7478001,Unsure,1986
 7479001,Not Bioeconomy,1986
-7482001,Unsure,1987
+7482001,Not Bioeconomy,1987
 7484001,Bioresource Vision,1987
 7485001,Not Bioeconomy,1988
-7487001,Unsure,1988
+7487001,Bioresource Vision,1988
 7492001,Bioresource Vision,1990
 7494001,Not Bioeconomy,1991
-7497001,Not Bioeconomy,1991
-7497001,Unsure,1991
+7497001,Bioecology Vision,1991
+7497001,Bioresource Vision,1991
 7498001,Not Bioeconomy,1991
 7503001,Not Bioeconomy,1992
 7505001,Bioresource Vision,1992
@@ -227,10 +207,8 @@ sinno_id,bioeconomy_vision,year
 7511001,Bioresource Vision,1994
 7512001,Not Bioeconomy,1994
 7513001,Bioecology Vision,1994
-7513001,Unsure,1994
+7513001,Bioresource Vision,1994
 7515001,Bioresource Vision,1995
-7515001,Not Bioeconomy,1995
-7515001,Unsure,1995
 7517001,Bioresource Vision,1995
 7518001,Bioresource Vision,1996
 7520001,Not Bioeconomy,1997
@@ -290,7 +268,6 @@ sinno_id,bioeconomy_vision,year
 7607001,Not Bioeconomy,1970
 7613001,Not Bioeconomy,1970
 7614001,Bioresource Vision,1970
-7614001,Unsure,1970
 7617001,Bioresource Vision,1971
 7638001,Not Bioeconomy,1971
 7642001,Bioecology Vision,1971
@@ -322,7 +299,6 @@ sinno_id,bioeconomy_vision,year
 7809001,Not Bioeconomy,1976
 7817001,Not Bioeconomy,1976
 7827001,Bioresource Vision,1976
-7827001,Unsure,1976
 7829001,Not Bioeconomy,1976
 7833001,Not Bioeconomy,1973
 7836001,Not Bioeconomy,1977
@@ -394,7 +370,6 @@ sinno_id,bioeconomy_vision,year
 8412001,Bioecology Vision,1989
 8412001,Bioresource Vision,1989
 8422001,Bioresource Vision,1989
-8422001,Unsure,1989
 8423001,Not Bioeconomy,1989
 8448001,Bioresource Vision,2010
 8459001,Not Bioeconomy,1989
@@ -483,7 +458,6 @@ sinno_id,bioeconomy_vision,year
 9377001,Biotechnology Vision,1998
 9398001,Bioecology Vision,2000
 9398001,Biotechnology Vision,2000
-9398001,Unsure,2000
 9410001,Bioresource Vision,1970
 9411001,Bioresource Vision,1970
 9413001,Bioecology Vision,1971
@@ -563,10 +537,11 @@ sinno_id,bioeconomy_vision,year
 9531001,Biotechnology Vision,2003
 9534001,Bioresource Vision,2004
 9535001,Bioecology Vision,1971
-9535001,Unsure,1971
 9536001,Bioresource Vision,1977
 9537001,Bioresource Vision,2004
 9538001,Not Bioeconomy,2004
+9539001,Bioecology Vision,1981
+9539001,Bioresource Vision,1981
 9540001,Not Bioeconomy,2004
 9541001,Not Bioeconomy,2005
 9542001,Bioresource Vision,2005
@@ -676,16 +651,22 @@ sinno_id,bioeconomy_vision,year
 10682001,Not Bioeconomy,1977
 10701001,Not Bioeconomy,1998
 10703001,Not Bioeconomy,1970
+10882001,Bioresource Vision,2007
 10925001,Bioecology Vision,2011
 10927001,Bioresource Vision,2010
+10928001,Bioecology Vision,2010
+10928001,Bioresource Vision,2010
 10950001,Not Bioeconomy,2010
 10974001,Bioecology Vision,2015
+11016001,Bioresource Vision,2011
 11098001,Not Bioeconomy,2010
 11106001,Biotechnology Vision,2008
 11142001,Bioresource Vision,2013
 11142001,Biotechnology Vision,2013
 11307001,Not Bioeconomy,2009
 11399001,Bioecology Vision,2010
+11399001,Bioresource Vision,2010
+11399001,Biotechnology Vision,2010
 11468001,Not Bioeconomy,2013
 11543001,Not Bioeconomy,2008
 11546001,Bioecology Vision,2014
@@ -724,17 +705,15 @@ sinno_id,bioeconomy_vision,year
 12466001,Not Bioeconomy,2009
 12518001,Not Bioeconomy,2008
 12565001,Not Bioeconomy,2008
-12576001,Bioecology Vision,2014
-12576001,Not Bioeconomy,2014
 12639001,Bioecology Vision,2012
+12639001,Bioresource Vision,2012
+12639001,Biotechnology Vision,2012
 12784001,Not Bioeconomy,2011
 12801001,Not Bioeconomy,2012
 12927001,Bioecology Vision,2009
 12946001,Bioecology Vision,2000
 12946001,Bioresource Vision,2000
-13013001,Bioecology Vision,2007
 13013001,Bioresource Vision,2007
-13013001,Unsure,2007
 13014001,Not Bioeconomy,2007
 13041001,Not Bioeconomy,2014
 13069001,Bioecology Vision,2019
@@ -777,7 +756,6 @@ sinno_id,bioeconomy_vision,year
 14612001,Not Bioeconomy,2019
 14617001,Not Bioeconomy,2016
 16067001,Bioresource Vision,2020
-16067001,Unsure,2020
 16155001,Not Bioeconomy,2021
 16197001,Bioresource Vision,2021
 16230001,Bioecology Vision,2021
