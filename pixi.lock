@@ -176,6 +176,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pillow-10.4.0-py312h8609ca0_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pkgutil-resolve-name-1.3.10-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.2-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/plotly-5.24.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/polars-1.7.0-py312h672d452_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/prometheus_client-0.20.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/prompt-toolkit-3.0.47-pyha770c72_0.conda
@@ -210,7 +211,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3986-validator-0.1.1-pyh9f0ad1d_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/rpds-py-0.20.0-py312he431725_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ruff-0.6.4-py312h42f095d_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/scipy-1.14.1-py312heb3a901_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/scipy-1.14.1-py312h20deb59_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-0.13.2-hd8ed1ab_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-base-0.13.2-pyhd8ed1ab_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/send2trash-1.8.3-pyh31c8845_0.conda
@@ -222,6 +223,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/sqlalchemy-2.0.34-py312h024a12e_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/stack_data-0.6.2-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/statsmodels-0.14.2-py312hbebd99a_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/tabulate-0.9.0-pyhd8ed1ab_1.tar.bz2
+      - conda: https://conda.anaconda.org/conda-forge/noarch/tenacity-9.0.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/terminado-0.18.1-pyh31c8845_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tinycss2-1.3.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/tk-8.6.13-h5083fa2_1.conda
@@ -249,6 +252,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/zipp-3.20.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zstandard-0.23.0-py312h15fbf35_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zstd-1.5.6-hb46c0d2_0.conda
+      - pypi: https://files.pythonhosted.org/packages/f9/a2/4c88f17ee50af5093978c4d989936883f959d7d81e1e2fa093863b080c1c/cmcrameri-1.9-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/04/e6/80f613b0f6d5079950083f274f2f19a2bf2870c0376ccd4a63851ef53f43/pyhere-1.0.3-py3-none-any.whl
       - pypi: .
 packages:
 - kind: conda
@@ -1005,6 +1010,16 @@ packages:
   - pkg:pypi/charset-normalizer?source=hash-mapping
   size: 46597
   timestamp: 1698833765762
+- kind: pypi
+  name: cmcrameri
+  version: '1.9'
+  url: https://files.pythonhosted.org/packages/f9/a2/4c88f17ee50af5093978c4d989936883f959d7d81e1e2fa093863b080c1c/cmcrameri-1.9-py3-none-any.whl
+  sha256: daefca10cc405f437ad292bad52f704c2ba8ae692b3e100da8c25f641997e337
+  requires_dist:
+  - matplotlib
+  - numpy
+  - packaging
+  requires_python: '>=3.6'
 - kind: conda
   name: colorama
   version: 0.4.6
@@ -3528,6 +3543,27 @@ packages:
   size: 20623
   timestamp: 1725821846879
 - kind: conda
+  name: plotly
+  version: 5.24.1
+  build: pyhd8ed1ab_0
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/plotly-5.24.1-pyhd8ed1ab_0.conda
+  sha256: 39cef6d3056211840709054b90badfa4efd6f61ea37935a89ab0b549a54cc83f
+  md5: 81bb643d6c3ab4cbeaf724e9d68d0a6a
+  depends:
+  - packaging
+  - python >=3.6
+  - tenacity >=6.2.0
+  constrains:
+  - ipywidgets >=7.6
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/plotly?source=hash-mapping
+  size: 6985343
+  timestamp: 1726179760565
+- kind: conda
   name: polars
   version: 1.7.0
   build: py312h672d452_0
@@ -3753,6 +3789,12 @@ packages:
   - pkg:pypi/pygments?source=hash-mapping
   size: 879295
   timestamp: 1714846885370
+- kind: pypi
+  name: pyhere
+  version: 1.0.3
+  url: https://files.pythonhosted.org/packages/04/e6/80f613b0f6d5079950083f274f2f19a2bf2870c0376ccd4a63851ef53f43/pyhere-1.0.3-py3-none-any.whl
+  sha256: 7c39f5ab806d332ce9812b74e4486c0753e2c5416265758c7251f1bbe0946f69
+  requires_python: '>=2.7'
 - kind: conda
   name: pyobjc-core
   version: 10.3.1
@@ -4177,11 +4219,12 @@ packages:
 - kind: conda
   name: scipy
   version: 1.14.1
-  build: py312heb3a901_0
+  build: py312h20deb59_1
+  build_number: 1
   subdir: osx-arm64
-  url: https://conda.anaconda.org/conda-forge/osx-arm64/scipy-1.14.1-py312heb3a901_0.conda
-  sha256: 48cc4b609a9cd8ea2636fe571d5017ea8f21a7097819f97f4ed6fdc69a3c1c75
-  md5: 807e90cb234c2d19a09b9453925aef95
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/scipy-1.14.1-py312h20deb59_1.conda
+  sha256: 1a4d655609bad7dbdbe9f44ba37fd100d01fb8e4e7060dfaed3c4a044ab40052
+  md5: c60ad657cccb6c2b97513f87ae27f47a
   depends:
   - __osx >=11.0
   - libblas >=3.9.0,<4.0a0
@@ -4200,8 +4243,8 @@ packages:
   license_family: BSD
   purls:
   - pkg:pypi/scipy?source=hash-mapping
-  size: 14993910
-  timestamp: 1724328538557
+  size: 15132713
+  timestamp: 1729481799441
 - kind: conda
   name: seaborn
   version: 0.13.2
@@ -4417,9 +4460,47 @@ packages:
   name: swinno-bioeconomy-directionality
   version: 0.2.0
   path: .
-  sha256: 17fa941896572a23569c2a451eaf40a22fe0e90cf55035b9b6d857083efe5dbc
+  sha256: e3540b52193665f3211611aebf7370782af607f0301a6a80f84fb2b94358bac8
+  requires_dist:
+  - pyhere>=1.0.3,<2
+  - cmcrameri>=1.9,<2
   requires_python: '>=3.12.6,<4'
   editable: true
+- kind: conda
+  name: tabulate
+  version: 0.9.0
+  build: pyhd8ed1ab_1
+  build_number: 1
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/tabulate-0.9.0-pyhd8ed1ab_1.tar.bz2
+  sha256: f6e4a0dd24ba060a4af69ca79d32361a6678e61d78c73eb5e357909b025b4620
+  md5: 4759805cce2d914c38472f70bf4d8bcb
+  depends:
+  - python >=3.7
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/tabulate?source=hash-mapping
+  size: 35912
+  timestamp: 1665138565317
+- kind: conda
+  name: tenacity
+  version: 9.0.0
+  build: pyhd8ed1ab_0
+  subdir: noarch
+  noarch: python
+  url: https://conda.anaconda.org/conda-forge/noarch/tenacity-9.0.0-pyhd8ed1ab_0.conda
+  sha256: 0d33171e1d303b57867f0cfcffb8a35031700acb3c52b1862064d8f4e1085538
+  md5: 42af51ad3b654ece73572628ad2882ae
+  depends:
+  - python >=3.8
+  license: Apache-2.0
+  license_family: APACHE
+  purls:
+  - pkg:pypi/tenacity?source=hash-mapping
+  size: 24683
+  timestamp: 1722278974784
 - kind: conda
   name: terminado
   version: 0.18.1

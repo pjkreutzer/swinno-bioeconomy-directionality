@@ -5,9 +5,16 @@ import seaborn as sns
 import plotly.graph_objects as go
 import plotly.express as px
 import plotly.io as pio
-from cmcrameri import cm
+import cmcrameri as cm
+from swinno_bioeconomy_directionality.config import FIGURES_DIR
 
 # Set global options for all Plotly plots
+
+
+def save_fig(fig: plt.Figure, title: str):
+    fig.savefig(FIGURES_DIR / f"{title}.svg", bbox_inches="tight")
+    fig.savefig(FIGURES_DIR / f"{title}.tex", format="pgf", bbox_inches="tight")
+
 
 royal_blue_800 = "#283aa4"
 gray_600 = "#878f97"
