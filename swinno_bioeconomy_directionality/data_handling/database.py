@@ -395,28 +395,45 @@ def query_total_innovation_counts(conn: Engine):
 
 def query_bioeconomy_visions(conn):
     query = """
-  SELECT bv.sinno_id
-  , codes.Category AS bioeconomy_vision
-  , i.year_of_commercialization AS "year"
+  WITH all_visions AS (
+  SELECT 
+    bv.sinno_id,
+    codes.Category AS bioeconomy_vision,
+    i.year_of_commercialization AS "year"
   FROM bioeconomy_visions AS bv
   JOIN [classification_codes] AS codes ON codes.code = bv.bioeconomy_vision
   JOIN innovation AS i ON i.sinno_id = bv.sinno_id
-  WHERE bv.sinno_id NOT IN (SELECT sinno_id FROM categorization_notes WHERE notes NOT LIKE "%not forest%")
+  
   UNION
-  SELECT DISTINCT(ei.sinno_id)
-  , 'Bioecology Vision' AS bioeconomy_vision
-  , i.year_of_commercialization AS "i.year"
+  
+  SELECT DISTINCT(ei.sinno_id),
+    'Bioecology Vision' AS bioeconomy_vision,
+    i.year_of_commercialization AS "year" 
   FROM eco_innovations AS ei
   JOIN innovation AS i ON i.sinno_id = ei.sinno_id
   WHERE ei.innovation_type IN (206, 107)
   AND ei.sinno_id NOT IN (
     SELECT ei2.sinno_id
     FROM eco_innovations as ei2
-    WHERE ei2.innovation_type IN (999, '000')
-    );
+    WHERE ei2.innovation_type IN (999, '000')  -- Consistent quoting of string values
+  )
   -- adds recycling innovation to bioecology
+)
+
+SELECT * 
+FROM all_visions 
+WHERE sinno_id NOT IN (
+  SELECT DISTINCT(sinno_id) 
+  FROM categorization_notes 
+  WHERE notes NOT LIKE '%not forest%' 
+) 
+AND sinno_id NOT IN (
+  SELECT DISTINCT(sinno_id) 
+  FROM bioeconomy_visions 
+  WHERE bioeconomy_vision = 0 
+)
   """
-    return pd.read_sql(query, conn)
+    return pl.read_database(query, conn)
 
 
 def query_eco_innovations(conn):
@@ -432,7 +449,7 @@ WHERE
 innovation_type NOT IN (701, 602, 601, 501, 111, 109, 108)
 ;
 """
-    return pd.read_sql(query, conn)
+    return pl.read_database(query, conn)
 
 
 def query_uncleaned_bioeconomy(conn):
@@ -446,7 +463,7 @@ def query_uncleaned_bioeconomy(conn):
         us.use_sector
       FROM
         innovation i
-        JOIN use_sectors us ON i.sinno_id = us.sinno_id
+        LEFT JOIN use_sectors us ON i.sinno_id = us.sinno_id
       WHERE
         (
           us.use_sector LIKE '02%'
@@ -482,4 +499,73 @@ def query_uncleaned_bioeconomy(conn):
           OR description LIKE '%lyocell%'
         );
     """
-    return pd.read_sql(query, conn)
+    return pl.read_database(query, conn)
+
+
+def query_clean_bioeconomy(conn):
+    query = """
+WITH raw AS (
+    SELECT DISTINCT
+        i.sinno_id,
+        i.year_of_commercialization AS year,
+        i.description_in_swedish as description,
+        i.product_code,
+        us.use_sector
+    FROM innovation i
+    LEFT JOIN use_sectors us ON i.sinno_id = us.sinno_id
+    WHERE (
+        us.use_sector LIKE '02%' OR
+        us.use_sector LIKE '20%' OR
+        us.use_sector LIKE '21%' OR
+        us.use_sector LIKE '36%' OR
+        i.product_code LIKE '02%' OR
+        i.product_code LIKE '20%' OR
+        i.product_code LIKE '21%' OR
+        i.product_code LIKE '36%'
+    ) OR (
+        description LIKE '%virke%' OR
+        description LIKE '%cellulos%' OR
+        description LIKE '%lignin%' OR
+        description LIKE '%spån%' OR
+        description LIKE '%bark%' OR
+        description LIKE '%levulinsyra%' OR
+        description LIKE '%furfural%' OR
+        description LIKE '%svarttjära%' OR
+        description LIKE '%svartlut%' OR
+        description LIKE '%växtbas%' OR
+        description LIKE '%ved%' OR
+        description LIKE '%trä%' OR
+        description LIKE '%skog%' OR
+        description LIKE '%biobränsle%' OR
+        description LIKE '%biologisk%' OR
+        description LIKE '%nedbrytbar%' OR
+        description LIKE '%papper%' OR
+        description LIKE '%pappret%' OR
+        description LIKE '%karton%' OR
+        description LIKE '%tencel%' OR
+        description LIKE '%lyocell%'
+    )
+),
+bioeconomy AS (
+    SELECT DISTINCT
+        sinno_id,
+        year
+    FROM raw
+    WHERE sinno_id NOT IN (
+        SELECT DISTINCT sinno_id
+        FROM categorization_notes
+        WHERE notes LIKE '%not forest%'
+    )
+)
+
+SELECT 
+    i.sinno_id,
+    i.year_of_commercialization AS year,
+    CASE 
+        WHEN b.sinno_id IS NOT NULL THEN 1 
+        ELSE 0 
+    END AS bioeconomy
+FROM innovation i
+LEFT JOIN bioeconomy b ON i.sinno_id = b.sinno_id;
+    """
+    return pl.read_database(query, conn)
