@@ -1,0 +1,180 @@
+
+```{python}
+# | label: Imports
+
+import polars as pl
+import numpy as np
+import scipy.stats as stats
+from IPython.display import display, Markdown
+import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
+import seaborn as sns
+from tabulate import tabulate
+
+from swinno_bioeconomy_directionality.utils import format_table
+
+from swinno_bioeconomy_directionality.data_handling.io import DataLoader
+from swinno_bioeconomy_directionality.data_handling import database
+from swinno_bioeconomy_directionality.config import (
+    PROJ_ROOT,
+    RAW_DATA_DIR,
+    PROCESSED_DATA_DIR,
+)
+
+conn = database.connect_swinno_db()
+
+sns.set_theme(style="white")
+```
+
+```{python}
+# | label: Load Data
+from_raw = DataLoader(RAW_DATA_DIR)
+from_processed = DataLoader(PROCESSED_DATA_DIR)
+
+uncleaned_bioeconomy_query = pl.read_csv(
+    RAW_DATA_DIR / "uncleaned_bioeconomy_query.csv", ignore_errors=True
+)
+
+id_year_bioeconomy = from_raw.load_id_year_bioeconomy()
+
+# bioeconomy_ids = id_year_bioeconomy.filter(pl.col("bioeconomy") ==  "1")
+
+swinno = from_raw.load_swinno()
+
+bioeconomy_visions = from_processed.load_visions()
+```
+
+```{python}
+# | label: Innovation Counts
+n_swinno = swinno.select("sinno_id").n_unique()
+year_min = swinno["year"].min()
+year_max = swinno["year"].max()
+
+n_uncleaned_bioeconomy_innovations = uncleaned_bioeconomy_query["sinno_id"].n_unique()
+sum_bioeconomy_innovations = int(id_year_bioeconomy["bioeconomy"].sum())
+```
+
+```{python}
+# | label: Calculate Bioeconomy Share
+
+def calculate_pct_bioeconomy(swinno):
+    return (
+        id_year_bioeconomy.group_by("year")
+        .agg(
+            pl.col("sinno_id").n_unique().alias("n_innovation"),
+            pl.col("bioeconomy").sum().alias("n_bioeconomy"),
+        )
+        .with_columns(pct_bioeconomy=pl.col("n_bioeconomy") / pl.col("n_innovation"))
+    ).sort("year")
+
+
+pct_bioeconomy = calculate_pct_bioeconomy(swinno)
+```
+
+```{python}
+# | label: Bioeconomy Trend Description
+# | output: asis
+pct_max = pct_bioeconomy.select("pct_bioeconomy").max().item()
+pct_max_year = (
+    pct_bioeconomy.filter(pl.col("pct_bioeconomy") == pct_max).select("year").item()
+)
+pct_last_year = pct_bioeconomy.select("year").max().item()
+pct_latest = (
+    pct_bioeconomy.filter(pl.col("year") == pct_last_year)
+    .select("pct_bioeconomy")
+    .item()
+)
+pct_diff_max_latest = (pct_max - pct_latest) * 100
+
+total_max = pct_bioeconomy.select("n_innovation").max().item()
+total_max_year = (
+    pct_bioeconomy.filter(pl.col("n_innovation") == total_max).select("year").item()
+)
+bioeconomy_max = pct_bioeconomy.select("n_bioeconomy").max().item()
+bioeconomy_max_year = (
+    pct_bioeconomy.filter(pl.col("n_bioeconomy") == bioeconomy_max)
+    .select("year")
+    .item()
+)
+
+total_pct_bioeconomy = sum_bioeconomy_innovations / n_swinno
+
+
+```
+
+```{python}
+# | label: Number of Results
+# | output: asis
+
+count_bioeconomy_visions = bioeconomy_visions.group_by(
+    ["year", "bioeconomy_vision"]
+).agg(pl.col("sinno_id").count().alias("count"))
+
+total_bioeconomy_visions = (
+    count_bioeconomy_visions.group_by("bioeconomy_vision")
+    .agg(pl.sum("count").alias("count"))
+    .sort("count", descending=True)
+)
+
+n_bioeconomy_visions = bioeconomy_visions.select("sinno_id").n_unique()
+bioeconomy_visions_min_year = bioeconomy_visions.select(pl.min("year")).item()
+bioeconomy_visions_max_year = bioeconomy_visions.select(pl.max("year")).item()
+n_most_bioeconomy_vision = total_bioeconomy_visions.row(0)[1]
+
+
+def calculate_share(vision: str):
+    return (
+        total_bioeconomy_visions.filter(pl.col("bioeconomy_vision") == vision)
+        .select("count")
+        .item()
+        / n_bioeconomy_visions
+    )
+
+
+pct_vision_neutral = calculate_share("Vision Neutral")
+pct_bioecology = calculate_share("Bioecology Vision")
+pct_bioresource = calculate_share("Bioresource Vision")
+pct_biotechnology = calculate_share("Biotechnology Vision")
+
+n_bioresource_1970_1990 = (
+    bioeconomy_visions.filter(
+        (pl.col("year").is_between(1970, 1990))
+        & (pl.col("bioeconomy_vision") == "Bioresource Vision")
+    )
+    .select("sinno_id")
+    .n_unique()
+)
+
+n_bioresource = (
+    bioeconomy_visions.filter(pl.col("bioeconomy_vision") == "Bioresource Vision")
+    .select("sinno_id")
+    .n_unique()
+)
+
+n_biotechnology = (
+    bioeconomy_visions.filter(pl.col("bioeconomy_vision") == "Biotechnology Vision")
+    .select("sinno_id")
+    .n_unique()
+)
+
+n_bioecology = (
+    bioeconomy_visions.filter(pl.col("bioeconomy_vision") == "Bioecology Vision")
+    .select("sinno_id")
+    .n_unique()
+)
+
+n_vision_neutral = (
+    bioeconomy_visions.filter(pl.col("bioeconomy_vision") == "Vision Neutral")
+    .select("sinno_id")
+    .n_unique()
+)
+```
+
+```{python}
+# | label: Count Recycling Innovation
+
+recycle_innovation = pl.read_csv(RAW_DATA_DIR / "recycling_innovation.csv")
+
+recycle_innovation_count = recycle_innovation["sinno_id"].n_unique()
+
+```

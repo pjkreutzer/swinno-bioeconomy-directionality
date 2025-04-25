@@ -1,0 +1,263 @@
+---
+title: "Unpacking Directionality: How Aligned Are Swedish Innovation with Bioeconomy Visions?"
+author: Philipp Jonas Kreutzer
+date: last-modified
+bibliography: swinno-bioeconomy-directionality.bib
+csl: 'https://zotero.org/styles/apa?source=1'
+format:
+    pjk_theme-revealjs
+---
+
+## Forest-Based Bioeconomy {background-opacity=0.25 background-image="/assets/images/forwarder.jpeg" .center}
+
+Transition from fossil-based economy to an economy built on bio-based material and fuel resources, but highly contested transition arena with competing visions
+
+[@holmgren2022WhoseTransformationThis]{.slide-cite}
+
+## Directionality in Innovation Systems
+
+Directionality as **possibility** [@stirling2023TransformingImaginationsMultiple], **normative governance** [@degraaff2025PoliticsDirectionalityInnovation] and **systemic outcomes** [@andersson2021OutcomesDirectionalityMorphology].
+
+
+:::{.fragment}
+#### Achieved Through Visions 
+Reaching a collective understanding of direction in practice, [**"... achieved by establishing shared future visions"**.]{.text-royal-blue-900} [@weber2012LegitimizingResearchTechnology p. 1042]
+:::
+
+
+## Three Visions for Normative Directionality
+
+::: {.columns}
+::: {.column width="33%"}
+
+### [Bioresource]{.text-batlow-darkgreen}
+
+![](/assets/images/bioresource.svg)
+:::
+::: {.column width="33%"}
+
+### [Biotechnology]{.text-batlow-forestgreen}
+
+![](/assets/images/biotechnology.svg)
+
+
+:::
+::: {.column width="33%"}
+
+### [Bioecology]{.text-batlow-darkblue}
+
+![](/assets/images/bioecology.svg)
+
+:::
+:::
+
+Classification based on @bugge2016WhatBioeconomyReview and @vivien2019HijackingBioeconomy
+
+
+## RQ {.center}
+
+<!-- The aim of this article is to provide a deeper understanding of the emerging Swedish bioeconomy by investigating (1) who are the key actors, and (2) how they have shaped the direction of the Swedish bioeconomy to date. Understanding by whom and how the Swedish bieconomy is shaped and institutionalized will fill an important knowledge gap and can help to open up the (forest) bioeconomy debate for discussion, contestation and remaking. -->
+
+
+[1.]{.text-gray-600} Beyond discourse, [what visions do commercialized innovations in Sweden's forest-based bioeconomy align with?]{.text-royal-blue-600}
+
+[2.]{.text-gray-600} What does Sweden's transition to a forest-based bioeconomy suggest for [the interplay of normative visions and commercialized innovation?]{.text-royal-blue-600}
+
+# Data From SWINNO Database {.inverted}
+
+## Significant Swedish Innovations
+
+::: {.columns}
+::: {.column}
+~ 5000 unique innovations
+
+Literature-Based Innovation Output method
+
+from 15 independent trade journals [@sjoo2014DatabaseSwedishInnovations]
+
+:::
+::: {.column}
+![Example Page From a Source Article](/assets/images/swinno-example-1.jpg)
+:::
+:::
+
+## Defining the Bioeconomy {.smaller}
+
+
+::: {.columns}
+::: {.column}
+|SNI Code | Description                            |
+|--------:|:---------------------------------------|
+|02       | Forestry and related services
+|20       | Wood and wood product manufacturing except furniture
+|21       | Pulp, paper and paper product manufacturing
+|36       | Furniture manufacturing; other manufacturing
+:Key Sectors Used in Query {#tbl-query}
+
+:::
+::: {.column}
+| Swedish           | English                    |
+|-------------------|----------------------------|
+| virke             | timber                     |
+| cellulos          | cellulose                  |
+| lignin            | lignin                     |
+| spån              | chip                       |
+| bark              | bark                       |
+| levulinsyra       | levulinic acid             |
+| furfural          | furfural                   |
+| svarttjära        | black tar                  |
+| svartlut          | black liquor               |
+| växtbas           | plant-based                |
+| ved               | wood                       |
+| trä               | timber                     |
+| skog              | forest                     |
+| biobränsle        | biofuel                    |
+| biologiskt        | biological                 |
+| nedbrytbar        | biodegradable              |
+| papper            | paper                      |
+| karton            | carton                     |
+| lyocell            | lyocell |
+: Swedish Keywords used in Query: `WHERE description LIKE %keyword% OR ...` {#tbl-keywords}
+:::
+:::
+
+# Results {.inverted}
+
+## Bioeconomy Innovation Has Declined After 1970s
+
+![a. A total number of innovation registered in SWINNO database. b. Forest-based bioeconomy innovations registered in SWINNO database. c. Percentage of forest based bioeconomy innovations to total innovation registered in SWINNO database. Shown are the 5 year moving averages for each time series.](results/figures/fig_innovation_trends.svg){#fig-innovation-trends}
+
+
+:::notes
+Querying the SWINNO database for forest based bioeconomy innovations **initially yields 817 innovations**.False positives were removed from the dataset during classification, resulting in **811 innovations** which originate from, are used in, or make use of products derived from the forest.
+:::
+
+## Bioresource Was Biggest Vision Category
+
+But most innovations did not align with any vision
+
+![Counts of innovation classification by Bioeconomy Vision Category](/results/figures/fig_bioeconomy_vision_counts.svg){#fig-bioeconomy-trends}
+
+## Bioecology and Biotechnology Vision Innovations Singular Events for Producers
+
+![Counts of Producing Firms by Number of Innovation Aligned With Bioeconomy Visions.](results/figures/fig_vision_producer_counts.svg){#fig-bioeconomy-vision-producer-counts width=100%} 
+
+:::notes
+| Rank | Bioresource Vision | Not Bioeconomy |
+|------|-------------------|----------------|
+| 1    | Sunds (7)         | Atlas Copco (10) |
+| 2    | MoDo (5)          | Sandvik (5)    |
+| 3    | Billerud (5)      | LKAB (5)       |
+| 4    | Kamyr (5)         | Asea/ABB (4)   |
+:::
+
+## [Bioresource Vision]{.text-batlow-darkgreen} {background-video="/assets/images/harvester.mp4" background-video-loop=true background-video-muted=true background-opacity=0.4}
+
+
+1970-1990:
+
+Intensification of Harvesting **Development Block** [@dahmen1988DevelopmentBlocksIndustrial]
+
+Energy & Chemical Pollution Reduction in Pulp and Paper
+
+. . .
+
+2000-2021:
+
+New Materials
+
+## {.center}
+
+::: {.columns}
+::: {.column width="33%"}
+
+### [Bioresource]{.text-batlow-darkgreen}
+
+[1970-1990:]{.text-gray-600}
+
+
+
+Intensification of Harvesting **Development Block** [@dahmen1988DevelopmentBlocksIndustrial]
+
+Energy Usage & Chemical Pollution Reduction in Pulp and Paper
+
+[2000-2021:]{.text-gray-600}
+
+New Materials
+
+
+:::
+::: {.column width="33%"}
+
+### [Biotechnology]{.text-batlow-forestgreen}
+
+Mostly applications to clean water in pulp and paper
+
+New materials from cellulose
+
+:::
+::: {.column width="33%"}
+
+### [Bioecology]{.text-batlow-darkblue}
+
+74% Recycling related
+
+Decommodification of value chains through regional identity products
+
+:::
+:::
+
+# Take Aways
+
+1. [The bioeconomy is declining]{.text-royal-blue-600} relative to total innovation, casting doubts on the overall transition to a bioeconomy.
+
+1. [Bioresource Vision strongest among commercialized innovation]{.text-royal-blue-600}, but overlap between visions and open development paths.
+   
+1. [Discourse dominance and innovation output likely strongly intertwined]{.text-royal-blue-600}, but other drivers of innovation matter at least as much.
+
+
+# References
+
+::: {#refs}
+:::
+
+
+# Appendix
+
+## Classification Matrix {.scrollable}
+
+| Corresponding Vision | Source article explicitly mentions that innovation:                          |
+|----------------------|-------------------------------------------------------------------------------------------------------|
+| Biotechnology    | Develops new, or modifies existing, organism, biological system, or process              |
+|           | Uses cellular or molecular process to solve problem or in production process             |
+|           | Applies biological agent in scientific or engineering based principle to produce product or service  |
+|           | Based on molecular biology, biochemistry, cell biology, embryology, genetics or microbiology research |
+|           | Provides method for research in the above areas                            |
+|||
+| Bioresource     | Uses biomass to substitute other input                                |
+|           | Refines biomass through mechanical, chemical or other process                     |
+|           | Converts and upgrades bioresource                                   |
+|           | Optimizes land use                                          |
+|           | Includes degraded land in production of biofuels                           |
+|           | Intensifies use of biomass, including from waste                           |
+|||
+| Bioecology      | Prioritizes biodiversity, conservation, ecosystem or soil health                   |
+|           | Integrates production systems                                     |
+|           | Develops high quality product with territorial identity                        |
+|           | Reuses or recycles waste                                       |
+|           | States compatibility with biosphere as motivation or aim                       |
+|           | States need for social or ecological counter-expertise relative to other sociotechnical innovations |
+|           | Promotes or uses a circular production mode                              |
+|           | Promotes or uses a self-sustained production mode                           |
+
+: Decision matrix used to classify innovation. {#tbl-decision-matrix tbl-colwidths="[20,80]"}
+
+## Top Five Producers
+
+| Rank | Bioresource Vision | Vision Neutral |
+|------|-------------------|----------------|
+| 1    | Sunds (7)         | Atlas Copco (10) |
+| 2    | MoDo (5)          | Sandvik (5)    |
+| 3    | Billerud (5)      | LKAB (5)       |
+| 4    | Kamyr (5)         | Asea/ABB (4)   |
+: Top Five Producers and their produced innovation by vision category {#tbl-top-producers}

@@ -1,350 +1,368 @@
-import pandas as pd
+import string
+import polars as pl
 import matplotlib.pyplot as plt
-import matplotlib.ticker as mtick
-import seaborn as sns
-import plotly.graph_objects as go
-import plotly.express as px
-import plotly.io as pio
-import cmcrameri as cm
-from swinno_bioeconomy_directionality.config import FIGURES_DIR
+import matplotlib.ticker as mtick  # Added missing import
+import seaborn.objects as so
+from seaborn import axes_style
 
-# Set global options for all Plotly plots
+from cmcrameri import cm
+from swinno_bioeconomy_directionality.config import (
+    FIGURES_DIR,
+    PROCESSED_DATA_DIR,
+    RAW_DATA_DIR,
+    EXTERNAL_DATA_DIR,
+)
+
+from swinno_bioeconomy_directionality.data_handling.io import DataLoader
+
+WIDTH = 12
+HEIGHT = 8
+
+
+def create_figures():
+    theme_dict = {
+        **axes_style("whitegrid"),
+        "grid.linestyle": "-",
+        "axes.grid.axis": "y",
+        "axes.spines.top": False,
+        "axes.spines.right": False,
+        "axes.spines.left": False,
+    }
+
+    so.Plot().theme(theme_dict)
+
+    bioeconomy_share = pl.read_csv(PROCESSED_DATA_DIR / "swinno_bioeconomy_share.csv")
+
+    bioeconomy_vision_data = DataLoader(RAW_DATA_DIR).load_visions()
+
+    vision_summary = bioeconomy_vision_data.group_by("bioeconomy_vision").agg(
+        pl.col("sinno_id").n_unique().alias("sum")
+    )
+
+    vision_colormap = create_vision_colormap()
+
+    # Create and save figures
+    fig_innovation_trends = plot_innovation_trends(bioeconomy_share)
+    save_fig(fig_innovation_trends, "fig_innovation_trends")
+
+    # Pass both required arguments
+    fig_bioeconomy_vision_counts = plot_vision_counts(
+        bioeconomy_vision_data, vision_colormap
+    )
+    save_fig(fig_bioeconomy_vision_counts, "fig_bioeconomy_vision_counts")
+
+    fig_vision_producer_counts = plot_firm_counts(
+        bioeconomy_vision_data, vision_colormap
+    )
+    save_fig(fig_vision_producer_counts, "fig_vision_producer_counts")
 
 
 def save_fig(fig: plt.Figure, title: str):
-    fig.savefig(FIGURES_DIR / f"{title}.svg", bbox_inches="tight")
-    fig.savefig(FIGURES_DIR / f"{title}.tex", format="pgf", bbox_inches="tight")
+    if isinstance(fig, so.Plot):
+        fig.save(FIGURES_DIR / f"{title}.svg", bbox_inches="tight")
+        fig.save(FIGURES_DIR / f"{title}.tex", format="pgf", bbox_inches="tight")
+    else:
+        fig.savefig(FIGURES_DIR / f"{title}.svg", bbox_inches="tight")
+        fig.savefig(FIGURES_DIR / f"{title}.tex", format="pgf", bbox_inches="tight")
 
 
-royal_blue_800 = "#283aa4"
-gray_600 = "#878f97"
+def create_vision_colormap():
+    bioeconomy_visions = [
+        "Bioecology Vision",
+        "Biotechnology Vision",
+        "Vision Neutral",
+        "Bioresource Vision",
+    ]
+
+    return dict(zip(bioeconomy_visions, cm.batlowWS.colors[1::]))
 
 
-def plot_bioeconomy_trends_interactive(data, y):
-    fig = go.Figure()
-
-    fig.add_trace(
-        go.Scatter(
-            x=data["year"],
-            y=data[y],
-            mode="lines",
-            name="Yearly",
-            line=dict(dash="dash", color=gray_600),
-        )
-    )
-
-    # Rolling mean
-    rolling_mean = data[y].rolling(window=5).mean()
-    fig.add_trace(
-        go.Scatter(
-            x=data["year"],
-            y=rolling_mean,
-            mode="lines",
-            name="5-Year Moving Average",
-            line=dict(color=royal_blue_800),
-        )
-    )
-    fig.update_xaxes(type="date")
-    fig.update_layout(
-        showlegend=False,
-        xaxis_range=["1965", "2025"],
-        font=dict(family="Atkinson Hyperlegible"),
-        height=550,
-        hovermode="x unified",
-    )
-
-    return fig
-
-
-def plot_count(data):
-    fig, ax = plt.subplots()
-    ax.plot(
-        data["year"],
-        data["bioeconomy_count"],
-        label="Yearly",
-    )
-
-    # Calculate rolling mean and plot on same axis
-    rolling_mean = data["bioeconomy_count"].rolling(window=5).mean()
-    ax.plot(
-        data["year"], rolling_mean, label="5-year moving average", linestyle="dashed"
-    )
-
-    ax.set_xticks(data["year"][::10])
-    ax.tick_params(labelsize=10)
-
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.legend(frameon=False)
-
-    plt.show()
-
-
-def plot_share(data):
-    fig, ax = plt.subplots()
-    ax.plot(data["year"], data["bioeconomy_share"], label="Yearly")
-    ax.set_xticks(data["year"][::10])
-    ax.yaxis.set_major_formatter(mtick.PercentFormatter(xmax=1.0))
-    ax.tick_params(which="major", labelsize=10)
-
-    # Calculate rolling mean and plot on same axis
-    rolling_mean = data["bioeconomy_share"].rolling(window=5).mean()
-    ax.plot(
-        data["year"], rolling_mean, label="5-year moving average", linestyle="dashed"
-    )
-    ax.set_ylim((0, 0.5))
-    ax.legend(frameon=False)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    plt.show()
-
-
-def plot_bv_trends(df):
-    palette = sns.color_palette("colorblind")[:5]
-
-    # Create a custom palette with a default light gray color for "not bio" hue
-    custom_palette = {
-        hue: color
-        if bioeconomy_vision != "No Bioeconomy Vision"
-        else (0.7, 0.7, 0.7, 0.6)
-        for hue, color, bioeconomy_vision in zip(
-            df["bioeconomy_vision"], palette, df["bioeconomy_vision"]
-        )
-    }
-
-    chart = sns.lineplot(
-        data=df,
-        x="year",
-        y="count",
-        hue="bioeconomy_vision",
-        palette=custom_palette,
-        linewidth=2,
-    )
-
-    chart.tick_params(labelsize=10)
-
-    # Customize x-axis tick labels
-    years = df["year"].unique()
-    chart.set_xticks(years[::10])
-    chart.set_xticklabels(years[::10])
-    chart.set_xlabel(None)
-    chart.set_ylabel(None)
-
-    # Create a custom legend with colored labels (no lines)
-    handles, labels = chart.get_legend_handles_labels()
-
-    # Set font color for legend labels based on the hue
-    legend = chart.legend(
-        bbox_to_anchor=(0.5, -0.1), loc="upper center", ncol=2, frameon=False
-    )
-    for text, label in zip(legend.texts, labels):
-        if label == "No Bioeconomy Vision":
-            text.set_color((0.4, 0.4, 0.4))
-        else:
-            text.set_color(custom_palette[label])
-
-    sns.despine()
-
-    plt.show()
-
-
-def plot_bv_trends_interactive(df):
-    color_map = {
-        "No Bioeconomy Vision": "rgb(0.8, 0.8, 0.8)",  # Gray
-        "Bioecology Vision": "#cc78bc",  # Purple
-        "Bioresource Vision": "#de8f05",  # Orange
-        "Biotechnology Vision": "#029e73",  # Green
-    }
-
-    traces = []
-
-    for bv, bioeconomy_vision in df.groupby("bioeconomy_vision"):
-        traces.append(
-            go.Scatter(
-                x=bioeconomy_vision["year"],
-                y=bioeconomy_vision["count"],
-                name=bv,
-                mode="markers+lines",
-                line=dict(color=color_map[bv]),  # Set line color based on the color_map
-                visible="legendonly",
-            )
-        )
-
-    fig = go.Figure(data=traces)
-    fig.update_layout(
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="left",
-            font=dict(size=30, family="Atkinson Hyperlegible"),
-        ),
-        hovermode="x unified",
-        height=550,
-        xaxis_range=["1965", "2015"],
-        font=dict(family="Atkinson Hyperlegible"),
-    )
-    return fig
-
-
-def plot_heatmap(data):
-    fig, ax = plt.subplots(1, 1)
-    ax = sns.heatmap(
-        data,
-        annot=True,
-        cmap="Blues",
-        fmt="g",
-        cbar=False,
-        annot_kws={"fontsize": 9},
-        square=True,
-    )
-    ax.set(ylabel=None, xlabel=None)
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
-    ax.set_yticklabels(ax.get_yticklabels(), fontsize=9)
-
-    plt.show()
-
-
-def prepare_heatmap_data(df, index_col, cols_col, values_col, ascending=False):
+def plot_innovation_trends(shares):
     """
-    Prepare data for a heatmap visualization by pivoting and sorting a dataframe.
+    Plots network metrics for innovation and actor counts.
 
-    Args:
-    - df: input dataframe
-    - index_col: column name for the index of the pivoted dataframe
-    - cols_col: column name for the columns of the pivoted dataframe
-    - values_col: column name for the values of the pivoted dataframe
-    - ascending: boolean to specify whether to sort in ascending or descending order (default: False)
+    Parameters:
+    shares (polars.DataFrame): DataFrame containing the network metrics.
 
     Returns:
-    - pivoted and sorted dataframe
+    matplotlib.figure.Figure: The resulting figure with subplots.
     """
-    # Pivot the data to create a matrix
-    matrix = df.pivot(index=index_col, columns=cols_col, values=values_col)
-
-    # Sort the matrix by descending order of values in the column with the highest value
-    highest_col = matrix.idxmax(axis=1).values[0]
-    matrix = matrix.sort_values(highest_col, ascending=ascending)
-
-    return matrix
-
-
-def create_label_mapping(label_lookup):
-    short_labels = {
-        "Acquisition of machinery and software": "Machinery & Software Acquisition",
-        "Component number reduction": "Component Number Reduction",
-        "Cooperation with stakeholders": "Stakeholder Cooperation",
-        "Elimination of dirty components": "Eliminate Dirty Components",
-        "Environmental audit": "Environmental Audit",
-        "Environmental-friendly technologies": "Eco-Friendly Technologies",
-        "Green design packaging": "Green Packaging Design",
-        "Keep waste to a minimum": "Waste Minimization",
-        "Longer life cycle of downstream product": "Extended Downstream Product Life",
-        "Longer life cycle of product itself": "Extended Product Life",
-        "Longer life cycle products": "Extended Product Lifespan",
-        "New systems (remanufacturing systems and transport systems)": "New Systems",
-        "Not Eco-Innovation": "Not Eco-Innovation",
-        "Protection of timber harvest": "Timber Harvest Protection",
-        "Recyclability of product": "Product Recyclability",
-        "Recycle waste, water or materials": "Waste Recycling",
-        "Reduce Chemical Waste": "Chemical Waste Reduction",
-        "Reduce Use of Energy": "Energy Use Reduction",
-        "Reduce Use of Water": "Water Use Reduction",
-        "Reduced Air Pollution": "Air Pollution Reduction",
-        "Reduced Other Pollution": "Other Pollution Reduction",
-        "Reduced Water Pollution": "Water Pollution Reduction",
-        "Reduction / optimization of raw material use": "Raw Material Optimization",
-        "Replace fossil engery source with electrical energy": "Use Electric Energy",
-        "Replace fossil input with bio input": "Use Bio Input",
-        "Replace plastic with bio source": "Use Bio Plastic",
-        "Returnable/reusable packaging": "Returnable/Reusable Packaging",
-        "Unsure": "Uncertain",
-        "Use new cleaner material or new input with lower environmental impact": "Cleaner Material Adoption",
-        "Use of recycled materials": "Recycled Material Usage",
-    }
-    label_mapping = label_lookup["Category"].to_dict()
-    plot_labels = {
-        str(k): short_labels[v] for k, v in label_mapping.items() if v in short_labels
-    }
-    return plot_labels
-
-
-def plot_eco_innovation_by_bioeconomy_vision(data, label_lookup):
-    label_mapping = create_label_mapping(label_lookup)
-
-    data["innovation_type_label"] = data["innovation_type_code"].map(label_mapping)
-
-    palette = cm.batlowS.colors
-
-    # Set font to IBM Plex Sans
-    plt.rcParams["font.family"] = "IBM Plex Sans"
-
-    fig = sns.catplot(
-        data=data,
-        x="count",
-        y="innovation_type_label",
-        hue="innovation_type_group",
-        col="bioeconomy_vision",
-        kind="bar",
-        col_wrap=2,
-        palette=palette,
-        dodge=False,
+    fig, axes = plt.subplots(
+        1,
+        3,
+        figsize=(WIDTH, HEIGHT),
+        constrained_layout=True,
     )
 
-    for ax in fig.axes.ravel():
-        for c in ax.containers:
-            ax.bar_label(c, label_type="edge", padding=2, fontsize=8)
-        ax.margins(x=0.1)
-        ax.tick_params(axis="y", labelsize=10)
+    def _plot_counts(ax, y, label, x=shares["year"]):
+        ax.plot(
+            x, y, linestyle="--", marker="o", alpha=0.15, label=label, color="black"
+        )
 
-        # Remove spines
+    def _plot_ma(ax, y, label, x=shares["year"]):
+        ax.plot(x, y, label=label, color="black", linewidth=2)
+
+    metrics = [
+        ("n_innovation", "Count"),
+        ("n_bioeconomy", "Count"),
+        ("pct_bioeconomy", "Share of Innovation"),
+    ]
+    axes = axes.flatten()
+    for i, (metric, ylabel) in enumerate(metrics):
+        _plot_counts(axes[i], shares[metric], metric.replace("_", " ").title())
+        _plot_ma(axes[i], shares[f"ma5_{metric}"], "5 MA")
+        axes[i].set_ylabel(ylabel)
+        axes[i].legend()
+
+    for ax in axes.flat:
+        ax.set_xticks(shares["year"][::10])
+        ax.set_xlabel("Year")
+
+    axes[0].set_ylim(0, 160)
+    axes[1].set_ylim(0, 160)
+    axes[2].set_ylim(0, 0.5)
+    axes[2].yaxis.set_major_formatter(mtick.PercentFormatter(1.0, decimals=0))
+
+    titles = ["All Innovation", "Bioeconomy Innovation", "% Bioeconomy"]
+    for i in range(3):
+        axes[i].set_title(titles[i])
+
+    for n, ax in enumerate(axes.flat):
+        ax.text(
+            -0.1,
+            1.1,
+            string.ascii_lowercase[n],
+            transform=ax.transAxes,
+            size=14,
+        )
+    fig.set_constrained_layout_pads(w_pad=0.15, h_pad=0.2, hspace=0.3)
+    return fig
+
+
+def plot_vision_counts(bioeconomy_vision_data, vision_colormap):
+    yearly_counts, total_counts = create_vision_plotting_data(bioeconomy_vision_data)
+
+    unique_visions = (
+        bioeconomy_vision_data.filter(pl.col("bioeconomy_vision") != "Unsure")
+        .select("bioeconomy_vision")
+        .unique()
+        .to_series()
+        .to_list()
+    )
+    unique_visions = sorted(unique_visions)
+    num_visions = len(unique_visions)
+
+    cols = 2
+    rows = (num_visions + 1) // 2
+
+    # Create figure and subplots
+    fig, axes = plt.subplots(
+        rows, cols, figsize=(WIDTH, HEIGHT * rows / 2), constrained_layout=True
+    )
+    axes = axes.flatten() if rows * cols > 1 else [axes]  # Flatten for easier indexing
+
+    # Set x-axis ticks to show every 10 years
+    min_year = bioeconomy_vision_data["year"].min()
+    max_year = bioeconomy_vision_data["year"].max()
+    tick_years = list(
+        range(
+            (min_year // 10) * 10,  # Round down to nearest decade
+            max_year + 10,  # Round up to nearest decade
+            10,  # Step by 10 years
+        )
+    )
+
+    # For each vision, create a subplot
+    for i, vision in enumerate(unique_visions):
+        # Filter data for this vision
+        vision_data = yearly_counts.filter(pl.col("bioeconomy_vision") == vision)
+
+        # Get years and counts as lists for plotting
+        years = vision_data["year"].to_list()
+        counts = vision_data["count"].to_list()
+
+        # Create the bar plot
+        axes[i].bar(
+            years,
+            counts,
+            color=vision_colormap[vision],
+            alpha=1,
+        )
+
+        # Set title and labels
+        axes[i].set_title(vision)
+        axes[i].set_xlabel("Year")
+        axes[i].set_ylabel("Innovation Count")
+        axes[i].set_xticks(tick_years)
+
+        # Calculate total count for this vision
+        total = total_counts.filter(pl.col("bioeconomy_vision") == vision)[
+            "sum"
+        ].to_list()[0]
+
+        # Add total count annotation
+        axes[i].annotate(
+            f"Total: {total}",
+            xy=(0.7, 0.9),
+            xycoords="axes fraction",
+            fontweight="bold",
+            color=vision_colormap[vision],
+        )
+
+    # Hide any unused subplots
+    for j in range(num_visions, len(axes)):
+        axes[j].set_visible(False)
+
+    # Apply theme settings
+    for ax in axes:
+        if not ax.get_visible():
+            continue
+
+        # Set ylim
+
+        ax.set_ylim(top=18)
+        ax.set_xlim(1969, 2022)
+
+        # Remove top and right spines
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
-        ax.spines["bottom"].set_visible(False)
+
+        # Use whitegrid
+        ax.grid(axis="y", linestyle="-", alpha=0.2)
+        ax.set_axisbelow(True)
+
+        # Make y-axis spine invisible if needed
         ax.spines["left"].set_visible(False)
+    return fig
 
-        # Add x-grid lines for every tick
-        ax.xaxis.grid(True, linestyle="-")
 
-    fig.set_titles("{col_name}")
-    fig.set_axis_labels("", "")
-    fig._legend.set_title(None)
+def create_vision_plotting_data(bioeconomy_vision_data):
+    yearly_counts = bioeconomy_vision_data.group_by(["bioeconomy_vision", "year"]).agg(
+        pl.col("sinno_id").n_unique().alias("count")
+    )
 
-    # plt.show()
+    total_counts = bioeconomy_vision_data.group_by("bioeconomy_vision").agg(
+        pl.col("sinno_id").n_unique().alias("sum")
+    )
+    return yearly_counts, total_counts
+
+
+def plot_firm_counts(bioeconomy_vision_data, vision_colormap, level: str = "firm"):
+    firm_counts = calculate_producer_counts(bioeconomy_vision_data, level)
+
+    unique_visions = firm_counts["bioeconomy_vision"].unique().to_list()
+    unique_visions = sorted(unique_visions)
+
+    num_visions = len(unique_visions)
+
+    cols = 2
+    rows = (num_visions + 1) // 2
+
+    fig, axes = plt.subplots(
+        rows, cols, figsize=(WIDTH, 4 * rows), constrained_layout=True
+    )
+    axes = axes.flatten()  # Flatten to make indexing easier
+
+    for i, vision in enumerate(unique_visions):
+        # Filter data for this vision
+        vision_data = firm_counts.filter(pl.col("bioeconomy_vision") == vision)
+
+        # Create histogram
+        bars = axes[i].bar(
+            x=vision_data["count"],
+            height=vision_data["freq"],
+            color=vision_colormap[vision],
+        )
+        axes[i].set_xlabel("Number of Innovations")
+        axes[i].set_ylabel("Number of Producers")
+        axes[i].set_title(f"{vision}")
+        axes[i].set_xticks(range(1, 11))
+        max_height = max([bar.get_height() for bar in bars])
+        axes[i].set_ylim(0, max_height * 1.15)
+
+        # Remove top and right spines
+        axes[i].spines["top"].set_visible(False)
+        axes[i].spines["right"].set_visible(False)
+
+        # Use whitegrid
+        axes[i].grid(axis="y", linestyle="-", alpha=0.2)
+        axes[i].set_axisbelow(True)
+
+        # Make y-axis spine invisible if needed
+        axes[i].spines["left"].set_visible(False)
+        axes[i].set_axisbelow(True)
+
+        # Add text labels on top of bars
+        for bar in bars:
+            height = bar.get_height()
+            if height > 0:
+                axes[i].annotate(
+                    f"{int(height)}",
+                    xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3),  # vertical offset
+                    textcoords="offset points",
+                    ha="center",
+                    va="bottom",
+                    fontsize=9,
+                )
 
     return fig
 
 
-def plot_eco_innovation_by_bioeconomy_vision_interactive(data, codes_df):
-    label_map = create_label_mapping(codes_df)
+def calculate_producer_counts(
+    bioeconomy_vision_data, level: str = "firm"
+) -> pl.DataFrame:
+    vision_producers = prepare_firm_data(bioeconomy_vision_data)
 
-    data["innovation_type_label"] = data["innovation_type_code"].map(label_map)
-
-    fig = px.bar(
-        x=data["count"],
-        y=data["innovation_type_label"],
-        color=data["innovation_type_group"],
-        facet_col=data["bioeconomy_vision"],
-        facet_col_wrap=4,
+    producers_by_vision = (
+        vision_producers.group_by([level, "bioeconomy_vision"])
+        .agg(pl.col("sinno_id").n_unique().alias("count"))
+        .sort(["bioeconomy_vision", "count"], descending=True)
+        .filter(pl.col("bioeconomy_vision") != "Unsure")
     )
 
-    fig.for_each_annotation(
-        lambda a: a.update(text=a.text.split("=")[-1].strip(" Vision"))
+    hist = (
+        producers_by_vision.group_by(["bioeconomy_vision", "count"])
+        .agg(pl.col(level).count().alias("freq"))
+        .sort(["bioeconomy_vision", "count"])
+        .with_columns(pl.col("count").cast(pl.Int64))
     )
-    fig.update_layout(
-        showlegend=False,
-        font=dict(family="Atkinson Hyperlegible"),
-        margin=dict(l=150),
-        yaxis=dict(autorange="reversed"),
-    )
-    fig.update_traces(hovertemplate="<b>%{x}</b> %{y} Innovations")
 
-    # hide subplot y-axis titles and x-axis titles
-    for axis in fig.layout:
-        if type(fig.layout[axis]) == go.layout.YAxis:
-            fig.layout[axis].title.text = ""
-            fig.layout[axis].tickfont = dict(size=10)
-        if type(fig.layout[axis]) == go.layout.XAxis:
-            fig.layout[axis].title.text = ""
-            fig.layout[axis].tickfont = dict(size=12)
-    return fig
+    visions = hist.select("bioeconomy_vision").unique()
+    counts = pl.DataFrame({"count": list(range(1, 11))})
+
+    full_grid = pl.concat(
+        [
+            counts.with_columns(
+                pl.lit(vision["bioeconomy_vision"]).alias("bioeconomy_vision")
+            )
+            for vision in visions.iter_rows(named=True)
+        ]
+    )
+
+    firm_counts = (
+        full_grid.join(hist, on=["bioeconomy_vision", "count"], how="left")
+        .fill_null(0)  # fill missing freq with 0
+        .sort(["bioeconomy_vision", "count"])
+    )
+
+    return firm_counts
+
+
+def prepare_firm_data(bioeconomy_vision_data):
+    firms = DataLoader(EXTERNAL_DATA_DIR).load_aggregated_collaborations()
+
+    all_collaborations = (
+        firms.unpivot(index="sinno_id", value_name="node").drop("variable").drop_nulls()
+    )
+    producers_only = firms.drop(r"^coll.*$")
+
+    vision_producers = bioeconomy_vision_data.join(
+        all_collaborations, on="sinno_id", how="left"
+    ).join(producers_only, on="sinno_id", how="left")
+
+    return vision_producers
+
+
+if __name__ == "__main__":
+    create_figures()
